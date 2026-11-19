@@ -540,6 +540,8 @@ const SovereignArchitecturalGlobe: React.FC<{
 }> = ({ activeSlide, lang }) => {
   const globeGroup = useRef<THREE.Group>(null);
   const planetGroup = useRef<THREE.Group>(null);
+  const wireframeRef = useRef<THREE.Mesh>(null);
+  const particlesRef = useRef<THREE.Points>(null);
   const ring1Ref = useRef<THREE.Mesh>(null);
   const ring2Ref = useRef<THREE.Mesh>(null);
   const { viewport } = useThree();
@@ -596,20 +598,16 @@ const SovereignArchitecturalGlobe: React.FC<{
     return arr;
   }, []);
 
-  // Base orientation: Center Africa (+14°E) squarely facing the camera (+Z)
-  const BASE_ROT_Y = -((90 + 14) * Math.PI) / 180;
-  const BASE_ROT_X = 0.09;
+  // Base orientation: Center Africa (+16°E) squarely facing the camera (+Z) — kept stable!
+  const BASE_ROT_Y = -((90 + 16) * Math.PI) / 180;
+  const BASE_ROT_X = 0.08;
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     const t = state.clock.getElapsedTime();
+    // Keep the African map stable & front-facing (only ultra-subtle pointer response)
     if (planetGroup.current) {
-      const swayY = Math.sin(t * 0.24) * 0.44;
-      const swayX = Math.cos(t * 0.19) * 0.06;
-      const slideOffset = (activeSlide - 1) * 0.12;
-
-      const targetRotY = BASE_ROT_Y + swayY + slideOffset + state.pointer.x * 0.22;
-      const targetRotX = BASE_ROT_X + swayX + state.pointer.y * 0.14;
-
+      const targetRotY = BASE_ROT_Y + state.pointer.x * 0.06;
+      const targetRotX = BASE_ROT_X + state.pointer.y * 0.05;
       planetGroup.current.rotation.y = THREE.MathUtils.lerp(
         planetGroup.current.rotation.y,
         targetRotY,
@@ -621,13 +619,24 @@ const SovereignArchitecturalGlobe: React.FC<{
         0.04
       );
     }
+    // Continuously animate the surrounding wireframe lattice, orbital rings & particle field
+    if (wireframeRef.current) {
+      wireframeRef.current.rotation.y += delta * 0.14;
+      wireframeRef.current.rotation.x += delta * 0.05;
+    }
+    if (particlesRef.current) {
+      particlesRef.current.rotation.y -= delta * 0.05;
+      particlesRef.current.rotation.x = Math.sin(t * 0.15) * 0.08;
+    }
     if (ring1Ref.current) {
-      ring1Ref.current.rotation.x = Math.PI / 2.6 + Math.sin(t * 0.3) * 0.1;
-      ring1Ref.current.rotation.z = t * 0.16;
+      ring1Ref.current.rotation.x = Math.PI / 2.55 + Math.sin(t * 0.38) * 0.14;
+      ring1Ref.current.rotation.y = Math.cos(t * 0.22) * 0.12;
+      ring1Ref.current.rotation.z = t * 0.24;
     }
     if (ring2Ref.current) {
-      ring2Ref.current.rotation.y = Math.PI / 3 + Math.cos(t * 0.25) * 0.12;
-      ring2Ref.current.rotation.z = -t * 0.13;
+      ring2Ref.current.rotation.y = Math.PI / 3 + Math.cos(t * 0.32) * 0.16;
+      ring2Ref.current.rotation.x = Math.sin(t * 0.25) * 0.12;
+      ring2Ref.current.rotation.z = -t * 0.2;
     }
   });
 
@@ -679,14 +688,14 @@ const SovereignArchitecturalGlobe: React.FC<{
         <CapitalFlowArcs />
       </group>
 
-      {/* Outer Architectural Geodesic Wireframe Lattice (Subtle HUD Frame) */}
-      <mesh>
+      {/* Animated Outer Architectural Geodesic Wireframe Lattice */}
+      <mesh ref={wireframeRef}>
         <icosahedronGeometry args={[2.32, 2]} />
         <meshBasicMaterial
           color={accentColor}
           wireframe
           transparent
-          opacity={0.09}
+          opacity={0.1}
         />
       </mesh>
 
@@ -702,8 +711,8 @@ const SovereignArchitecturalGlobe: React.FC<{
         <meshBasicMaterial color="#38BDF8" transparent opacity={0.38} />
       </mesh>
 
-      {/* Floating Telemetry Nodes */}
-      <points>
+      {/* Animated Floating Telemetry Nodes */}
+      <points ref={particlesRef}>
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
