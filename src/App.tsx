@@ -8,6 +8,7 @@ import {
 import { PortalPreloader } from './components/PortalPreloader';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
+import { SovereignMetricsBar } from './components/SovereignMetricsBar';
 import { MissionAndStrategy } from './components/MissionAndStrategy';
 import { ExcellenceAndProjects } from './components/ExcellenceAndProjects';
 import { ResponsibilitySection } from './components/ResponsibilitySection';
@@ -90,6 +91,9 @@ export function App() {
               currency={currency}
               onOpenSubmitModal={() => setActiveDossier({ type: 'submit' })}
             />
+
+            {/* Sovereign Ticker & Key Institutional Metrics Bar */}
+            <SovereignMetricsBar lang={lang} currency={currency} />
 
             {/* The Mission & 3-Pillar Hover-Reveal Strategy Grid */}
             <MissionAndStrategy lang={lang} />

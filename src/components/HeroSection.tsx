@@ -177,14 +177,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
       </div>
 
-      {/* 4. HERO STATS & CONTROLS BAR */}
-      <div className="relative z-10 border-t border-white/10 bg-obsidian-950/85 backdrop-blur-md">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-4 px-5 py-4 sm:px-8 sm:py-5 md:px-12 lg:flex-row lg:items-center lg:justify-between">
-          {/* Left: Scroll Prompt */}
+      {/* 4. Minimal Bottom Scroll Prompt (Stats moved down to dedicated SovereignMetricsBar) */}
+      <div className="relative z-10 pb-6 pt-2">
+        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-center md:justify-start px-5 sm:px-8 md:px-12">
           <a
-            href="#mission"
+            href="#metrics"
             onClick={() => soundEngine.playClick()}
-            className="group hidden sm:inline-flex items-center gap-3 font-mono text-[10px] sm:text-[11px] tracking-[0.22em] text-slate-400 uppercase transition-colors hover:text-gold-300"
+            className="group inline-flex items-center gap-3 font-mono text-[10px] sm:text-[11px] tracking-[0.22em] text-slate-400 uppercase transition-colors hover:text-gold-300"
           >
             <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D] transition-transform group-hover:scale-125" />
             <span>
@@ -193,63 +192,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 : 'Faites défiler pour explorer'}
             </span>
           </a>
-
-          {/* Right: The 4 Key Sovereign Stats */}
-          <div className="grid w-full grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-4 sm:gap-6 lg:w-auto lg:gap-12">
-            {/* Stat 1: Target Capacity */}
-            <div className="border-l-2 border-gold-500/50 pl-3 sm:pl-4">
-              <span className="block font-mono text-[10px] sm:text-xs font-semibold text-gold-400 mb-0.5 leading-none">+</span>
-              <div className="font-heading text-lg sm:text-2xl lg:text-3xl font-bold text-gold-300 tracking-wide drop-shadow-[0_0_15px_rgba(201,162,77,0.25)]">
-                {currency === 'FCFA'
-                  ? lang === 'en'
-                    ? '1,000 BN'
-                    : '1 000 Mds'
-                  : '$1.65 BN'}
-              </div>
-              <div className="mt-0.5 font-mono text-[9px] sm:text-[10px] tracking-[0.14em] text-slate-300 uppercase">
-                {currency === 'FCFA'
-                  ? lang === 'en'
-                    ? 'FCFA Capacity'
-                    : 'FCFA Capacité'
-                  : lang === 'en'
-                    ? 'USD Capacity'
-                    : 'USD Capacité'}
-              </div>
-            </div>
-
-            {/* Stat 2: Priority Sectors */}
-            <div className="border-l-2 border-gold-500/50 pl-3 sm:pl-4">
-              <span className="block font-mono text-[10px] sm:text-xs text-transparent mb-0.5 leading-none">•</span>
-              <div className="font-heading text-lg sm:text-2xl lg:text-3xl font-bold text-gold-300 drop-shadow-[0_0_15px_rgba(201,162,77,0.25)]">
-                +5
-              </div>
-              <div className="mt-0.5 font-mono text-[9px] sm:text-[10px] tracking-[0.14em] text-slate-300 uppercase">
-                {lang === 'en' ? 'Priority Sectors' : 'Secteurs Clés'}
-              </div>
-            </div>
-
-            {/* Stat 3: Track Record */}
-            <div className="border-l-2 border-gold-500/50 pl-3 sm:pl-4">
-              <span className="block font-mono text-[10px] sm:text-xs text-transparent mb-0.5 leading-none">•</span>
-              <div className="font-heading text-lg sm:text-2xl lg:text-3xl font-bold text-gold-300 drop-shadow-[0_0_15px_rgba(201,162,77,0.25)]">
-                15+
-              </div>
-              <div className="mt-0.5 font-mono text-[9px] sm:text-[10px] tracking-[0.14em] text-slate-300 uppercase">
-                {lang === 'en' ? 'Years Track Record' : "Années d'Expérience"}
-              </div>
-            </div>
-
-            {/* Stat 4: Sovereign Hubs */}
-            <div className="border-l-2 border-gold-500/50 pl-3 sm:pl-4">
-              <span className="block font-mono text-[10px] sm:text-xs text-transparent mb-0.5 leading-none">•</span>
-              <div className="font-heading text-lg sm:text-2xl lg:text-3xl font-bold text-gold-300 drop-shadow-[0_0_15px_rgba(201,162,77,0.25)]">
-                7
-              </div>
-              <div className="mt-0.5 font-mono text-[9px] sm:text-[10px] tracking-[0.14em] text-slate-300 uppercase">
-                {lang === 'en' ? 'Sovereign Hubs' : 'Hubs Souverains'}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

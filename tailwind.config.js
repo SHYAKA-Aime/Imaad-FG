@@ -29,11 +29,11 @@ export default {
         }
       },
       fontFamily: {
-        display: ['"Plus Jakarta Sans"', 'sans-serif'],
-        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
-        serif: ['"Plus Jakarta Sans"', 'sans-serif'],
-        sans: ['"Inter"', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        display: ['Space Grotesk', 'sans-serif'],
+        heading: ['Space Grotesk', 'sans-serif'],
+        serif: ['Cinzel', 'serif'],
+        sans: ['Plus Jakarta Sans', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       letterSpacing: {
         widest2: '0.25em',

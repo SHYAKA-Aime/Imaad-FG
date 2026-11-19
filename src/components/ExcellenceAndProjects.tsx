@@ -9,7 +9,7 @@ import {
   PROJECTS_PORTFOLIO,
   ProjectCardData,
 } from '../data/imaadData';
-import { HudCorners, VertexDots } from './ui/BlueprintPrimitives';
+import { VertexDots } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
 
 interface ExcellenceAndProjectsProps {
@@ -40,7 +40,7 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
       ====================================================================== */}
       <section
         id="excellence"
-        className="relative overflow-hidden border-b border-white/10 bg-obsidian-950 py-16 sm:py-24 lg:py-32"
+        className="relative overflow-hidden border-b border-white/10 bg-[#14233C] py-16 sm:py-24 lg:py-32"
       >
         {/* Subtle Ambient Radial Lighting */}
         <div
@@ -80,17 +80,17 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
             {/* Two-Column Editorial Briefing Grid from Reference */}
             <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
               {/* Left Column: Institutional Pedigree & Network */}
-              <div className="relative border border-white/10 bg-obsidian-900/50 p-6 sm:p-8 backdrop-blur-md lg:col-span-7">
+              <div className="relative border border-white/15 bg-[#1B2D4B]/80 p-6 sm:p-8 backdrop-blur-md lg:col-span-7">
                 <div className="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-gold-400 via-gold-500/80 to-transparent" />
                 <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-gold-400 uppercase">
                   <span>{lang === 'en' ? 'ESTABLISHED 2021 // SOVEREIGN MANDATE' : 'DEPUIS 2021 // MANDAT SOUVERAIN'}</span>
                 </div>
-                <p className="text-sm leading-relaxed text-slate-300 sm:text-base">
+                <p className="text-sm leading-relaxed text-slate-200 sm:text-base">
                   {lang === 'en'
                     ? 'Since 2021, Imaad Financial Group has been supporting states, institutions and companies in structuring and financing their most strategic projects in emerging markets.'
                     : 'Depuis 2021, Imaad Financial Group accompagne les États, institutions et entreprises dans la structuration et le financement de leurs projets les plus stratégiques sur les marchés émergents.'}
                 </p>
-                <p className="mt-3.5 text-sm leading-relaxed text-slate-400 sm:text-base">
+                <p className="mt-3.5 text-sm leading-relaxed text-slate-300 sm:text-base">
                   {lang === 'en'
                     ? 'We combine the rigor of international standards, in-depth knowledge of African markets and direct access to a network of leading investors and institutional partners.'
                     : "Nous combinons la rigueur des standards internationaux, une connaissance approfondie des marchés africains et un accès direct à un réseau d'investisseurs de premier plan et partenaires institutionnels."}
@@ -98,7 +98,7 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
               </div>
 
               {/* Right Column: Areas of Excellence Strategic Summary */}
-              <div className="relative flex flex-col justify-center border border-white/10 bg-obsidian-900/40 p-6 sm:p-8 backdrop-blur-md lg:col-span-5">
+              <div className="relative flex flex-col justify-center border border-white/15 bg-[#1B2D4B]/70 p-6 sm:p-8 backdrop-blur-md lg:col-span-5">
                 <div>
                   <div className="mb-2 font-serif text-lg font-bold tracking-[0.14em] text-gold-300 sm:text-xl">
                     {lang === 'en' ? 'AREAS OF EXCELLENCE' : "DOMAINES D'EXCELLENCE"}
@@ -130,7 +130,7 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                   viewport={{ once: true, amount: 0.15 }}
                   transition={{ duration: 0.6, delay: idx * 0.12 }}
                   onMouseEnter={() => soundEngine.playHover()}
-                  className={`group relative flex flex-col justify-start overflow-hidden border border-white/15 bg-obsidian-900/70 p-7 sm:p-9 transition-all duration-500 hover:-translate-y-1.5 hover:bg-obsidian-900/95 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] ${cardAccentBorder}`}
+                  className={`group relative flex flex-col justify-start overflow-hidden border border-white/15 bg-[#1B2D4B]/85 p-7 sm:p-9 transition-all duration-500 hover:-translate-y-1.5 hover:bg-[#213659] hover:shadow-[0_20px_50px_rgba(3,5,8,0.45)] ${cardAccentBorder}`}
                 >
                   <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
 
@@ -207,47 +207,47 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
       ====================================================================== */}
       <section
         id="projects-showcase"
-        className="relative overflow-hidden border-b border-white/10 bg-obsidian-950 py-16 sm:py-24 lg:py-32"
+        className="relative overflow-hidden border-b border-[#C4BDB0] bg-[#DDD8CE] py-16 text-[#0B1528] sm:py-24 lg:py-32"
       >
-        {/* Ambient Radial Spotlight */}
+        {/* Subtle Warm Architectural Vignette */}
         <div
-          className="pointer-events-none absolute top-1/4 -right-48 h-[600px] w-[600px] rounded-full opacity-40 blur-[150px]"
+          className="pointer-events-none absolute top-1/4 -right-48 h-[600px] w-[600px] rounded-full opacity-35 blur-[150px]"
           style={{
             background:
-              'radial-gradient(circle, rgba(201,162,77,0.18) 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(201,162,77,0.22) 0%, transparent 70%)',
           }}
         />
         <div
-          className="pointer-events-none absolute bottom-1/4 -left-48 h-[600px] w-[600px] rounded-full opacity-35 blur-[150px]"
+          className="pointer-events-none absolute bottom-1/4 -left-48 h-[600px] w-[600px] rounded-full opacity-25 blur-[150px]"
           style={{
             background:
-              'radial-gradient(circle, rgba(30,107,255,0.18) 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(11,21,40,0.12) 0%, transparent 70%)',
           }}
         />
 
         <div className="mx-auto max-w-[1360px] px-6 sm:px-10 lg:px-16">
           {/* Section Header */}
-          <div className="mb-16 sm:mb-20 text-center">
-            <div className="mb-3.5 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
-              <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
+          <div className="mb-14 sm:mb-20 text-center">
+            <div className="mb-3.5 inline-flex items-center gap-2.5 font-mono text-[10px] font-semibold tracking-[0.24em] text-[#9A7428] uppercase">
+              <span className="h-1.5 w-1.5 rotate-45 bg-[#B38832]" />
               <span>
                 {lang === 'en'
                   ? 'PORTFOLIO // FLAGSHIP MANDATES'
                   : 'PORTEFEUILLE // MANDATS PHARES'}
               </span>
             </div>
-            <h2 className="font-display text-2xl font-bold tracking-[0.18em] text-white uppercase sm:text-4xl lg:text-5xl">
+            <h2 className="font-display text-2xl font-bold tracking-[0.18em] text-[#0B1528] uppercase sm:text-4xl lg:text-5xl">
               {lang === 'en' ? 'PROJECTS & IMPACT' : 'PROJETS & IMPACT'}
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#3A4659] sm:text-base">
               {lang === 'en'
                 ? 'High-impact sovereign road corridors, turnkey healthcare complexes, and civic institutions financed across Africa.'
                 : 'Corridors routiers souverains, complexes hospitaliers de référence et cités administratives structurés en Afrique.'}
             </p>
           </div>
 
-          {/* 3 Alternating Blueprint Split Showcase Items (Teyliom Style) */}
-          <div className="space-y-16 sm:space-y-24">
+          {/* 3 Alternating Blueprint Split Showcase Items in Medium Warm Stone */}
+          <div className="space-y-14 sm:space-y-20">
             {featuredProjects.map((project, idx) => {
               const isReverse = idx % 2 === 1;
 
@@ -260,13 +260,13 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                   transition={{ duration: 0.65 }}
                   className="relative"
                 >
-                  {/* Floating Architectural Wireframe Badge Box (Teyliom Reference) */}
+                  {/* Floating Architectural Wireframe Badge Box */}
                   <div
                     className={`-mb-[1px] flex ${
                       isReverse ? 'justify-start' : 'justify-end'
                     }`}
                   >
-                    <div className="group relative z-20 inline-flex flex-wrap items-center gap-2 sm:gap-3 border border-white/15 bg-obsidian-900 px-4 py-2.5 sm:px-6 sm:py-3.5 backdrop-blur-md shadow-lg">
+                    <div className="group relative z-20 inline-flex flex-wrap items-center gap-2 sm:gap-3 border border-[#0B1528]/20 bg-[#0B1528] px-4 py-2.5 sm:px-6 sm:py-3.5 shadow-md">
                       <VertexDots color="gold" />
                       <span className="font-serif text-xs sm:text-sm font-bold tracking-widest text-white">
                         IMAAD
@@ -278,8 +278,8 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                   </div>
 
                   {/* Main Blueprint Wireframe Body */}
-                  <div className="group relative border border-white/15 bg-obsidian-900/70 p-5 sm:p-9 lg:p-12 backdrop-blur-md transition-colors hover:border-gold-400/40">
-                    <VertexDots />
+                  <div className="group relative border border-[#C4BDB0] bg-[#EAE6DE] p-5 sm:p-9 lg:p-12 shadow-[0_12px_36px_rgba(11,21,40,0.07)] transition-colors hover:border-[#B38832]/70">
+                    <VertexDots color="gold" />
 
                     <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-14">
                       {/* Narrative Column */}
@@ -289,32 +289,32 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                         }`}
                       >
                         {/* Sector Eyebrow */}
-                        <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] sm:tracking-[0.24em] text-gold-400 uppercase">
-                          <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
+                        <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] font-semibold tracking-[0.2em] sm:tracking-[0.24em] text-[#9A7428] uppercase">
+                          <span className="h-1.5 w-1.5 rotate-45 bg-[#B38832]" />
                           <span>{project.statusTag[lang]}</span>
                         </div>
 
                         {/* Project Sector Title */}
-                        <h3 className="font-display text-xl font-bold tracking-[0.12em] text-white uppercase sm:text-2xl md:text-3xl sm:tracking-[0.14em] leading-snug">
+                        <h3 className="font-display text-xl font-bold tracking-[0.12em] text-[#0B1528] uppercase sm:text-2xl md:text-3xl sm:tracking-[0.14em] leading-snug">
                           {project.sector[lang]}
                         </h3>
 
                         {/* Capital Amount */}
-                        <div className="mt-2 font-serif text-lg font-bold tracking-wide text-gold-300 sm:text-2xl">
+                        <div className="mt-2 font-serif text-lg font-bold tracking-wide text-[#9E7727] sm:text-2xl">
                           {project.amountDisplay || project.amountUSD}
                         </div>
 
                         {/* Description */}
-                        <p className="mt-3.5 sm:mt-4 text-sm leading-relaxed text-slate-300 sm:text-base">
+                        <p className="mt-3.5 sm:mt-4 text-sm leading-relaxed text-[#3A4659] sm:text-base">
                           {project.description[lang]}
                         </p>
 
                         {/* Specs Pill Tag */}
-                        <div className="mt-4 sm:mt-5 inline-flex max-w-full items-center gap-2 border border-white/10 bg-white/[0.02] px-3 py-1.5 font-mono text-[10px] sm:text-[11px] tracking-[0.14em] text-slate-400 uppercase break-words">
+                        <div className="mt-4 sm:mt-5 inline-flex max-w-full items-center gap-2 border border-[#C4BDB0] bg-[#DDD8CE]/70 px-3 py-1.5 font-mono text-[10px] sm:text-[11px] tracking-[0.14em] text-[#3A4659] uppercase break-words">
                           <span>{project.metaTag}</span>
                         </div>
 
-                        {/* Bracketed CTA Button (Teyliom Style) */}
+                        {/* Clean Modern CTA Button */}
                         <button
                           type="button"
                           onClick={() => {
@@ -322,9 +322,8 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                             onInspectProject(project);
                           }}
                           onMouseEnter={() => soundEngine.playHover()}
-                          className="group/btn relative mt-6 sm:mt-8 flex h-11 items-center justify-center border border-white/20 bg-obsidian-900/80 px-6 font-display text-[11px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md transition-all hover:border-gold-400 hover:bg-gold-500/10 hover:text-gold-200 hover:shadow-[0_0_25px_rgba(201,162,77,0.25)] sm:h-12 sm:px-8 sm:text-xs"
+                          className="mt-6 sm:mt-8 inline-flex h-11 items-center justify-center rounded bg-[#0B1528] px-6 font-display text-[11px] font-bold tracking-[0.18em] text-white uppercase transition-all hover:bg-[#172847] hover:text-gold-300 hover:shadow-[0_10px_24px_rgba(11,21,40,0.22)] sm:h-12 sm:px-8 sm:text-xs"
                         >
-                          <HudCorners variant="gold" />
                           <span>{lang === 'en' ? 'LEARN MORE' : 'EN SAVOIR PLUS'}</span>
                         </button>
                       </div>
@@ -335,17 +334,17 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                           isReverse ? 'lg:order-1' : 'lg:order-2'
                         }`}
                       >
-                        <div className="relative h-[230px] w-full overflow-hidden border border-white/15 bg-obsidian-950 sm:h-[340px] lg:h-[400px]">
-                          <VertexDots />
+                        <div className="relative h-[230px] w-full overflow-hidden border border-[#C4BDB0] bg-[#0B1528] sm:h-[340px] lg:h-[400px]">
+                          <VertexDots color="gold" />
                           <img
                             src={project.image}
                             alt={project.sector[lang]}
                             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950/85 via-transparent to-transparent" />
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1528]/75 via-transparent to-transparent" />
 
                           {/* Country Flag Pill */}
-                          <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 inline-flex items-center gap-1.5 sm:gap-2 border border-white/20 bg-obsidian-950/90 px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-xs font-semibold tracking-wider text-white backdrop-blur-md">
+                          <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 inline-flex items-center gap-1.5 sm:gap-2 border border-white/20 bg-[#0B1528]/90 px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-xs font-semibold tracking-wider text-white backdrop-blur-md">
                             <span>{project.flag}</span>
                             <span>{project.country[lang]}</span>
                           </div>
@@ -366,7 +365,7 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                           )}
 
                           {/* Status Tag */}
-                          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 border border-gold-400/50 bg-obsidian-950/90 px-2.5 py-1 sm:px-3 font-mono text-[9px] sm:text-[10px] tracking-widest text-gold-300 backdrop-blur-md">
+                          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 border border-gold-400/50 bg-[#0B1528]/90 px-2.5 py-1 sm:px-3 font-mono text-[9px] sm:text-[10px] tracking-widest text-gold-300 backdrop-blur-md">
                             {project.statusTag[lang]}
                           </div>
                         </div>
@@ -392,9 +391,8 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                 onViewAllProjects();
               }}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative flex h-12 items-center justify-center border border-gold-400/60 bg-obsidian-900/90 px-7 font-display text-[11px] font-bold tracking-[0.2em] text-gold-300 uppercase backdrop-blur-md transition-all hover:border-gold-300 hover:bg-gold-500/15 hover:text-white hover:shadow-[0_0_35px_rgba(201,162,77,0.35)] sm:h-14 sm:px-12 sm:text-sm sm:tracking-[0.24em]"
+              className="group inline-flex h-12 items-center justify-center rounded bg-[#0B1528] px-8 font-display text-[11px] font-bold tracking-[0.2em] text-gold-300 uppercase shadow-[0_10px_28px_rgba(11,21,40,0.2)] transition-all hover:bg-[#162745] hover:text-white hover:shadow-[0_14px_34px_rgba(11,21,40,0.3)] sm:h-14 sm:px-12 sm:text-sm sm:tracking-[0.24em]"
             >
-              <HudCorners variant="gold" />
               <span className="flex items-center gap-3">
                 <span>{lang === 'en' ? 'VIEW ALL PROJECTS' : 'VOIR TOUS LES PROJETS'}</span>
                 <ArrowRight className="h-4 w-4 text-gold-400 transition-transform duration-300 group-hover:translate-x-1.5" />

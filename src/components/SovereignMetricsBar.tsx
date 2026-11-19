@@ -12,9 +12,9 @@ export const SovereignMetricsBar: React.FC<SovereignMetricsBarProps> = ({
   currency,
 }) => {
   return (
-    <section className="relative z-20 border-y border-white/10 bg-obsidian-950">
+    <section id="metrics" className="relative z-20 border-y border-white/10 bg-[#101C33]">
       {/* Continuous Sovereign Gold Ticker Strip */}
-      <div className="overflow-hidden border-b border-white/10 bg-gradient-to-r from-gold-700 via-gold-500 to-gold-700 py-2.5 text-obsidian-950">
+      <div className="overflow-hidden border-b border-white/10 bg-gradient-to-r from-[#A68032] via-[#C9A24D] to-[#A68032] py-2.5 text-[#0B1528]">
         <div className="animate-ticker items-center gap-10 font-display text-[10px] font-bold tracking-[0.26em] uppercase">
           {[...Array(2)].map((_, groupIdx) => (
             <React.Fragment key={groupIdx}>
@@ -34,8 +34,8 @@ export const SovereignMetricsBar: React.FC<SovereignMetricsBarProps> = ({
       </div>
 
       {/* Spacious, Fully-Responsive Key Figures Grid */}
-      <div className="mx-auto max-w-[1440px] px-6 py-10 md:px-12 md:py-14">
-        <div className="grid grid-cols-2 gap-8 sm:gap-10 lg:grid-cols-4">
+      <div className="mx-auto max-w-[1440px] px-5 py-9 sm:px-8 md:px-12 md:py-12">
+        <div className="grid grid-cols-2 gap-6 sm:gap-10 lg:grid-cols-4">
           {/* Stat 1: Target Capacity */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
