@@ -22,6 +22,9 @@ interface ContactAndFooterProps {
   onCloseDossier: () => void;
   onOpenSubmitModal: () => void;
   onNavigateContact?: () => void;
+  onNavigateTeam?: () => void;
+  onNavigateService?: (serviceId: string) => void;
+  onNavigateProjects?: () => void;
 }
 
 export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
@@ -30,6 +33,9 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
   onCloseDossier,
   onOpenSubmitModal,
   onNavigateContact,
+  onNavigateTeam,
+  onNavigateService,
+  onNavigateProjects,
 }) => {
   const [selectedHub, setSelectedHub] = useState(REGIONAL_HUBS[0]);
   const [contactSent, setContactSent] = useState(false);
@@ -146,33 +152,73 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                   </a>
                 </li>
                 <li>
-                  <a href="#projects-showcase" className="transition-colors hover:text-gold-300">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playClick();
+                      if (onNavigateProjects) onNavigateProjects();
+                    }}
+                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                  >
                     {lang === 'en' ? 'Projects & Impact' : 'Projets & Impact'}
-                  </a>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playClick();
+                      if (onNavigateTeam) onNavigateTeam();
+                    }}
+                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                  >
+                    {lang === 'en' ? 'Governance & Team' : 'Gouvernance & Équipe'}
+                  </button>
                 </li>
               </ul>
             </div>
 
-            {/* Col 3: Areas of Excellence (Exact Brochure Order) */}
+            {/* Col 3: Areas of Excellence (Exact Brochure Order, linked to dedicated Service Detail pages) */}
             <div>
               <h4 className="mb-5 font-heading text-sm font-bold text-white">
                 {lang === 'en' ? 'Areas of Excellence' : 'Domaines d’Excellence'}
               </h4>
               <ul className="space-y-2.5 text-xs text-slate-400">
                 <li>
-                  <a href="#excellence" className="transition-colors hover:text-gold-300">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playClick();
+                      if (onNavigateService) onNavigateService('excellence-01');
+                    }}
+                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                  >
                     01. {lang === 'en' ? 'Sovereign Financing' : 'Financement Souverain'}
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#excellence" className="transition-colors hover:text-gold-300">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playClick();
+                      if (onNavigateService) onNavigateService('excellence-02');
+                    }}
+                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                  >
                     02. Corporate &amp; Trade Finance
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#excellence" className="transition-colors hover:text-gold-300">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playClick();
+                      if (onNavigateService) onNavigateService('excellence-03');
+                    }}
+                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                  >
                     03. {lang === 'en' ? 'Public-Private Partnerships (PPP)' : 'Partenariats Public-Privé (PPP)'}
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <button

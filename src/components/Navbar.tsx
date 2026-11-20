@@ -15,9 +15,11 @@ interface NavbarProps {
   onToggleSound?: () => void;
   onReplayIntro?: () => void;
   onOpenSubmitModal?: () => void;
-  currentView?: 'home' | 'projects' | 'contact';
+  currentView?: 'home' | 'projects' | 'team' | 'service' | 'contact';
   onNavigateHome?: () => void;
   onNavigateProjects?: () => void;
+  onNavigateTeam?: () => void;
+  onNavigateService?: (serviceId: string) => void;
   onNavigateContact?: () => void;
 }
 
@@ -27,6 +29,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentView = 'home',
   onNavigateHome,
   onNavigateProjects,
+  onNavigateTeam,
+  onNavigateService,
   onNavigateContact,
   onOpenSubmitModal,
 }) => {
@@ -76,6 +80,26 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
+  const handleGoTeam = () => {
+    soundEngine.playClick();
+    setMobileMenuOpen(false);
+    if (currentView !== 'team' && onNavigateTeam) {
+      onNavigateTeam();
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleGoServices = () => {
+    soundEngine.playClick();
+    setMobileMenuOpen(false);
+    if (currentView === 'home') {
+      handleNavClick('#excellence');
+    } else if (onNavigateService) {
+      onNavigateService('excellence-01');
+    }
+  };
+
   const handleGoContact = () => {
     soundEngine.playClick();
     setMobileMenuOpen(false);
@@ -114,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </a>
 
         {/* Desktop Navigation (md and up) */}
-        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+        <nav className="hidden md:flex items-center gap-5 lg:gap-7">
           <a
             href="#mission"
             onClick={(e) => {
@@ -122,9 +146,25 @@ export const Navbar: React.FC<NavbarProps> = ({
               handleNavClick('#mission');
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className="font-heading text-xs font-semibold tracking-[0.18em] text-slate-300 uppercase transition-colors hover:text-gold-300 lg:text-sm"
+            className="font-heading text-xs font-semibold tracking-[0.16em] text-slate-300 uppercase transition-colors hover:text-gold-300 lg:text-[13px]"
           >
-            {lang === 'en' ? 'About' : 'À Propos'}
+            {lang === 'en' ? 'About' : 'À propos'}
+          </a>
+
+          <a
+            href="#excellence"
+            onClick={(e) => {
+              e.preventDefault();
+              handleGoServices();
+            }}
+            onMouseEnter={() => soundEngine.playHover()}
+            className={`font-heading text-xs font-semibold tracking-[0.16em] uppercase transition-colors lg:text-[13px] ${
+              currentView === 'service'
+                ? 'text-gold-300 font-bold'
+                : 'text-slate-300 hover:text-gold-300'
+            }`}
+          >
+            Services
           </a>
 
           <a
@@ -134,7 +174,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               handleGoProjects();
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className={`font-heading text-xs font-semibold tracking-[0.18em] uppercase transition-colors lg:text-sm ${
+            className={`font-heading text-xs font-semibold tracking-[0.16em] uppercase transition-colors lg:text-[13px] ${
               currentView === 'projects'
                 ? 'text-gold-300 font-bold'
                 : 'text-slate-300 hover:text-gold-300'
@@ -144,13 +184,29 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
 
           <a
+            href="#team"
+            onClick={(e) => {
+              e.preventDefault();
+              handleGoTeam();
+            }}
+            onMouseEnter={() => soundEngine.playHover()}
+            className={`font-heading text-xs font-semibold tracking-[0.16em] uppercase transition-colors lg:text-[13px] ${
+              currentView === 'team'
+                ? 'text-gold-300 font-bold'
+                : 'text-slate-300 hover:text-gold-300'
+            }`}
+          >
+            {lang === 'en' ? 'Team' : 'Équipe'}
+          </a>
+
+          <a
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
               handleGoContact();
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className={`font-heading text-xs font-semibold tracking-[0.18em] uppercase transition-colors lg:text-sm ${
+            className={`font-heading text-xs font-semibold tracking-[0.16em] uppercase transition-colors lg:text-[13px] ${
               currentView === 'contact'
                 ? 'text-gold-300 font-bold'
                 : 'text-slate-300 hover:text-gold-300'
@@ -275,7 +331,22 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
                 className="border-b border-white/5 py-3.5 font-heading text-sm font-semibold tracking-[0.2em] text-slate-200 uppercase transition-colors hover:text-gold-300"
               >
-                {lang === 'en' ? 'About' : 'À Propos'}
+                {lang === 'en' ? 'About' : 'À propos'}
+              </a>
+
+              <a
+                href="#excellence"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleGoServices();
+                }}
+                className={`border-b border-white/5 py-3.5 font-heading text-sm font-semibold tracking-[0.2em] uppercase transition-colors ${
+                  currentView === 'service'
+                    ? 'text-gold-300 font-bold'
+                    : 'text-slate-200 hover:text-gold-300'
+                }`}
+              >
+                Services
               </a>
 
               <a
@@ -291,6 +362,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 {lang === 'en' ? 'Projects' : 'Projets'}
+              </a>
+
+              <a
+                href="#team"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleGoTeam();
+                }}
+                className={`border-b border-white/5 py-3.5 font-heading text-sm font-semibold tracking-[0.2em] uppercase transition-colors ${
+                  currentView === 'team'
+                    ? 'text-gold-300 font-bold'
+                    : 'text-slate-200 hover:text-gold-300'
+                }`}
+              >
+                {lang === 'en' ? 'Team' : 'Équipe'}
               </a>
 
               <a
@@ -313,7 +399,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={handleGoContact}
                 className="mt-4 w-full rounded bg-[#C69C45] py-3 font-heading text-xs font-bold tracking-[0.18em] text-[#0B1528] uppercase transition-colors hover:bg-[#d4ab53]"
               >
-                {lang === 'en' ? 'CONTACT US' : 'CONTACTEZ-NOUS'}
+                {lang === 'en' ? 'Contact Us' : 'Nous écrire'}
               </button>
             </div>
           </motion.nav>

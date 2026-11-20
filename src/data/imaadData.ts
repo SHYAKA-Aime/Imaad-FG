@@ -53,8 +53,19 @@ export interface ProjectCardData {
 }
 
 export interface TeamMemberData {
+  id: string;
+  initials: string;
   name: string;
   role: { en: string; fr: string };
+  entity: 'governance' | 'operations' | 'advisory';
+  entityLabel: { en: string; fr: string };
+  bio?: { en: string; fr: string };
+  photo?: string;
+}
+
+export interface KeySectorData {
+  id: string;
+  label: { en: string; fr: string };
 }
 
 export interface OfficeLocationData {
@@ -597,56 +608,150 @@ export const PROJECTS_PORTFOLIO: ProjectCardData[] = [
   },
 ];
 
-// Official Governance & Team Members from Brochure Page 15 (ready for approved photos & bios)
+// Official Governance & Team Members from Brochure Page 15 (grouped by entity/tier, ready for approved photos & bios)
 export const TEAM_MEMBERS: TeamMemberData[] = [
   {
+    id: 'pierre-wolf',
+    initials: 'PW',
     name: 'Pierre Wolf',
     role: { en: 'Chairman of the Board of Directors', fr: 'Président du Conseil d’Administration' },
+    entity: 'governance',
+    entityLabel: { en: 'Board of Directors & Holding', fr: 'Conseil d’Administration & Holding' },
   },
   {
+    id: 'issa-ndiaye',
+    initials: 'IN',
     name: 'Issa Mehmet N’Diaye',
     role: { en: 'Co-founder & Chief Executive Officer', fr: 'Co-fondateur & Président Directeur Général' },
+    entity: 'governance',
+    entityLabel: { en: 'Board of Directors & Holding', fr: 'Conseil d’Administration & Holding' },
   },
   {
+    id: 'rym-moulaye-idriss',
+    initials: 'RM',
     name: 'Rym Moulaye-Idriss',
     role: { en: 'Co-founder & Deputy Chief Executive Officer', fr: 'Co-fondatrice & Directrice Générale Adjointe' },
+    entity: 'governance',
+    entityLabel: { en: 'Board of Directors & Holding', fr: 'Conseil d’Administration & Holding' },
   },
   {
+    id: 'olutobi-osibodu',
+    initials: 'OO',
     name: 'Olutobi Osibodu',
     role: { en: 'Co-founder & Managing Director', fr: 'Co-fondateur & Directeur Exécutif' },
+    entity: 'governance',
+    entityLabel: { en: 'Board of Directors & Holding', fr: 'Conseil d’Administration & Holding' },
   },
   {
+    id: 'pape-baye-diop',
+    initials: 'PD',
     name: 'Pape Baye Diop',
     role: { en: 'Chief Operating Officer', fr: 'Directeur des Opérations' },
+    entity: 'operations',
+    entityLabel: { en: 'Operations & Business Development', fr: 'Opérations & Développement Commercial' },
   },
   {
-    name: 'Mireille Atta',
-    role: { en: 'Head of Administration and Accounting', fr: 'Responsable Administratif et Comptable' },
-  },
-  {
-    name: 'Safietou Camara',
-    role: { en: 'Senior Financial Analyst', fr: 'Analyste Financier Senior' },
-  },
-  {
+    id: 'herve-rugwizangoga',
+    initials: 'HR',
     name: 'Hervé Rugwizangoga',
     role: { en: 'Chief Business Development Officer', fr: 'Directeur du Développement Commercial' },
+    entity: 'operations',
+    entityLabel: { en: 'Operations & Business Development', fr: 'Opérations & Développement Commercial' },
   },
   {
-    name: 'Frédéric Wolf',
-    role: { en: 'Executive Assistant to the CEO', fr: 'Assistant Exécutif Direction Générale' },
+    id: 'mireille-atta',
+    initials: 'MA',
+    name: 'Mireille Atta',
+    role: { en: 'Head of Administration and Accounting', fr: 'Responsable Administratif et Comptable' },
+    entity: 'operations',
+    entityLabel: { en: 'Operations & Business Development', fr: 'Opérations & Développement Commercial' },
   },
   {
+    id: 'henri-tchakoute',
+    initials: 'HT',
     name: 'Henri Tchakoute',
     role: { en: 'Head of Business Development, Cameroon', fr: 'Responsable du Développement Commercial, Cameroun' },
+    entity: 'operations',
+    entityLabel: { en: 'Operations & Business Development', fr: 'Opérations & Développement Commercial' },
   },
   {
+    id: 'safietou-camara',
+    initials: 'SC',
+    name: 'Safietou Camara',
+    role: { en: 'Senior Financial Analyst', fr: 'Analyste Financier Senior' },
+    entity: 'advisory',
+    entityLabel: { en: 'Financial Analysis & Executive Support', fr: 'Analyse Financière & Support Exécutif' },
+  },
+  {
+    id: 'korotoum-kone',
+    initials: 'KK',
     name: 'Korotoum Kone',
     role: { en: 'Junior Financial Analyst', fr: 'Analyste Financier Junior' },
+    entity: 'advisory',
+    entityLabel: { en: 'Financial Analysis & Executive Support', fr: 'Analyse Financière & Support Exécutif' },
   },
   {
+    id: 'frederic-wolf',
+    initials: 'FW',
+    name: 'Frédéric Wolf',
+    role: { en: 'Executive Assistant to the CEO', fr: 'Assistant Exécutif Direction Générale' },
+    entity: 'advisory',
+    entityLabel: { en: 'Financial Analysis & Executive Support', fr: 'Analyse Financière & Support Exécutif' },
+  },
+  {
+    id: 'paul-maylis-agbahan',
+    initials: 'PA',
     name: 'Paul-Maylis Agbahan',
     role: { en: 'Executive Assistant', fr: 'Assistante de Direction' },
+    entity: 'advisory',
+    entityLabel: { en: 'Financial Analysis & Executive Support', fr: 'Analyse Financière & Support Exécutif' },
   },
+];
+
+// Official 4 Values from Brochure Page 4
+export const OFFICIAL_VALUES = [
+  {
+    num: '01',
+    title: {
+      en: 'Sovereignty and economic leadership',
+      fr: 'Souveraineté et leadership économique',
+    },
+  },
+  {
+    num: '02',
+    title: {
+      en: 'Excellence, discipline and innovation',
+      fr: 'Excellence, discipline et innovation',
+    },
+  },
+  {
+    num: '03',
+    title: {
+      en: 'Integrity and absolute confidentiality',
+      fr: 'Intégrité et confidentialité absolue',
+    },
+  },
+  {
+    num: '04',
+    title: {
+      en: 'Resilience and long-term vision',
+      fr: 'Résilience et vision long terme',
+    },
+  },
+];
+
+// Official 10 Key Sectors from Brochure Page 13
+export const KEY_SECTORS: KeySectorData[] = [
+  { id: 'energy', label: { en: 'Energy', fr: 'Énergie' } },
+  { id: 'transport', label: { en: 'Transport', fr: 'Transport' } },
+  { id: 'mining', label: { en: 'Mining', fr: 'Mines' } },
+  { id: 'education', label: { en: 'Education', fr: 'Éducation' } },
+  { id: 'realestate', label: { en: 'Real Estate', fr: 'Immobilier' } },
+  { id: 'healthcare', label: { en: 'Healthcare', fr: 'Santé' } },
+  { id: 'water', label: { en: 'Water', fr: 'Eau' } },
+  { id: 'agriculture', label: { en: 'Agriculture', fr: 'Agriculture' } },
+  { id: 'recycling', label: { en: 'Recycling', fr: 'Recyclage' } },
+  { id: 'technology', label: { en: 'Technology', fr: 'Technologie' } },
 ];
 
 // Primary Offices from Chairman & CEO Reference Artifact
