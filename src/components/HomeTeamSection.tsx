@@ -257,7 +257,7 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
           </motion.div>
         </div>
 
-        {/* Clean 3-Column Team Cards (Zero PDF Clutter — Click for Bio Modal) */}
+        {/* Editorial Portrait Grid (Prominent Executive Photography + Clean Typography) */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab.id}
@@ -265,12 +265,12 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.35 }}
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           >
             {visibleMembers.map((member, idx) => (
               <motion.article
                 key={member.id}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: idx * 0.03 }}
                 onClick={() => {
@@ -278,48 +278,66 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                   setSelectedMember(member);
                 }}
                 onMouseEnter={() => soundEngine.playHover()}
-                className="group relative flex cursor-pointer items-center gap-4 border border-white/12 border-t-2 border-t-[#C69C45]/75 bg-[#0B1528]/85 p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold-400/60 hover:bg-[#0F1E38] hover:shadow-[0_18px_40px_rgba(0,0,0,0.6)]"
+                className="group relative flex cursor-pointer flex-col overflow-hidden border border-white/12 bg-[#0B1528]/90 transition-all duration-400 hover:-translate-y-1.5 hover:border-gold-400/60 hover:bg-[#0F1E38] hover:shadow-[0_22px_50px_rgba(0,0,0,0.68)]"
               >
                 <VertexDots color="gold" />
 
-                {/* Circular Portrait / Monogram Slot */}
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#C69C45]/70 bg-[#070E1B] transition-all duration-300 group-hover:scale-105 group-hover:border-gold-300">
+                {/* Executive Portrait Frame */}
+                <div className="relative aspect-[4/4.4] w-full overflow-hidden border-b border-white/10 bg-[#070E1B]">
                   {member.photo ? (
                     <img
                       src={member.photo}
                       alt={member.name}
-                      className="h-full w-full object-cover object-top"
+                      loading="lazy"
+                      className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
-                    <span className="font-serif text-base font-semibold tracking-wider text-gold-300">
-                      {member.initials}
-                    </span>
-                  )}
-                </div>
-
-                {/* Crisp Name, Role & Subtle Bio Indicator */}
-                <div className="min-w-0 flex-1">
-                  {activeTab.id === 'all' && (
-                    <div className="mb-1 font-mono text-[9px] tracking-[0.16em] text-gold-400/90 uppercase">
-                      {member.entity === 'holding'
-                        ? 'Holding'
-                        : member.entity === 'ifesa'
-                        ? 'IFESA'
-                        : 'IFWCA'}
+                    <div className="flex h-full w-full items-center justify-center">
+                      <span className="font-serif text-3xl font-semibold tracking-wider text-gold-300">
+                        {member.initials}
+                      </span>
                     </div>
                   )}
-                  <h4 className="truncate font-serif text-base font-bold tracking-wide text-white transition-colors group-hover:text-gold-300">
-                    {member.name}
-                  </h4>
-                  <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-300">
-                    {member.role[lang]}
-                  </p>
-                  {member.bio && (
-                    <span className="mt-2 inline-flex items-center gap-1.5 font-mono text-[9px] tracking-[0.16em] text-gold-400 uppercase">
-                      <span className="h-1 w-1 rotate-45 bg-gold-400" />
-                      {lang === 'en' ? 'Read biography' : 'Lire la biographie'}
+
+                  {/* Subtle Editorial Dark Bottom Vignette */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1528] via-[#0B1528]/15 to-transparent" />
+
+                  {/* Entity Badge */}
+                  <div className="absolute top-3 left-3 border border-white/15 bg-obsidian-950/80 px-2.5 py-1 font-mono text-[9px] font-semibold tracking-[0.16em] text-gold-300 uppercase backdrop-blur-md">
+                    {member.entity === 'holding'
+                      ? 'Holding'
+                      : member.entity === 'ifesa'
+                      ? 'IFESA'
+                      : 'IFWCA'}
+                  </div>
+
+                  {/* Top Gold Accent Hairline on Hover */}
+                  <div className="pointer-events-none absolute top-0 right-0 left-0 h-[2px] bg-gradient-to-r from-transparent via-gold-400 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </div>
+
+                {/* Clean Member Name & Title */}
+                <div className="flex flex-1 flex-col justify-between p-5">
+                  <div>
+                    <h4 className="font-serif text-base font-bold tracking-wide text-white transition-colors group-hover:text-gold-300">
+                      {member.name}
+                    </h4>
+                    <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
+                      {member.role[lang]}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3 font-mono text-[9px] font-semibold tracking-[0.18em] text-gold-400/80 uppercase transition-colors group-hover:text-gold-300">
+                    <span>
+                      {member.bio
+                        ? lang === 'en'
+                          ? 'Read biography'
+                          : 'Lire la biographie'
+                        : lang === 'en'
+                        ? 'Profile'
+                        : 'Profil'}
                     </span>
-                  )}
+                    <span className="h-1.5 w-1.5 rotate-45 bg-gold-400" />
+                  </div>
                 </div>
               </motion.article>
             ))}
@@ -375,8 +393,8 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                 <X className="h-4 w-4" />
               </button>
 
-              <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#C69C45] bg-[#081020]">
+              <div className="flex items-center gap-5">
+                <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-[#C69C45] bg-[#081020]">
                   {selectedMember.photo ? (
                     <img
                       src={selectedMember.photo}
