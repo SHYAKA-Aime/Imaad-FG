@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Language, STRATEGY_PILLARS } from '../data/imaadData';
-import { HudCorners, VertexDots } from './ui/BlueprintPrimitives';
+import { HoverBorderTrace, HudCorners, VertexDots } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
 
 interface MissionAndStrategyProps {
@@ -286,9 +286,10 @@ export const MissionAndStrategy: React.FC<MissionAndStrategyProps> = ({ lang }) 
                   transition={{ duration: 0.55, delay: idx * 0.12 }}
                   onClick={() => soundEngine.playClick()}
                   onMouseEnter={() => soundEngine.playHover()}
-                  className="group relative flex flex-col overflow-hidden border border-transparent bg-obsidian-900/65 transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-400/50 hover:bg-obsidian-900/90 hover:shadow-[0_22px_50px_rgba(0,0,0,0.65)]"
+                  className="group relative flex flex-col overflow-hidden bg-obsidian-900/65 transition-all duration-500 hover:-translate-y-1.5 hover:bg-obsidian-900/90 hover:shadow-[0_22px_50px_rgba(0,0,0,0.65)]"
                 >
-                  <div className="pointer-events-none opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <HoverBorderTrace color={isSapphire ? 'sapphire' : 'gold'} />
+                  <div className="pointer-events-none opacity-0 transition-opacity duration-300 delay-200 group-hover:opacity-100">
                     <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
                   </div>
 

@@ -30,6 +30,40 @@ export const VertexDots: React.FC<{ color?: 'white' | 'gold' | 'sapphire' }> = (
   );
 };
 
+export const HoverBorderTrace: React.FC<{ color?: 'gold' | 'sapphire' }> = ({
+  color = 'gold',
+}) => {
+  const lineH =
+    color === 'sapphire'
+      ? 'bg-gradient-to-r from-sapphire-400/90 via-sapphire-300/70 to-white/40 shadow-[0_0_10px_rgba(56,189,248,0.45)]'
+      : 'bg-gradient-to-r from-gold-400/90 via-gold-300/70 to-white/40 shadow-[0_0_10px_rgba(201,162,77,0.45)]';
+  const lineV =
+    color === 'sapphire'
+      ? 'bg-gradient-to-b from-sapphire-400/90 via-sapphire-300/70 to-white/40 shadow-[0_0_10px_rgba(56,189,248,0.45)]'
+      : 'bg-gradient-to-b from-gold-400/90 via-gold-300/70 to-white/40 shadow-[0_0_10px_rgba(201,162,77,0.45)]';
+
+  return (
+    <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
+      {/* Top edge: draws left -> right from Top-Left corner */}
+      <span
+        className={`absolute top-0 left-0 h-[1.5px] w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 ${lineH}`}
+      />
+      {/* Bottom edge: draws right -> left from Bottom-Right corner */}
+      <span
+        className={`absolute right-0 bottom-0 h-[1.5px] w-full origin-right scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 ${lineH}`}
+      />
+      {/* Right edge: draws top -> bottom meeting Bottom-Right */}
+      <span
+        className={`absolute top-0 right-0 h-full w-[1.5px] origin-top scale-y-0 transition-transform duration-300 delay-150 ease-out group-hover:scale-y-100 ${lineV}`}
+      />
+      {/* Left edge: draws bottom -> top meeting Top-Left */}
+      <span
+        className={`absolute bottom-0 left-0 h-full w-[1.5px] origin-bottom scale-y-0 transition-transform duration-300 delay-150 ease-out group-hover:scale-y-100 ${lineV}`}
+      />
+    </div>
+  );
+};
+
 export const HudCorners: React.FC<{ variant?: 'gold' | 'sapphire' }> = () => {
   const borderCol = 'border-white/35 group-hover:border-white/70';
 
