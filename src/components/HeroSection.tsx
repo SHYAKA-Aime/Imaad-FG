@@ -88,10 +88,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   {s.tabLabel[lang]}
                 </span>
                 <span
-                  className={`absolute top-1/2 -right-[15px] w-[2px] -translate-y-1/2 bg-gold-400 shadow-[0_0_12px_#C9A24D] transition-all duration-300 lg:-right-[17px] ${
+                  className={`absolute top-1/2 -right-[15px] w-[2px] -translate-y-1/2 overflow-hidden bg-white/15 transition-all duration-300 lg:-right-[17px] ${
                     isActive ? 'h-full opacity-100' : 'h-0 opacity-0'
                   }`}
-                />
+                >
+                  {isActive && (
+                    <motion.span
+                      key={`rail-${activeSlide}-${lang}`}
+                      initial={{ scaleY: 0 }}
+                      animate={{ scaleY: 1 }}
+                      transition={{
+                        duration: (currentSlide.durationMs ?? 7000) / 1000,
+                        ease: 'linear',
+                      }}
+                      style={{ transformOrigin: 'top' }}
+                      className="block h-full w-full bg-gold-400 shadow-[0_0_12px_#C9A24D]"
+                    />
+                  )}
+                </span>
               </button>
             );
           })}
@@ -123,37 +137,125 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             })}
           </div>
 
-          {/* Animated Slide Text (Fixed min-height keeps persistent buttons completely steady) */}
-          <div className="min-h-[145px] w-full sm:min-h-[165px]">
-            <AnimatePresence mode="wait">
+          {/* Silky Masked Editorial Slide Transition (Fixed Stage Height Keeps Buttons Steady) */}
+          <div className="relative min-h-[168px] w-full sm:min-h-[188px]">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.div
-                key={currentSlide.id + lang}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                key={`${currentSlide.id}-${lang}`}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={{
+                  hidden: {},
+                  visible: {},
+                  exit: {
+                    opacity: 0,
+                    y: -12,
+                    filter: 'blur(4px)',
+                    transition: { duration: 0.34, ease: [0.4, 0, 1, 1] },
+                  },
+                }}
                 className="flex w-full flex-col items-start"
               >
-                {/* Primary Bio Slide vs Pillar Slide Headline */}
+                {/* Primary Bio Slide vs Pillar Slide Headline with Masked Line Curtain Reveal */}
                 {currentSlide.isBioSlide ? (
                   <h1 className="font-display text-xl font-bold tracking-[0.1em] text-white uppercase sm:text-2xl md:text-[26px] lg:text-[30px] leading-snug">
-                    {currentSlide.line1[lang]}{' '}
-                    <span className="text-gold-300">
-                      {currentSlide.lineGold[lang]}
+                    <span className="block overflow-hidden">
+                      <motion.span
+                        className="block"
+                        variants={{
+                          hidden: { y: '105%', opacity: 0, filter: 'blur(3px)' },
+                          visible: {
+                            y: '0%',
+                            opacity: 1,
+                            filter: 'blur(0px)',
+                            transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+                          },
+                        }}
+                      >
+                        {currentSlide.line1[lang]}{' '}
+                        <span className="text-gold-300">
+                          {currentSlide.lineGold[lang]}
+                        </span>
+                      </motion.span>
                     </span>
-                    <br />
-                    {currentSlide.line3[lang]}
+                    <span className="block overflow-hidden">
+                      <motion.span
+                        className="block"
+                        variants={{
+                          hidden: { y: '105%', opacity: 0, filter: 'blur(3px)' },
+                          visible: {
+                            y: '0%',
+                            opacity: 1,
+                            filter: 'blur(0px)',
+                            transition: {
+                              duration: 0.72,
+                              delay: 0.1,
+                              ease: [0.22, 1, 0.36, 1],
+                            },
+                          },
+                        }}
+                      >
+                        {currentSlide.line3[lang]}
+                      </motion.span>
+                    </span>
                   </h1>
                 ) : (
-                  <h1 className="font-display text-xl font-bold tracking-[0.14em] text-white uppercase sm:text-2xl md:text-3xl lg:text-[34px] leading-tight">
-                    {currentSlide.tabLabel[lang]}
+                  <h1 className="overflow-hidden font-display text-xl font-bold tracking-[0.14em] text-white uppercase sm:text-2xl md:text-3xl lg:text-[34px] leading-tight">
+                    <motion.span
+                      className="block"
+                      variants={{
+                        hidden: { y: '105%', opacity: 0, filter: 'blur(3px)' },
+                        visible: {
+                          y: '0%',
+                          opacity: 1,
+                          filter: 'blur(0px)',
+                          transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+                        },
+                      }}
+                    >
+                      {currentSlide.tabLabel[lang]}
+                    </motion.span>
                   </h1>
                 )}
 
-                {/* Slide Description (Visible on all slides) */}
-                <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-300 sm:text-[13px]">
+                {/* Delicate Sweeping Gold Accent Hairline */}
+                <motion.div
+                  variants={{
+                    hidden: { scaleX: 0, opacity: 0 },
+                    visible: {
+                      scaleX: 1,
+                      opacity: 1,
+                      transition: {
+                        duration: 0.65,
+                        delay: 0.16,
+                        ease: [0.22, 1, 0.36, 1],
+                      },
+                    },
+                  }}
+                  style={{ transformOrigin: 'left' }}
+                  className="mt-3.5 h-[1px] w-16 bg-gradient-to-r from-gold-400/90 to-transparent"
+                />
+
+                {/* Slide Description with Soft Upward Focus-In Glide */}
+                <motion.p
+                  variants={{
+                    hidden: { y: 12, opacity: 0, filter: 'blur(4px)' },
+                    visible: {
+                      y: 0,
+                      opacity: 1,
+                      filter: 'blur(0px)',
+                      transition: {
+                        duration: 0.75,
+                        delay: 0.22,
+                        ease: [0.22, 1, 0.36, 1],
+                      },
+                    },
+                  }}
+                  className="mt-3 max-w-md text-xs leading-relaxed text-slate-300 sm:text-[13px]"
+                >
                   {currentSlide.description[lang]}
-                </p>
+                </motion.p>
               </motion.div>
             </AnimatePresence>
           </div>
