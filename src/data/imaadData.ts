@@ -117,8 +117,8 @@ export const HERO_SLIDES: HeroSlideData[] = [
     lineGold: { en: 'sovereignty', fr: 'souveraineté' },
     line3: { en: 'and sustainable growth', fr: 'et de croissance durable' },
     description: {
-      en: 'Imaad Financial Group structures and finances sovereign, PPP and corporate projects in Africa, the Middle East and Latin America.',
-      fr: 'Imaad Financial Group structure et finance des projets souverains, PPP et corporate en Afrique, au Moyen-Orient et en Amérique latine.',
+      en: 'Imaad Financial Group structures and finances sovereign, corporate & trade finance, and PPP projects across Sub-Saharan Africa.',
+      fr: 'Imaad Financial Group structure et finance des projets souverains, corporate & trade finance et PPP en Afrique subsaharienne.',
     },
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=85',
     coordinates: 'ABIDJAN // 5.3167° N, 4.0333° W',
@@ -153,8 +153,8 @@ export const HERO_SLIDES: HeroSlideData[] = [
     lineGold: { en: 'GENERATIONAL', fr: 'L’INFRASTRUCTURE' },
     line3: { en: 'AFRICAN INFRASTRUCTURE', fr: 'GÉNÉRATIONNELLE' },
     description: {
-      en: 'Mobilizing over €1 Billion in institutional and multilateral liquidity for transport corridors, reference hospitals, clean energy grids, and civic hubs.',
-      fr: 'Mobilisation de plus d’1 milliard € de liquidités institutionnelles pour les corridors routiers, hôpitaux de référence, réseaux énergétiques et pôles éducatifs.',
+      en: 'Mobilizing over €1 Billion in institutional and multilateral liquidity for transport corridors, energy & gas infrastructure, industrial healthcare, and housing programs.',
+      fr: 'Mobilisation de plus d’1 milliard € de liquidités institutionnelles pour les corridors de transport, infrastructures énergétiques et gazières, santé industrielle et programmes de logements.',
     },
     image: 'https://images.unsplash.com/photo-1541888946425-d09bb18086f6?auto=format&fit=crop&w=2000&q=85',
     coordinates: 'DAKAR // 14.7167° N, 17.4677° W',

@@ -306,8 +306,8 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
               {lang === 'en'
-                ? 'High-impact sovereign road corridors, turnkey healthcare complexes, and civic institutions financed across Africa.'
-                : 'Corridors routiers souverains, complexes hospitaliers de référence et cités administratives structurés en Afrique.'}
+                ? 'Strategic energy storage and gas infrastructure, transport corridors, industrial healthcare, and housing programs structured across Sub-Saharan Africa.'
+                : 'Infrastructures énergétiques et gazières, corridors de transport, santé industrielle et programmes de logements structurés en Afrique subsaharienne.'}
             </p>
           </div>
 
