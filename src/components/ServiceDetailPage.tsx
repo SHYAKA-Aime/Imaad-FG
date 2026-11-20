@@ -227,15 +227,16 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
 
       {/* =====================================================================
           2. TEYLIOM SPLIT SHOWCASE: INTERACTIVE PHOTO STAGE + SCOPE CHIPS
+             (MEDIUM WARM STONE MODE — #DDD8CE / #EAE6DE / #0B1528)
       ====================================================================== */}
-      <section className="border-b border-white/10 bg-obsidian-950 py-14 sm:py-20">
+      <section className="border-y border-[#C4BDB0] bg-[#DDD8CE] py-14 text-[#0B1528] sm:py-20">
         <div className="mx-auto max-w-[1360px] px-5 sm:px-10 lg:px-16">
-          <div className="relative border border-white/15 bg-obsidian-900/65 p-5 sm:p-8 lg:p-12">
+          <div className="relative border border-[#C4BDB0] bg-[#EAE6DE] p-5 shadow-[0_14px_40px_rgba(11,21,40,0.08)] sm:p-8 lg:p-12">
             <VertexDots color="gold" />
             <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
               {/* Left: Interactive Teyliom Image Carousel */}
               <div className="lg:col-span-6">
-                <div className="relative h-[260px] w-full overflow-hidden border border-white/15 bg-obsidian-950 sm:h-[340px]">
+                <div className="relative h-[260px] w-full overflow-hidden border border-[#C4BDB0] bg-obsidian-950 sm:h-[340px]">
                   {currentSlide && (
                     <AnimatePresence mode="wait">
                       <motion.img
@@ -250,7 +251,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                       />
                     </AnimatePresence>
                   )}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950/85 via-transparent to-transparent" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950/75 via-transparent to-transparent" />
 
                   {/* Centered Teyliom Carousel Dots */}
                   <div className="absolute right-0 bottom-4 left-0 flex items-center justify-center gap-2">
@@ -276,10 +277,10 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
 
               {/* Right: Clean Scannable Intervention Scope Tiles */}
               <div className="lg:col-span-6">
-                <div className="font-mono text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase">
+                <div className="font-mono text-[10px] font-bold tracking-[0.22em] text-[#9A7428] uppercase">
                   {lang === 'en' ? 'SCOPE OF INTERVENTION' : 'CHAMPS D’INTERVENTION'}
                 </div>
-                <h2 className="mt-2 font-display text-xl font-bold tracking-[0.12em] text-white uppercase sm:text-2xl">
+                <h2 className="mt-2 font-display text-xl font-bold tracking-[0.12em] text-[#0B1528] uppercase sm:text-2xl">
                   {activeService.badgeDivision[lang]}
                 </h2>
 
@@ -287,12 +288,12 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                   {activeService.bullets[lang].map((bullet, idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-3 border border-white/10 border-l-2 border-l-gold-400 bg-obsidian-950/75 p-4"
+                      className="flex items-start gap-3 border border-[#D2CBBF] border-l-2 border-l-[#B38832] bg-[#DDD8CE]/70 p-4"
                     >
-                      <span className="font-mono text-[10px] font-bold text-gold-400">
+                      <span className="font-mono text-[10px] font-bold text-[#9A7428]">
                         0{idx + 1}
                       </span>
-                      <span className="text-xs font-medium leading-relaxed text-slate-200">
+                      <span className="text-xs font-medium leading-relaxed text-[#0B1528]">
                         {bullet}
                       </span>
                     </div>
