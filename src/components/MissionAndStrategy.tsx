@@ -159,7 +159,7 @@ export const MissionAndStrategy: React.FC<MissionAndStrategyProps> = ({ lang }) 
           >
             <div className="mb-3.5 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
               <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
-              <span>{lang === 'en' ? 'ABOUT // OUR MODEL' : 'À PROPOS // NOTRE MODÈLE'}</span>
+              <span>{lang === 'en' ? 'ABOUT' : 'À PROPOS'}</span>
             </div>
 
             <h2 className="font-display text-2xl font-bold tracking-[0.12em] text-white uppercase sm:text-3xl lg:text-4xl leading-tight">
@@ -286,9 +286,11 @@ export const MissionAndStrategy: React.FC<MissionAndStrategyProps> = ({ lang }) 
                   transition={{ duration: 0.55, delay: idx * 0.12 }}
                   onClick={() => soundEngine.playClick()}
                   onMouseEnter={() => soundEngine.playHover()}
-                  className="group relative flex flex-col overflow-hidden border border-white/15 bg-obsidian-900/75 transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-400/50 hover:shadow-[0_22px_50px_rgba(0,0,0,0.65)]"
+                  className="group relative flex flex-col overflow-hidden border border-transparent bg-obsidian-900/65 transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-400/50 hover:bg-obsidian-900/90 hover:shadow-[0_22px_50px_rgba(0,0,0,0.65)]"
                 >
-                  <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
+                  <div className="pointer-events-none opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                    <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
+                  </div>
 
                   {/* Visible Editorial Image Header (Clean, No Extra Corner Tag) */}
                   <div className="relative h-48 w-full overflow-hidden border-b border-white/10 sm:h-52">

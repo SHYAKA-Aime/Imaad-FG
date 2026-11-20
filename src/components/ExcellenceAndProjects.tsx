@@ -21,8 +21,6 @@ interface ExcellenceAndProjectsProps {
   onViewAllProjects: () => void;
 }
 
-const SERVICE_LETTERS = ['A', 'B', 'C'];
-
 const ServiceVisualCard: React.FC<{
   mod: ExcellenceModuleData;
   idx: number;
@@ -40,9 +38,11 @@ const ServiceVisualCard: React.FC<{
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6, delay: idx * 0.12 }}
-      className="group relative flex flex-col overflow-hidden border border-white/15 bg-obsidian-900/75 transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-400/50 hover:shadow-[0_24px_55px_rgba(0,0,0,0.75)]"
+      className="group relative flex flex-col overflow-hidden border border-transparent bg-obsidian-900/65 transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-400/50 hover:bg-obsidian-900/90 hover:shadow-[0_24px_55px_rgba(0,0,0,0.75)]"
     >
-      <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
+      <div className="pointer-events-none opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
+      </div>
 
       {/* Interactive Photo Stage with Pure Teyliom Carousel Dots (No Extra Text Overlays) */}
       <div className="relative h-56 w-full overflow-hidden border-b border-white/10 bg-obsidian-950 sm:h-60">
@@ -89,10 +89,7 @@ const ServiceVisualCard: React.FC<{
       {/* Concise Editorial Copy + Corner-Bracketed Learn More CTA */}
       <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
         <div>
-          <span className="font-serif text-sm font-semibold text-gold-400">
-            {SERVICE_LETTERS[idx] || mod.num}
-          </span>
-          <h3 className="mt-1 font-heading text-lg font-bold tracking-[0.1em] text-white uppercase transition-colors duration-300 group-hover:text-gold-300 sm:text-xl leading-snug">
+          <h3 className="font-heading text-lg font-bold tracking-[0.1em] text-white uppercase transition-colors duration-300 group-hover:text-gold-300 sm:text-xl leading-snug">
             {mod.title[lang]}
           </h3>
           <p className="mt-3 line-clamp-4 text-xs leading-relaxed text-slate-300 sm:text-[13px]">
@@ -300,9 +297,7 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
             <div className="mb-3.5 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
               <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
               <span>
-                {lang === 'en'
-                  ? 'PORTFOLIO // FLAGSHIP MANDATES'
-                  : 'PORTEFEUILLE // MANDATS PHARES'}
+                {lang === 'en' ? 'PORTFOLIO' : 'PORTEFEUILLE'}
               </span>
             </div>
             <h2 className="font-display text-2xl font-bold tracking-[0.18em] text-white uppercase sm:text-4xl lg:text-5xl">
