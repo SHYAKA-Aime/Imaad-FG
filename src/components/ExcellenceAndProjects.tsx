@@ -44,28 +44,14 @@ const ServiceVisualCard: React.FC<{
     >
       <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
 
-      {/* Top Teyliom Chamfered Division Bar */}
-      <div className="flex items-center justify-between border-b border-white/10 bg-[#070E1B]/90 px-5 py-3">
-        <div className="flex items-center gap-2.5">
-          <span className="font-serif text-base font-bold text-gold-300">
-            {SERVICE_LETTERS[idx] || mod.num}
-          </span>
-          <span className="h-3.5 w-[1px] bg-white/20" />
-          <span className="font-mono text-[10px] tracking-[0.2em] text-slate-300 uppercase">
-            {mod.num} · {mod.badgeDivision[lang]}
-          </span>
-        </div>
-        <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
-      </div>
-
-      {/* Interactive Photo Stage with Teyliom Carousel Dots */}
+      {/* Interactive Photo Stage with Pure Teyliom Carousel Dots (No Extra Text Overlays) */}
       <div className="relative h-56 w-full overflow-hidden border-b border-white/10 bg-obsidian-950 sm:h-60">
         {activeSlide && (
           <AnimatePresence mode="wait">
             <motion.img
               key={activeSlide.image}
               src={activeSlide.image}
-              alt={activeSlide.caption[lang]}
+              alt={mod.title[lang]}
               initial={{ opacity: 0, scale: 1.06 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
@@ -74,43 +60,39 @@ const ServiceVisualCard: React.FC<{
             />
           </AnimatePresence>
         )}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/30 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950/85 via-transparent to-transparent" />
 
-        {/* Subtle Active Slide Caption + Teyliom-Style Carousel Dots */}
-        <div className="absolute right-4 bottom-3 left-4 flex items-end justify-between gap-3">
-          {activeSlide && (
-            <span className="max-w-[70%] truncate font-mono text-[9px] tracking-[0.14em] text-slate-200/90 uppercase drop-shadow">
-              {activeSlide.caption[lang]}
-            </span>
-          )}
-          {slides.length > 1 && (
-            <div className="flex items-center gap-1.5">
-              {slides.map((_, sIdx) => (
-                <button
-                  key={sIdx}
-                  type="button"
-                  aria-label={`Slide ${sIdx + 1}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    soundEngine.playClick();
-                    setSlideIdx(sIdx);
-                  }}
-                  className={`h-2.5 w-2.5 rounded-full border transition-all ${
-                    sIdx === slideIdx
-                      ? 'scale-110 border-gold-300 bg-gold-400 shadow-[0_0_8px_#C9A24D]'
-                      : 'border-white/50 bg-obsidian-950/60 hover:border-gold-300'
-                  }`}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+        {/* Centered Teyliom Carousel Dots */}
+        {slides.length > 1 && (
+          <div className="absolute right-0 bottom-3.5 left-0 flex items-center justify-center gap-2">
+            {slides.map((_, sIdx) => (
+              <button
+                key={sIdx}
+                type="button"
+                aria-label={`Slide ${sIdx + 1}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  soundEngine.playClick();
+                  setSlideIdx(sIdx);
+                }}
+                className={`h-2.5 w-2.5 rounded-full border transition-all ${
+                  sIdx === slideIdx
+                    ? 'scale-110 border-gold-300 bg-gold-400 shadow-[0_0_8px_#C9A24D]'
+                    : 'border-white/50 bg-obsidian-950/60 hover:border-gold-300'
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Concise Editorial Copy + Corner-Bracketed Learn More CTA */}
       <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
         <div>
-          <h3 className="font-heading text-lg font-bold tracking-[0.1em] text-white uppercase transition-colors duration-300 group-hover:text-gold-300 sm:text-xl leading-snug">
+          <span className="font-serif text-sm font-semibold text-gold-400">
+            {SERVICE_LETTERS[idx] || mod.num}
+          </span>
+          <h3 className="mt-1 font-heading text-lg font-bold tracking-[0.1em] text-white uppercase transition-colors duration-300 group-hover:text-gold-300 sm:text-xl leading-snug">
             {mod.title[lang]}
           </h3>
           <p className="mt-3 line-clamp-4 text-xs leading-relaxed text-slate-300 sm:text-[13px]">

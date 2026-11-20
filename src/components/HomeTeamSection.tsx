@@ -3,7 +3,6 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import {
   Language,
-  OFFICIAL_VALUES,
   TEAM_MEMBERS,
   TeamMemberData,
 } from '../data/imaadData';
@@ -137,39 +136,11 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
         />
 
         <div className="relative z-10 mx-auto max-w-[1360px] px-5 sm:px-10 lg:px-16">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-3 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
-              <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
-              <span>{lang === 'en' ? 'GOVERNANCE & TEAM' : 'GOUVERNANCE & ÉQUIPE'}</span>
-            </div>
-
+          {/* Minimal Banner Header (Clean, No Extra Text Boxes) */}
+          <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-display text-2xl font-bold tracking-[0.18em] text-white uppercase sm:text-4xl lg:text-5xl">
               {lang === 'en' ? 'TEAM' : 'ÉQUIPE'}
             </h2>
-
-            <p className="mt-3.5 text-sm leading-relaxed text-slate-300 sm:text-base">
-              {lang === 'en'
-                ? 'Three integrated entities uniting executive governance in Kigali and regional execution in Abidjan.'
-                : 'Trois entités intégrées alliant gouvernance à Kigali et exécution régionale à Abidjan.'}
-            </p>
-          </div>
-
-          {/* 4 Official Values Strip */}
-          <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {OFFICIAL_VALUES.map((val) => (
-              <div
-                key={val.num}
-                className="flex items-center gap-3 border border-white/15 bg-obsidian-950/75 px-4 py-3 backdrop-blur-md"
-              >
-                <span className="font-mono text-[10px] font-bold tracking-[0.2em] text-gold-400">
-                  {val.num}
-                </span>
-                <span className="h-3 w-[1px] bg-white/15" />
-                <span className="text-xs font-medium text-slate-200">
-                  {val.title[lang]}
-                </span>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -265,16 +236,13 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
               return (
                 <div key={group.id}>
                   {/* Exact Official Entity Heading */}
-                  <div className="mb-7 flex items-baseline justify-between gap-4 border-b border-gold-400/25 pb-3.5">
+                  <div className="mb-7 border-b border-gold-400/25 pb-3.5">
                     <h3 className="font-serif text-xl font-bold tracking-wide text-[#C9A24D] sm:text-2xl">
                       {group.fullTitle[lang]}
                     </h3>
-                    <span className="shrink-0 font-mono text-[10px] tracking-[0.2em] text-slate-400 uppercase">
-                      {group.code} · {members.length}
-                    </span>
                   </div>
 
-                  {/* Editorial Portrait Cards (Avatar Image Frame + Exact CEO Details) */}
+                  {/* Editorial Portrait Cards (Clean Avatar Frame + Name & Exact Title) */}
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {members.map((member, idx) => (
                       <motion.article
@@ -292,7 +260,7 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                       >
                         <VertexDots color="gold" />
 
-                        {/* Full Editorial Portrait Avatar Frame */}
+                        {/* Pure Portrait Avatar Frame (Zero Overlay Tags) */}
                         <div className="relative aspect-[4/4.4] w-full overflow-hidden border-b border-white/10 bg-[#070E1B]">
                           <img
                             src={member.photo || '/team-avatar.svg'}
@@ -302,50 +270,25 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                           />
 
                           {/* Subtle Editorial Bottom Vignette */}
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1528] via-[#0B1528]/15 to-transparent" />
-
-                          {/* Entity Tag */}
-                          <div className="absolute top-3 left-3 border border-white/15 bg-obsidian-950/80 px-2.5 py-1 font-mono text-[9px] font-semibold tracking-[0.16em] text-gold-300 uppercase backdrop-blur-md">
-                            {member.entity === 'holding'
-                              ? 'Holding'
-                              : member.entity === 'ifesa'
-                              ? 'IFESA'
-                              : 'IFWCA'}
-                          </div>
-
-                          {/* Monogram Corner Tag (matches CEO screenshots) */}
-                          <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full border border-gold-400/50 bg-obsidian-950/80 font-serif text-[11px] font-semibold text-gold-300 backdrop-blur-md">
-                            {member.initials}
-                          </div>
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1528] via-[#0B1528]/10 to-transparent" />
 
                           {/* Top Gold Accent Hairline on Hover */}
                           <div className="pointer-events-none absolute top-0 right-0 left-0 h-[2px] bg-gradient-to-r from-transparent via-gold-400 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                         </div>
 
-                        {/* Exact Member Details (Name, Title & Bio / Placeholder) */}
-                        <div className="flex flex-1 flex-col justify-between p-5">
-                          <div>
-                            <h4 className="font-serif text-base font-bold tracking-wide text-white transition-colors group-hover:text-gold-300">
-                              {member.name}
-                            </h4>
-                            <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
-                              {member.role[lang]}
+                        {/* Clean Name & Exact Role */}
+                        <div className="flex flex-1 flex-col p-5">
+                          <h4 className="font-serif text-base font-bold tracking-wide text-white transition-colors group-hover:text-gold-300">
+                            {member.name}
+                          </h4>
+                          <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
+                            {member.role[lang]}
+                          </p>
+                          {member.bio && (
+                            <p className="mt-3 border-t border-white/10 pt-3 text-[11px] leading-relaxed text-slate-400">
+                              {member.bio[lang]}
                             </p>
-                          </div>
-
-                          <div className="mt-4 border-t border-white/10 pt-3.5">
-                            {member.bio ? (
-                              <p className="line-clamp-4 text-[11px] leading-relaxed text-slate-300">
-                                {member.bio[lang]}
-                              </p>
-                            ) : (
-                              <p className="text-[11px] italic text-slate-500">
-                                {lang === 'en'
-                                  ? '[Biography to be completed]'
-                                  : '[Biographie à compléter]'}
-                              </p>
-                            )}
-                          </div>
+                          )}
                         </div>
                       </motion.article>
                     ))}

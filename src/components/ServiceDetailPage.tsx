@@ -252,31 +252,24 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                   )}
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950/85 via-transparent to-transparent" />
 
-                  {/* Teyliom Carousel Dots + Caption */}
-                  <div className="absolute right-4 bottom-4 left-4 flex items-center justify-between gap-3">
-                    {currentSlide && (
-                      <span className="truncate font-mono text-[10px] tracking-[0.14em] text-gold-200 uppercase">
-                        {currentSlide.caption[lang]}
-                      </span>
-                    )}
-                    <div className="flex shrink-0 items-center gap-2">
-                      {slides.map((_, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          aria-label={`Slide ${idx + 1}`}
-                          onClick={() => {
-                            soundEngine.playClick();
-                            setSlideIdx(idx);
-                          }}
-                          className={`h-2.5 w-2.5 rounded-full border transition-all ${
-                            idx === slideIdx
-                              ? 'scale-110 border-gold-300 bg-gold-400 shadow-[0_0_8px_#C9A24D]'
-                              : 'border-white/50 bg-obsidian-950/60 hover:border-gold-300'
-                          }`}
-                        />
-                      ))}
-                    </div>
+                  {/* Centered Teyliom Carousel Dots */}
+                  <div className="absolute right-0 bottom-4 left-0 flex items-center justify-center gap-2">
+                    {slides.map((_, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        aria-label={`Slide ${idx + 1}`}
+                        onClick={() => {
+                          soundEngine.playClick();
+                          setSlideIdx(idx);
+                        }}
+                        className={`h-2.5 w-2.5 rounded-full border transition-all ${
+                          idx === slideIdx
+                            ? 'scale-110 border-gold-300 bg-gold-400 shadow-[0_0_8px_#C9A24D]'
+                            : 'border-white/50 bg-obsidian-950/60 hover:border-gold-300'
+                        }`}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>

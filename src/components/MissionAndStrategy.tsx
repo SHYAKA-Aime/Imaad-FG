@@ -238,7 +238,7 @@ export const MissionAndStrategy: React.FC<MissionAndStrategyProps> = ({ lang }) 
                 <span className="pointer-events-none absolute -top-1.5 -left-1.5 h-2.5 w-2.5 rotate-45 bg-gold-400 shadow-[0_0_10px_#C9A24D]" />
                 <span className="pointer-events-none absolute -right-1.5 -bottom-1.5 h-2.5 w-2.5 rotate-45 bg-gold-400 shadow-[0_0_10px_#C9A24D]" />
 
-                {/* Parallax Image Viewport */}
+                {/* Parallax Image Viewport (Pure, Uncluttered) */}
                 <div className="relative h-[320px] w-full overflow-hidden bg-obsidian-950 sm:h-[400px] lg:h-[440px]">
                   <motion.img
                     style={{ y: imageY, scale: 1.14 }}
@@ -246,17 +246,7 @@ export const MissionAndStrategy: React.FC<MissionAndStrategyProps> = ({ lang }) 
                     alt="Imaad Financial Group — Architecture"
                     className="h-full w-full object-cover"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950/75 via-obsidian-950/15 to-transparent" />
-
-                  {/* Minimal Floating Coordinate Caption */}
-                  <div className="absolute right-4 bottom-4 left-4 flex items-center justify-between border border-white/15 bg-obsidian-950/85 px-4 py-2.5 backdrop-blur-md">
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-gold-300 uppercase">
-                      KIGALI · ABIDJAN
-                    </span>
-                    <span className="font-mono text-[10px] tracking-[0.16em] text-slate-300 uppercase">
-                      {lang === 'en' ? '9 OFFICES · 24 COUNTRIES' : '9 BUREAUX · 24 PAYS'}
-                    </span>
-                  </div>
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950/60 via-transparent to-transparent" />
                 </div>
               </div>
             </div>
@@ -300,19 +290,14 @@ export const MissionAndStrategy: React.FC<MissionAndStrategyProps> = ({ lang }) 
                 >
                   <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
 
-                  {/* Visible Editorial Image Header */}
+                  {/* Visible Editorial Image Header (Clean, No Extra Corner Tag) */}
                   <div className="relative h-48 w-full overflow-hidden border-b border-white/10 sm:h-52">
                     <img
                       src={pillar.bgImage}
                       alt={pillar.title[lang]}
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/35 to-transparent" />
-
-                    {/* Pillar Index Pill */}
-                    <div className="absolute top-3.5 left-3.5 border border-white/20 bg-obsidian-950/85 px-2.5 py-1 font-mono text-[10px] font-bold tracking-[0.2em] text-gold-300 backdrop-blur-md">
-                      {pillar.code}
-                    </div>
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/30 to-transparent" />
 
                     {/* Floating Emblem Badge */}
                     <div
@@ -335,10 +320,7 @@ export const MissionAndStrategy: React.FC<MissionAndStrategyProps> = ({ lang }) 
                   {/* Concise Visual Card Body */}
                   <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
                     <div>
-                      <div className="font-mono text-[9px] tracking-[0.2em] text-gold-400/90 uppercase">
-                        {pillar.region[lang]}
-                      </div>
-                      <h4 className="mt-1.5 font-heading text-lg font-bold tracking-wider text-white uppercase transition-colors group-hover:text-gold-300">
+                      <h4 className="font-heading text-lg font-bold tracking-wider text-white uppercase transition-colors group-hover:text-gold-300">
                         {pillar.title[lang]}
                       </h4>
                       <p className="mt-2.5 text-xs leading-relaxed text-slate-300 sm:text-sm">
