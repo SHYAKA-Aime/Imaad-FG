@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Currency, HERO_SLIDES, Language } from '../data/imaadData';
 import { HeroArchitectureScene } from './three/HeroArchitectureScene';
+import { HudCorners } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
 
 interface HeroSectionProps {
@@ -122,58 +123,63 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             })}
           </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide.id + lang}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="flex w-full flex-col items-start"
+          {/* Animated Slide Text (Fixed min-height keeps persistent buttons completely steady) */}
+          <div className="min-h-[145px] w-full sm:min-h-[165px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide.id + lang}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="flex w-full flex-col items-start"
+              >
+                {/* Primary Bio Slide vs Pillar Slide Headline */}
+                {currentSlide.isBioSlide ? (
+                  <h1 className="font-display text-xl font-bold tracking-[0.1em] text-white uppercase sm:text-2xl md:text-[26px] lg:text-[30px] leading-snug">
+                    {currentSlide.line1[lang]}{' '}
+                    <span className="text-gold-300">
+                      {currentSlide.lineGold[lang]}
+                    </span>
+                    <br />
+                    {currentSlide.line3[lang]}
+                  </h1>
+                ) : (
+                  <h1 className="font-display text-xl font-bold tracking-[0.14em] text-white uppercase sm:text-2xl md:text-3xl lg:text-[34px] leading-tight">
+                    {currentSlide.tabLabel[lang]}
+                  </h1>
+                )}
+
+                {/* Slide Description (Visible on all slides) */}
+                <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-300 sm:text-[13px]">
+                  {currentSlide.description[lang]}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Persistent Hero Actions (Unified 2-Corner Low-Opacity White Bracket Style) */}
+          <div className="mt-5 flex flex-wrap items-center gap-3.5 sm:mt-6">
+            <a
+              href="#excellence"
+              onClick={() => soundEngine.playClick()}
+              onMouseEnter={() => soundEngine.playHover()}
+              className="group relative inline-flex h-11 items-center justify-center bg-gold-500/15 px-6 font-display text-[11px] font-bold tracking-[0.18em] text-gold-200 uppercase backdrop-blur-md transition-all duration-300 hover:bg-gold-500/25 hover:text-white sm:h-12 sm:px-7"
             >
-              {/* Primary Bio Slide vs Pillar Slide Headline */}
-              {currentSlide.isBioSlide ? (
-                <h1 className="font-display text-xl font-bold tracking-[0.1em] text-white uppercase sm:text-2xl md:text-[26px] lg:text-[30px] leading-snug">
-                  {currentSlide.line1[lang]}{' '}
-                  <span className="text-gold-300">
-                    {currentSlide.lineGold[lang]}
-                  </span>
-                  <br />
-                  {currentSlide.line3[lang]}
-                </h1>
-              ) : (
-                <h1 className="font-display text-xl font-bold tracking-[0.14em] text-white uppercase sm:text-2xl md:text-3xl lg:text-[34px] leading-tight">
-                  {currentSlide.tabLabel[lang]}
-                </h1>
-              )}
+              <HudCorners />
+              <span>{lang === 'en' ? 'Discover our solutions' : 'Découvrir nos solutions'}</span>
+            </a>
 
-              {/* Slide Description (Visible on all slides) */}
-              <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-300 sm:text-[13px]">
-                {currentSlide.description[lang]}
-              </p>
-
-              {/* The 2 Primary Hero Actions: Clean Modern Buttons */}
-              <div className="mt-5 flex flex-wrap items-center gap-3 sm:mt-6">
-                <a
-                  href="#excellence"
-                  onClick={() => soundEngine.playClick()}
-                  onMouseEnter={() => soundEngine.playHover()}
-                  className="inline-flex h-10 items-center justify-center rounded bg-[#C69C45] px-5 font-heading text-[11px] font-bold tracking-[0.14em] text-[#0B1528] uppercase shadow-[0_6px_22px_rgba(201,162,77,0.28)] transition-all duration-300 hover:bg-[#d6ad56] hover:shadow-[0_8px_28px_rgba(201,162,77,0.45)] sm:h-11 sm:px-6 sm:text-xs"
-                >
-                  <span>{lang === 'en' ? 'Discover our solutions' : 'Découvrir nos solutions'}</span>
-                </a>
-
-                <a
-                  href="#projects-showcase"
-                  onClick={() => soundEngine.playClick()}
-                  onMouseEnter={() => soundEngine.playHover()}
-                  className="inline-flex h-10 items-center justify-center rounded border border-white/25 bg-white/[0.06] px-5 font-heading text-[11px] font-semibold tracking-[0.14em] text-white uppercase backdrop-blur-md transition-all duration-300 hover:border-[#C69C45]/80 hover:bg-white/[0.12] hover:text-gold-200 sm:h-11 sm:px-6 sm:text-xs"
-                >
-                  <span>{lang === 'en' ? 'See our projects' : 'Voir nos projets'}</span>
-                </a>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+            <a
+              href="#projects-showcase"
+              onClick={() => soundEngine.playClick()}
+              onMouseEnter={() => soundEngine.playHover()}
+              className="group relative inline-flex h-11 items-center justify-center bg-white/[0.04] px-6 font-display text-[11px] font-bold tracking-[0.18em] text-white uppercase backdrop-blur-md transition-all duration-300 hover:bg-white/[0.09] hover:text-gold-200 sm:h-12 sm:px-7"
+            >
+              <HudCorners />
+              <span>{lang === 'en' ? 'See our projects' : 'Voir nos projets'}</span>
+            </a>
+          </div>
         </div>
       </div>
 
