@@ -10,21 +10,6 @@ interface SovereignMetricsBarProps {
 export const SovereignMetricsBar: React.FC<SovereignMetricsBarProps> = ({
   lang,
 }) => {
-  const tickerItems =
-    lang === 'fr'
-      ? [
-          'DETTE SOUVERAINE',
-          'CORPORATE & TRADE FINANCE',
-          'PARTENARIATS PUBLIC-PRIVÉ',
-          'KIGALI · ABIDJAN · YAOUNDÉ · CONAKRY · LIBREVILLE · COTONOU · DAKAR · LAGOS · LONDRES',
-        ]
-      : [
-          'SOVEREIGN DEBT',
-          'CORPORATE & TRADE FINANCE',
-          'PUBLIC-PRIVATE PARTNERSHIPS',
-          'KIGALI · ABIDJAN · YAOUNDÉ · CONAKRY · LIBREVILLE · COTONOU · DAKAR · LAGOS · LONDON',
-        ];
-
   const metrics = [
     {
       value: lang === 'fr' ? '+1 Md €' : '+€1 Bn',
@@ -62,22 +47,6 @@ export const SovereignMetricsBar: React.FC<SovereignMetricsBarProps> = ({
       id="metrics"
       className="relative z-20 border-y border-[#C4BDB0] bg-[#DDD8CE] text-[#0B1528]"
     >
-      {/* Continuous Sovereign Gold Ticker Strip */}
-      <div className="overflow-hidden border-b border-[#B8903D]/40 bg-gradient-to-r from-[#A68032] via-[#C9A24D] to-[#A68032] py-2.5 text-[#0B1528]">
-        <div className="animate-ticker items-center gap-10 font-display text-[10px] font-bold tracking-[0.26em] uppercase">
-          {[0, 1].map((groupIdx) => (
-            <React.Fragment key={groupIdx}>
-              {tickerItems.map((item, idx) => (
-                <React.Fragment key={`${groupIdx}-${idx}`}>
-                  <span>{item}</span>
-                  <span>&#9670;</span>
-                </React.Fragment>
-              ))}
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-
       {/* Official Brochure Key Figures + 9 Offices (Medium Warm Stone Mode) */}
       <div className="mx-auto max-w-[1440px] px-5 py-9 sm:px-8 md:px-12 md:py-12">
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8 lg:grid-cols-5">
