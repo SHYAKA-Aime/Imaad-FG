@@ -498,9 +498,9 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                 soundEngine.playClick();
                 onNavigateContact();
               }}
-              className="group relative shrink-0 border border-gold-400 bg-[#C69C45] px-7 py-3 font-heading text-xs font-bold tracking-[0.16em] text-[#0B1528] uppercase transition-all hover:bg-[#d6ad56]"
+              className="group relative shrink-0 bg-white/[0.05] px-7 py-3 font-heading text-xs font-bold tracking-[0.16em] text-white uppercase transition-all hover:bg-white/[0.1] hover:text-gold-200"
             >
-              <HudCorners variant="gold" />
+              <HudCorners />
               <span>{lang === 'en' ? 'Contact Us' : 'Nous écrire'}</span>
             </button>
           </div>

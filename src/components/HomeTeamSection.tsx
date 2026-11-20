@@ -183,9 +183,9 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
               type="button"
               onClick={handlePrev}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative inline-flex h-10 items-center gap-2 border border-white/15 bg-obsidian-900/80 px-4 font-display text-[10px] font-bold tracking-[0.2em] text-slate-200 uppercase transition-all hover:border-gold-400 hover:bg-gold-500/10 hover:text-gold-200"
+              className="group relative inline-flex h-10 items-center gap-2 bg-white/[0.04] px-4 font-display text-[10px] font-bold tracking-[0.2em] text-slate-200 uppercase transition-all hover:bg-white/[0.09] hover:text-gold-200"
             >
-              <HudCorners variant="gold" />
+              <HudCorners />
               <ChevronLeft className="h-3.5 w-3.5 text-gold-400" />
               <span>{lang === 'en' ? 'PREV' : 'PRÉC.'}</span>
             </button>
@@ -194,9 +194,9 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
               type="button"
               onClick={handleNext}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative inline-flex h-10 items-center gap-2 border border-white/15 bg-obsidian-900/80 px-4 font-display text-[10px] font-bold tracking-[0.2em] text-slate-200 uppercase transition-all hover:border-gold-400 hover:bg-gold-500/10 hover:text-gold-200"
+              className="group relative inline-flex h-10 items-center gap-2 bg-white/[0.04] px-4 font-display text-[10px] font-bold tracking-[0.2em] text-slate-200 uppercase transition-all hover:bg-white/[0.09] hover:text-gold-200"
             >
-              <HudCorners variant="gold" />
+              <HudCorners />
               <span>{lang === 'en' ? 'NEXT' : 'SUIV.'}</span>
               <ChevronRight className="h-3.5 w-3.5 text-gold-400" />
             </button>
@@ -308,9 +308,9 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
               onNavigateContact();
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className="group relative inline-flex h-12 items-center justify-center border border-gold-400/50 bg-obsidian-900/80 px-8 font-display text-[11px] font-bold tracking-[0.22em] text-gold-300 uppercase transition-all hover:border-gold-300 hover:bg-gold-500/15 hover:text-white"
+            className="group relative inline-flex h-12 items-center justify-center bg-white/[0.04] px-8 font-display text-[11px] font-bold tracking-[0.22em] text-gold-300 uppercase transition-all hover:bg-white/[0.09] hover:text-white"
           >
-            <HudCorners variant="gold" />
+            <HudCorners />
             <span>
               {lang === 'en' ? 'START A CONVERSATION' : 'ÉCHANGER AVEC NOTRE ÉQUIPE'}
             </span>

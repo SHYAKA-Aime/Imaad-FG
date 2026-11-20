@@ -30,27 +30,16 @@ export const VertexDots: React.FC<{ color?: 'white' | 'gold' | 'sapphire' }> = (
   );
 };
 
-export const HudCorners: React.FC<{ variant?: 'gold' | 'sapphire' }> = ({
-  variant = 'gold',
-}) => {
-  const borderCol =
-    variant === 'gold'
-      ? 'border-gold-400 group-hover:border-gold-200'
-      : 'border-sapphire-400 group-hover:border-gold-300';
+export const HudCorners: React.FC<{ variant?: 'gold' | 'sapphire' }> = () => {
+  const borderCol = 'border-white/35 group-hover:border-white/70';
 
   return (
     <>
       <span
-        className={`pointer-events-none absolute -top-[1px] -left-[1px] h-2.5 w-2.5 border-t-[1.5px] border-l-[1.5px] transition-all duration-300 group-hover:h-3.5 group-hover:w-3.5 ${borderCol}`}
+        className={`pointer-events-none absolute top-0 left-0 h-3 w-3 border-t border-l transition-all duration-300 group-hover:h-4 group-hover:w-4 ${borderCol}`}
       />
       <span
-        className={`pointer-events-none absolute -top-[1px] -right-[1px] h-2.5 w-2.5 border-t-[1.5px] border-r-[1.5px] transition-all duration-300 group-hover:h-3.5 group-hover:w-3.5 ${borderCol}`}
-      />
-      <span
-        className={`pointer-events-none absolute -bottom-[1px] -left-[1px] h-2.5 w-2.5 border-b-[1.5px] border-l-[1.5px] transition-all duration-300 group-hover:h-3.5 group-hover:w-3.5 ${borderCol}`}
-      />
-      <span
-        className={`pointer-events-none absolute -bottom-[1px] -right-[1px] h-2.5 w-2.5 border-b-[1.5px] border-r-[1.5px] transition-all duration-300 group-hover:h-3.5 group-hover:w-3.5 ${borderCol}`}
+        className={`pointer-events-none absolute right-0 bottom-0 h-3 w-3 border-r border-b transition-all duration-300 group-hover:h-4 group-hover:w-4 ${borderCol}`}
       />
     </>
   );
@@ -77,11 +66,7 @@ export const HudButton: React.FC<HudButtonProps> = ({
 }) => {
   const baseClass = `group relative inline-flex items-center justify-center gap-3 px-8 py-4 font-display text-[11px] font-bold tracking-[0.25em] uppercase transition-all duration-300 ${
     fullWidth ? 'w-full' : ''
-  } ${
-    variant === 'gold'
-      ? 'bg-gradient-to-r from-gold-500/20 to-gold-500/5 border border-gold-500/35 text-gold-200 hover:bg-gold-500/25 hover:border-gold-400 hover:shadow-[0_0_30px_rgba(201,162,77,0.25)]'
-      : 'bg-white/[0.02] border border-white/10 text-slate-100 hover:bg-sapphire-400/10 hover:border-sapphire-400/45 hover:shadow-[0_0_28px_rgba(56,189,248,0.22)]'
-  } ${className}`;
+  } bg-white/[0.04] text-slate-100 hover:bg-white/[0.09] hover:text-white ${className}`;
 
   const handleEnter = () => soundEngine.playHover();
   const handleClick = () => {

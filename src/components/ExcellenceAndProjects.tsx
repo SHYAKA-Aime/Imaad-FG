@@ -108,9 +108,9 @@ const ServiceVisualCard: React.FC<{
               onInspectModule(mod);
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className="group/btn relative inline-flex h-11 items-center justify-center gap-2.5 border border-white/20 bg-obsidian-950/70 px-6 font-display text-[11px] font-bold tracking-[0.18em] text-white uppercase transition-all hover:border-gold-400 hover:bg-gold-500/10 hover:text-gold-200"
+            className="group/btn group relative inline-flex h-11 items-center justify-center gap-2.5 bg-white/[0.04] px-6 font-display text-[11px] font-bold tracking-[0.18em] text-white uppercase transition-all hover:bg-white/[0.09] hover:text-gold-200"
           >
-            <HudCorners variant="gold" />
+            <HudCorners />
             <span>{lang === 'en' ? 'LEARN MORE' : 'EN SAVOIR PLUS'}</span>
             <ArrowRight className="h-3.5 w-3.5 text-gold-400 transition-transform duration-300 group-hover/btn:translate-x-1" />
           </button>
@@ -391,9 +391,9 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                             onInspectProject(project);
                           }}
                           onMouseEnter={() => soundEngine.playHover()}
-                          className="group/btn relative mt-6 sm:mt-8 flex h-11 items-center justify-center border border-white/20 bg-obsidian-900/80 px-6 font-display text-[11px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md transition-all hover:border-gold-400 hover:bg-gold-500/10 hover:text-gold-200 hover:shadow-[0_0_25px_rgba(201,162,77,0.25)] sm:h-12 sm:px-8 sm:text-xs"
+                          className="group/btn group relative mt-6 sm:mt-8 flex h-11 items-center justify-center bg-white/[0.04] px-6 font-display text-[11px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md transition-all hover:bg-white/[0.09] hover:text-gold-200 sm:h-12 sm:px-8 sm:text-xs"
                         >
-                          <HudCorners variant="gold" />
+                          <HudCorners />
                           <span>{lang === 'en' ? 'LEARN MORE' : 'EN SAVOIR PLUS'}</span>
                         </button>
                       </div>
@@ -446,9 +446,9 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                 onViewAllProjects();
               }}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative flex h-12 items-center justify-center border border-gold-400/60 bg-obsidian-900/90 px-7 font-display text-[11px] font-bold tracking-[0.2em] text-gold-300 uppercase backdrop-blur-md transition-all hover:border-gold-300 hover:bg-gold-500/15 hover:text-white hover:shadow-[0_0_35px_rgba(201,162,77,0.35)] sm:h-14 sm:px-12 sm:text-sm sm:tracking-[0.24em]"
+              className="group relative flex h-12 items-center justify-center bg-white/[0.04] px-7 font-display text-[11px] font-bold tracking-[0.2em] text-gold-300 uppercase backdrop-blur-md transition-all hover:bg-white/[0.09] hover:text-white sm:h-14 sm:px-12 sm:text-sm sm:tracking-[0.24em]"
             >
-              <HudCorners variant="gold" />
+              <HudCorners />
               <span className="flex items-center gap-3">
                 <span>{lang === 'en' ? 'VIEW ALL PROJECTS' : 'VOIR TOUS LES PROJETS'}</span>
                 <ArrowRight className="h-4 w-4 text-gold-400 transition-transform duration-300 group-hover:translate-x-1.5" />

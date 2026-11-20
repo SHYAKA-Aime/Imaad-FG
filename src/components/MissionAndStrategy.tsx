@@ -208,9 +208,9 @@ export const MissionAndStrategy: React.FC<MissionAndStrategyProps> = ({ lang }) 
                 href="#excellence"
                 onClick={() => soundEngine.playClick()}
                 onMouseEnter={() => soundEngine.playHover()}
-                className="group relative inline-flex h-12 items-center justify-center border border-white/20 bg-obsidian-900/80 px-7 font-display text-[11px] font-bold tracking-[0.22em] text-white uppercase backdrop-blur-md transition-all hover:border-gold-400 hover:bg-gold-500/10 hover:text-gold-200 hover:shadow-[0_0_25px_rgba(201,162,77,0.22)]"
+                className="group relative inline-flex h-12 items-center justify-center bg-white/[0.04] px-7 font-display text-[11px] font-bold tracking-[0.22em] text-white uppercase backdrop-blur-md transition-all hover:bg-white/[0.09] hover:text-gold-200"
               >
-                <HudCorners variant="gold" />
+                <HudCorners />
                 <span>{lang === 'en' ? 'OUR SERVICES' : 'NOS SERVICES'}</span>
               </a>
 
