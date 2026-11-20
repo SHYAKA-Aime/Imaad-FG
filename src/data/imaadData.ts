@@ -57,7 +57,7 @@ export interface TeamMemberData {
   initials: string;
   name: string;
   role: { en: string; fr: string };
-  entity: 'governance' | 'operations' | 'advisory';
+  entity: 'holding' | 'ifesa' | 'ifwca';
   entityLabel: { en: string; fr: string };
   bio?: { en: string; fr: string };
   photo?: string;
@@ -72,7 +72,7 @@ export interface OfficeLocationData {
   id: string;
   entityLabel: { en: string; fr: string };
   cityCountry: { en: string; fr: string };
-  addressLines: string[];
+  addressLines: { en: string[]; fr: string[] };
   phone: string;
   mapUrl: string;
 }
@@ -110,15 +110,18 @@ export const HERO_SLIDES: HeroSlideData[] = [
     durationMs: 16000,
     tabLabel: { en: 'VISION', fr: 'VISION' },
     eyebrow: {
-      en: 'IMAAD FINANCIAL GROUP',
-      fr: 'IMAAD FINANCIAL GROUP',
+      en: 'MERCHANT BANKING',
+      fr: 'BANQUE D’AFFAIRES',
     },
-    line1: { en: 'Catalyst for', fr: 'Catalyseur de la' },
-    lineGold: { en: 'sovereignty', fr: 'souveraineté' },
-    line3: { en: 'and sustainable growth', fr: 'et de la croissance durable' },
+    line1: { en: 'Structuring and Mobilising', fr: 'Structurer et mobiliser' },
+    lineGold: { en: 'Capital in the Service', fr: 'des capitaux au service' },
+    line3: {
+      en: 'of African States and Businesses',
+      fr: 'des États et des entreprises africaines',
+    },
     description: {
-      en: 'Imaad Financial Group (IFG) is an independent Pan-African* Investment Bank specialized in the structuring, financing and execution of transformative projects in Africa.',
-      fr: 'Imaad Financial Group (IFG) est une banque d’affaires panafricaine* indépendante spécialisée dans la structuration, le financement et la réalisation de projets structurants en Afrique.',
+      en: 'Imaad Financial Group advises private clients, institutions, investors and governments on the transactions that build infrastructure, industry and wealth across Sub-Saharan Africa.',
+      fr: 'Imaad Financial Group conseille les clients privés, les institutions, les investisseurs et les gouvernements sur les opérations qui bâtissent les infrastructures, l’industrie et la richesse en Afrique subsaharienne.',
     },
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=85',
     coordinates: 'KIGALI · ABIDJAN',
@@ -218,30 +221,32 @@ export const STRATEGY_PILLARS = [
   },
 ];
 
-// Exact brochure order & content (Pages 6, 9, 10, 11):
-// 01 Sovereign Financing -> 02 Corporate & Trade Finance -> 03 Public-Private Partnerships (PPP)
+// Exact order & content of services from CEO reference artifact (Screenshot 2):
+// A. Sovereign Debt -> B. Corporate & Trade Finance -> C. Public-Private Partnerships
 export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
   {
     id: 'excellence-01',
     num: '01',
-    badgeDivision: { en: 'Sovereign Financing', fr: 'Financement Souverain' },
+    badgeDivision: { en: 'Sovereign Debt', fr: 'Dette Souveraine' },
     accentColor: 'gold',
     reverse: false,
-    title: { en: 'SOVEREIGN FINANCING', fr: 'FINANCEMENT SOUVERAIN' },
+    title: { en: 'SOVEREIGN DEBT', fr: 'DETTE SOUVERAINE' },
     description: {
-      en: 'Infrastructure project financing and budget support. Imaad Financial Group supports States in mobilizing tailored sovereign capital.',
-      fr: 'Financement de projets d’infrastructures et appuis budgétaires. Imaad Financial Group soutient les États dans la mobilisation de financements structurés.',
+      en: 'We advise states and public agencies on structuring and managing their borrowing: issuance strategy, Eurobonds, bilateral and multilateral loans, liability management and restructuring, and dialogue with investors and rating agencies.',
+      fr: 'Nous conseillons les États et les organismes publics dans la structuration et la gestion de leur endettement : stratégie d’émission, euro-obligations, prêts bilatéraux et multilatéraux, gestion de passif et restructuration, et dialogue avec les investisseurs et agences de notation.',
     },
     bullets: {
       en: [
-        'Mobilizing concessional, semi-concessional and commercial financing',
-        'Mobilizing budget support lines',
-        'Public debt restructuring',
+        'Issuance strategy & Eurobonds',
+        'Bilateral, multilateral & concessional loans',
+        'Liability management and public debt restructuring',
+        'Dialogue with international investors and rating agencies',
       ],
       fr: [
-        'Mobilisation de financements concessionnels, semi-concessionnels et commerciaux',
-        'Mobilisation de lignes d’appui budgétaire',
-        'Restructuration de la dette publique',
+        'Stratégie d’émission et euro-obligations',
+        'Prêts bilatéraux, multilatéraux et concessionnels',
+        'Gestion de passif et restructuration de la dette publique',
+        'Dialogue avec les investisseurs et agences de notation',
       ],
     },
     slides: [
@@ -254,16 +259,16 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
       },
     ],
     dossier: {
-      tag: '01 · FINANCEMENT SOUVERAIN / SOVEREIGN FINANCING',
+      tag: 'A · DETTE SOUVERAINE / SOVEREIGN DEBT',
       metrics: [
         { label: 'CÔTE D’IVOIRE', value: 'Axe routier Abidjan – San Pedro · 150 M€' },
         { label: 'CAMEROUN / CAMEROON', value: 'Réseau routier et logistique portuaire · 121 M€' },
         { label: 'NIGÉRIA / NIGERIA', value: 'Réseau de distribution de gaz naturel · 500 M$' },
-        { label: 'APPROCHE / APPROACH', value: 'Concessionnel, semi-concessionnel & commercial' },
+        { label: 'EXPERTISE', value: 'Eurobonds, prêts multilatéraux & restructuration' },
       ],
       structureNote: {
-        en: 'Imaad Financial Group supports States in mobilizing concessional, semi-concessional and commercial financing, budget support lines, and public debt restructuring.',
-        fr: 'Imaad Financial Group soutient les États dans la mobilisation de financements concessionnels, semi-concessionnels et commerciaux, de lignes d’appui budgétaire et la restructuration de la dette publique.',
+        en: 'We advise states and public agencies on structuring and managing their borrowing: issuance strategy, Eurobonds, bilateral and multilateral loans, liability management and restructuring, and dialogue with investors and rating agencies.',
+        fr: 'Nous conseillons les États et les organismes publics dans la structuration et la gestion de leur endettement : stratégie d’émission, euro-obligations, prêts bilatéraux et multilatéraux, gestion de passif et restructuration, et dialogue avec les investisseurs et agences de notation.',
       },
     },
   },
@@ -275,19 +280,21 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
     reverse: true,
     title: { en: 'CORPORATE & TRADE FINANCE', fr: 'CORPORATE & TRADE FINANCE' },
     description: {
-      en: 'OPEX and CAPEX financing for corporations across high-growth African sectors including real estate, healthcare manufacturing and agribusiness.',
-      fr: 'Financement d’OPEX et de CAPEX pour les entreprises dans des secteurs clés à fort potentiel : immobilier, industrie pharmaceutique et agro-industrie.',
+      en: 'We help companies finance their growth and their commodity flows: corporate debt, asset- or contract-backed structured finance, trade finance (letters of credit, export pre-financing), working capital, and introductions to lenders and investors.',
+      fr: 'Nous accompagnons les entreprises dans le financement de leur croissance et de leurs flux de matières premières : dette corporate, financements structurés adossés à des actifs ou contrats, trade finance (lettres de crédit, préfinancement export), fonds de roulement et mise en relation avec les prêteurs et investisseurs.',
     },
     bullets: {
       en: [
-        'Fund mobilization (CAPEX & OPEX) for corporations',
-        'Structured financing for industrial, real estate and agribusiness projects',
-        'Tailored corporate & trade finance solutions',
+        'Corporate debt (CAPEX & OPEX)',
+        'Asset- or contract-backed structured finance',
+        'Trade finance (letters of credit, export pre-financing)',
+        'Working capital & introductions to lenders and investors',
       ],
       fr: [
-        'Mobilisation de fonds (CAPEX & OPEX) pour les entreprises',
-        'Financement structuré de projets industriels, immobiliers et agro-industriels',
-        'Solutions sur mesure de financement corporate et trade finance',
+        'Dette corporate (CAPEX & OPEX)',
+        'Financements structurés adossés à des actifs ou contrats',
+        'Trade finance (lettres de crédit, préfinancement export)',
+        'Fonds de roulement et mise en relation prêteurs & investisseurs',
       ],
     },
     slides: [
@@ -300,16 +307,16 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
       },
     ],
     dossier: {
-      tag: '02 · CORPORATE & TRADE FINANCE',
+      tag: 'B · CORPORATE & TRADE FINANCE',
       metrics: [
         { label: 'GUINÉE / GUINEA', value: 'Projet immobilier · 10 M$' },
         { label: 'BÉNIN / BENIN', value: 'Vaccins vétérinaires & dispositifs médicaux · 24 M€' },
         { label: 'GUINÉE / GUINEA', value: 'Programme de développement avicole · 5 M$' },
-        { label: 'MANDAT / MANDATE', value: 'Mobilisation CAPEX & OPEX pour les entreprises' },
+        { label: 'EXPERTISE', value: 'Dette corporate, trade finance & financements structurés' },
       ],
       structureNote: {
-        en: 'We operate as a financial solutions integrator mobilizing CAPEX and OPEX funding for leading African corporations and industrial sponsors.',
-        fr: 'Nous opérons comme un intégrateur de solutions financières mobilisant des financements CAPEX et OPEX pour les entreprises africaines de premier plan.',
+        en: 'We help companies finance their growth and their commodity flows: corporate debt, asset- or contract-backed structured finance, trade finance (letters of credit, export pre-financing), working capital, and introductions to lenders and investors.',
+        fr: 'Nous accompagnons les entreprises dans le financement de leur croissance et de leurs flux de matières premières : dette corporate, financements structurés adossés à des actifs ou contrats, trade finance (lettres de crédit, préfinancement export), fonds de roulement et mise en relation avec les prêteurs et investisseurs.',
       },
     },
   },
@@ -320,23 +327,25 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
     accentColor: 'gold',
     reverse: false,
     title: {
-      en: 'PUBLIC-PRIVATE PARTNERSHIPS (PPP)',
-      fr: 'PARTENARIATS PUBLIC-PRIVÉ (PPP)',
+      en: 'PUBLIC-PRIVATE PARTNERSHIPS',
+      fr: 'PARTENARIATS PUBLIC-PRIVÉ',
     },
     description: {
-      en: 'Advisory and project development within public-private partnerships for large-scale transport, housing and energy storage infrastructure.',
-      fr: 'Conseil et développement de projets dans le cadre de partenariats public-privé pour les grandes infrastructures de transport, de logement et de stockage énergétique.',
+      en: 'We build infrastructure projects with public authorities: legal and financial structuring of concessions and BOT schemes, risk allocation, financial modelling, and mobilisation of lenders and investors until financial close.',
+      fr: 'Nous construisons des projets d’infrastructures avec les autorités publiques : structuration juridique et financière de concessions et de schémas BOT, allocation des risques, modélisation financière et mobilisation des prêteurs et investisseurs jusqu’au bouclage financier.',
     },
     bullets: {
       en: [
-        'Advisory and project development within PPP',
-        'Financial and legal engineering',
-        'Strategic public and private multilateral partnerships',
+        'Legal and financial structuring of concessions and BOT schemes',
+        'Risk allocation and bankability optimization',
+        'Financial modelling',
+        'Mobilisation of lenders and investors until financial close',
       ],
       fr: [
-        'Conseil et développement de projets dans le cadre de PPP',
-        'Ingénierie financière et juridique',
-        'Partenariats stratégiques multilatéraux publics et privés',
+        'Structuration juridique et financière de concessions et schémas BOT',
+        'Allocation des risques et optimisation de la bancabilité',
+        'Modélisation financière',
+        'Mobilisation des prêteurs et investisseurs jusqu’au bouclage financier',
       ],
     },
     slides: [
@@ -349,19 +358,26 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
       },
     ],
     dossier: {
-      tag: '03 · PARTENARIATS PUBLIC-PRIVÉ (PPP)',
+      tag: 'C · PARTENARIATS PUBLIC-PRIVÉ / PUBLIC-PRIVATE PARTNERSHIPS',
       metrics: [
         { label: 'CÔTE D’IVOIRE', value: 'Gare Routière Inter-Urbaine d’Abidjan · 112 M€' },
         { label: 'CAMEROUN / CAMEROON', value: 'Programme de Logements · 100 M€' },
         { label: 'CÔTE D’IVOIRE', value: 'Bacs de stockage de produits pétroliers · 600 M€' },
-        { label: 'PORTEFEUILLE / TRACK', value: '+5 projets PPP finalisés ou en cours' },
+        { label: 'PORTEFEUILLE', value: '+5 projets PPP finalisés ou en cours' },
       ],
       structureNote: {
-        en: 'Advisory and project development within public-private partnerships, combining international vision, local execution, and financial and legal engineering.',
-        fr: 'Conseil et développement de projets dans le cadre de partenariats public-privé, alliant vision internationale, exécution locale et ingénierie financière et juridique.',
+        en: 'We build infrastructure projects with public authorities: legal and financial structuring of concessions and BOT schemes, risk allocation, financial modelling, and mobilisation of lenders and investors until financial close.',
+        fr: 'Nous construisons des projets d’infrastructures avec les autorités publiques : structuration juridique et financière de concessions et de schémas BOT, allocation des risques, modélisation financière et mobilisation des prêteurs et investisseurs jusqu’au bouclage financier.',
       },
     },
   },
+];
+
+export const WHO_WE_SERVE: { en: string; fr: string }[] = [
+  { en: 'Private clients', fr: 'Clients privés' },
+  { en: 'Institutions', fr: 'Institutions' },
+  { en: 'Investors', fr: 'Investisseurs' },
+  { en: 'Governments', fr: 'Gouvernements' },
 ];
 
 // Strictly the 9 official projects from the IMAAD Financial Group Brochure (Pages 9, 10, 11)
@@ -608,103 +624,282 @@ export const PROJECTS_PORTFOLIO: ProjectCardData[] = [
   },
 ];
 
-// Official Governance & Team Members from Brochure Page 15 (grouped by entity/tier, ready for approved photos & bios)
+// Exact 19 Team Members, Titles & Entity Groupings from Chairman & CEO Reference Artifact
 export const TEAM_MEMBERS: TeamMemberData[] = [
-  {
-    id: 'pierre-wolf',
-    initials: 'PW',
-    name: 'Pierre Wolf',
-    role: { en: 'Chairman of the Board of Directors', fr: 'Président du Conseil d’Administration' },
-    entity: 'governance',
-    entityLabel: { en: 'Board of Directors & Holding', fr: 'Conseil d’Administration & Holding' },
-  },
+  // --- Entity 1: Imaad Financial Group (Holding / Rwanda) ---
   {
     id: 'issa-ndiaye',
     initials: 'IN',
-    name: 'Issa Mehmet N’Diaye',
-    role: { en: 'Co-founder & Chief Executive Officer', fr: 'Co-fondateur & Président Directeur Général' },
-    entity: 'governance',
-    entityLabel: { en: 'Board of Directors & Holding', fr: 'Conseil d’Administration & Holding' },
+    name: 'Issa Mehmet NDIAYE',
+    role: {
+      en: 'Co-Founder, Group Chairman & CEO',
+      fr: 'Co-fondateur, Président-Directeur Général du Groupe',
+    },
+    entity: 'holding',
+    entityLabel: {
+      en: 'Imaad Financial Group (Holding / Rwanda)',
+      fr: 'Imaad Financial Group (Holding / Rwanda)',
+    },
+    bio: {
+      en: 'Co-founder of Imaad Financial Group and IMAAD Holdings. Background in quantitative finance (algorithmic trading, actuarial mathematics) and commodity markets, working across francophone and anglophone Africa.',
+      fr: 'Co-fondateur d’Imaad Financial Group et d’IMAAD Holdings. Parcours en finance quantitative (trading algorithmique, mathématiques actuarielles) et sur les marchés de matières premières, intervenant en Afrique francophone et anglophone.',
+    },
   },
   {
     id: 'rym-moulaye-idriss',
     initials: 'RM',
-    name: 'Rym Moulaye-Idriss',
-    role: { en: 'Co-founder & Deputy Chief Executive Officer', fr: 'Co-fondatrice & Directrice Générale Adjointe' },
-    entity: 'governance',
-    entityLabel: { en: 'Board of Directors & Holding', fr: 'Conseil d’Administration & Holding' },
+    name: 'Rym MOULAYE IDRISS',
+    role: {
+      en: 'Co-Founder, Group Executive Director, Head of Business Development',
+      fr: 'Co-fondatrice, Directrice Exécutive Groupe, Directrice du Développement Commercial',
+    },
+    entity: 'holding',
+    entityLabel: {
+      en: 'Imaad Financial Group (Holding / Rwanda)',
+      fr: 'Imaad Financial Group (Holding / Rwanda)',
+    },
   },
   {
     id: 'olutobi-osibodu',
     initials: 'OO',
-    name: 'Olutobi Osibodu',
-    role: { en: 'Co-founder & Managing Director', fr: 'Co-fondateur & Directeur Exécutif' },
-    entity: 'governance',
-    entityLabel: { en: 'Board of Directors & Holding', fr: 'Conseil d’Administration & Holding' },
+    name: 'Olutobi OSIBODU',
+    role: {
+      en: 'Co-Founder, Group Executive Director, Head of Investment Banking, Distribution & Portfolio Management',
+      fr: 'Co-fondateur, Directeur Exécutif Groupe, Directeur Banque d’Investissement, Distribution & Gestion de Portefeuille',
+    },
+    entity: 'holding',
+    entityLabel: {
+      en: 'Imaad Financial Group (Holding / Rwanda)',
+      fr: 'Imaad Financial Group (Holding / Rwanda)',
+    },
   },
   {
-    id: 'pape-baye-diop',
-    initials: 'PD',
-    name: 'Pape Baye Diop',
-    role: { en: 'Chief Operating Officer', fr: 'Directeur des Opérations' },
-    entity: 'operations',
-    entityLabel: { en: 'Operations & Business Development', fr: 'Opérations & Développement Commercial' },
-  },
-  {
-    id: 'herve-rugwizangoga',
-    initials: 'HR',
-    name: 'Hervé Rugwizangoga',
-    role: { en: 'Chief Business Development Officer', fr: 'Directeur du Développement Commercial' },
-    entity: 'operations',
-    entityLabel: { en: 'Operations & Business Development', fr: 'Opérations & Développement Commercial' },
-  },
-  {
-    id: 'mireille-atta',
-    initials: 'MA',
-    name: 'Mireille Atta',
-    role: { en: 'Head of Administration and Accounting', fr: 'Responsable Administratif et Comptable' },
-    entity: 'operations',
-    entityLabel: { en: 'Operations & Business Development', fr: 'Opérations & Développement Commercial' },
-  },
-  {
-    id: 'henri-tchakoute',
-    initials: 'HT',
-    name: 'Henri Tchakoute',
-    role: { en: 'Head of Business Development, Cameroon', fr: 'Responsable du Développement Commercial, Cameroun' },
-    entity: 'operations',
-    entityLabel: { en: 'Operations & Business Development', fr: 'Opérations & Développement Commercial' },
-  },
-  {
-    id: 'safietou-camara',
-    initials: 'SC',
-    name: 'Safietou Camara',
-    role: { en: 'Senior Financial Analyst', fr: 'Analyste Financier Senior' },
-    entity: 'advisory',
-    entityLabel: { en: 'Financial Analysis & Executive Support', fr: 'Analyse Financière & Support Exécutif' },
-  },
-  {
-    id: 'korotoum-kone',
-    initials: 'KK',
-    name: 'Korotoum Kone',
-    role: { en: 'Junior Financial Analyst', fr: 'Analyste Financier Junior' },
-    entity: 'advisory',
-    entityLabel: { en: 'Financial Analysis & Executive Support', fr: 'Analyse Financière & Support Exécutif' },
+    id: 'ines-umulisa',
+    initials: 'IU',
+    name: 'Ines UMULISA',
+    role: {
+      en: 'Group COO / Head of Compliance & Risk Management',
+      fr: 'Directrice des Opérations Groupe / Responsable Conformité & Gestion des Risques',
+    },
+    entity: 'holding',
+    entityLabel: {
+      en: 'Imaad Financial Group (Holding / Rwanda)',
+      fr: 'Imaad Financial Group (Holding / Rwanda)',
+    },
   },
   {
     id: 'frederic-wolf',
     initials: 'FW',
-    name: 'Frédéric Wolf',
-    role: { en: 'Executive Assistant to the CEO', fr: 'Assistant Exécutif Direction Générale' },
-    entity: 'advisory',
-    entityLabel: { en: 'Financial Analysis & Executive Support', fr: 'Analyse Financière & Support Exécutif' },
+    name: 'Frederic WOLF',
+    role: {
+      en: 'Group Assistant Manager / Administration & Finance',
+      fr: 'Adjoint de Direction Groupe / Administration & Finance',
+    },
+    entity: 'holding',
+    entityLabel: {
+      en: 'Imaad Financial Group (Holding / Rwanda)',
+      fr: 'Imaad Financial Group (Holding / Rwanda)',
+    },
   },
   {
-    id: 'paul-maylis-agbahan',
-    initials: 'PA',
-    name: 'Paul-Maylis Agbahan',
-    role: { en: 'Executive Assistant', fr: 'Assistante de Direction' },
-    entity: 'advisory',
-    entityLabel: { en: 'Financial Analysis & Executive Support', fr: 'Analyse Financière & Support Exécutif' },
+    id: 'walid-touahri',
+    initials: 'WT',
+    name: 'Walid TOUAHRI',
+    role: {
+      en: 'Financial Analyst / Group Head of AI Integration',
+      fr: 'Analyste Financier / Responsable Intégration IA Groupe',
+    },
+    entity: 'holding',
+    entityLabel: {
+      en: 'Imaad Financial Group (Holding / Rwanda)',
+      fr: 'Imaad Financial Group (Holding / Rwanda)',
+    },
+  },
+
+  // --- Entity 2: Imaad Financial Eastern & Southern Africa (IFESA / Rwanda) ---
+  {
+    id: 'abdoul-younoussi',
+    initials: 'AY',
+    name: 'Abdoul Moumoune YOUNOUSSI',
+    role: {
+      en: 'Chairman, IFESA',
+      fr: 'Président, IFESA',
+    },
+    entity: 'ifesa',
+    entityLabel: {
+      en: 'Imaad Financial Eastern & Southern Africa (IFESA / Rwanda)',
+      fr: 'Imaad Financial Eastern & Southern Africa (IFESA / Rwanda)',
+    },
+  },
+  {
+    id: 'herve-rugwizangoga',
+    initials: 'HR',
+    name: 'Hervé RUGWIZANGOGA',
+    role: {
+      en: 'Chief Business Development Officer',
+      fr: 'Directeur du Développement Commercial',
+    },
+    entity: 'ifesa',
+    entityLabel: {
+      en: 'Imaad Financial Eastern & Southern Africa (IFESA / Rwanda)',
+      fr: 'Imaad Financial Eastern & Southern Africa (IFESA / Rwanda)',
+    },
+  },
+  {
+    id: 'ange-felix-iradukunda',
+    initials: 'AI',
+    name: 'Ange Felix de Valois IRADUKUNDA',
+    role: {
+      en: 'Compliance Manager',
+      fr: 'Responsable Conformité',
+    },
+    entity: 'ifesa',
+    entityLabel: {
+      en: 'Imaad Financial Eastern & Southern Africa (IFESA / Rwanda)',
+      fr: 'Imaad Financial Eastern & Southern Africa (IFESA / Rwanda)',
+    },
+  },
+  {
+    id: 'mohamed-yassine',
+    initials: 'MY',
+    name: 'Mohamed YASSINE',
+    role: {
+      en: 'Business Developer / Mozambique, Angola, Cape Verde, São Tomé',
+      fr: 'Responsable Développement Commercial / Mozambique, Angola, Cap-Vert, São Tomé',
+    },
+    entity: 'ifesa',
+    entityLabel: {
+      en: 'Imaad Financial Eastern & Southern Africa (IFESA / Rwanda)',
+      fr: 'Imaad Financial Eastern & Southern Africa (IFESA / Rwanda)',
+    },
+  },
+
+  // --- Entity 3: Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire) ---
+  {
+    id: 'pape-boye-diack-diop',
+    initials: 'PD',
+    name: 'Pape Boye Diack DIOP',
+    role: {
+      en: 'Regional Manager, IFWCA',
+      fr: 'Directeur Régional, IFWCA',
+    },
+    entity: 'ifwca',
+    entityLabel: {
+      en: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+      fr: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+    },
+  },
+  {
+    id: 'mireille-olivia-atta',
+    initials: 'MA',
+    name: 'Mireille Olivia ATTA',
+    role: {
+      en: 'Chief Business Development Manager',
+      fr: 'Directrice du Développement Commercial',
+    },
+    entity: 'ifwca',
+    entityLabel: {
+      en: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+      fr: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+    },
+  },
+  {
+    id: 'safietou-camara',
+    initials: 'SC',
+    name: 'Safietou CAMARA',
+    role: {
+      en: 'Financial Analyst',
+      fr: 'Analyste Financier',
+    },
+    entity: 'ifwca',
+    entityLabel: {
+      en: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+      fr: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+    },
+  },
+  {
+    id: 'korotoum-kone',
+    initials: 'KK',
+    name: 'Korotoum KONÉ',
+    role: {
+      en: 'Junior Financial Analyst',
+      fr: 'Analyste Financier Junior',
+    },
+    entity: 'ifwca',
+    entityLabel: {
+      en: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+      fr: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+    },
+  },
+  {
+    id: 'maylis-agbahan',
+    initials: 'MG',
+    name: 'Maylis AGBAHAN',
+    role: {
+      en: 'Executive Assistant',
+      fr: 'Assistante de Direction',
+    },
+    entity: 'ifwca',
+    entityLabel: {
+      en: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+      fr: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+    },
+  },
+  {
+    id: 'mireille-tedjong',
+    initials: 'MT',
+    name: 'Mireille TEDJONG',
+    role: {
+      en: 'Business Developer / Cameroon, Gabon',
+      fr: 'Responsable Développement Commercial / Cameroun, Gabon',
+    },
+    entity: 'ifwca',
+    entityLabel: {
+      en: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+      fr: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+    },
+  },
+  {
+    id: 'karim-aminou',
+    initials: 'KA',
+    name: 'Karim AMINOU',
+    role: {
+      en: 'Business Developer / Cameroon',
+      fr: 'Responsable Développement Commercial / Cameroun',
+    },
+    entity: 'ifwca',
+    entityLabel: {
+      en: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+      fr: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+    },
+  },
+  {
+    id: 'henri-tchakoute',
+    initials: 'HT',
+    name: 'Henri TCHAKOUTE',
+    role: {
+      en: 'Business Developer / Cameroon',
+      fr: 'Responsable Développement Commercial / Cameroun',
+    },
+    entity: 'ifwca',
+    entityLabel: {
+      en: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+      fr: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+    },
+  },
+  {
+    id: 'arthur-tapsoba',
+    initials: 'AT',
+    name: 'Arthur TAPSOBA',
+    role: {
+      en: 'Business Developer / Burkina Faso & Côte d’Ivoire',
+      fr: 'Responsable Développement Commercial / Burkina Faso & Côte d’Ivoire',
+    },
+    entity: 'ifwca',
+    entityLabel: {
+      en: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+      fr: 'Imaad Financial Western & Central Africa (IFWCA / Côte d’Ivoire)',
+    },
   },
 ];
 
@@ -754,17 +949,16 @@ export const KEY_SECTORS: KeySectorData[] = [
   { id: 'technology', label: { en: 'Technology', fr: 'Technologie' } },
 ];
 
-// Primary Offices from Chairman & CEO Reference Artifact
+// Primary Offices from Chairman & CEO Reference Artifact (Bilingual Addresses)
 export const OFFICIAL_OFFICES: OfficeLocationData[] = [
   {
     id: 'kigali',
     entityLabel: { en: 'Headquarters · Holding & IFESA', fr: 'Siège · Holding & IFESA' },
     cityCountry: { en: 'Kigali, Rwanda', fr: 'Kigali, Rwanda' },
-    addressLines: [
-      '11 KG 532 ST, Brilliant Tower,',
-      '7e étage, Room 703',
-      'Kigali, Rwanda',
-    ],
+    addressLines: {
+      en: ['11 KG 532 ST, Brilliant Tower,', '7th floor, Room 703', 'Kigali, Rwanda'],
+      fr: ['11 KG 532 ST, Brilliant Tower,', '7e étage, Room 703', 'Kigali, Rwanda'],
+    },
     phone: '+250 780 395 017',
     mapUrl: 'https://maps.google.com/?q=11+KG+532+ST+Brilliant+Tower+Kigali+Rwanda',
   },
@@ -772,33 +966,41 @@ export const OFFICIAL_OFFICES: OfficeLocationData[] = [
     id: 'abidjan',
     entityLabel: { en: 'Regional Office · IFWCA', fr: 'Bureau Régional · IFWCA' },
     cityCountry: { en: 'Abidjan, Côte d’Ivoire', fr: 'Abidjan, Côte d’Ivoire' },
-    addressLines: [
-      'Cocody Riviera Bonoumin,',
-      'Immeuble IHBC 2, face au Collège Charles de Gaulle,',
-      '4e étage, Appartement 4A',
-      'Abidjan, Côte d’Ivoire',
-    ],
+    addressLines: {
+      en: [
+        'Cocody Riviera Bonoumin,',
+        'Immeuble IHBC 2, opposite Collège Charles de Gaulle,',
+        '4th floor, Apartment 4A',
+        'Abidjan, Côte d’Ivoire',
+      ],
+      fr: [
+        'Cocody Riviera Bonoumin,',
+        'Immeuble IHBC 2, face au Collège Charles de Gaulle,',
+        '4e étage, Appartement 4A',
+        'Abidjan, Côte d’Ivoire',
+      ],
+    },
     phone: '+225 01 42 81 26 26',
     mapUrl: 'https://maps.google.com/?q=Cocody+Riviera+Bonoumin+Abidjan+Cote+d+Ivoire',
   },
 ];
 
-// 9 Offices Footprint (per Management feedback)
+// Exact 9 Offices List from Chairman & CEO Reference Artifact
 export const NINE_OFFICES_LIST: { en: string; fr: string }[] = [
   { en: 'Kigali', fr: 'Kigali' },
   { en: 'Abidjan', fr: 'Abidjan' },
   { en: 'Yaoundé', fr: 'Yaoundé' },
-  { en: 'London', fr: 'Londres' },
-  { en: 'Dakar', fr: 'Dakar' },
   { en: 'Conakry', fr: 'Conakry' },
+  { en: 'Libreville', fr: 'Libreville' },
   { en: 'Cotonou', fr: 'Cotonou' },
+  { en: 'Dakar', fr: 'Dakar' },
   { en: 'Lagos', fr: 'Lagos' },
-  { en: 'Casablanca', fr: 'Casablanca' },
+  { en: 'London', fr: 'Londres' },
 ];
 
 export const OFFICIAL_REGULATORY_NOTICE = {
-  fr: '*La demande d’IFG en vue d’obtenir une licence de banque d’investissement au Rwanda est en cours de préparation pour être soumise à l’Autorité des marchés de capitaux (CMA). Dans l’attente de son approbation, les activités d’IFG au Rwanda sont limitées aux services de conseil. Ce site est fourni à titre d’information et ne constitue pas une offre de titres ni de services financiers.',
-  en: '*IFG’s application for an investment banking licence in Rwanda is being prepared for submission to the Capital Market Authority (CMA). Pending its approval, IFG’s activities in Rwanda are limited to advisory services. This website is provided for informational purposes only and does not constitute an offer of securities or financial services.',
+  fr: 'Statut réglementaire et références de licence à compléter avant publication. Ce site est fourni à titre d’information et ne constitue pas une offre de titres ni de services financiers.',
+  en: 'Regulatory status and licence references to be completed before publication. This site is for information only and is not an offer of securities or financial services.',
 };
 
 // Retained cleanly for type compatibility with archived components
@@ -809,6 +1011,6 @@ export const REGIONAL_HUBS = OFFICIAL_OFFICES.map((o) => ({
   flag: o.id === 'kigali' ? 'RW' : 'CI',
   tab: o.cityCountry.fr.toUpperCase(),
   title: `${o.entityLabel.fr} — ${o.cityCountry.fr}`,
-  address: o.addressLines.join(' '),
+  address: o.addressLines.fr.join(' '),
   phone: o.phone,
 }));

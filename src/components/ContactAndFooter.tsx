@@ -193,7 +193,7 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                     }}
                     className="cursor-pointer text-left transition-colors hover:text-gold-300"
                   >
-                    01. {lang === 'en' ? 'Sovereign Financing' : 'Financement Souverain'}
+                    01. {lang === 'en' ? 'Sovereign Debt' : 'Dette Souveraine'}
                   </button>
                 </li>
                 <li>
@@ -217,7 +217,7 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                     }}
                     className="cursor-pointer text-left transition-colors hover:text-gold-300"
                   >
-                    03. {lang === 'en' ? 'Public-Private Partnerships (PPP)' : 'Partenariats Public-Privé (PPP)'}
+                    03. {lang === 'en' ? 'Public-Private Partnerships' : 'Partenariats Public-Privé'}
                   </button>
                 </li>
                 <li>

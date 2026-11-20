@@ -30,7 +30,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
     { id: 'all', label: lang === 'en' ? 'ALL' : 'TOUS' },
     {
       id: 'sovereign',
-      label: lang === 'en' ? 'SOVEREIGN FINANCING' : 'FINANCEMENT SOUVERAIN',
+      label: lang === 'en' ? 'SOVEREIGN DEBT' : 'DETTE SOUVERAINE',
     },
     {
       id: 'corporate',

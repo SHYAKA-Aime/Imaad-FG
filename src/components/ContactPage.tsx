@@ -115,7 +115,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   <div className="mt-2.5 flex items-start gap-2.5 text-xs leading-relaxed text-slate-600">
                     <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#C09A4B]" />
                     <div>
-                      {office.addressLines.map((line, i) => (
+                      {office.addressLines[lang].map((line, i) => (
                         <div key={i}>{line}</div>
                       ))}
                     </div>

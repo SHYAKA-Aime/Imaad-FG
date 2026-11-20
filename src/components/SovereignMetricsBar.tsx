@@ -13,18 +13,16 @@ export const SovereignMetricsBar: React.FC<SovereignMetricsBarProps> = ({
   const tickerItems =
     lang === 'fr'
       ? [
-          'FINANCEMENT SOUVERAIN',
+          'DETTE SOUVERAINE',
           'CORPORATE & TRADE FINANCE',
-          'PARTENARIATS PUBLIC-PRIVÉ (PPP)',
-          'STRUCTURER · FINANCER · RÉALISER',
-          '10 SECTEURS CLÉS',
+          'PARTENARIATS PUBLIC-PRIVÉ',
+          'KIGALI · ABIDJAN · YAOUNDÉ · CONAKRY · LIBREVILLE · COTONOU · DAKAR · LAGOS · LONDRES',
         ]
       : [
-          'SOVEREIGN FINANCING',
+          'SOVEREIGN DEBT',
           'CORPORATE & TRADE FINANCE',
-          'PUBLIC-PRIVATE PARTNERSHIPS (PPP)',
-          'STRUCTURE · FINANCE · DELIVER',
-          '10 KEY SECTORS',
+          'PUBLIC-PRIVATE PARTNERSHIPS',
+          'KIGALI · ABIDJAN · YAOUNDÉ · CONAKRY · LIBREVILLE · COTONOU · DAKAR · LAGOS · LONDON',
         ];
 
   const metrics = [

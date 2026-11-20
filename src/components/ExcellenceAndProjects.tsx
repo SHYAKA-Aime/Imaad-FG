@@ -8,6 +8,7 @@ import {
   Language,
   PROJECTS_PORTFOLIO,
   ProjectCardData,
+  WHO_WE_SERVE,
 } from '../data/imaadData';
 import { HudCorners, VertexDots } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
@@ -77,37 +78,55 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                 : 'TROIS MÉTIERS, UNE PLATEFORME INTÉGRÉE'}
             </h2>
 
-            {/* Two-Column Editorial Briefing Grid (Official Brochure Copy) */}
+            {/* Two-Column Editorial Briefing Grid (Exact CEO Reference Copy) */}
             <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-              {/* Left Column: Platform & Approach */}
+              {/* Left Column: Official About Copy */}
               <div className="relative border border-white/10 bg-obsidian-900/50 p-6 sm:p-8 backdrop-blur-md lg:col-span-7">
                 <div className="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-gold-400 via-gold-500/80 to-transparent" />
                 <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-gold-400 uppercase">
-                  <span>{lang === 'en' ? 'STRUCTURE · FINANCE · DELIVER' : 'STRUCTURER · FINANCER · RÉALISER'}</span>
+                  <span>{lang === 'en' ? 'ABOUT IMAAD FINANCIAL GROUP' : 'À PROPOS D’IMAAD FINANCIAL GROUP'}</span>
                 </div>
-                <p className="text-sm leading-relaxed text-slate-300 sm:text-base">
+                <p className="text-sm leading-relaxed text-slate-200 sm:text-base">
                   {lang === 'en'
-                    ? 'We operate as a financial solutions integrator and a trusted partner for States, Institutions, Corporations and Investors.'
-                    : 'Nous opérons comme un intégrateur de solutions financières et un partenaire de confiance pour les États, Institutions, Entreprises et Investisseurs.'}
+                    ? 'Imaad Financial Group Ltd is a merchant bank based in Kigali, Rwanda, with a West and Central Africa regional office in Abidjan, Côte d’Ivoire. We combine quantitative rigour with operational knowledge of commodities, energy, mining and infrastructure.'
+                    : 'Imaad Financial Group Ltd est une banque d’affaires basée à Kigali, au Rwanda, dotée d’un bureau régional pour l’Afrique de l’Ouest et Centrale à Abidjan, en Côte d’Ivoire. Nous combinons rigueur quantitative et connaissance opérationnelle des matières premières, de l’énergie, des mines et des infrastructures.'}
                 </p>
-                <p className="mt-3.5 text-sm leading-relaxed text-slate-400 sm:text-base">
+                <p className="mt-3.5 text-sm leading-relaxed text-slate-300 sm:text-base">
                   {lang === 'en'
-                    ? 'Our approach combines international vision with local execution, financial and legal engineering, and strategic public and private multilateral partnerships.'
-                    : 'Notre approche allie vision internationale et exécution locale, ingénierie financière et juridique, et partenariats stratégiques multilatéraux publics et privés.'}
+                    ? 'Rwanda and Côte d’Ivoire are our two anchors. From there we structure financings, partnerships and public-private projects that are bankable for lenders and credible for the states of Sub-Saharan Africa.'
+                    : 'Le Rwanda et la Côte d’Ivoire sont nos deux ancrages. De là, nous structurons des financements, des partenariats et des projets public-privé bancables pour les prêteurs et crédibles pour les États d’Afrique subsaharienne.'}
                 </p>
               </div>
 
-              {/* Right Column: Areas of Excellence Summary */}
-              <div className="relative flex flex-col justify-center border border-white/10 bg-obsidian-900/40 p-6 sm:p-8 backdrop-blur-md lg:col-span-5">
-                <div>
-                  <div className="mb-2 font-serif text-lg font-bold tracking-[0.14em] text-gold-300 sm:text-xl">
-                    {lang === 'en' ? 'OUR APPROACH' : 'NOTRE APPROCHE'}
+              {/* Right Column: Official Anchor Callouts (Headquarters / Regional Office / Coverage) */}
+              <div className="flex flex-col justify-between gap-3.5 lg:col-span-5">
+                <div className="border-l-2 border-gold-400 bg-obsidian-900/60 px-5 py-4 backdrop-blur-md">
+                  <div className="font-mono text-[10px] font-semibold tracking-[0.2em] text-gold-400 uppercase">
+                    {lang === 'en' ? 'HEADQUARTERS' : 'SIÈGE SOCIAL'}
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                  <div className="mt-1 font-serif text-base font-semibold text-white">
+                    Kigali, Rwanda
+                  </div>
+                </div>
+
+                <div className="border-l-2 border-gold-400 bg-obsidian-900/60 px-5 py-4 backdrop-blur-md">
+                  <div className="font-mono text-[10px] font-semibold tracking-[0.2em] text-gold-400 uppercase">
+                    {lang === 'en' ? 'REGIONAL OFFICE' : 'BUREAU RÉGIONAL'}
+                  </div>
+                  <div className="mt-1 font-serif text-base font-semibold text-white">
                     {lang === 'en'
-                      ? 'From strategy to structured operations across three complementary pillars: Sovereign Financing, Corporate & Trade Finance, and Public-Private Partnerships (PPP).'
-                      : 'De la stratégie aux opérations structurées autour de trois leviers complémentaires : Financement Souverain, Corporate & Trade Finance, et Partenariats Public-Privé (PPP).'}
-                  </p>
+                      ? 'Abidjan, Côte d’Ivoire (West and Central Africa)'
+                      : 'Abidjan, Côte d’Ivoire (Afrique de l’Ouest et Centrale)'}
+                  </div>
+                </div>
+
+                <div className="border-l-2 border-gold-400 bg-obsidian-900/60 px-5 py-4 backdrop-blur-md">
+                  <div className="font-mono text-[10px] font-semibold tracking-[0.2em] text-gold-400 uppercase">
+                    {lang === 'en' ? 'COVERAGE' : 'COUVERTURE'}
+                  </div>
+                  <div className="mt-1 font-serif text-base font-semibold text-white">
+                    {lang === 'en' ? 'Sub-Saharan Africa' : 'Afrique subsaharienne'}
+                  </div>
                 </div>
               </div>
             </div>
@@ -206,6 +225,21 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                 </motion.article>
               );
             })}
+          </div>
+
+          {/* Who We Serve Strip (from CEO Reference Screenshot 2) */}
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <span className="mr-2 font-mono text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase">
+              {lang === 'en' ? 'WHO WE SERVE' : 'NOS CLIENTS'}
+            </span>
+            {WHO_WE_SERVE.map((client) => (
+              <span
+                key={client.en}
+                className="border border-white/15 bg-obsidian-900/60 px-4 py-2 text-xs font-medium text-slate-200"
+              >
+                {client[lang]}
+              </span>
+            ))}
           </div>
         </div>
       </section>
