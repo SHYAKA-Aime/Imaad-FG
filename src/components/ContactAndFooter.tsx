@@ -147,7 +147,7 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                 </li>
                 <li>
                   <a href="#excellence" className="transition-colors hover:text-gold-300">
-                    {lang === 'en' ? 'Areas of Excellence' : "Domaines d'Excellence"}
+                    {lang === 'en' ? 'Areas of Excellence' : 'Domaines d’Excellence'}
                   </a>
                 </li>
                 <li>
@@ -293,12 +293,16 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
               <VertexDots color="gold" />
 
               <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4">
-                <span className="font-mono text-xs tracking-[0.2em] text-gold-300">
+                <span className="font-mono text-xs tracking-[0.2em] text-gold-300 uppercase">
                   {activeDossier.type === 'module' && activeDossier.module
-                    ? activeDossier.module.dossier.tag
+                    ? activeDossier.module.dossier.tag[lang]
                     : activeDossier.type === 'project' && activeDossier.project
-                    ? `MANDATE DOSSIER // ${activeDossier.project.country[lang]}`
-                    : 'DIRECT MANDATE DESK // SUBMISSION'}
+                    ? lang === 'en'
+                      ? `MANDATE DOSSIER · ${activeDossier.project.country[lang]}`
+                      : `DOSSIER DE MANDAT · ${activeDossier.project.country[lang]}`
+                    : lang === 'en'
+                    ? 'MANDATE SUBMISSION'
+                    : 'SOUMISSION DE MANDAT'}
                 </span>
                 <button
                   type="button"
@@ -306,7 +310,7 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                   className="inline-flex items-center gap-1.5 border border-white/15 px-3 py-1 font-mono text-xs text-slate-400 transition-colors hover:border-gold-400 hover:text-gold-300"
                 >
                   <X className="h-3.5 w-3.5" />
-                  <span>CLOSE</span>
+                  <span>{lang === 'en' ? 'CLOSE' : 'FERMER'}</span>
                 </button>
               </div>
 
@@ -327,10 +331,10 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                         className="border border-white/10 bg-white/[0.02] p-3.5"
                       >
                         <span className="block font-mono text-[10px] tracking-[0.15em] text-slate-400">
-                          {m.label}
+                          {m.label[lang]}
                         </span>
                         <span className="mt-1 block font-heading text-sm font-semibold text-gold-200">
-                          {m.value}
+                          {m.value[lang]}
                         </span>
                       </div>
                     ))}
@@ -425,7 +429,7 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                   <p className="mt-2 mb-6 text-xs text-slate-400">
                     {lang === 'en'
                       ? 'Direct transmission to the IMAAD Financial Group Executive Structuring Committee.'
-                      : "Transmission directe au Comité Exécutif de Structuration d'IMAAD Financial Group."}
+                      : 'Transmission directe au Comité Exécutif de Structuration d’IMAAD Financial Group.'}
                   </p>
 
                   {modalFormSent ? (
@@ -449,7 +453,7 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                         <input
                           type="email"
                           required
-                          placeholder={lang === 'en' ? 'Official Email *' : 'Email Officiel *'}
+                          placeholder={lang === 'en' ? 'Official Email *' : 'E-mail officiel *'}
                           className="w-full border border-white/15 bg-obsidian-950 px-3.5 py-2.5 text-xs text-white focus:border-gold-400 focus:outline-none"
                         />
                       </div>
@@ -469,8 +473,8 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                           required
                           placeholder={
                             lang === 'en'
-                              ? 'Country & Target Capital (e.g. 100 Bn FCFA)'
-                              : 'Pays & Montant Cible (ex. 100 Mds FCFA)'
+                              ? 'Country & Target Amount (e.g. €100M)'
+                              : 'Pays & Montant cible (ex. 100 M€)'
                           }
                           className="w-full border border-white/15 bg-obsidian-950 px-3.5 py-2.5 text-xs text-white focus:border-gold-400 focus:outline-none"
                         />

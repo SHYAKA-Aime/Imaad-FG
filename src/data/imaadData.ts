@@ -29,8 +29,8 @@ export interface ExcellenceModuleData {
     caption: { en: string; fr: string };
   }[];
   dossier: {
-    tag: string;
-    metrics: { label: string; value: string }[];
+    tag: { en: string; fr: string };
+    metrics: { label: { en: string; fr: string }; value: { en: string; fr: string } }[];
     structureNote: { en: string; fr: string };
   };
 }
@@ -270,12 +270,36 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
       },
     ],
     dossier: {
-      tag: 'A · DETTE SOUVERAINE / SOVEREIGN DEBT',
+      tag: { en: 'SOVEREIGN DEBT', fr: 'DETTE SOUVERAINE' },
       metrics: [
-        { label: 'CÔTE D’IVOIRE', value: 'Axe routier Abidjan – San Pedro · 150 M€' },
-        { label: 'CAMEROUN / CAMEROON', value: 'Réseau routier et logistique portuaire · 121 M€' },
-        { label: 'NIGÉRIA / NIGERIA', value: 'Réseau de distribution de gaz naturel · 500 M$' },
-        { label: 'EXPERTISE', value: 'Eurobonds, prêts multilatéraux & restructuration' },
+        {
+          label: { en: 'CÔTE D’IVOIRE', fr: 'CÔTE D’IVOIRE' },
+          value: {
+            en: 'Abidjan – San Pedro Road · 150M€',
+            fr: 'Axe routier Abidjan – San Pedro · 150 M€',
+          },
+        },
+        {
+          label: { en: 'CAMEROON', fr: 'CAMEROUN' },
+          value: {
+            en: 'Road Network & Port Logistics · 121M€',
+            fr: 'Réseau routier et logistique portuaire · 121 M€',
+          },
+        },
+        {
+          label: { en: 'NIGERIA', fr: 'NIGÉRIA' },
+          value: {
+            en: 'Natural Gas Distribution Network · 500M$',
+            fr: 'Réseau de distribution de gaz naturel · 500 M$',
+          },
+        },
+        {
+          label: { en: 'EXPERTISE', fr: 'EXPERTISE' },
+          value: {
+            en: 'Eurobonds, multilateral loans & restructuring',
+            fr: 'Euro-obligations, prêts multilatéraux & restructuration',
+          },
+        },
       ],
       structureNote: {
         en: 'We advise states and public agencies on structuring and managing their borrowing: issuance strategy, Eurobonds, bilateral and multilateral loans, liability management and restructuring, and dialogue with investors and rating agencies.',
@@ -332,12 +356,33 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
       },
     ],
     dossier: {
-      tag: 'B · CORPORATE & TRADE FINANCE',
+      tag: { en: 'CORPORATE & TRADE FINANCE', fr: 'CORPORATE & TRADE FINANCE' },
       metrics: [
-        { label: 'GUINÉE / GUINEA', value: 'Projet immobilier · 10 M$' },
-        { label: 'BÉNIN / BENIN', value: 'Vaccins vétérinaires & dispositifs médicaux · 24 M€' },
-        { label: 'GUINÉE / GUINEA', value: 'Programme de développement avicole · 5 M$' },
-        { label: 'EXPERTISE', value: 'Dette corporate, trade finance & financements structurés' },
+        {
+          label: { en: 'GUINEA', fr: 'GUINÉE' },
+          value: { en: 'Real Estate Project · 10M$', fr: 'Projet immobilier · 10 M$' },
+        },
+        {
+          label: { en: 'BENIN', fr: 'BÉNIN' },
+          value: {
+            en: 'Veterinary Vaccines & Medical Devices · 24M€',
+            fr: 'Vaccins vétérinaires & dispositifs médicaux · 24 M€',
+          },
+        },
+        {
+          label: { en: 'GUINEA', fr: 'GUINÉE' },
+          value: {
+            en: 'Poultry Development Program · 5M$',
+            fr: 'Programme de développement avicole · 5 M$',
+          },
+        },
+        {
+          label: { en: 'EXPERTISE', fr: 'EXPERTISE' },
+          value: {
+            en: 'Corporate debt, trade finance & structured finance',
+            fr: 'Dette corporate, trade finance & financements structurés',
+          },
+        },
       ],
       structureNote: {
         en: 'We help companies finance their growth and their commodity flows: corporate debt, asset- or contract-backed structured finance, trade finance (letters of credit, export pre-financing), working capital, and introductions to lenders and investors.',
@@ -397,12 +442,33 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
       },
     ],
     dossier: {
-      tag: 'C · PARTENARIATS PUBLIC-PRIVÉ / PUBLIC-PRIVATE PARTNERSHIPS',
+      tag: { en: 'PUBLIC-PRIVATE PARTNERSHIPS', fr: 'PARTENARIATS PUBLIC-PRIVÉ' },
       metrics: [
-        { label: 'CÔTE D’IVOIRE', value: 'Gare Routière Inter-Urbaine d’Abidjan · 112 M€' },
-        { label: 'CAMEROUN / CAMEROON', value: 'Programme de Logements · 100 M€' },
-        { label: 'CÔTE D’IVOIRE', value: 'Bacs de stockage de produits pétroliers · 600 M€' },
-        { label: 'PORTEFEUILLE', value: '+5 projets PPP finalisés ou en cours' },
+        {
+          label: { en: 'CÔTE D’IVOIRE', fr: 'CÔTE D’IVOIRE' },
+          value: {
+            en: 'Abidjan Inter-Urban Bus Terminal · 112M€',
+            fr: 'Gare Routière Inter-Urbaine d’Abidjan · 112 M€',
+          },
+        },
+        {
+          label: { en: 'CAMEROON', fr: 'CAMEROUN' },
+          value: { en: 'Housing Program · 100M€', fr: 'Programme de Logements · 100 M€' },
+        },
+        {
+          label: { en: 'CÔTE D’IVOIRE', fr: 'CÔTE D’IVOIRE' },
+          value: {
+            en: 'Petroleum Product Storage Tanks · 600M€',
+            fr: 'Bacs de stockage de produits pétroliers · 600 M€',
+          },
+        },
+        {
+          label: { en: 'PORTFOLIO', fr: 'PORTEFEUILLE' },
+          value: {
+            en: '+5 PPP projects completed or underway',
+            fr: '+5 projets PPP finalisés ou en cours',
+          },
+        },
       ],
       structureNote: {
         en: 'We build infrastructure projects with public authorities: legal and financial structuring of concessions and BOT schemes, risk allocation, financial modelling, and mobilisation of lenders and investors until financial close.',

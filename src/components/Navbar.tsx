@@ -304,7 +304,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               soundEngine.playClick();
               setMobileMenuOpen((prev) => !prev);
             }}
-            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-label={
+              mobileMenuOpen
+                ? lang === 'en'
+                  ? 'Close navigation menu'
+                  : 'Fermer le menu de navigation'
+                : lang === 'en'
+                ? 'Open navigation menu'
+                : 'Ouvrir le menu de navigation'
+            }
             className="flex h-10 w-10 items-center justify-center rounded border border-white/15 bg-white/[0.04] text-gold-300 transition-colors hover:border-gold-400/60 hover:bg-gold-500/10"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

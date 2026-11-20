@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Currency,
   ExcellenceModuleData,
@@ -24,6 +24,14 @@ export function App() {
   const [portalOpen, setPortalOpen] = useState<boolean>(true);
   const [lang, setLang] = useState<Language>('fr');
   const [currency, setCurrency] = useState<Currency>('FCFA');
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.title =
+      lang === 'fr'
+        ? 'IMAAD FINANCIAL GROUP — Catalyseur de la souveraineté et de la croissance durable'
+        : 'IMAAD FINANCIAL GROUP — Catalyst for Sovereignty and Sustainable Growth';
+  }, [lang]);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [soundOn, setSoundOn] = useState<boolean>(false);
   const [currentView, setCurrentView] = useState<

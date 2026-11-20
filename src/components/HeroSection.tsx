@@ -62,7 +62,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 items-end px-5 pb-6 sm:px-8 md:items-center md:px-12 md:py-8">
         {/* LEFT VERTICAL RAIL: Mode Switcher (Visible on md and up) */}
         <aside
-          aria-label="Perspective Switcher"
+          aria-label={lang === 'en' ? 'Perspective Switcher' : 'Sélecteur de perspective'}
           className="mr-5 hidden flex-col items-center justify-center gap-6 border-r border-white/10 py-3 pr-3.5 md:mr-10 md:flex lg:mr-14 lg:gap-9 lg:pr-4"
         >
           {HERO_SLIDES.map((s, idx) => {

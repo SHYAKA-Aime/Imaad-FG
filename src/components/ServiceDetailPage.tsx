@@ -258,7 +258,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                       <button
                         key={idx}
                         type="button"
-                        aria-label={`Slide ${idx + 1}`}
+                        aria-label={lang === 'en' ? `Slide ${idx + 1}` : `Diapositive ${idx + 1}`}
                         onClick={() => {
                           soundEngine.playClick();
                           setSlideIdx(idx);

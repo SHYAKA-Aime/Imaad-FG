@@ -70,7 +70,7 @@ const ServiceVisualCard: React.FC<{
               <button
                 key={sIdx}
                 type="button"
-                aria-label={`Slide ${sIdx + 1}`}
+                aria-label={lang === 'en' ? `Slide ${sIdx + 1}` : `Diapositive ${sIdx + 1}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   soundEngine.playClick();

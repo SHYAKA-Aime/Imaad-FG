@@ -50,7 +50,7 @@ export const ResponsibilitySection: React.FC<ResponsibilitySectionProps> = ({
                   <span>
                     {lang === 'en'
                       ? 'Contribute to improving living conditions through healthcare, potable water, and transport infrastructure.'
-                      : "Contribuer à l'amélioration durable des conditions de vie (santé, eau potable, désenclavement routier)."}
+                      : 'Contribuer à l’amélioration durable des conditions de vie (santé, eau potable, désenclavement routier).'}
                   </span>
                 </li>
                 <li className="flex items-start gap-3.5 text-sm font-semibold text-[#0B1528]">

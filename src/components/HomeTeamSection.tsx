@@ -342,7 +342,7 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
               <button
                 type="button"
                 onClick={() => setSelectedMember(null)}
-                aria-label="Close biography"
+                aria-label={lang === 'en' ? 'Close biography' : 'Fermer la biographie'}
                 className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center border border-white/15 bg-white/[0.04] text-slate-300 transition-colors hover:border-gold-400 hover:text-gold-300"
               >
                 <X className="h-4 w-4" />
