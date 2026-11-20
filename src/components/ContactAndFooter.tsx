@@ -5,7 +5,6 @@ import {
   ExcellenceModuleData,
   Language,
   NINE_OFFICES_LIST,
-  OFFICIAL_REGULATORY_NOTICE,
   ProjectCardData,
   REGIONAL_HUBS,
 } from '../data/imaadData';
@@ -255,20 +254,15 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
             </div>
           </div>
 
-          {/* Bottom Legal, Copyright & Regulatory Notice */}
-          <div className="mt-8 space-y-4 text-xs text-slate-500">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>&copy; 2026 Imaad Financial Group Ltd &middot; Kigali &middot; Abidjan</div>
-              <div className="flex flex-wrap gap-6">
-                <a href="mailto:infos@imaadholding.com" className="hover:text-gold-300">
-                  infos@imaadholding.com
-                </a>
-                <span className="text-slate-600">www.imaadfg.com</span>
-              </div>
+          {/* Bottom Legal & Copyright */}
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
+            <div>&copy; 2026 Imaad Financial Group Ltd &middot; Kigali &middot; Abidjan</div>
+            <div className="flex flex-wrap gap-6">
+              <a href="mailto:infos@imaadholding.com" className="hover:text-gold-300">
+                infos@imaadholding.com
+              </a>
+              <span className="text-slate-600">www.imaadfg.com</span>
             </div>
-            <p className="max-w-5xl text-[11px] leading-relaxed text-slate-500">
-              {OFFICIAL_REGULATORY_NOTICE[lang]}
-            </p>
           </div>
         </div>
       </footer>
