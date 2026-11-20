@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import {
   Currency,
@@ -21,12 +21,132 @@ interface ExcellenceAndProjectsProps {
   onViewAllProjects: () => void;
 }
 
+const SERVICE_LETTERS = ['A', 'B', 'C'];
+
+const ServiceVisualCard: React.FC<{
+  mod: ExcellenceModuleData;
+  idx: number;
+  lang: Language;
+  onInspectModule: (mod: ExcellenceModuleData) => void;
+}> = ({ mod, idx, lang, onInspectModule }) => {
+  const [slideIdx, setSlideIdx] = useState(0);
+  const slides = mod.slides.length > 0 ? mod.slides : [];
+  const activeSlide = slides[slideIdx] || slides[0];
+  const isSapphire = mod.accentColor === 'sapphire';
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.6, delay: idx * 0.12 }}
+      className="group relative flex flex-col overflow-hidden border border-white/15 bg-obsidian-900/75 transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-400/50 hover:shadow-[0_24px_55px_rgba(0,0,0,0.75)]"
+    >
+      <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
+
+      {/* Top Teyliom Chamfered Division Bar */}
+      <div className="flex items-center justify-between border-b border-white/10 bg-[#070E1B]/90 px-5 py-3">
+        <div className="flex items-center gap-2.5">
+          <span className="font-serif text-base font-bold text-gold-300">
+            {SERVICE_LETTERS[idx] || mod.num}
+          </span>
+          <span className="h-3.5 w-[1px] bg-white/20" />
+          <span className="font-mono text-[10px] tracking-[0.2em] text-slate-300 uppercase">
+            {mod.num} · {mod.badgeDivision[lang]}
+          </span>
+        </div>
+        <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
+      </div>
+
+      {/* Interactive Photo Stage with Teyliom Carousel Dots */}
+      <div className="relative h-56 w-full overflow-hidden border-b border-white/10 bg-obsidian-950 sm:h-60">
+        {activeSlide && (
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={activeSlide.image}
+              src={activeSlide.image}
+              alt={activeSlide.caption[lang]}
+              initial={{ opacity: 0, scale: 1.06 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.45 }}
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </AnimatePresence>
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/30 to-transparent" />
+
+        {/* Subtle Active Slide Caption + Teyliom-Style Carousel Dots */}
+        <div className="absolute right-4 bottom-3 left-4 flex items-end justify-between gap-3">
+          {activeSlide && (
+            <span className="max-w-[70%] truncate font-mono text-[9px] tracking-[0.14em] text-slate-200/90 uppercase drop-shadow">
+              {activeSlide.caption[lang]}
+            </span>
+          )}
+          {slides.length > 1 && (
+            <div className="flex items-center gap-1.5">
+              {slides.map((_, sIdx) => (
+                <button
+                  key={sIdx}
+                  type="button"
+                  aria-label={`Slide ${sIdx + 1}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    soundEngine.playClick();
+                    setSlideIdx(sIdx);
+                  }}
+                  className={`h-2.5 w-2.5 rounded-full border transition-all ${
+                    sIdx === slideIdx
+                      ? 'scale-110 border-gold-300 bg-gold-400 shadow-[0_0_8px_#C9A24D]'
+                      : 'border-white/50 bg-obsidian-950/60 hover:border-gold-300'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Concise Editorial Copy + Corner-Bracketed Learn More CTA */}
+      <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
+        <div>
+          <h3 className="font-heading text-lg font-bold tracking-[0.1em] text-white uppercase transition-colors duration-300 group-hover:text-gold-300 sm:text-xl leading-snug">
+            {mod.title[lang]}
+          </h3>
+          <p className="mt-3 line-clamp-4 text-xs leading-relaxed text-slate-300 sm:text-[13px]">
+            {mod.description[lang]}
+          </p>
+        </div>
+
+        <div className="mt-6 pt-2">
+          <button
+            type="button"
+            onClick={() => {
+              soundEngine.playClick();
+              onInspectModule(mod);
+            }}
+            onMouseEnter={() => soundEngine.playHover()}
+            className="group/btn relative inline-flex h-11 items-center justify-center gap-2.5 border border-white/20 bg-obsidian-950/70 px-6 font-display text-[11px] font-bold tracking-[0.18em] text-white uppercase transition-all hover:border-gold-400 hover:bg-gold-500/10 hover:text-gold-200"
+          >
+            <HudCorners variant="gold" />
+            <span>{lang === 'en' ? 'LEARN MORE' : 'EN SAVOIR PLUS'}</span>
+            <ArrowRight className="h-3.5 w-3.5 text-gold-400 transition-transform duration-300 group-hover/btn:translate-x-1" />
+          </button>
+        </div>
+      </div>
+    </motion.article>
+  );
+};
+
 export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
   lang,
   onInspectModule,
   onInspectProject,
   onViewAllProjects,
 }) => {
+  const [activeClientIdx, setActiveClientIdx] = useState(0);
+  const activeClient = WHO_WE_SERVE[activeClientIdx] || WHO_WE_SERVE[0];
+
   // 3 Flagship Official Brochure Projects for the Homepage (one from each core business line)
   const featuredIds = ['proj-ci-storage', 'proj-ng-gas', 'proj-bj-vaccines'];
   const featuredProjects = featuredIds
@@ -36,8 +156,7 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
   return (
     <>
       {/* =====================================================================
-          SECTION 3: AREAS OF EXCELLENCE (01, 02, 03) — ARCHITECTURAL VAULT CARDS
-          Aligned with Reference media_1795096516687_2509cf54.jpg
+          SECTION 3: AREAS OF EXCELLENCE (A, B, C) — TEYLIOM VISUAL SHOWCASE
       ====================================================================== */}
       <section
         id="excellence"
@@ -58,188 +177,112 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
         />
 
         <div className="mx-auto max-w-[1360px] px-6 sm:px-10 lg:px-16">
-          {/* Top Section Header & Eyebrow */}
+          {/* Concise Centered Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-14"
+            className="mb-12 sm:mb-16 text-center"
           >
-            {/* Minimal Eyebrow */}
-            <div className="mb-3.5 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
+            <div className="mb-3 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
               <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
-              <span>{lang === 'en' ? 'OUR AREAS OF EXCELLENCE' : 'NOS DOMAINES D’EXCELLENCE'}</span>
+              <span>{lang === 'en' ? 'OUR SERVICES' : 'NOS SERVICES'}</span>
             </div>
 
-            {/* Grand Headline */}
-            <h2 className="font-display text-2xl font-bold tracking-[0.16em] text-white uppercase sm:text-3xl lg:text-4xl leading-tight max-w-4xl">
+            <h2 className="mx-auto max-w-4xl font-display text-2xl font-bold tracking-[0.16em] text-white uppercase sm:text-3xl lg:text-4xl leading-tight">
               {lang === 'en'
                 ? 'THREE CORE BUSINESSES, ONE INTEGRATED PLATFORM'
                 : 'TROIS MÉTIERS, UNE PLATEFORME INTÉGRÉE'}
             </h2>
 
-            {/* Two-Column Editorial Briefing Grid (Exact CEO Reference Copy) */}
-            <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-              {/* Left Column: Official About Copy */}
-              <div className="relative border border-white/10 bg-obsidian-900/50 p-6 sm:p-8 backdrop-blur-md lg:col-span-7">
-                <div className="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-gold-400 via-gold-500/80 to-transparent" />
-                <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-gold-400 uppercase">
-                  <span>{lang === 'en' ? 'ABOUT IMAAD FINANCIAL GROUP' : 'À PROPOS D’IMAAD FINANCIAL GROUP'}</span>
-                </div>
-                <p className="text-sm leading-relaxed text-slate-200 sm:text-base">
-                  {lang === 'en'
-                    ? 'Imaad Financial Group Ltd is a merchant bank based in Kigali, Rwanda, with a West and Central Africa regional office in Abidjan, Côte d’Ivoire. We combine quantitative rigour with operational knowledge of commodities, energy, mining and infrastructure.'
-                    : 'Imaad Financial Group Ltd est une banque d’affaires basée à Kigali, au Rwanda, dotée d’un bureau régional pour l’Afrique de l’Ouest et Centrale à Abidjan, en Côte d’Ivoire. Nous combinons rigueur quantitative et connaissance opérationnelle des matières premières, de l’énergie, des mines et des infrastructures.'}
-                </p>
-                <p className="mt-3.5 text-sm leading-relaxed text-slate-300 sm:text-base">
-                  {lang === 'en'
-                    ? 'Rwanda and Côte d’Ivoire are our two anchors. From there we structure financings, partnerships and public-private projects that are bankable for lenders and credible for the states of Sub-Saharan Africa.'
-                    : 'Le Rwanda et la Côte d’Ivoire sont nos deux ancrages. De là, nous structurons des financements, des partenariats et des projets public-privé bancables pour les prêteurs et crédibles pour les États d’Afrique subsaharienne.'}
-                </p>
-              </div>
-
-              {/* Right Column: Official Anchor Callouts (Headquarters / Regional Office / Coverage) */}
-              <div className="flex flex-col justify-between gap-3.5 lg:col-span-5">
-                <div className="border-l-2 border-gold-400 bg-obsidian-900/60 px-5 py-4 backdrop-blur-md">
-                  <div className="font-mono text-[10px] font-semibold tracking-[0.2em] text-gold-400 uppercase">
-                    {lang === 'en' ? 'HEADQUARTERS' : 'SIÈGE SOCIAL'}
-                  </div>
-                  <div className="mt-1 font-serif text-base font-semibold text-white">
-                    Kigali, Rwanda
-                  </div>
-                </div>
-
-                <div className="border-l-2 border-gold-400 bg-obsidian-900/60 px-5 py-4 backdrop-blur-md">
-                  <div className="font-mono text-[10px] font-semibold tracking-[0.2em] text-gold-400 uppercase">
-                    {lang === 'en' ? 'REGIONAL OFFICE' : 'BUREAU RÉGIONAL'}
-                  </div>
-                  <div className="mt-1 font-serif text-base font-semibold text-white">
-                    {lang === 'en'
-                      ? 'Abidjan, Côte d’Ivoire (West and Central Africa)'
-                      : 'Abidjan, Côte d’Ivoire (Afrique de l’Ouest et Centrale)'}
-                  </div>
-                </div>
-
-                <div className="border-l-2 border-gold-400 bg-obsidian-900/60 px-5 py-4 backdrop-blur-md">
-                  <div className="font-mono text-[10px] font-semibold tracking-[0.2em] text-gold-400 uppercase">
-                    {lang === 'en' ? 'COVERAGE' : 'COUVERTURE'}
-                  </div>
-                  <div className="mt-1 font-serif text-base font-semibold text-white">
-                    {lang === 'en' ? 'Sub-Saharan Africa' : 'Afrique subsaharienne'}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <p className="mx-auto mt-3.5 max-w-xl text-sm text-slate-400 sm:text-base">
+              {lang === 'en'
+                ? 'We provide advisory services in three areas across Sub-Saharan Africa.'
+                : 'Nous intervenons en conseil et structuration dans trois domaines clés en Afrique subsaharienne.'}
+            </p>
           </motion.div>
 
-          {/* The 3 Architectural Vault Cards (01, 02, 03) */}
+          {/* 3 Visual Interactive Service Showcase Cards */}
           <div className="grid grid-cols-1 gap-7 lg:grid-cols-3">
-            {EXCELLENCE_MODULES.map((mod, idx) => {
-              const isSapphire = mod.accentColor === 'sapphire';
-              const cardAccentBorder = isSapphire ? 'group-hover:border-sapphire-400/50' : 'group-hover:border-gold-400/50';
-              const cardTopGlow = isSapphire
-                ? 'bg-gradient-to-r from-transparent via-sapphire-400 to-transparent shadow-[0_0_14px_#38BDF8]'
-                : 'bg-gradient-to-r from-transparent via-gold-400 to-transparent shadow-[0_0_14px_#C9A24D]';
-
-              return (
-                <motion.article
-                  key={mod.id}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.6, delay: idx * 0.12 }}
-                  onClick={() => {
-                    soundEngine.playClick();
-                    onInspectModule(mod);
-                  }}
-                  onMouseEnter={() => soundEngine.playHover()}
-                  className={`group relative flex cursor-pointer flex-col justify-between overflow-hidden border border-white/15 bg-obsidian-900/70 p-7 sm:p-9 transition-all duration-500 hover:-translate-y-1.5 hover:bg-obsidian-900/95 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] ${cardAccentBorder}`}
-                >
-                  <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
-
-                  {/* Top Glowing Laser Horizon on Hover */}
-                  <div
-                    className={`pointer-events-none absolute top-0 left-0 right-0 h-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${cardTopGlow}`}
-                  />
-
-                  {/* Background Watermark Numeral */}
-                  <span className="pointer-events-none absolute top-2 right-4 select-none font-serif text-7xl font-bold text-white/[0.03] transition-colors duration-500 group-hover:text-gold-400/[0.08]">
-                    {mod.num}
-                  </span>
-
-                  {/* Low Opacity Linear Gradient (No Image) */}
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-40 transition-opacity duration-700 group-hover:opacity-80"
-                    style={{
-                      background: isSapphire
-                        ? 'linear-gradient(180deg, rgba(56,189,248,0.06) 0%, rgba(10,15,28,0) 65%, rgba(56,189,248,0.03) 100%)'
-                        : 'linear-gradient(180deg, rgba(201,162,77,0.06) 0%, rgba(10,15,28,0) 65%, rgba(201,162,77,0.03) 100%)',
-                    }}
-                  />
-
-                  {/* Content: Pill & Title */}
-                  <div className="relative z-10">
-                    <div className="mb-4 inline-flex items-center gap-2.5">
-                      <span className="font-serif text-3xl font-bold text-gold-300 tracking-wider">
-                        {mod.num}
-                      </span>
-                      <span className="h-4 w-[1px] bg-white/20" />
-                      <span className="font-mono text-[10px] tracking-[0.2em] text-slate-400 uppercase">
-                        {mod.badgeDivision[lang]}
-                      </span>
-                    </div>
-
-                    <h3 className="font-heading text-lg font-bold tracking-[0.1em] text-white uppercase transition-colors duration-300 group-hover:text-gold-300 sm:text-xl leading-snug">
-                      {mod.title[lang]}
-                    </h3>
-
-                    <p className="mt-3.5 text-xs sm:text-[13px] leading-relaxed text-slate-300">
-                      {mod.description[lang]}
-                    </p>
-
-                    {/* Interactive Capability Bullet Checklist (No Underline) */}
-                    <ul className="mt-6 space-y-3">
-                      {mod.bullets[lang].map((bullet, bIdx) => (
-                        <li
-                          key={bIdx}
-                          className="flex items-start gap-2.5 transition-transform duration-300 group-hover:translate-x-1"
-                        >
-                          <span
-                            className={`mt-1.5 h-1.5 w-1.5 shrink-0 rotate-45 transition-colors ${
-                              isSapphire ? 'bg-sapphire-400' : 'bg-gold-400'
-                            }`}
-                          />
-                          <span className="text-xs sm:text-[13px] leading-relaxed text-slate-300 transition-colors group-hover:text-slate-100">
-                            {bullet}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Subtle Learn More link for service detail */}
-                  <div className="relative z-10 mt-7 flex items-center gap-2 font-mono text-[11px] font-semibold tracking-[0.16em] text-gold-300/80 uppercase transition-colors group-hover:text-gold-200">
-                    <span>{lang === 'en' ? 'Learn more' : 'En savoir plus'}</span>
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </div>
-                </motion.article>
-              );
-            })}
+            {EXCELLENCE_MODULES.map((mod, idx) => (
+              <ServiceVisualCard
+                key={mod.id}
+                mod={mod}
+                idx={idx}
+                lang={lang}
+                onInspectModule={onInspectModule}
+              />
+            ))}
           </div>
 
-          {/* Who We Serve Strip (from CEO Reference Screenshot 2) */}
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <span className="mr-2 font-mono text-[10px] font-bold tracking-[0.22em] text-gold-400 uppercase">
-              {lang === 'en' ? 'WHO WE SERVE' : 'NOS CLIENTS'}
-            </span>
-            {WHO_WE_SERVE.map((client) => (
-              <span
-                key={client.en}
-                className="border border-white/15 bg-obsidian-900/60 px-4 py-2 text-xs font-medium text-slate-200"
-              >
-                {client[lang]}
-              </span>
-            ))}
+          {/* Teyliom B.U.I.L.D.-Inspired Interactive WHO WE SERVE Monolith Strip */}
+          <div className="mt-14 sm:mt-16 border border-white/15 bg-obsidian-900/50 p-6 sm:p-8 lg:p-10 backdrop-blur-md">
+            <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
+              {/* Left: Dynamic Illuminated Callout */}
+              <div className="lg:col-span-5">
+                <div className="inline-flex items-center gap-2 font-mono text-[10px] font-bold tracking-[0.24em] text-gold-400 uppercase">
+                  <span className="h-1.5 w-1.5 rotate-45 bg-gold-400" />
+                  <span>{lang === 'en' ? 'WHO WE SERVE' : 'NOS CLIENTS'}</span>
+                </div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeClient.code + lang}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.28 }}
+                    className="mt-3"
+                  >
+                    <h3 className="font-serif text-xl font-bold text-white sm:text-2xl">
+                      {activeClient[lang]}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-300 sm:text-sm">
+                      {activeClient.detail[lang]}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Right: 4 Interactive Monolith Blocks */}
+              <div className="grid grid-cols-2 gap-0 border border-white/15 sm:grid-cols-4 lg:col-span-7">
+                {WHO_WE_SERVE.map((client, cIdx) => {
+                  const isActive = cIdx === activeClientIdx;
+                  return (
+                    <button
+                      key={client.code}
+                      type="button"
+                      onMouseEnter={() => {
+                        soundEngine.playHover();
+                        setActiveClientIdx(cIdx);
+                      }}
+                      onClick={() => {
+                        soundEngine.playClick();
+                        setActiveClientIdx(cIdx);
+                      }}
+                      className={`group relative flex min-h-[104px] flex-col items-start justify-between border-r border-b border-white/10 p-4 text-left transition-all duration-300 last:border-r-0 sm:border-b-0 ${
+                        isActive
+                          ? 'bg-gold-500/15 text-gold-200 shadow-[inset_0_0_25px_rgba(201,162,77,0.18)]'
+                          : 'bg-obsidian-950/60 text-slate-400 hover:bg-white/[0.04] hover:text-white'
+                      }`}
+                    >
+                      {isActive && (
+                        <span className="pointer-events-none absolute top-0 right-0 left-0 h-[2px] bg-gold-400 shadow-[0_0_12px_#C9A24D]" />
+                      )}
+                      <span
+                        className={`font-mono text-[10px] font-bold tracking-[0.2em] ${
+                          isActive ? 'text-gold-300' : 'text-slate-500'
+                        }`}
+                      >
+                        {client.code}
+                      </span>
+                      <span className="font-heading text-xs font-bold tracking-wider uppercase sm:text-[13px]">
+                        {client[lang]}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -12,6 +12,7 @@ import { SovereignMetricsBar } from './components/SovereignMetricsBar';
 import { MissionAndStrategy } from './components/MissionAndStrategy';
 import { ExcellenceAndProjects } from './components/ExcellenceAndProjects';
 import { ResponsibilitySection } from './components/ResponsibilitySection';
+import { HomeTeamSection } from './components/HomeTeamSection';
 import { ProjectsPage } from './components/ProjectsPage';
 import { TeamPage } from './components/TeamPage';
 import { ServiceDetailPage } from './components/ServiceDetailPage';
@@ -47,8 +48,16 @@ export function App() {
   };
 
   const handleNavigateTeam = () => {
-    setCurrentView('team');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (currentView !== 'home') {
+      setCurrentView('home');
+      setTimeout(() => {
+        const el = document.querySelector('#team');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 90);
+    } else {
+      const el = document.querySelector('#team');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const handleNavigateService = (serviceId: string) => {
@@ -131,6 +140,12 @@ export function App() {
                 setActiveDossier({ type: 'project', project })
               }
               onViewAllProjects={handleViewAllProjects}
+            />
+
+            {/* Governance & Team Section directly on Homepage */}
+            <HomeTeamSection
+              lang={lang}
+              onNavigateContact={handleNavigateContact}
             />
           </>
         ) : currentView === 'projects' ? (

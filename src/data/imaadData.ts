@@ -189,11 +189,11 @@ export const STRATEGY_PILLARS = [
     region: { en: 'SOVEREIGNTY & LEADERSHIP', fr: 'SOUVERAINETÉ & LEADERSHIP' },
     title: { en: 'Sovereignty', fr: 'Souveraineté' },
     description: {
-      en: 'Accelerate the financial sovereignty of States and public institutions through innovative, structured and responsible financing solutions.',
-      fr: 'Accélérer la souveraineté financière des États et des institutions publiques à travers des solutions de financement innovantes, structurées et responsables.',
+      en: 'Structuring sustainable financing to strengthen the economic sovereignty of African States.',
+      fr: 'Structurer des financements durables au service de la souveraineté économique des États.',
     },
     accent: 'gold' as const,
-    bgImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80',
+    bgImage: '/projects/infrastructure-routiere.png',
   },
   {
     id: '02',
@@ -201,11 +201,11 @@ export const STRATEGY_PILLARS = [
     region: { en: 'ECONOMIC, SOCIAL & ENVIRONMENTAL', fr: 'IMPACT ÉCONOMIQUE, SOCIAL & ENVIRONNEMENTAL' },
     title: { en: 'Impact', fr: 'Impact' },
     description: {
-      en: 'Building bridges between international capital and transformative projects with high economic, social and environmental impact across 10 key sectors.',
-      fr: 'Créer des ponts entre capitaux internationaux et projets structurants à fort impact économique, social et environnemental dans 10 secteurs clés.',
+      en: 'Connecting global capital to transformative infrastructure across 10 key sectors.',
+      fr: 'Relier capitaux internationaux et infrastructures structurantes dans 10 secteurs clés.',
     },
     accent: 'sapphire' as const,
-    bgImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80',
+    bgImage: '/responsibility-banner.jpg',
   },
   {
     id: '03',
@@ -213,11 +213,11 @@ export const STRATEGY_PILLARS = [
     region: { en: 'DISCIPLINE & INTEGRITY', fr: 'DISCIPLINE & INTÉGRITÉ' },
     title: { en: 'Excellence', fr: 'Excellence' },
     description: {
-      en: 'Excellence, discipline and innovation, integrity and absolute confidentiality, resilience and long-term vision at the service of every mandate.',
-      fr: 'Excellence, discipline et innovation, intégrité et confidentialité absolue, résilience et vision long terme au service de chaque mandat.',
+      en: 'Quantitative rigour, operational depth, and confidential execution on every mandate.',
+      fr: 'Rigueur quantitative, maîtrise opérationnelle et confidentialité sur chaque mandat.',
     },
     accent: 'gold' as const,
-    bgImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+    bgImage: '/about-architecture.jpg',
   },
 ];
 
@@ -253,8 +253,22 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
       {
         image: '/projects/infrastructure-routiere.png',
         caption: {
-          en: 'Abidjan – San Pedro Road / Côte d’Ivoire (150M€)',
-          fr: 'Axe routier Abidjan – San Pedro / Côte d’Ivoire (150 M€)',
+          en: 'Abidjan – San Pedro Road · Côte d’Ivoire (150M€)',
+          fr: 'Axe routier Abidjan – San Pedro · Côte d’Ivoire (150 M€)',
+        },
+      },
+      {
+        image: '/projects/logistique-minerais.png',
+        caption: {
+          en: 'Road Network & Port Logistics · Cameroon (121M€)',
+          fr: 'Réseau routier et logistique portuaire · Cameroun (121 M€)',
+        },
+      },
+      {
+        image: '/projects/industrie-cables-benin.png',
+        caption: {
+          en: 'Natural Gas Distribution Infrastructure · Nigeria (500M$)',
+          fr: 'Distribution de gaz naturel · Nigéria (500 M$)',
         },
       },
     ],
@@ -301,8 +315,22 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
       {
         image: '/projects/immobilier-guinee.png',
         caption: {
-          en: 'Real Estate Project / Guinea (10M$)',
-          fr: 'Projet immobilier / Guinée (10 M$)',
+          en: 'Real Estate Project · Guinea (10M$)',
+          fr: 'Projet immobilier · Guinée (10 M$)',
+        },
+      },
+      {
+        image: '/projects/sante-vaccins.png',
+        caption: {
+          en: 'Veterinary Vaccine & Medical Devices · Benin (24M€)',
+          fr: 'Vaccins vétérinaires & dispositifs médicaux · Bénin (24 M€)',
+        },
+      },
+      {
+        image: '/projects/agriculture-silos-senegal.png',
+        caption: {
+          en: 'Poultry Development Program · Guinea (5M$)',
+          fr: 'Programme de développement avicole · Guinée (5 M$)',
         },
       },
     ],
@@ -350,10 +378,24 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
     },
     slides: [
       {
+        image: '/projects/hydraulique-abidjan-ivory.png',
+        caption: {
+          en: 'Abidjan Intercity Bus Terminal · Côte d’Ivoire (112M€)',
+          fr: 'Gare Routière Inter-Urbaine d’Abidjan · Côte d’Ivoire (112 M€)',
+        },
+      },
+      {
         image: '/projects/real-estate-cameroon.jpeg',
         caption: {
-          en: 'Housing Program / Cameroon (100M€)',
-          fr: 'Programme de Logements / Cameroun (100 M€)',
+          en: 'Housing Program · Cameroon (100M€)',
+          fr: 'Programme de Logements · Cameroun (100 M€)',
+        },
+      },
+      {
+        image: '/projects/immobilier-cite-senegal.png',
+        caption: {
+          en: 'Petroleum Product Storage Tanks · Côte d’Ivoire (600M€)',
+          fr: 'Bacs de stockage de produits pétroliers · Côte d’Ivoire (600 M€)',
         },
       },
     ],
@@ -373,11 +415,48 @@ export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
   },
 ];
 
-export const WHO_WE_SERVE: { en: string; fr: string }[] = [
-  { en: 'Private clients', fr: 'Clients privés' },
-  { en: 'Institutions', fr: 'Institutions' },
-  { en: 'Investors', fr: 'Investisseurs' },
-  { en: 'Governments', fr: 'Gouvernements' },
+export const WHO_WE_SERVE: {
+  code: string;
+  en: string;
+  fr: string;
+  detail: { en: string; fr: string };
+}[] = [
+  {
+    code: '01',
+    en: 'Private clients',
+    fr: 'Clients privés',
+    detail: {
+      en: 'Structured growth capital, trade finance and bespoke strategic advisory.',
+      fr: 'Financement structuré de croissance, trade finance et conseil stratégique sur mesure.',
+    },
+  },
+  {
+    code: '02',
+    en: 'Institutions',
+    fr: 'Institutions',
+    detail: {
+      en: 'Public agencies and regional institutions advancing bankable development mandates.',
+      fr: 'Organismes publics et institutions régionales portant des mandats structurants.',
+    },
+  },
+  {
+    code: '03',
+    en: 'Investors',
+    fr: 'Investisseurs',
+    detail: {
+      en: 'Multilateral DFIs, international banks and institutional capital seeking vetted African assets.',
+      fr: 'Bailleurs multilatéraux, banques internationales et investisseurs institutionnels.',
+    },
+  },
+  {
+    code: '04',
+    en: 'Governments',
+    fr: 'Gouvernements',
+    detail: {
+      en: 'Sovereign debt management, Eurobonds and public-private infrastructure concessions.',
+      fr: 'Gestion de la dette souveraine, euro-obligations et concessions d’infrastructures PPP.',
+    },
+  },
 ];
 
 // Strictly the 9 official projects from the IMAAD Financial Group Brochure (Pages 9, 10, 11)

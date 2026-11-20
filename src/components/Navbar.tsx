@@ -83,10 +83,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   const handleGoTeam = () => {
     soundEngine.playClick();
     setMobileMenuOpen(false);
-    if (currentView !== 'team' && onNavigateTeam) {
+    if (onNavigateTeam) {
       onNavigateTeam();
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      handleNavClick('#team');
     }
   };
 

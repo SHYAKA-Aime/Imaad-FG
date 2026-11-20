@@ -1,89 +1,71 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Language, STRATEGY_PILLARS } from '../data/imaadData';
-import { VertexDots } from './ui/BlueprintPrimitives';
+import { HudCorners, VertexDots } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
 
 interface MissionAndStrategyProps {
   lang: Language;
 }
 
-// Pillar 1: Sovereign Architectural Column with Calibrated Coordinate Orbit
 const SovereigntyIcon = () => (
   <svg
     viewBox="0 0 40 40"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="h-7 w-7 text-gold-400 transition-all duration-500 group-hover:scale-110"
+    className="h-6 w-6 text-gold-400 transition-transform duration-500 group-hover:scale-110"
   >
-    {/* Calibrated Celestial Coordinate Orbit */}
     <circle
       cx="20"
       cy="20"
       r="17"
       stroke="#C9A24D"
-      strokeWidth="0.8"
+      strokeWidth="0.9"
       strokeDasharray="2 3"
-      className="opacity-40 transition-transform duration-700 group-hover:rotate-45"
+      className="opacity-50 transition-transform duration-700 group-hover:rotate-45"
     />
-    <circle
-      cx="20"
-      cy="20"
-      r="13"
-      stroke="#C9A24D"
-      strokeWidth="0.8"
-      className="opacity-25"
-    />
-    {/* Capital */}
     <rect x="13" y="10" width="14" height="2" rx="0.5" fill="#C9A24D" />
-    <rect x="14.5" y="12" width="11" height="1.2" fill="#C9A24D" />
-    {/* Fluted Column Shaft */}
     <rect
       x="15.5"
       y="13.2"
       width="9"
       height="13.6"
       fill="#C9A24D"
-      fillOpacity={0.18}
+      fillOpacity={0.22}
       stroke="#C9A24D"
-      strokeWidth="0.8"
+      strokeWidth="0.9"
     />
-    <line x1="18.5" y1="13.2" x2="18.5" y2="26.8" stroke="#C9A24D" strokeWidth="0.7" />
-    <line x1="21.5" y1="13.2" x2="21.5" y2="26.8" stroke="#C9A24D" strokeWidth="0.7" />
-    {/* Base */}
-    <rect x="14.5" y="26.8" width="11" height="1.2" fill="#C9A24D" />
+    <line x1="18.5" y1="13.2" x2="18.5" y2="26.8" stroke="#C9A24D" strokeWidth="0.8" />
+    <line x1="21.5" y1="13.2" x2="21.5" y2="26.8" stroke="#C9A24D" strokeWidth="0.8" />
     <rect x="13" y="28" width="14" height="2" rx="0.5" fill="#C9A24D" />
   </svg>
 );
 
-// Pillar 2: Generational Impact Interlocking Catalyst Rings & Core
 const ImpactIcon = () => (
   <svg
     viewBox="0 0 40 40"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="h-7 w-7 text-sapphire-400 transition-all duration-500 group-hover:scale-110"
+    className="h-6 w-6 text-sapphire-400 transition-transform duration-500 group-hover:scale-110"
   >
-    {/* Outer Expanding Ripple Ring */}
     <circle
       cx="20"
       cy="20"
       r="16.5"
       stroke="#38BDF8"
-      strokeWidth="0.8"
+      strokeWidth="0.9"
       strokeDasharray="3 3"
-      className="opacity-40 transition-transform duration-700 group-hover:rotate-90"
+      className="opacity-50 transition-transform duration-700 group-hover:rotate-90"
     />
-    {/* Interlocking Orbital Energy Paths */}
     <ellipse
       cx="20"
       cy="20"
       rx="15"
       ry="6.5"
       stroke="#38BDF8"
-      strokeWidth="0.8"
+      strokeWidth="0.9"
       transform="rotate(-28 20 20)"
-      className="opacity-70 transition-transform duration-500 group-hover:rotate-0"
+      className="opacity-80"
     />
     <ellipse
       cx="20"
@@ -91,51 +73,38 @@ const ImpactIcon = () => (
       rx="15"
       ry="6.5"
       stroke="#38BDF8"
-      strokeWidth="0.8"
+      strokeWidth="0.9"
       transform="rotate(32 20 20)"
-      className="opacity-70 transition-transform duration-500 group-hover:rotate-45"
+      className="opacity-80"
     />
-    {/* Radiant Center Nexus */}
-    <circle cx="20" cy="20" r="3.5" fill="#38BDF8" />
-    <circle cx="20" cy="20" r="1.5" fill="#FFFFFF" />
+    <circle cx="20" cy="20" r="3.2" fill="#38BDF8" />
+    <circle cx="20" cy="20" r="1.4" fill="#FFFFFF" />
   </svg>
 );
 
-// Pillar 3: Precision Astrolabe Compass & 8-Pointed Star of Excellence
 const ExcellenceIcon = () => (
   <svg
     viewBox="0 0 40 40"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="h-7 w-7 text-gold-400 transition-all duration-700 group-hover:rotate-45 group-hover:scale-110"
+    className="h-6 w-6 text-gold-400 transition-transform duration-700 group-hover:rotate-45 group-hover:scale-110"
   >
-    {/* Outer Precision Degree Gauge */}
     <circle
       cx="20"
       cy="20"
       r="16.5"
       stroke="#C9A24D"
-      strokeWidth="0.8"
+      strokeWidth="0.9"
       strokeDasharray="1.5 3"
-      className="opacity-50"
+      className="opacity-55"
     />
-    <circle
-      cx="20"
-      cy="20"
-      r="12"
-      stroke="#C9A24D"
-      strokeWidth="0.8"
-      className="opacity-30"
-    />
-    {/* 8-Pointed Geometric Star of Execution Rigor */}
     <path
       d="M20 5 L22.8 16.5 L34.5 16.5 L25 22.8 L28.5 34.5 L20 27.5 L11.5 34.5 L15 22.8 L5.5 16.5 L17.2 16.5 Z"
       fill="#C9A24D"
-      fillOpacity={0.16}
+      fillOpacity={0.22}
       stroke="#C9A24D"
-      strokeWidth="0.8"
+      strokeWidth="0.9"
     />
-    {/* Center Core Spark */}
     <rect
       x="18.5"
       y="18.5"
@@ -148,138 +117,239 @@ const ExcellenceIcon = () => (
 );
 
 export const MissionAndStrategy: React.FC<MissionAndStrategyProps> = ({ lang }) => {
+  const splitRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: splitRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Smooth Teyliom-style vertical parallax on the framed architectural photograph
+  const imageY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
+  const frameY = useTransform(scrollYProgress, [0, 1], ['18px', '-18px']);
+
   return (
     <section
       id="mission"
       className="relative overflow-hidden border-b border-white/10 bg-obsidian-950 py-16 sm:py-24 lg:py-32"
     >
-      {/* Center Ambient Spotlight */}
+      {/* Subtle Ambient Radial Aura */}
       <div
-        className="pointer-events-none absolute top-1/3 left-1/2 h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-[140px]"
+        className="pointer-events-none absolute top-1/4 left-1/2 h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-35 blur-[140px]"
         style={{
           background:
-            'radial-gradient(circle, rgba(30,107,255,0.2) 0%, rgba(201,162,77,0.12) 50%, transparent 70%)',
+            'radial-gradient(circle, rgba(30,107,255,0.18) 0%, rgba(201,162,77,0.12) 50%, transparent 70%)',
         }}
       />
 
       <div id="our-model" className="mx-auto max-w-[1360px] px-5 sm:px-10 lg:px-16">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-10 sm:mb-14 text-center"
+        {/* ===================================================================
+            1. TEYLIOM-INSPIRED ABOUT EDITORIAL SPLIT WITH PARALLAX FRAME
+        ==================================================================== */}
+        <div
+          ref={splitRef}
+          className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16"
         >
-          {/* Eyebrow */}
-          <div className="mb-3 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
-            <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
-            <span>{lang === 'en' ? 'OUR MODEL' : 'NOTRE MODÈLE'}</span>
-          </div>
+          {/* Left Column: Concise Institutional Positioning */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.65 }}
+            className="lg:col-span-6"
+          >
+            <div className="mb-3.5 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
+              <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
+              <span>{lang === 'en' ? 'ABOUT // OUR MODEL' : 'À PROPOS // NOTRE MODÈLE'}</span>
+            </div>
 
-          {/* Headline from Screenshot */}
-          <h2 className="mx-auto max-w-4xl font-display text-xl font-bold tracking-[0.12em] text-white uppercase sm:text-3xl sm:tracking-[0.16em] lg:text-4xl leading-tight">
-            {lang === 'en'
-              ? 'AN INVESTMENT BANK AT THE SERVICE OF SUSTAINABLE DEVELOPMENT'
-              : 'UNE BANQUE D’AFFAIRES AU SERVICE DU DÉVELOPPEMENT DURABLE'}
-          </h2>
+            <h2 className="font-display text-2xl font-bold tracking-[0.12em] text-white uppercase sm:text-3xl lg:text-4xl leading-tight">
+              {lang === 'en'
+                ? 'A MERCHANT BANK BUILT FOR SUB-SAHARAN AFRICA'
+                : 'UNE BANQUE D’AFFAIRES ANCRÉE EN AFRIQUE SUBSAHARIENNE'}
+            </h2>
 
-          {/* Subtitle / Intro Copy from Screenshot */}
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
-            {lang === 'en'
-              ? 'Imaad Financial Group puts finance at the service of development, competitiveness, and sustainability. We combine international vision with local execution.'
-              : 'Imaad Financial Group place la finance au service du développement, de la compétitivité et de la durabilité. Nous combinons vision internationale et exécution locale.'}
-          </p>
-        </motion.div>
+            <p className="mt-5 text-sm leading-relaxed text-slate-300 sm:text-base">
+              {lang === 'en'
+                ? 'Based in Kigali with a West and Central Africa regional office in Abidjan, Imaad Financial Group Ltd combines quantitative rigour with operational depth across commodities, energy, mining and infrastructure.'
+                : 'Basée à Kigali avec un bureau régional pour l’Afrique de l’Ouest et Centrale à Abidjan, Imaad Financial Group Ltd combine rigueur quantitative et maîtrise opérationnelle des matières premières, de l’énergie, des mines et des infrastructures.'}
+            </p>
 
-        {/* 3 Architectural Pillar Cards with Rich Interactive Hover */}
-        <div className="grid grid-cols-1 border border-white/15 md:grid-cols-3">
-          {STRATEGY_PILLARS.map((pillar, idx) => {
-            const isPillar1 = idx === 0;
-            const isPillar2 = idx === 1;
+            {/* Compact Anchor Strip (Visual, Scannable — Not a PDF Box) */}
+            <div className="mt-7 grid grid-cols-1 gap-3 border-y border-white/10 py-5 sm:grid-cols-3">
+              <div className="border-l-2 border-gold-400 pl-3.5">
+                <div className="font-mono text-[9px] tracking-[0.2em] text-gold-400 uppercase">
+                  {lang === 'en' ? 'HEADQUARTERS' : 'SIÈGE SOCIAL'}
+                </div>
+                <div className="mt-1 font-serif text-sm font-semibold text-white">
+                  Kigali, Rwanda
+                </div>
+              </div>
+              <div className="border-l-2 border-gold-400/70 pl-3.5">
+                <div className="font-mono text-[9px] tracking-[0.2em] text-gold-400 uppercase">
+                  {lang === 'en' ? 'REGIONAL OFFICE' : 'BUREAU RÉGIONAL'}
+                </div>
+                <div className="mt-1 font-serif text-sm font-semibold text-white">
+                  Abidjan, Côte d’Ivoire
+                </div>
+              </div>
+              <div className="border-l-2 border-sapphire-400/70 pl-3.5">
+                <div className="font-mono text-[9px] tracking-[0.2em] text-sapphire-300 uppercase">
+                  {lang === 'en' ? 'COVERAGE' : 'COUVERTURE'}
+                </div>
+                <div className="mt-1 font-serif text-sm font-semibold text-white">
+                  {lang === 'en' ? 'Sub-Saharan Africa' : 'Afrique subsaharienne'}
+                </div>
+              </div>
+            </div>
 
-            return (
-              <motion.article
-                key={pillar.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: idx * 0.12 }}
+            {/* Teyliom Corner-Bracketed Action */}
+            <div className="mt-8 flex flex-wrap items-center gap-6">
+              <a
+                href="#excellence"
                 onClick={() => soundEngine.playClick()}
                 onMouseEnter={() => soundEngine.playHover()}
-                className="group relative flex min-h-[260px] sm:min-h-[320px] cursor-pointer flex-col justify-between overflow-hidden border-b last:border-b-0 border-white/15 bg-obsidian-900/60 p-6 sm:p-8 lg:p-10 transition-all duration-500 md:border-r md:border-b-0 last:md:border-r-0 hover:bg-obsidian-900/90"
+                className="group relative inline-flex h-12 items-center justify-center border border-white/20 bg-obsidian-900/80 px-7 font-display text-[11px] font-bold tracking-[0.22em] text-white uppercase backdrop-blur-md transition-all hover:border-gold-400 hover:bg-gold-500/10 hover:text-gold-200 hover:shadow-[0_0_25px_rgba(201,162,77,0.22)]"
               >
-                <VertexDots color={pillar.accent === 'sapphire' ? 'sapphire' : 'gold'} />
+                <HudCorners variant="gold" />
+                <span>{lang === 'en' ? 'OUR SERVICES' : 'NOS SERVICES'}</span>
+              </a>
 
-                {/* Top Glowing Shimmer Line on Hover */}
-                <div
-                  className={`pointer-events-none absolute top-0 left-0 right-0 h-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${
-                    pillar.accent === 'sapphire'
-                      ? 'bg-gradient-to-r from-transparent via-sapphire-400 to-transparent shadow-[0_0_12px_#38BDF8]'
-                      : 'bg-gradient-to-r from-transparent via-gold-400 to-transparent shadow-[0_0_12px_#C9A24D]'
-                  }`}
-                />
+              <a
+                href="#team"
+                onClick={() => soundEngine.playClick()}
+                className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.18em] text-slate-400 uppercase transition-colors hover:text-gold-300"
+              >
+                <span className="h-1.5 w-1.5 rotate-45 bg-gold-400" />
+                <span>{lang === 'en' ? 'Meet our team' : 'Découvrir l’équipe'}</span>
+              </a>
+            </div>
+          </motion.div>
 
-                {/* Subtle Hover Radial Aura */}
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    background:
-                      pillar.accent === 'sapphire'
-                        ? 'radial-gradient(circle at 50% 30%, rgba(56,189,248,0.12) 0%, transparent 70%)'
-                        : 'radial-gradient(circle at 50% 30%, rgba(201,162,77,0.12) 0%, transparent 70%)',
-                  }}
-                />
+          {/* Right Column: Teyliom Double-Wireframe Parallax Architectural Image */}
+          <motion.div
+            style={{ y: frameY }}
+            className="relative mx-auto w-full max-w-[540px] lg:col-span-6 lg:max-w-none"
+          >
+            {/* Outer Blueprint Frame with Glowing Reticle Diamonds */}
+            <div className="relative border border-white/15 bg-obsidian-900/35 p-4 sm:p-6">
+              <VertexDots color="gold" />
+              {/* Inner Precision Offset Frame */}
+              <div className="relative border border-gold-400/25 p-2.5 sm:p-3.5">
+                <span className="pointer-events-none absolute -top-1.5 -left-1.5 h-2.5 w-2.5 rotate-45 bg-gold-400 shadow-[0_0_10px_#C9A24D]" />
+                <span className="pointer-events-none absolute -right-1.5 -bottom-1.5 h-2.5 w-2.5 rotate-45 bg-gold-400 shadow-[0_0_10px_#C9A24D]" />
 
-                {/* Background Texture with Smooth Scale Lift */}
-                <div
-                  className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-10 transition-all duration-700 group-hover:scale-105 group-hover:opacity-25"
-                  style={{ backgroundImage: `url('${pillar.bgImage}')` }}
-                />
-                <div
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    background:
-                      'radial-gradient(circle at center, rgba(10,15,28,0.25) 0%, rgba(3,5,8,0.92) 85%)',
-                  }}
-                />
+                {/* Parallax Image Viewport */}
+                <div className="relative h-[320px] w-full overflow-hidden bg-obsidian-950 sm:h-[400px] lg:h-[440px]">
+                  <motion.img
+                    style={{ y: imageY, scale: 1.14 }}
+                    src="/about-architecture.jpg"
+                    alt="Imaad Financial Group — Architecture"
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950/75 via-obsidian-950/15 to-transparent" />
 
-                {/* Center Creative Emblem */}
-                <div className="relative z-10 my-4 flex items-center justify-center">
-                  <div
-                    className={`relative flex h-16 w-16 items-center justify-center rounded-full border transition-all duration-500 group-hover:scale-110 ${
-                      pillar.accent === 'sapphire'
-                        ? 'border-sapphire-400/30 bg-sapphire-500/[0.05] group-hover:border-sapphire-400 group-hover:bg-sapphire-500/15 group-hover:shadow-[0_0_28px_rgba(56,189,248,0.35)]'
-                        : 'border-gold-400/30 bg-gold-500/[0.05] group-hover:border-gold-400 group-hover:bg-gold-500/15 group-hover:shadow-[0_0_28px_rgba(201,162,77,0.35)]'
-                    }`}
-                  >
-                    {/* Architectural Crosshair Reticles */}
-                    <span className="absolute -top-1 left-1/2 h-2 w-[1px] -translate-x-1/2 bg-white/25 transition-colors group-hover:bg-white/60" />
-                    <span className="absolute -bottom-1 left-1/2 h-2 w-[1px] -translate-x-1/2 bg-white/25 transition-colors group-hover:bg-white/60" />
-                    <span className="absolute top-1/2 -left-1 h-[1px] w-2 -translate-y-1/2 bg-white/25 transition-colors group-hover:bg-white/60" />
-                    <span className="absolute top-1/2 -right-1 h-[1px] w-2 -translate-y-1/2 bg-white/25 transition-colors group-hover:bg-white/60" />
-
-                    {isPillar1 ? (
-                      <SovereigntyIcon />
-                    ) : isPillar2 ? (
-                      <ImpactIcon />
-                    ) : (
-                      <ExcellenceIcon />
-                    )}
+                  {/* Minimal Floating Coordinate Caption */}
+                  <div className="absolute right-4 bottom-4 left-4 flex items-center justify-between border border-white/15 bg-obsidian-950/85 px-4 py-2.5 backdrop-blur-md">
+                    <span className="font-mono text-[10px] tracking-[0.2em] text-gold-300 uppercase">
+                      KIGALI · ABIDJAN
+                    </span>
+                    <span className="font-mono text-[10px] tracking-[0.16em] text-slate-300 uppercase">
+                      {lang === 'en' ? '9 OFFICES · 24 COUNTRIES' : '9 BUREAUX · 24 PAYS'}
+                    </span>
                   </div>
                 </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
 
-                {/* Bottom Title & Description (Exact Texts from Screenshot) */}
-                <div className="relative z-10 transition-transform duration-300 group-hover:-translate-y-1">
-                  <h3 className="font-heading text-lg font-bold text-white uppercase tracking-wider transition-colors duration-300 group-hover:text-gold-300 sm:text-xl">
-                    {pillar.title[lang]}
-                  </h3>
-                  <p className="mt-3 text-xs leading-relaxed text-slate-300 transition-colors duration-300 group-hover:text-slate-200 sm:text-sm">
-                    {pillar.description[lang]}
-                  </p>
-                </div>
-              </motion.article>
-            );
-          })}
+        {/* ===================================================================
+            2. THE STRATEGY — 3 VISUAL IMAGE-BACKED PILLARS
+        ==================================================================== */}
+        <div className="mt-20 sm:mt-28">
+          <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <div className="mb-2 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
+                <span className="h-1.5 w-1.5 rotate-45 bg-gold-400" />
+                <span>{lang === 'en' ? 'OUR STRATEGY' : 'NOTRE STRATÉGIE'}</span>
+              </div>
+              <h3 className="font-display text-xl font-bold tracking-[0.14em] text-white uppercase sm:text-2xl lg:text-3xl">
+                {lang === 'en'
+                  ? 'INTERNATIONAL VISION, LOCAL EXECUTION'
+                  : 'VISION INTERNATIONALE, EXÉCUTION LOCALE'}
+              </h3>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {STRATEGY_PILLARS.map((pillar, idx) => {
+              const isPillar1 = idx === 0;
+              const isPillar2 = idx === 1;
+              const isSapphire = pillar.accent === 'sapphire';
+
+              return (
+                <motion.article
+                  key={pillar.id}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.55, delay: idx * 0.12 }}
+                  onClick={() => soundEngine.playClick()}
+                  onMouseEnter={() => soundEngine.playHover()}
+                  className="group relative flex flex-col overflow-hidden border border-white/15 bg-obsidian-900/75 transition-all duration-500 hover:-translate-y-1.5 hover:border-gold-400/50 hover:shadow-[0_22px_50px_rgba(0,0,0,0.65)]"
+                >
+                  <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
+
+                  {/* Visible Editorial Image Header */}
+                  <div className="relative h-48 w-full overflow-hidden border-b border-white/10 sm:h-52">
+                    <img
+                      src={pillar.bgImage}
+                      alt={pillar.title[lang]}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/35 to-transparent" />
+
+                    {/* Pillar Index Pill */}
+                    <div className="absolute top-3.5 left-3.5 border border-white/20 bg-obsidian-950/85 px-2.5 py-1 font-mono text-[10px] font-bold tracking-[0.2em] text-gold-300 backdrop-blur-md">
+                      {pillar.code}
+                    </div>
+
+                    {/* Floating Emblem Badge */}
+                    <div
+                      className={`absolute right-4 bottom-3 flex h-12 w-12 items-center justify-center rounded-full border backdrop-blur-md transition-all duration-500 group-hover:scale-110 ${
+                        isSapphire
+                          ? 'border-sapphire-400/50 bg-obsidian-950/85'
+                          : 'border-gold-400/50 bg-obsidian-950/85'
+                      }`}
+                    >
+                      {isPillar1 ? (
+                        <SovereigntyIcon />
+                      ) : isPillar2 ? (
+                        <ImpactIcon />
+                      ) : (
+                        <ExcellenceIcon />
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Concise Visual Card Body */}
+                  <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
+                    <div>
+                      <div className="font-mono text-[9px] tracking-[0.2em] text-gold-400/90 uppercase">
+                        {pillar.region[lang]}
+                      </div>
+                      <h4 className="mt-1.5 font-heading text-lg font-bold tracking-wider text-white uppercase transition-colors group-hover:text-gold-300">
+                        {pillar.title[lang]}
+                      </h4>
+                      <p className="mt-2.5 text-xs leading-relaxed text-slate-300 sm:text-sm">
+                        {pillar.description[lang]}
+                      </p>
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
