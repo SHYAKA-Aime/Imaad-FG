@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 704" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#11203B"/>
+      <stop offset="60%" stop-color="#0B1528"/>
+      <stop offset="100%" stop-color="#060B16"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="38%" r="48%">
+      <stop offset="0%" stop-color="#C9A24D" stop-opacity="0.22"/>
+      <stop offset="55%" stop-color="#1E6BFF" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#060B16" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sil" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#223659"/>
+      <stop offset="100%" stop-color="#0E1B33"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#E0BE74" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#C9A24D" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Studio Backdrop -->
+  <rect width="640" height="704" fill="url(#bg)"/>
+  <rect width="640" height="704" fill="url(#halo)"/>
+
+  <!-- Subtle Architectural Framing Lines -->
+  <circle cx="320" cy="275" r="195" stroke="#C9A24D" stroke-opacity="0.12" stroke-width="1" stroke-dasharray="4 6"/>
+  <circle cx="320" cy="275" r="245" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1"/>
+  <line x1="320" y1="48" x2="320" y2="96" stroke="#C9A24D" stroke-opacity="0.22" stroke-width="1"/>
+
+  <!-- Clean Executive Silhouette (Head) -->
+  <circle cx="320" cy="252" r="96" fill="url(#sil)" stroke="url(#rim)" stroke-width="1.6"/>
+
+  <!-- Clean Executive Silhouette (Tailored Shoulders) -->
+  <path
+    d="M116 704 C122 544 196 456 320 456 C444 456 518 544 524 704 Z"
+    fill="url(#sil)"
+    stroke="url(#rim)"
+    stroke-width="1.6"
+  />
+
+  <!-- Subtle Suit Lapel Geometry -->
+  <path
+    d="M276 462 L320 568 L364 462"
+    stroke="#C9A24D"
+    stroke-opacity="0.28"
+    stroke-width="1.4"
+    fill="none"
+  />
+  <line x1="320" y1="568" x2="320" y2="704" stroke="#C9A24D" stroke-opacity="0.14" stroke-width="1.2"/>
+</svg>

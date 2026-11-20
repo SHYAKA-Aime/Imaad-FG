@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ChevronLeft, ChevronRight, User, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import {
   Language,
   OFFICIAL_VALUES,
@@ -80,39 +80,10 @@ const ENTITY_TABS: {
   },
 ];
 
-// Clean Architectural Avatar Badge (supports real photo drop-in when approved)
-const MemberAvatar: React.FC<{
-  member: TeamMemberData;
-  size?: 'md' | 'lg';
-}> = ({ member, size = 'md' }) => {
-  const dim = size === 'lg' ? 'h-16 w-16' : 'h-14 w-14';
-  return (
-    <div
-      className={`relative flex ${dim} shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#C69C45]/80 bg-gradient-to-b from-[#11203B] to-[#070E1B] shadow-[0_0_18px_rgba(201,162,77,0.14)] transition-all duration-300 group-hover:border-gold-300 group-hover:shadow-[0_0_24px_rgba(201,162,77,0.28)]`}
-    >
-      {member.photo ? (
-        <img
-          src={member.photo}
-          alt={member.name}
-          className="h-full w-full object-cover object-top"
-        />
-      ) : (
-        <>
-          <User className="pointer-events-none absolute -bottom-1 h-9 w-9 text-gold-400/15" />
-          <span className="relative z-10 font-serif text-sm font-semibold tracking-wider text-[#C9A24D] sm:text-base">
-            {member.initials}
-          </span>
-        </>
-      )}
-    </div>
-  );
-};
-
 export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
   lang,
   onNavigateContact,
 }) => {
-  // Default to 'all' so all 3 entity groups & 19 members match the CEO screenshots immediately
   const [activeEntityIdx, setActiveEntityIdx] = useState<number>(0);
   const [selectedMember, setSelectedMember] = useState<TeamMemberData | null>(null);
 
@@ -204,7 +175,7 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
       </div>
 
       {/* ===================================================================
-          2. TEYLIOM ENTITY FILTER & ARCHITECTURAL RULER + EXACT 3 ENTITY GROUPS
+          2. TEYLIOM ENTITY FILTER & ARCHITECTURAL RULER + PORTRAIT AVATAR CARDS
       ==================================================================== */}
       <div className="mx-auto max-w-[1360px] px-5 py-14 sm:px-10 sm:py-20 lg:px-16">
         {/* Filter Bar + Teyliom Prev/Next Controls */}
@@ -279,7 +250,7 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
           </motion.div>
         </div>
 
-        {/* Exact Entity Groups & 19 Member Cards matching CEO Screenshots */}
+        {/* Exact Entity Groups with Full Editorial Portrait Avatar Cards */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab.id}
@@ -287,7 +258,7 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.35 }}
-            className="space-y-14"
+            className="space-y-16"
           >
             {visibleGroups.map((group) => {
               const members = TEAM_MEMBERS.filter((m) => m.entity === group.id);
@@ -303,12 +274,12 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                     </span>
                   </div>
 
-                  {/* 3-Column Architectural Cards with Clean Avatar + Exact Details */}
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {/* Editorial Portrait Cards (Avatar Image Frame + Exact CEO Details) */}
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {members.map((member, idx) => (
                       <motion.article
                         key={member.id}
-                        initial={{ opacity: 0, y: 16 }}
+                        initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
                         transition={{ duration: 0.35, delay: idx * 0.03 }}
@@ -317,32 +288,58 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                           setSelectedMember(member);
                         }}
                         onMouseEnter={() => soundEngine.playHover()}
-                        className="group relative flex cursor-pointer flex-col justify-between border border-white/12 border-t-2 border-t-[#C69C45] bg-[#0B1528]/90 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold-400/60 hover:bg-[#0F1E38] hover:shadow-[0_20px_45px_rgba(0,0,0,0.65)]"
+                        className="group relative flex cursor-pointer flex-col overflow-hidden border border-white/12 bg-[#0B1528]/90 transition-all duration-400 hover:-translate-y-1.5 hover:border-gold-400/60 hover:bg-[#0F1E38] hover:shadow-[0_22px_50px_rgba(0,0,0,0.68)]"
                       >
                         <VertexDots color="gold" />
 
-                        <div>
-                          {/* Header: Avatar + Exact Name & Exact Title */}
-                          <div className="flex items-start gap-4">
-                            <MemberAvatar member={member} />
-                            <div className="min-w-0">
-                              <h4 className="font-serif text-base font-bold tracking-wide text-white transition-colors group-hover:text-gold-300 sm:text-[17px]">
-                                {member.name}
-                              </h4>
-                              <p className="mt-1 text-xs leading-relaxed text-slate-300">
-                                {member.role[lang]}
-                              </p>
-                            </div>
+                        {/* Full Editorial Portrait Avatar Frame */}
+                        <div className="relative aspect-[4/4.4] w-full overflow-hidden border-b border-white/10 bg-[#070E1B]">
+                          <img
+                            src={member.photo || '/team-avatar.svg'}
+                            alt={member.name}
+                            loading="lazy"
+                            className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                          />
+
+                          {/* Subtle Editorial Bottom Vignette */}
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1528] via-[#0B1528]/15 to-transparent" />
+
+                          {/* Entity Tag */}
+                          <div className="absolute top-3 left-3 border border-white/15 bg-obsidian-950/80 px-2.5 py-1 font-mono text-[9px] font-semibold tracking-[0.16em] text-gold-300 uppercase backdrop-blur-md">
+                            {member.entity === 'holding'
+                              ? 'Holding'
+                              : member.entity === 'ifesa'
+                              ? 'IFESA'
+                              : 'IFWCA'}
                           </div>
 
-                          {/* Divider + Exact Bio / Placeholder matching CEO Screenshots */}
-                          <div className="mt-5 border-t border-white/10 pt-4">
+                          {/* Monogram Corner Tag (matches CEO screenshots) */}
+                          <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full border border-gold-400/50 bg-obsidian-950/80 font-serif text-[11px] font-semibold text-gold-300 backdrop-blur-md">
+                            {member.initials}
+                          </div>
+
+                          {/* Top Gold Accent Hairline on Hover */}
+                          <div className="pointer-events-none absolute top-0 right-0 left-0 h-[2px] bg-gradient-to-r from-transparent via-gold-400 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                        </div>
+
+                        {/* Exact Member Details (Name, Title & Bio / Placeholder) */}
+                        <div className="flex flex-1 flex-col justify-between p-5">
+                          <div>
+                            <h4 className="font-serif text-base font-bold tracking-wide text-white transition-colors group-hover:text-gold-300">
+                              {member.name}
+                            </h4>
+                            <p className="mt-1.5 text-xs leading-relaxed text-slate-300">
+                              {member.role[lang]}
+                            </p>
+                          </div>
+
+                          <div className="mt-4 border-t border-white/10 pt-3.5">
                             {member.bio ? (
-                              <p className="text-xs leading-relaxed text-slate-300 sm:text-[13px]">
+                              <p className="line-clamp-4 text-[11px] leading-relaxed text-slate-300">
                                 {member.bio[lang]}
                               </p>
                             ) : (
-                              <p className="text-xs italic text-slate-500">
+                              <p className="text-[11px] italic text-slate-500">
                                 {lang === 'en'
                                   ? '[Biography to be completed]'
                                   : '[Biographie à compléter]'}
@@ -408,8 +405,14 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                 <X className="h-4 w-4" />
               </button>
 
-              <div className="flex items-center gap-4">
-                <MemberAvatar member={selectedMember} size="lg" />
+              <div className="flex items-center gap-5">
+                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-[#C69C45] bg-[#081020]">
+                  <img
+                    src={selectedMember.photo || '/team-avatar.svg'}
+                    alt={selectedMember.name}
+                    className="h-full w-full object-cover object-top"
+                  />
+                </div>
                 <div>
                   <div className="font-mono text-[10px] font-semibold tracking-[0.18em] text-gold-400 uppercase">
                     {selectedMember.entityLabel[lang]}
