@@ -710,7 +710,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'issa-ndiaye',
     initials: 'IN',
     name: 'Issa Mehmet NDIAYE',
-    photo: '/team/issa-ndiaye.jpg',
     role: {
       en: 'Co-Founder, Group Chairman & CEO',
       fr: 'Co-fondateur, Président-Directeur Général du Groupe',
@@ -729,7 +728,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'rym-moulaye-idriss',
     initials: 'RM',
     name: 'Rym MOULAYE IDRISS',
-    photo: '/team/rym-moulaye-idriss.jpg',
     role: {
       en: 'Co-Founder, Group Executive Director, Head of Business Development',
       fr: 'Co-fondatrice, Directrice Exécutive Groupe, Directrice du Développement Commercial',
@@ -744,7 +742,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'olutobi-osibodu',
     initials: 'OO',
     name: 'Olutobi OSIBODU',
-    photo: '/team/olutobi-osibodu.jpg',
     role: {
       en: 'Co-Founder, Group Executive Director, Head of Investment Banking, Distribution & Portfolio Management',
       fr: 'Co-fondateur, Directeur Exécutif Groupe, Directeur Banque d’Investissement, Distribution & Gestion de Portefeuille',
@@ -759,7 +756,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'ines-umulisa',
     initials: 'IU',
     name: 'Ines UMULISA',
-    photo: '/team/ines-umulisa.jpg',
     role: {
       en: 'Group COO / Head of Compliance & Risk Management',
       fr: 'Directrice des Opérations Groupe / Responsable Conformité & Gestion des Risques',
@@ -774,7 +770,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'frederic-wolf',
     initials: 'FW',
     name: 'Frederic WOLF',
-    photo: '/team/frederic-wolf.jpg',
     role: {
       en: 'Group Assistant Manager / Administration & Finance',
       fr: 'Adjoint de Direction Groupe / Administration & Finance',
@@ -789,7 +784,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'walid-touahri',
     initials: 'WT',
     name: 'Walid TOUAHRI',
-    photo: '/team/walid-touahri.jpg',
     role: {
       en: 'Financial Analyst / Group Head of AI Integration',
       fr: 'Analyste Financier / Responsable Intégration IA Groupe',
@@ -806,7 +800,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'abdoul-younoussi',
     initials: 'AY',
     name: 'Abdoul Moumoune YOUNOUSSI',
-    photo: '/team/abdoul-younoussi.jpg',
     role: {
       en: 'Chairman, IFESA',
       fr: 'Président, IFESA',
@@ -821,7 +814,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'herve-rugwizangoga',
     initials: 'HR',
     name: 'Hervé RUGWIZANGOGA',
-    photo: '/team/herve-rugwizangoga.jpg',
     role: {
       en: 'Chief Business Development Officer',
       fr: 'Directeur du Développement Commercial',
@@ -836,7 +828,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'ange-felix-iradukunda',
     initials: 'AI',
     name: 'Ange Felix de Valois IRADUKUNDA',
-    photo: '/team/ange-felix-iradukunda.jpg',
     role: {
       en: 'Compliance Manager',
       fr: 'Responsable Conformité',
@@ -851,7 +842,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'mohamed-yassine',
     initials: 'MY',
     name: 'Mohamed YASSINE',
-    photo: '/team/mohamed-yassine.jpg',
     role: {
       en: 'Business Developer / Mozambique, Angola, Cape Verde, São Tomé',
       fr: 'Responsable Développement Commercial / Mozambique, Angola, Cap-Vert, São Tomé',
@@ -868,7 +858,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'pape-boye-diack-diop',
     initials: 'PD',
     name: 'Pape Boye Diack DIOP',
-    photo: '/team/pape-boye-diack-diop.jpg',
     role: {
       en: 'Regional Manager, IFWCA',
       fr: 'Directeur Régional, IFWCA',
@@ -883,7 +872,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'mireille-olivia-atta',
     initials: 'MA',
     name: 'Mireille Olivia ATTA',
-    photo: '/team/mireille-olivia-atta.jpg',
     role: {
       en: 'Chief Business Development Manager',
       fr: 'Directrice du Développement Commercial',
@@ -898,7 +886,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'safietou-camara',
     initials: 'SC',
     name: 'Safietou CAMARA',
-    photo: '/team/safietou-camara.jpg',
     role: {
       en: 'Financial Analyst',
       fr: 'Analyste Financier',
@@ -913,7 +900,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'korotoum-kone',
     initials: 'KK',
     name: 'Korotoum KONÉ',
-    photo: '/team/korotoum-kone.jpg',
     role: {
       en: 'Junior Financial Analyst',
       fr: 'Analyste Financier Junior',
@@ -928,7 +914,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'maylis-agbahan',
     initials: 'MG',
     name: 'Maylis AGBAHAN',
-    photo: '/team/maylis-agbahan.jpg',
     role: {
       en: 'Executive Assistant',
       fr: 'Assistante de Direction',
@@ -943,7 +928,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'mireille-tedjong',
     initials: 'MT',
     name: 'Mireille TEDJONG',
-    photo: '/team/mireille-tedjong.jpg',
     role: {
       en: 'Business Developer / Cameroon, Gabon',
       fr: 'Responsable Développement Commercial / Cameroun, Gabon',
@@ -958,7 +942,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'karim-aminou',
     initials: 'KA',
     name: 'Karim AMINOU',
-    photo: '/team/karim-aminou.jpg',
     role: {
       en: 'Business Developer / Cameroon',
       fr: 'Responsable Développement Commercial / Cameroun',
@@ -973,7 +956,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'henri-tchakoute',
     initials: 'HT',
     name: 'Henri TCHAKOUTE',
-    photo: '/team/henri-tchakoute.jpg',
     role: {
       en: 'Business Developer / Cameroon',
       fr: 'Responsable Développement Commercial / Cameroun',
@@ -988,7 +970,6 @@ export const TEAM_MEMBERS: TeamMemberData[] = [
     id: 'arthur-tapsoba',
     initials: 'AT',
     name: 'Arthur TAPSOBA',
-    photo: '/team/arthur-tapsoba.jpg',
     role: {
       en: 'Business Developer / Burkina Faso & Côte d’Ivoire',
       fr: 'Responsable Développement Commercial / Burkina Faso & Côte d’Ivoire',
