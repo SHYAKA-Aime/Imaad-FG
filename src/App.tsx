@@ -19,7 +19,7 @@ import { soundEngine } from './utils/soundEngine';
 
 export function App() {
   const [portalOpen, setPortalOpen] = useState<boolean>(true);
-  const [lang, setLang] = useState<Language>('en');
+  const [lang, setLang] = useState<Language>('fr');
   const [currency, setCurrency] = useState<Currency>('FCFA');
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [soundOn, setSoundOn] = useState<boolean>(false);

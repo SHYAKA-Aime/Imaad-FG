@@ -159,18 +159,41 @@ export const Navbar: React.FC<NavbarProps> = ({
             Contact
           </a>
 
-          {/* Language Switcher */}
-          <button
-            type="button"
-            onClick={() => {
-              soundEngine.playClick();
-              setLang(lang === 'en' ? 'fr' : 'en');
-            }}
-            className="font-mono text-xs font-semibold tracking-widest text-slate-400 transition-colors hover:text-gold-300"
-            title="Switch Language"
+          {/* FR | EN Segmented Language Switcher */}
+          <div
+            className="inline-flex items-center overflow-hidden rounded border border-white/15 bg-white/[0.03]"
+            role="group"
+            aria-label="Language switcher"
           >
-            {lang.toUpperCase()}
-          </button>
+            <button
+              type="button"
+              onClick={() => {
+                soundEngine.playClick();
+                setLang('fr');
+              }}
+              className={`px-2.5 py-1 font-mono text-[11px] font-bold tracking-wider transition-colors ${
+                lang === 'fr'
+                  ? 'bg-[#C69C45] text-[#0B1528]'
+                  : 'text-slate-300 hover:text-gold-300'
+              }`}
+            >
+              FR
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                soundEngine.playClick();
+                setLang('en');
+              }}
+              className={`px-2.5 py-1 font-mono text-[11px] font-bold tracking-wider transition-colors ${
+                lang === 'en'
+                  ? 'bg-[#C69C45] text-[#0B1528]'
+                  : 'text-slate-300 hover:text-gold-300'
+              }`}
+            >
+              EN
+            </button>
+          </div>
 
           {/* Gold Action Button */}
           <button
@@ -178,23 +201,46 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={handleGoContact}
             className="inline-flex items-center justify-center rounded bg-[#C69C45] px-4 py-2 lg:px-5 font-heading text-xs font-bold tracking-wider text-[#0B1528] uppercase transition-all duration-300 hover:bg-[#d4ab53] hover:shadow-[0_0_20px_rgba(201,162,77,0.4)]"
           >
-            {lang === 'en' ? 'CONTACT US' : 'CONTACTEZ-NOUS'}
+            {lang === 'en' ? 'Contact Us' : 'Nous écrire'}
           </button>
         </nav>
 
         {/* Mobile Controls (< md) */}
         <div className="flex items-center gap-3 md:hidden">
-          <button
-            type="button"
-            onClick={() => {
-              soundEngine.playClick();
-              setLang(lang === 'en' ? 'fr' : 'en');
-            }}
-            className="rounded border border-white/15 bg-white/[0.04] px-2.5 py-1.5 font-mono text-[11px] font-semibold tracking-widest text-slate-300 transition-colors hover:border-gold-400/50 hover:text-gold-300"
-            title="Switch Language"
+          <div
+            className="inline-flex items-center overflow-hidden rounded border border-white/15 bg-white/[0.04]"
+            role="group"
+            aria-label="Language switcher"
           >
-            {lang.toUpperCase()}
-          </button>
+            <button
+              type="button"
+              onClick={() => {
+                soundEngine.playClick();
+                setLang('fr');
+              }}
+              className={`px-2 py-1 font-mono text-[10px] font-bold tracking-wider transition-colors ${
+                lang === 'fr'
+                  ? 'bg-[#C69C45] text-[#0B1528]'
+                  : 'text-slate-300 hover:text-gold-300'
+              }`}
+            >
+              FR
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                soundEngine.playClick();
+                setLang('en');
+              }}
+              className={`px-2 py-1 font-mono text-[10px] font-bold tracking-wider transition-colors ${
+                lang === 'en'
+                  ? 'bg-[#C69C45] text-[#0B1528]'
+                  : 'text-slate-300 hover:text-gold-300'
+              }`}
+            >
+              EN
+            </button>
+          </div>
 
           <button
             type="button"

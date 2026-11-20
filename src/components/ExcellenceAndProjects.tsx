@@ -26,8 +26,8 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
   onInspectProject,
   onViewAllProjects,
 }) => {
-  // 3 Flagship Real Projects for the Homepage (Ivory Coast Road €150M, Guinea Real Estate $10M, Djibouti Health $25M)
-  const featuredIds = ['proj-ci-road', 'proj-gn-re', 'proj-dj-health'];
+  // 3 Flagship Official Brochure Projects for the Homepage (one from each core business line)
+  const featuredIds = ['proj-ci-storage', 'proj-ng-gas', 'proj-bj-vaccines'];
   const featuredProjects = featuredIds
     .map((id) => PROJECTS_PORTFOLIO.find((p) => p.id === id))
     .filter((p): p is ProjectCardData => Boolean(p));
@@ -67,46 +67,46 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
             {/* Minimal Eyebrow */}
             <div className="mb-3.5 inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.24em] text-gold-400 uppercase">
               <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
-              <span>{lang === 'en' ? 'OUR EXPERTISE' : 'NOTRE EXPERTISE'}</span>
+              <span>{lang === 'en' ? 'OUR AREAS OF EXCELLENCE' : 'NOS DOMAINES D’EXCELLENCE'}</span>
             </div>
 
             {/* Grand Headline */}
             <h2 className="font-display text-2xl font-bold tracking-[0.16em] text-white uppercase sm:text-3xl lg:text-4xl leading-tight max-w-4xl">
               {lang === 'en'
-                ? 'A PAN-AFRICAN INVESTMENT BANK WITH AN INTERNATIONAL FOCUS'
-                : "UNE BANQUE D'AFFAIRES PANAFRICAINE À VOCATION INTERNATIONALE"}
+                ? 'THREE CORE BUSINESSES, ONE INTEGRATED PLATFORM'
+                : 'TROIS MÉTIERS, UNE PLATEFORME INTÉGRÉE'}
             </h2>
 
-            {/* Two-Column Editorial Briefing Grid from Reference */}
+            {/* Two-Column Editorial Briefing Grid (Official Brochure Copy) */}
             <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-              {/* Left Column: Institutional Pedigree & Network */}
+              {/* Left Column: Platform & Approach */}
               <div className="relative border border-white/10 bg-obsidian-900/50 p-6 sm:p-8 backdrop-blur-md lg:col-span-7">
                 <div className="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-gold-400 via-gold-500/80 to-transparent" />
                 <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-gold-400 uppercase">
-                  <span>{lang === 'en' ? 'ESTABLISHED 2021 // SOVEREIGN MANDATE' : 'DEPUIS 2021 // MANDAT SOUVERAIN'}</span>
+                  <span>{lang === 'en' ? 'STRUCTURE · FINANCE · DELIVER' : 'STRUCTURER · FINANCER · RÉALISER'}</span>
                 </div>
                 <p className="text-sm leading-relaxed text-slate-300 sm:text-base">
                   {lang === 'en'
-                    ? 'Since 2021, Imaad Financial Group has been supporting states, institutions and companies in structuring and financing their most strategic projects in emerging markets.'
-                    : 'Depuis 2021, Imaad Financial Group accompagne les États, institutions et entreprises dans la structuration et le financement de leurs projets les plus stratégiques sur les marchés émergents.'}
+                    ? 'We operate as a financial solutions integrator and a trusted partner for States, Institutions, Corporations and Investors.'
+                    : 'Nous opérons comme un intégrateur de solutions financières et un partenaire de confiance pour les États, Institutions, Entreprises et Investisseurs.'}
                 </p>
                 <p className="mt-3.5 text-sm leading-relaxed text-slate-400 sm:text-base">
                   {lang === 'en'
-                    ? 'We combine the rigor of international standards, in-depth knowledge of African markets and direct access to a network of leading investors and institutional partners.'
-                    : "Nous combinons la rigueur des standards internationaux, une connaissance approfondie des marchés africains et un accès direct à un réseau d'investisseurs de premier plan et partenaires institutionnels."}
+                    ? 'Our approach combines international vision with local execution, financial and legal engineering, and strategic public and private multilateral partnerships.'
+                    : 'Notre approche allie vision internationale et exécution locale, ingénierie financière et juridique, et partenariats stratégiques multilatéraux publics et privés.'}
                 </p>
               </div>
 
-              {/* Right Column: Areas of Excellence Strategic Summary */}
+              {/* Right Column: Areas of Excellence Summary */}
               <div className="relative flex flex-col justify-center border border-white/10 bg-obsidian-900/40 p-6 sm:p-8 backdrop-blur-md lg:col-span-5">
                 <div>
                   <div className="mb-2 font-serif text-lg font-bold tracking-[0.14em] text-gold-300 sm:text-xl">
-                    {lang === 'en' ? 'AREAS OF EXCELLENCE' : "DOMAINES D'EXCELLENCE"}
+                    {lang === 'en' ? 'OUR APPROACH' : 'NOTRE APPROCHE'}
                   </div>
                   <p className="mt-2 text-sm leading-relaxed text-slate-300">
                     {lang === 'en'
-                      ? 'Tailor-made financing solutions for states, companies and investors, structured around three complementary strategic axes.'
-                      : 'Des solutions de financement sur mesure pour les États, entreprises et investisseurs, structurées autour de trois axes stratégiques complémentaires.'}
+                      ? 'From strategy to structured operations across three complementary pillars: Sovereign Financing, Corporate & Trade Finance, and Public-Private Partnerships (PPP).'
+                      : 'De la stratégie aux opérations structurées autour de trois leviers complémentaires : Financement Souverain, Corporate & Trade Finance, et Partenariats Public-Privé (PPP).'}
                   </p>
                 </div>
               </div>
@@ -129,8 +129,12 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.15 }}
                   transition={{ duration: 0.6, delay: idx * 0.12 }}
+                  onClick={() => {
+                    soundEngine.playClick();
+                    onInspectModule(mod);
+                  }}
                   onMouseEnter={() => soundEngine.playHover()}
-                  className={`group relative flex flex-col justify-start overflow-hidden border border-white/15 bg-obsidian-900/70 p-7 sm:p-9 transition-all duration-500 hover:-translate-y-1.5 hover:bg-obsidian-900/95 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] ${cardAccentBorder}`}
+                  className={`group relative flex cursor-pointer flex-col justify-between overflow-hidden border border-white/15 bg-obsidian-900/70 p-7 sm:p-9 transition-all duration-500 hover:-translate-y-1.5 hover:bg-obsidian-900/95 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] ${cardAccentBorder}`}
                 >
                   <VertexDots color={isSapphire ? 'sapphire' : 'gold'} />
 
@@ -192,6 +196,12 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                         </li>
                       ))}
                     </ul>
+                  </div>
+
+                  {/* Subtle Learn More link for service detail */}
+                  <div className="relative z-10 mt-7 flex items-center gap-2 font-mono text-[11px] font-semibold tracking-[0.16em] text-gold-300/80 uppercase transition-colors group-hover:text-gold-200">
+                    <span>{lang === 'en' ? 'Learn more' : 'En savoir plus'}</span>
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
                 </motion.article>
               );
@@ -272,7 +282,7 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                         IMAAD
                       </span>
                       <span className="font-mono text-[11px] sm:text-xs font-medium text-gold-400 tracking-wider uppercase">
-                        {project.sector[lang]} {project.flag}
+                        {project.country[lang]}
                       </span>
                     </div>
                   </div>
@@ -288,7 +298,7 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                           isReverse ? 'lg:order-2' : 'lg:order-1'
                         }`}
                       >
-                        {/* Sector Eyebrow */}
+                        {/* Business Line Eyebrow */}
                         <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] sm:tracking-[0.24em] text-gold-400 uppercase">
                           <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D]" />
                           <span>{project.statusTag[lang]}</span>
@@ -301,7 +311,7 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
 
                         {/* Capital Amount */}
                         <div className="mt-2 font-serif text-lg font-bold tracking-wide text-gold-300 sm:text-2xl">
-                          {project.amountDisplay || project.amountUSD}
+                          {project.amountDisplay[lang]}
                         </div>
 
                         {/* Description */}
@@ -311,10 +321,10 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
 
                         {/* Specs Pill Tag */}
                         <div className="mt-4 sm:mt-5 inline-flex max-w-full items-center gap-2 border border-white/10 bg-white/[0.02] px-3 py-1.5 font-mono text-[10px] sm:text-[11px] tracking-[0.14em] text-slate-400 uppercase break-words">
-                          <span>{project.metaTag}</span>
+                          <span>{project.metaTag[lang]}</span>
                         </div>
 
-                        {/* Bracketed CTA Button (Teyliom Style) */}
+                        {/* Bracketed CTA Button */}
                         <button
                           type="button"
                           onClick={() => {
@@ -344,29 +354,14 @@ export const ExcellenceAndProjects: React.FC<ExcellenceAndProjectsProps> = ({
                           />
                           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian-950/85 via-transparent to-transparent" />
 
-                          {/* Country Flag Pill */}
-                          <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 inline-flex items-center gap-1.5 sm:gap-2 border border-white/20 bg-obsidian-950/90 px-2.5 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-xs font-semibold tracking-wider text-white backdrop-blur-md">
-                            <span>{project.flag}</span>
+                          {/* Country Pill (Clean Text, Zero Emojis) */}
+                          <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 inline-flex items-center gap-2 border border-white/20 bg-obsidian-950/90 px-3 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[11px] sm:text-xs font-semibold tracking-wider text-white uppercase backdrop-blur-md">
+                            <span className="h-1.5 w-1.5 rounded-full bg-gold-400" />
                             <span>{project.country[lang]}</span>
                           </div>
 
-                          {/* Quarter / Closed Tag */}
-                          {project.quarter && (
-                            <div
-                              className={`absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-2 py-1 sm:px-2.5 font-mono text-[10px] sm:text-[11px] font-bold tracking-wider shadow-md ${
-                                project.isClosed
-                                  ? 'bg-[#2D6A4F]/95 text-white'
-                                  : 'bg-[#C69C45] text-[#0B1528] uppercase'
-                              }`}
-                            >
-                              {project.isClosed
-                                ? `${lang === 'en' ? 'Closed' : 'Clôturé'} ${project.quarter}`
-                                : project.quarter}
-                            </div>
-                          )}
-
-                          {/* Status Tag */}
-                          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 border border-gold-400/50 bg-obsidian-950/90 px-2.5 py-1 sm:px-3 font-mono text-[9px] sm:text-[10px] tracking-widest text-gold-300 backdrop-blur-md">
+                          {/* Business Line Tag (No Closed/Closing status) */}
+                          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 border border-gold-400/50 bg-obsidian-950/90 px-2.5 py-1 sm:px-3 font-mono text-[9px] sm:text-[10px] tracking-widest text-gold-300 uppercase backdrop-blur-md">
                             {project.statusTag[lang]}
                           </div>
                         </div>

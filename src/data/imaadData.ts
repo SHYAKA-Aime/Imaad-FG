@@ -37,21 +37,33 @@ export interface ExcellenceModuleData {
 
 export interface ProjectCardData {
   id: string;
-  category: 'all' | 'sovereign' | 'ppp' | 'corporate' | 'water_infra' | string;
+  category: 'all' | 'sovereign' | 'corporate' | 'ppp' | string;
   categories?: string[];
   country: { en: string; fr: string };
-  flag: string;
-  quarter?: string;
-  isClosed?: boolean;
+  flag: string; // Clean ISO country code (no emojis)
   statusTag: { en: string; fr: string };
   sector: { en: string; fr: string };
-  amountDisplay?: string;
+  amountDisplay: { en: string; fr: string };
   amountFCFA: string;
   amountUSD: string;
   description: { en: string; fr: string };
-  metaTag: string;
+  metaTag: { en: string; fr: string };
   image: string;
-  specs: { label: string; value: string }[];
+  specs: { label: { en: string; fr: string }; value: { en: string; fr: string } }[];
+}
+
+export interface TeamMemberData {
+  name: string;
+  role: { en: string; fr: string };
+}
+
+export interface OfficeLocationData {
+  id: string;
+  entityLabel: { en: string; fr: string };
+  cityCountry: { en: string; fr: string };
+  addressLines: string[];
+  phone: string;
+  mapUrl: string;
 }
 
 export interface JourneyPeriodData {
@@ -90,957 +102,608 @@ export const HERO_SLIDES: HeroSlideData[] = [
       en: 'IMAAD FINANCIAL GROUP',
       fr: 'IMAAD FINANCIAL GROUP',
     },
-    line1: { en: 'Catalyst for', fr: 'Catalyseur de' },
+    line1: { en: 'Catalyst for', fr: 'Catalyseur de la' },
     lineGold: { en: 'sovereignty', fr: 'souveraineté' },
-    line3: { en: 'and sustainable growth', fr: 'et de croissance durable' },
+    line3: { en: 'and sustainable growth', fr: 'et de la croissance durable' },
     description: {
-      en: 'Imaad Financial Group structures and finances sovereign, PPP and corporate projects in Africa, the Middle East and Latin America.',
-      fr: 'Imaad Financial Group structure et finance des projets souverains, PPP et corporate en Afrique, au Moyen-Orient et en Amérique latine.',
+      en: 'Imaad Financial Group (IFG) is an independent Pan-African* Investment Bank specialized in the structuring, financing and execution of transformative projects in Africa.',
+      fr: 'Imaad Financial Group (IFG) est une banque d’affaires panafricaine* indépendante spécialisée dans la structuration, le financement et la réalisation de projets structurants en Afrique.',
     },
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=85',
-    coordinates: 'ABIDJAN // 5.3167° N, 4.0333° W',
+    coordinates: 'KIGALI · ABIDJAN',
   },
   {
     id: 1,
     durationMs: 7000,
     tabLabel: { en: 'SOVEREIGNTY', fr: 'SOUVERAINETÉ' },
     eyebrow: {
-      en: 'PAN-AFRICAN INVESTMENT BANK & SOVEREIGN ADVISORY',
-      fr: "BANQUE D'AFFAIRES PANAFRICAINE & CONSEIL SOUVERAIN",
+      en: 'STRUCTURE · FINANCE · DELIVER',
+      fr: 'STRUCTURER · FINANCER · RÉALISER',
     },
-    line1: { en: 'CATALYST FOR', fr: 'CATALYSEUR DE' },
-    lineGold: { en: 'SOVEREIGNTY', fr: 'SOUVERAINETÉ' },
-    line3: { en: '& SUSTAINABLE GROWTH', fr: '& CROISSANCE DURABLE' },
+    line1: { en: 'ACCELERATING', fr: 'ACCÉLÉRER LA' },
+    lineGold: { en: 'FINANCIAL SOVEREIGNTY', fr: 'SOUVERAINETÉ FINANCIÈRE' },
+    line3: { en: 'OF AFRICAN STATES', fr: 'DES ÉTATS' },
     description: {
-      en: 'Structuring, financing, and executing transformative public-private partnerships, sovereign infrastructure, and dedicated investment funds across Africa.',
-      fr: "Structuration, financement et exécution de partenariats public-privé transformateurs, d'infrastructures souveraines et de fonds d'investissement dédiés en Afrique.",
+      en: 'Accelerate the financial sovereignty of States, strengthen investment capacities of businesses and build bridges between international capital and high-impact projects.',
+      fr: 'Accélérer la souveraineté financière des États, renforcer les capacités d’investissement des entreprises et créer des ponts entre capitaux internationaux et projets à fort impact.',
     },
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=85',
-    coordinates: 'ABIDJAN // 5.3167° N, 4.0333° W',
+    coordinates: 'ABIDJAN',
   },
   {
     id: 2,
     durationMs: 7000,
     tabLabel: { en: 'IMPACT', fr: 'IMPACT' },
     eyebrow: {
-      en: 'STRATEGIC INFRASTRUCTURE & CONCESSION ENGINEERING',
-      fr: "INFRASTRUCTURES STRATÉGIQUES & INGÉNIERIE DE CONCESSION",
+      en: 'MEASURABLE RESULTS, A SUSTAINABLE VISION',
+      fr: 'DES RÉSULTATS MESURABLES, UNE VISION DURABLE',
     },
-    line1: { en: 'FINANCING', fr: 'FINANCER' },
-    lineGold: { en: 'GENERATIONAL', fr: "L'INFRASTRUCTURE" },
-    line3: { en: 'AFRICAN INFRASTRUCTURE', fr: 'GÉNÉRATIONNELLE' },
+    line1: { en: 'MEASURABLE', fr: 'DES RÉSULTATS' },
+    lineGold: { en: 'RESULTS', fr: 'MESURABLES' },
+    line3: { en: 'A SUSTAINABLE VISION', fr: 'UNE VISION DURABLE' },
     description: {
-      en: 'Mobilizing over 1,000 Billion FCFA in institutional and multilateral liquidity for transport corridors, reference hospitals, clean energy grids, and civic hubs.',
-      fr: 'Mobilisation de plus de 1 000 Milliards FCFA de liquidités institutionnelles pour les corridors routiers, hôpitaux de référence, réseaux énergétiques et pôles éducatifs.',
+      en: 'Over €1 billion mobilized since 2020, +5 PPP projects completed or underway, and a project portfolio exceeding €3.5 billion by end of 2026 across 24 Sub-Saharan African countries.',
+      fr: 'Plus d’1 milliard € mobilisés depuis 2020, +5 projets PPP finalisés ou en cours et un portefeuille projets de plus de 3,5 milliards € à fin 2026 dans 24 pays couverts en Afrique subsaharienne.',
     },
     image: 'https://images.unsplash.com/photo-1541888946425-d09bb18086f6?auto=format&fit=crop&w=2000&q=85',
-    coordinates: 'DAKAR // 14.7167° N, 17.4677° W',
+    coordinates: 'KIGALI',
   },
   {
     id: 3,
     durationMs: 7000,
     tabLabel: { en: 'EXCELLENCE', fr: 'EXCELLENCE' },
     eyebrow: {
-      en: 'GLOBAL CAPITAL MARKETS & DEDICATED SOVEREIGN FUNDS',
-      fr: 'MARCHÉS DE CAPITAUX GLOBAUX & FONDS SOUVERAINS DÉDIÉS',
+      en: 'FROM STRATEGY TO STRUCTURED OPERATIONS',
+      fr: 'DE LA STRATÉGIE AUX OPÉRATIONS STRUCTURÉES',
     },
-    line1: { en: 'ARCHITECTS OF', fr: 'ARCHITECTES DE' },
-    lineGold: { en: 'FINANCIAL', fr: "L'EXCELLENCE" },
-    line3: { en: 'EXCELLENCE & TRUST', fr: 'FINANCIÈRE' },
+    line1: { en: 'INTERNATIONAL VISION', fr: 'VISION INTERNATIONALE' },
+    lineGold: { en: 'LOCAL EXECUTION', fr: 'EXÉCUTION LOCALE' },
+    line3: { en: 'FINANCIAL & LEGAL ENGINEERING', fr: 'INGÉNIERIE FINANCIÈRE ET JURIDIQUE' },
     description: {
-      en: 'Combining tier-one international investment banking rigor with deep sovereign alignment across 7 regional and international financial hubs.',
-      fr: "Alliance de la rigueur bancaire internationale de premier rang et d'un ancrage souverain profond à travers 7 hubs financiers régionaux et internationaux.",
+      en: 'Combining international vision with local execution, financial and legal engineering, and strategic public and private multilateral partnerships.',
+      fr: 'Allier vision internationale et exécution locale, ingénierie financière et juridique, et partenariats stratégiques multilatéraux publics et privés.',
     },
     image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=2000&q=85',
-    coordinates: 'DUBAI // 25.2048° N, 55.2708° E',
+    coordinates: 'YAOUNDÉ · LONDON',
   },
 ];
 
 export const STRATEGY_PILLARS = [
   {
     id: '01',
-    code: 'PILLAR // 01',
-    region: { en: 'ECONOMIC AUTONOMY', fr: 'AUTONOMIE ÉCONOMIQUE' },
+    code: '01',
+    region: { en: 'SOVEREIGNTY & LEADERSHIP', fr: 'SOUVERAINETÉ & LEADERSHIP' },
     title: { en: 'Sovereignty', fr: 'Souveraineté' },
     description: {
-      en: 'Strengthening the financial autonomy of States and public institutions through innovative and responsible financing solutions.',
-      fr: "Renforcer l'autonomie financière des États et des institutions publiques à travers des solutions de financement innovantes et responsables.",
+      en: 'Accelerate the financial sovereignty of States and public institutions through innovative, structured and responsible financing solutions.',
+      fr: 'Accélérer la souveraineté financière des États et des institutions publiques à travers des solutions de financement innovantes, structurées et responsables.',
     },
     accent: 'gold' as const,
     bgImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80',
   },
   {
     id: '02',
-    code: 'PILLAR // 02',
-    region: { en: 'SDGS & REGIONAL DEVELOPMENT', fr: 'ODD & DÉVELOPPEMENT RÉGIONAL' },
+    code: '02',
+    region: { en: 'ECONOMIC, SOCIAL & ENVIRONMENTAL', fr: 'IMPACT ÉCONOMIQUE, SOCIAL & ENVIRONNEMENTAL' },
     title: { en: 'Impact', fr: 'Impact' },
     description: {
-      en: 'Sustainable projects creating jobs and social value, aligned with the SDGs and regional development goals.',
-      fr: "Des projets durables créateurs d'emplois et de valeur sociale, alignés sur les ODD et les objectifs de développement régional.",
+      en: 'Building bridges between international capital and transformative projects with high economic, social and environmental impact across 10 key sectors.',
+      fr: 'Créer des ponts entre capitaux internationaux et projets structurants à fort impact économique, social et environnemental dans 10 secteurs clés.',
     },
     accent: 'sapphire' as const,
     bgImage: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80',
   },
   {
     id: '03',
-    code: 'PILLAR // 03',
-    region: { en: 'GLOBAL EXPERTISE', fr: 'EXPERTISE INTERNATIONALE' },
+    code: '03',
+    region: { en: 'DISCIPLINE & INTEGRITY', fr: 'DISCIPLINE & INTÉGRITÉ' },
     title: { en: 'Excellence', fr: 'Excellence' },
     description: {
-      en: 'High-precision execution delivered by multidisciplinary teams and international financial expertise.',
-      fr: "Une exécution de haute précision portée par des équipes pluridisciplinaires et une expertise financière internationale.",
+      en: 'Excellence, discipline and innovation, integrity and absolute confidentiality, resilience and long-term vision at the service of every mandate.',
+      fr: 'Excellence, discipline et innovation, intégrité et confidentialité absolue, résilience et vision long terme au service de chaque mandat.',
     },
     accent: 'gold' as const,
     bgImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
   },
 ];
 
+// Exact brochure order & content (Pages 6, 9, 10, 11):
+// 01 Sovereign Financing -> 02 Corporate & Trade Finance -> 03 Public-Private Partnerships (PPP)
 export const EXCELLENCE_MODULES: ExcellenceModuleData[] = [
   {
     id: 'excellence-01',
     num: '01',
-    badgeDivision: { en: 'sovereign financing', fr: 'financement souverain' },
+    badgeDivision: { en: 'Sovereign Financing', fr: 'Financement Souverain' },
     accentColor: 'gold',
     reverse: false,
     title: { en: 'SOVEREIGN FINANCING', fr: 'FINANCEMENT SOUVERAIN' },
     description: {
-      en: 'Mobilization of concessional financing, restructuring and optimization of public debt, and budgetary support for states and public institutions.',
-      fr: 'Mobilisation de financements concessionnels, restructuration et optimisation de la dette publique, et appui budgétaire aux États et institutions publiques.',
+      en: 'Infrastructure project financing and budget support. Imaad Financial Group supports States in mobilizing tailored sovereign capital.',
+      fr: 'Financement de projets d’infrastructures et appuis budgétaires. Imaad Financial Group soutient les États dans la mobilisation de financements structurés.',
     },
     bullets: {
       en: [
+        'Mobilizing concessional, semi-concessional and commercial financing',
+        'Mobilizing budget support lines',
         'Public debt restructuring',
-        'Access to international capital markets',
-        'Mobilizing multilateral funding',
-        'Budgetary support and sovereign guarantees',
       ],
       fr: [
+        'Mobilisation de financements concessionnels, semi-concessionnels et commerciaux',
+        'Mobilisation de lignes d’appui budgétaire',
         'Restructuration de la dette publique',
-        'Accès aux marchés internationaux de capitaux',
-        'Mobilisation de financements multilatéraux',
-        'Appui budgétaire et garanties souveraines',
       ],
     },
     slides: [
       {
-        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Sovereign Debt & Capital Markets Advisory', fr: 'Conseil en Dette Souveraine & Marchés de Capitaux' },
-      },
-      {
-        image: 'https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Cross-Border Institutional Syndication & DFI Alignment', fr: 'Syndication Institutionnelle Transfrontalière & IFD' },
-      },
-      {
-        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Credit Enhancement & Sovereign Guarantee Modeling', fr: 'Rehaussement de Crédit & Garanties Souveraines' },
-      },
-      {
-        image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Macro-Financial Feasibility & Bankability Optimization', fr: 'Faisabilité Macro-Financière & Bancabilité' },
+        image: '/projects/infrastructure-routiere.png',
+        caption: {
+          en: 'Abidjan – San Pedro Road / Côte d’Ivoire (150M€)',
+          fr: 'Axe routier Abidjan – San Pedro / Côte d’Ivoire (150 M€)',
+        },
       },
     ],
     dossier: {
-      tag: 'DIVISION 01 // SOVEREIGN & PUBLIC DEBT ADVISORY',
+      tag: '01 · FINANCEMENT SOUVERAIN / SOVEREIGN FINANCING',
       metrics: [
-        { label: 'TYPICAL TICKET SIZE', value: '25 Bn – 250 Bn FCFA ($40M – $400M)' },
-        { label: 'INSTRUMENTS', value: 'Syndicated Loans, Sukuk, Eurobonds, Blended Finance' },
-        { label: 'RISK MITIGATION', value: 'MIGA, ATI/ACA, AfDB & ECAs' },
-        { label: 'TARGET CLIENTS', value: 'Ministries of Finance, Public Utilities, National Champions' },
+        { label: 'CÔTE D’IVOIRE', value: 'Axe routier Abidjan – San Pedro · 150 M€' },
+        { label: 'CAMEROUN / CAMEROON', value: 'Réseau routier et logistique portuaire · 121 M€' },
+        { label: 'NIGÉRIA / NIGERIA', value: 'Réseau de distribution de gaz naturel · 500 M$' },
+        { label: 'APPROCHE / APPROACH', value: 'Concessionnel, semi-concessionnel & commercial' },
       ],
       structureNote: {
-        en: 'Our Sovereign Financing desk serves as the strategic architect from initial debt audit through credit enhancement, guarantee negotiation, and international capital market issuance.',
-        fr: "Notre pôle Financement Souverain accompagne les États et institutions de l'audit de dette jusqu'à la levée de capitaux internationaux et au closing financier.",
+        en: 'Imaad Financial Group supports States in mobilizing concessional, semi-concessional and commercial financing, budget support lines, and public debt restructuring.',
+        fr: 'Imaad Financial Group soutient les États dans la mobilisation de financements concessionnels, semi-concessionnels et commerciaux, de lignes d’appui budgétaire et la restructuration de la dette publique.',
       },
     },
   },
   {
     id: 'excellence-02',
     num: '02',
-    badgeDivision: { en: 'public-private partnerships', fr: 'partenariats public-privé (PPP)' },
+    badgeDivision: { en: 'Corporate & Trade Finance', fr: 'Corporate & Trade Finance' },
     accentColor: 'sapphire',
     reverse: true,
-    title: { en: 'PUBLIC-PRIVATE PARTNERSHIPS (PPP)', fr: 'PARTENARIATS PUBLIC-PRIVÉ (PPP)' },
+    title: { en: 'CORPORATE & TRADE FINANCE', fr: 'CORPORATE & TRADE FINANCE' },
     description: {
-      en: 'Consulting, structuring and infrastructure development in public and private partnerships. Roads, hospitals, energy, water: we support each stage of the project cycle.',
-      fr: "Conseil, structuration et développement d'infrastructures en partenariat public-privé. Routes, hôpitaux, énergie, eau : nous accompagnons chaque étape du cycle de projet.",
+      en: 'OPEX and CAPEX financing for corporations across high-growth African sectors including real estate, healthcare manufacturing and agribusiness.',
+      fr: 'Financement d’OPEX et de CAPEX pour les entreprises dans des secteurs clés à fort potentiel : immobilier, industrie pharmaceutique et agro-industrie.',
     },
     bullets: {
       en: [
-        'Legal and financial structuring of PPPs',
-        'Partner identification and selection',
-        'Structuring of concessions and BOT',
-        'Financial closing support',
+        'Fund mobilization (CAPEX & OPEX) for corporations',
+        'Structured financing for industrial, real estate and agribusiness projects',
+        'Tailored corporate & trade finance solutions',
       ],
       fr: [
-        'Structuration juridique et financière des PPP',
-        'Identification et sélection de partenaires',
-        'Structuration de concessions et BOT',
-        'Accompagnement au closing financier',
+        'Mobilisation de fonds (CAPEX & OPEX) pour les entreprises',
+        'Financement structuré de projets industriels, immobiliers et agro-industriels',
+        'Solutions sur mesure de financement corporate et trade finance',
       ],
     },
     slides: [
       {
-        image: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Sovereign Transport Corridors & Bridge Concessions', fr: 'Corridors Routiers Souverains & Concessions' },
-      },
-      {
-        image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Utility-Scale Solar & Independent Power Producer (IPP) PPPs', fr: 'Centrales Solaires & Producteurs Indépendants (IPP)' },
-      },
-      {
-        image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Turnkey Healthcare & Regional Reference Hospitals', fr: 'Hôpitaux de Référence & Infrastructures de Santé Clés en Main' },
-      },
-      {
-        image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'University Campuses & Ministerial Administrative Precincts', fr: 'Campus Universitaires & Cités Administratives' },
+        image: '/projects/immobilier-guinee.png',
+        caption: {
+          en: 'Real Estate Project / Guinea (10M$)',
+          fr: 'Projet immobilier / Guinée (10 M$)',
+        },
       },
     ],
     dossier: {
-      tag: 'DIVISION 02 // CONCESSION & PPP ENGINEERING',
+      tag: '02 · CORPORATE & TRADE FINANCE',
       metrics: [
-        { label: 'CONCESSION HORIZON', value: '15 to 30 Years (BOT / DBFOM)' },
-        { label: 'CORE SECTORS', value: 'Highways, Ports, Hospitals, Universities, Energy' },
-        { label: 'PARTNER ECOSYSTEM', value: 'Tier-1 International EPCs & DFI Co-Lenders' },
-        { label: 'FISCAL IMPACT', value: 'Off-Balance-Sheet & Sustainable Sovereign Debt Profile' },
+        { label: 'GUINÉE / GUINEA', value: 'Projet immobilier · 10 M$' },
+        { label: 'BÉNIN / BENIN', value: 'Vaccins vétérinaires & dispositifs médicaux · 24 M€' },
+        { label: 'GUINÉE / GUINEA', value: 'Programme de développement avicole · 5 M$' },
+        { label: 'MANDAT / MANDATE', value: 'Mobilisation CAPEX & OPEX pour les entreprises' },
       ],
       structureNote: {
-        en: 'IMAAD structures bankable PPP frameworks that preserve sovereign debt sustainability while accelerating critical infrastructure delivery.',
-        fr: "IMAAD structure des cadres PPP bancables qui préservent la soutenabilité de la dette publique tout en accélérant la livraison d'infrastructures critiques.",
+        en: 'We operate as a financial solutions integrator mobilizing CAPEX and OPEX funding for leading African corporations and industrial sponsors.',
+        fr: 'Nous opérons comme un intégrateur de solutions financières mobilisant des financements CAPEX et OPEX pour les entreprises africaines de premier plan.',
       },
     },
   },
   {
     id: 'excellence-03',
     num: '03',
-    badgeDivision: { en: 'corporate & trade finance', fr: 'finance d’entreprise & du commerce' },
-    accentColor: 'emerald',
+    badgeDivision: { en: 'Public-Private Partnerships', fr: 'Partenariats Public-Privé' },
+    accentColor: 'gold',
     reverse: false,
-    title: { en: 'CORPORATE & TRADE FINANCE', fr: 'FINANCE D’ENTREPRISE & DU COMMERCE' },
+    title: {
+      en: 'PUBLIC-PRIVATE PARTNERSHIPS (PPP)',
+      fr: 'PARTENARIATS PUBLIC-PRIVÉ (PPP)',
+    },
     description: {
-      en: 'CAPEX & OPEX financing for companies in the industrial, logistics and real estate sectors. Structured solutions adapted to emerging markets.',
-      fr: 'Financement CAPEX & OPEX pour les entreprises des secteurs industriel, logistique et immobilier. Solutions structurées adaptées aux marchés émergents.',
+      en: 'Advisory and project development within public-private partnerships for large-scale transport, housing and energy storage infrastructure.',
+      fr: 'Conseil et développement de projets dans le cadre de partenariats public-privé pour les grandes infrastructures de transport, de logement et de stockage énergétique.',
     },
     bullets: {
       en: [
-        'Financing of industrial projects',
-        'Structured trade finance solutions',
-        'M&A and acquisition support',
-        'Equity and mezzanine fundraising',
+        'Advisory and project development within PPP',
+        'Financial and legal engineering',
+        'Strategic public and private multilateral partnerships',
       ],
       fr: [
-        'Financement de projets industriels',
-        'Solutions de financement du commerce structuré',
-        'Accompagnement M&A et acquisitions',
-        'Levée de fonds en fonds propres et mezzanine',
+        'Conseil et développement de projets dans le cadre de PPP',
+        'Ingénierie financière et juridique',
+        'Partenariats stratégiques multilatéraux publics et privés',
       ],
     },
     slides: [
       {
-        image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Thematic Infrastructure & Green Transition Funds', fr: 'Fonds Infrastructures & Transition Verte' },
-      },
-      {
-        image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Port, Logistics & Regional Trade Corridor Vehicles', fr: 'Fonds Logistique, Ports & Corridors Commerciaux' },
-      },
-      {
-        image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85',
-        caption: { en: 'Strategic Growth Capital for National Industrial Champions', fr: 'Capital Croissance pour Champions Industriels Nationaux' },
+        image: '/projects/real-estate-cameroon.jpeg',
+        caption: {
+          en: 'Housing Program / Cameroon (100M€)',
+          fr: 'Programme de Logements / Cameroun (100 M€)',
+        },
       },
     ],
     dossier: {
-      tag: 'DIVISION 03 // SOVEREIGN & THEMATIC ASSET MANAGEMENT',
+      tag: '03 · PARTENARIATS PUBLIC-PRIVÉ (PPP)',
       metrics: [
-        { label: 'TARGET FUND CAPACITY', value: '100 Bn – 500 Bn FCFA ($165M – $825M)' },
-        { label: 'LP BASE', value: 'Regional Pension Funds, Sovereign Funds, DFIs, Family Offices' },
-        { label: 'STRATEGIES', value: 'Greenfield Infrastructure, Mezzanine & Growth Equity' },
-        { label: 'GOVERNANCE', value: 'International AIFM & IFC Performance Standards' },
+        { label: 'CÔTE D’IVOIRE', value: 'Gare Routière Inter-Urbaine d’Abidjan · 112 M€' },
+        { label: 'CAMEROUN / CAMEROON', value: 'Programme de Logements · 100 M€' },
+        { label: 'CÔTE D’IVOIRE', value: 'Bacs de stockage de produits pétroliers · 600 M€' },
+        { label: 'PORTEFEUILLE / TRACK', value: '+5 projets PPP finalisés ou en cours' },
       ],
       structureNote: {
-        en: 'Our Dedicated Funds platform unlocks domestic institutional savings and matches them with international co-investors to build long-term African equity.',
-        fr: "Nos fonds dédiés mobilisent l'épargne institutionnelle régionale aux côtés de co-investisseurs internationaux pour bâtir des actifs souverains durables.",
+        en: 'Advisory and project development within public-private partnerships, combining international vision, local execution, and financial and legal engineering.',
+        fr: 'Conseil et développement de projets dans le cadre de partenariats public-privé, alliant vision internationale, exécution locale et ingénierie financière et juridique.',
       },
     },
   },
 ];
 
+// Strictly the 9 official projects from the IMAAD Financial Group Brochure (Pages 9, 10, 11)
+// No emojis, no "Closed" / "Closing" status
 export const PROJECTS_PORTFOLIO: ProjectCardData[] = [
+  // --- 1. SOVEREIGN FINANCING (Page 9) ---
   {
     id: 'proj-ci-road',
-    category: 'water_infra',
-    categories: ['ppp', 'water_infra'],
-    country: { en: 'IVORY COAST', fr: "CÔTE D'IVOIRE" },
-    flag: '🇨🇮',
-    quarter: 'Q3 2023',
-    isClosed: true,
-    statusTag: { en: 'PPP INFRASTRUCTURE', fr: 'INFRASTRUCTURE PPP' },
-    sector: { en: 'ROAD INFRASTRUCTURE', fr: 'INFRASTRUCTURES ROUTIÈRES' },
-    amountDisplay: '€150 MILLION',
-    amountFCFA: '98,400,000,000 FCFA',
-    amountUSD: '$162,000,000 USD',
+    category: 'sovereign',
+    categories: ['sovereign'],
+    country: { en: 'Côte d’Ivoire', fr: 'Côte d’Ivoire' },
+    flag: 'CI',
+    statusTag: { en: 'Sovereign Financing', fr: 'Financement Souverain' },
+    sector: { en: 'Transport & Road Infrastructure', fr: 'Infrastructures Routières' },
+    amountDisplay: { en: '150M€', fr: '150 M€' },
+    amountFCFA: '150 M€',
+    amountUSD: '150M€',
     description: {
-      en: 'Structuring and coordinating financing for the strategic road linking the cities of Abidjan and San Pedro.',
-      fr: 'Structuration et coordination du financement de la route stratégique reliant les villes d’Abidjan et San Pedro.',
+      en: 'Abidjan – San Pedro Road: structuring and mobilizing sovereign financing for this strategic national transport corridor.',
+      fr: 'Axe routier Abidjan – San Pedro : structuration et mobilisation de financements souverains pour cet axe stratégique national.',
     },
-    metaTag: 'ABIDJAN - SAN PEDRO // PPP',
+    metaTag: {
+      en: 'Abidjan – San Pedro Road · Sovereign Financing',
+      fr: 'Axe routier Abidjan – San Pedro · Financement Souverain',
+    },
     image: '/projects/infrastructure-routiere.png',
     specs: [
-      { label: 'COUNTRY', value: 'Ivory Coast' },
-      { label: 'CAPITAL', value: '€150,000,000' },
-      { label: 'TIMELINE', value: 'Q3 2023' },
+      { label: { en: 'COUNTRY', fr: 'PAYS' }, value: { en: 'Côte d’Ivoire', fr: 'Côte d’Ivoire' } },
+      { label: { en: 'AMOUNT', fr: 'MONTANT' }, value: { en: '150M€', fr: '150 M€' } },
+      { label: { en: 'BUSINESS LINE', fr: 'MÉTIER' }, value: { en: 'Sovereign Financing', fr: 'Financement Souverain' } },
     ],
   },
+  {
+    id: 'proj-cm-road-port',
+    category: 'sovereign',
+    categories: ['sovereign'],
+    country: { en: 'Cameroon', fr: 'Cameroun' },
+    flag: 'CM',
+    statusTag: { en: 'Sovereign Financing', fr: 'Financement Souverain' },
+    sector: { en: 'Road & Port Logistics', fr: 'Réseau Routier & Logistique Portuaire' },
+    amountDisplay: { en: '121M€', fr: '121 M€' },
+    amountFCFA: '121 M€',
+    amountUSD: '121M€',
+    description: {
+      en: 'Road Infrastructure and Port Logistics: sovereign financing mobilized to strengthen road connectivity and port logistics capacity.',
+      fr: 'Réseau routier et logistique portuaire : mobilisation de financements souverains pour renforcer la connectivité routière et la logistique portuaire.',
+    },
+    metaTag: {
+      en: 'Road Infrastructure & Port Logistics · Sovereign Financing',
+      fr: 'Réseau routier & logistique portuaire · Financement Souverain',
+    },
+    image: '/projects/logistique-minerais.png',
+    specs: [
+      { label: { en: 'COUNTRY', fr: 'PAYS' }, value: { en: 'Cameroon', fr: 'Cameroun' } },
+      { label: { en: 'AMOUNT', fr: 'MONTANT' }, value: { en: '121M€', fr: '121 M€' } },
+      { label: { en: 'BUSINESS LINE', fr: 'MÉTIER' }, value: { en: 'Sovereign Financing', fr: 'Financement Souverain' } },
+    ],
+  },
+  {
+    id: 'proj-ng-gas',
+    category: 'sovereign',
+    categories: ['sovereign'],
+    country: { en: 'Nigeria', fr: 'Nigéria' },
+    flag: 'NG',
+    statusTag: { en: 'Sovereign Financing', fr: 'Financement Souverain' },
+    sector: { en: 'Energy & Gas Infrastructure', fr: 'Énergie & Gaz Naturel' },
+    amountDisplay: { en: '500M$', fr: '500 M$' },
+    amountFCFA: '500 M$',
+    amountUSD: '500M$',
+    description: {
+      en: 'Natural gas distribution network reinforcement: large-scale sovereign energy financing supporting national gas infrastructure.',
+      fr: 'Renforcement du réseau de distribution de gaz naturel : financement souverain d’envergure à l’appui des infrastructures gazières nationales.',
+    },
+    metaTag: {
+      en: 'Natural Gas Distribution Network · Sovereign Financing',
+      fr: 'Réseau de distribution de gaz naturel · Financement Souverain',
+    },
+    image: '/projects/industrie-cables-benin.png',
+    specs: [
+      { label: { en: 'COUNTRY', fr: 'PAYS' }, value: { en: 'Nigeria', fr: 'Nigéria' } },
+      { label: { en: 'AMOUNT', fr: 'MONTANT' }, value: { en: '500M$', fr: '500 M$' } },
+      { label: { en: 'BUSINESS LINE', fr: 'MÉTIER' }, value: { en: 'Sovereign Financing', fr: 'Financement Souverain' } },
+    ],
+  },
+
+  // --- 2. CORPORATE & TRADE FINANCE (Page 10) ---
   {
     id: 'proj-gn-re',
     category: 'corporate',
     categories: ['corporate'],
-    country: { en: 'GUINEA', fr: 'GUINÉE' },
-    flag: '🇬🇳',
-    quarter: 'Q2 2024',
-    isClosed: true,
-    statusTag: { en: 'CORPORATE FINANCE', fr: 'FINANCE D’ENTREPRISE' },
-    sector: { en: 'REAL ESTATE', fr: 'IMMOBILIER' },
-    amountDisplay: '$10 MILLION',
-    amountFCFA: '6,100,000,000 FCFA',
-    amountUSD: '$10,000,000 USD',
+    country: { en: 'Guinea', fr: 'Guinée' },
+    flag: 'GN',
+    statusTag: { en: 'Corporate & Trade Finance', fr: 'Corporate & Trade Finance' },
+    sector: { en: 'Real Estate', fr: 'Immobilier' },
+    amountDisplay: { en: '10M$', fr: '10 M$' },
+    amountFCFA: '10 M$',
+    amountUSD: '10M$',
     description: {
-      en: 'Structuring and coordinating financing for the acquisition of the headquarters of a large Guinean private group.',
-      fr: 'Structuration et coordination du financement pour l’acquisition du siège d’un grand groupe privé guinéen.',
+      en: 'Real estate project in Guinea: CAPEX & OPEX fund mobilization structured for a leading private corporate sponsor.',
+      fr: 'Projet immobilier en Guinée : mobilisation de fonds CAPEX & OPEX structurée au service d’un acteur privé de référence.',
     },
-    metaTag: 'HEADQUARTERS ACQUISITION',
+    metaTag: {
+      en: 'Real Estate Project · Corporate & Trade Finance',
+      fr: 'Projet immobilier · Corporate & Trade Finance',
+    },
     image: '/projects/immobilier-guinee.png',
     specs: [
-      { label: 'COUNTRY', value: 'Guinea' },
-      { label: 'CAPITAL', value: '$10,000,000' },
-      { label: 'TIMELINE', value: 'Q2 2024' },
+      { label: { en: 'COUNTRY', fr: 'PAYS' }, value: { en: 'Guinea', fr: 'Guinée' } },
+      { label: { en: 'AMOUNT', fr: 'MONTANT' }, value: { en: '10M$', fr: '10 M$' } },
+      { label: { en: 'BUSINESS LINE', fr: 'MÉTIER' }, value: { en: 'Corporate & Trade Finance', fr: 'Corporate & Trade Finance' } },
     ],
   },
   {
-    id: 'proj-gn-logistics',
+    id: 'proj-bj-vaccines',
     category: 'corporate',
     categories: ['corporate'],
-    country: { en: 'GUINEA', fr: 'GUINÉE' },
-    flag: '🇬🇳',
-    quarter: 'Q2 2024',
-    statusTag: { en: 'EQUIPMENT FINANCE', fr: 'FINANCEMENT D’ÉQUIPEMENT' },
-    sector: { en: 'LOGISTICS', fr: 'LOGISTIQUE' },
-    amountDisplay: '$5 MILLION',
-    amountFCFA: '3,050,000,000 FCFA',
-    amountUSD: '$5,000,000 USD',
+    country: { en: 'Benin', fr: 'Bénin' },
+    flag: 'BJ',
+    statusTag: { en: 'Corporate & Trade Finance', fr: 'Corporate & Trade Finance' },
+    sector: { en: 'Healthcare & Manufacturing', fr: 'Santé & Industrie Pharmaceutique' },
+    amountDisplay: { en: '24M€', fr: '24 M€' },
+    amountFCFA: '24 M€',
+    amountUSD: '24M€',
     description: {
-      en: 'Project to acquire 60 dump trucks.',
-      fr: 'Projet d’acquisition de 60 camions bennes.',
+      en: 'Veterinary Vaccine and Medical Device Manufacturing Project: industrial CAPEX financing reinforcing regional health sovereignty.',
+      fr: 'Projet d’unité de production de vaccins vétérinaires et dispositifs médicaux : financement industriel renforçant la souveraineté sanitaire régionale.',
     },
-    metaTag: '60 DUMP TRUCKS // FLEET EXPANSION',
-    image: '/projects/logistique-minerais.png',
-    specs: [
-      { label: 'COUNTRY', value: 'Guinea' },
-      { label: 'CAPITAL', value: '$5,000,000' },
-      { label: 'TIMELINE', value: 'Q2 2024' },
-    ],
-  },
-  {
-    id: 'proj-dj-health',
-    category: 'sovereign',
-    categories: ['sovereign', 'ppp'],
-    country: { en: 'DJIBOUTI', fr: 'DJIBOUTI' },
-    flag: '🇩🇯',
-    quarter: 'Q3 2024',
-    statusTag: { en: 'SOVEREIGN FINANCING', fr: 'FINANCEMENT SOUVERAIN' },
-    sector: { en: 'HEALTH', fr: 'SANTÉ' },
-    amountDisplay: '$25 MILLION',
-    amountFCFA: '15,250,000,000 FCFA',
-    amountUSD: '$25,000,000 USD',
-    description: {
-      en: 'Construction of the Djibouti Regional Referral Hospital.',
-      fr: 'Construction du Centre Hospitalier Régional de Référence de Djibouti.',
+    metaTag: {
+      en: 'Veterinary Vaccine & Medical Device Unit · Corporate Finance',
+      fr: 'Unité de vaccins vétérinaires & dispositifs médicaux · Corporate',
     },
-    metaTag: 'REGIONAL REFERRAL HOSPITAL',
-    image: '/projects/sante-djibouti.png',
-    specs: [
-      { label: 'COUNTRY', value: 'Djibouti' },
-      { label: 'CAPITAL', value: '$25,000,000' },
-      { label: 'TIMELINE', value: 'Q3 2024' },
-    ],
-  },
-  {
-    id: 'proj-gn-diaspora',
-    category: 'corporate',
-    categories: ['corporate'],
-    country: { en: 'GUINEA', fr: 'GUINÉE' },
-    flag: '🇬🇳',
-    quarter: 'Q3 2024',
-    statusTag: { en: 'HOUSING FINANCE', fr: 'FINANCEMENT IMMOBILIER' },
-    sector: { en: 'REAL ESTATE', fr: 'IMMOBILIER' },
-    amountDisplay: '$15 MILLION',
-    amountFCFA: '9,150,000,000 FCFA',
-    amountUSD: '$15,000,000 USD',
-    description: {
-      en: 'Housing construction project for the Diaspora.',
-      fr: 'Projet de construction de logements pour la Diaspora.',
-    },
-    metaTag: 'DIASPORA HOUSING // RESIDENTIAL',
-    image: '/projects/immobilier-diaspora.png',
-    specs: [
-      { label: 'COUNTRY', value: 'Guinea' },
-      { label: 'CAPITAL', value: '$15,000,000' },
-      { label: 'TIMELINE', value: 'Q3 2024' },
-    ],
-  },
-  {
-    id: 'proj-bj-health',
-    category: 'sovereign',
-    categories: ['sovereign'],
-    country: { en: 'BENIN', fr: 'BÉNIN' },
-    flag: '🇧🇯',
-    quarter: 'Q4 2024',
-    statusTag: { en: 'PUBLIC HEALTHCARE', fr: 'SANTÉ PUBLIQUE' },
-    sector: { en: 'HEALTH', fr: 'SANTÉ' },
-    amountDisplay: '€25 MILLION',
-    amountFCFA: '16,400,000,000 FCFA',
-    amountUSD: '$27,000,000 USD',
-    description: {
-      en: 'Project to equip 10 secondary health care units.',
-      fr: 'Projet d’équipement de 10 unités de soins de santé secondaires.',
-    },
-    metaTag: '10 SECONDARY HEALTH UNITS',
     image: '/projects/sante-vaccins.png',
     specs: [
-      { label: 'COUNTRY', value: 'Benin' },
-      { label: 'CAPITAL', value: '€25,000,000' },
-      { label: 'TIMELINE', value: 'Q4 2024' },
+      { label: { en: 'COUNTRY', fr: 'PAYS' }, value: { en: 'Benin', fr: 'Bénin' } },
+      { label: { en: 'AMOUNT', fr: 'MONTANT' }, value: { en: '24M€', fr: '24 M€' } },
+      { label: { en: 'BUSINESS LINE', fr: 'MÉTIER' }, value: { en: 'Corporate & Trade Finance', fr: 'Corporate & Trade Finance' } },
     ],
   },
   {
-    id: 'proj-bj-industry',
+    id: 'proj-gn-poultry',
     category: 'corporate',
     categories: ['corporate'],
-    country: { en: 'BENIN', fr: 'BÉNIN' },
-    flag: '🇧🇯',
-    quarter: 'Q4 2024',
-    statusTag: { en: 'INDUSTRIAL CAPEX', fr: 'INDUSTRIE & ÉNERGIE' },
-    sector: { en: 'INDUSTRY', fr: 'INDUSTRIE' },
-    amountDisplay: '€137 MILLION',
-    amountFCFA: '89,870,000,000 FCFA',
-    amountUSD: '$148,000,000 USD',
+    country: { en: 'Guinea', fr: 'Guinée' },
+    flag: 'GN',
+    statusTag: { en: 'Corporate & Trade Finance', fr: 'Corporate & Trade Finance' },
+    sector: { en: 'Agriculture & Agribusiness', fr: 'Agriculture & Agro-Industrie' },
+    amountDisplay: { en: '5M$', fr: '5 M$' },
+    amountFCFA: '5 M$',
+    amountUSD: '5M$',
     description: {
-      en: 'Project for the construction of an electrical cable production unit.',
-      fr: 'Projet de construction d’une unité de production de câbles électriques.',
+      en: 'Poultry Development Program: structured corporate financing supporting agro-industrial production and national food security.',
+      fr: 'Programme de développement avicole : financement corporate structuré à l’appui de la production agro-industrielle et de la souveraineté alimentaire.',
     },
-    metaTag: 'ELECTRICAL CABLE MANUFACTURING',
-    image: '/projects/industrie-cables-benin.png',
-    specs: [
-      { label: 'COUNTRY', value: 'Benin' },
-      { label: 'CAPITAL', value: '€137,000,000' },
-      { label: 'TIMELINE', value: 'Q4 2024' },
-    ],
-  },
-  {
-    id: 'proj-rw-mines',
-    category: 'corporate',
-    categories: ['corporate'],
-    country: { en: 'RWANDA', fr: 'RWANDA' },
-    flag: '🇷🇼',
-    quarter: 'Q4 2024',
-    statusTag: { en: 'MINING FINANCE', fr: 'FINANCEMENT MINIER' },
-    sector: { en: 'MINES', fr: 'MINES' },
-    amountDisplay: '$10 MILLION',
-    amountFCFA: '6,100,000,000 FCFA',
-    amountUSD: '$10,000,000 USD',
-    description: {
-      en: 'Project to acquire mining equipment for a coltan mine.',
-      fr: 'Projet d’acquisition d’équipements miniers pour une mine de coltan.',
+    metaTag: {
+      en: 'Poultry Development Program · Corporate & Trade Finance',
+      fr: 'Programme de développement avicole · Corporate & Trade Finance',
     },
-    metaTag: 'COLTAN MINE // HEAVY MACHINERY',
-    image: '/projects/mines-rwanda.png',
-    specs: [
-      { label: 'COUNTRY', value: 'Rwanda' },
-      { label: 'CAPITAL', value: '$10,000,000' },
-      { label: 'TIMELINE', value: 'Q4 2024' },
-    ],
-  },
-  {
-    id: 'proj-sn-housing',
-    category: 'ppp',
-    categories: ['ppp', 'corporate'],
-    country: { en: 'SENEGAL', fr: 'SÉNÉGAL' },
-    flag: '🇸🇳',
-    quarter: 'Q1 2025',
-    statusTag: { en: 'AFFORDABLE HOUSING PPP', fr: 'PPP LOGEMENTS' },
-    sector: { en: 'REAL ESTATE', fr: 'IMMOBILIER' },
-    amountDisplay: '€25 MILLION',
-    amountFCFA: '16,400,000,000 FCFA',
-    amountUSD: '$27,000,000 USD',
-    description: {
-      en: 'Construction of a block of affordable and connected housing.',
-      fr: 'Construction d’un îlot de logements abordables et connectés.',
-    },
-    metaTag: 'AFFORDABLE & CONNECTED HOUSING',
-    image: '/projects/immobilier-cite-senegal.png',
-    specs: [
-      { label: 'COUNTRY', value: 'Senegal' },
-      { label: 'CAPITAL', value: '€25,000,000' },
-      { label: 'TIMELINE', value: 'Q1 2025' },
-    ],
-  },
-  {
-    id: 'proj-sn-agri',
-    category: 'corporate',
-    categories: ['corporate'],
-    country: { en: 'SENEGAL', fr: 'SÉNÉGAL' },
-    flag: '🇸🇳',
-    quarter: 'Q1 2025',
-    statusTag: { en: 'AGRI-INFRASTRUCTURE', fr: 'AGRO-INDUSTRIE' },
-    sector: { en: 'AGRICULTURE', fr: 'AGRICULTURE' },
-    amountDisplay: '€17 MILLION',
-    amountFCFA: '11,150,000,000 FCFA',
-    amountUSD: '$18,500,000 USD',
-    description: {
-      en: 'Construction of grain silos.',
-      fr: 'Construction de silos à grains.',
-    },
-    metaTag: 'GRAIN SILOS // STORAGE FACILITY',
     image: '/projects/agriculture-silos-senegal.png',
     specs: [
-      { label: 'COUNTRY', value: 'Senegal' },
-      { label: 'CAPITAL', value: '€17,000,000' },
-      { label: 'TIMELINE', value: 'Q1 2025' },
+      { label: { en: 'COUNTRY', fr: 'PAYS' }, value: { en: 'Guinea', fr: 'Guinée' } },
+      { label: { en: 'AMOUNT', fr: 'MONTANT' }, value: { en: '5M$', fr: '5 M$' } },
+      { label: { en: 'BUSINESS LINE', fr: 'MÉTIER' }, value: { en: 'Corporate & Trade Finance', fr: 'Corporate & Trade Finance' } },
     ],
   },
+
+  // --- 3. PUBLIC-PRIVATE PARTNERSHIPS — PPP (Page 11) ---
   {
-    id: 'proj-cm-re',
-    category: 'corporate',
-    categories: ['corporate'],
-    country: { en: 'CAMEROON', fr: 'CAMEROUN' },
-    flag: '🇨🇲',
-    quarter: 'Q1 2025',
-    statusTag: { en: 'RESIDENTIAL DEVELOPMENT', fr: 'DÉVELOPPEMENT RÉSIDENTIEL' },
-    sector: { en: 'REAL ESTATE', fr: 'IMMOBILIER' },
-    amountDisplay: '€20 MILLION',
-    amountFCFA: '13,120,000,000 FCFA',
-    amountUSD: '$21,500,000 USD',
+    id: 'proj-ci-bus-terminal',
+    category: 'ppp',
+    categories: ['ppp'],
+    country: { en: 'Côte d’Ivoire', fr: 'Côte d’Ivoire' },
+    flag: 'CI',
+    statusTag: { en: 'Public-Private Partnership (PPP)', fr: 'Partenariat Public-Privé (PPP)' },
+    sector: { en: 'Urban & Inter-Urban Transport', fr: 'Transport Inter-Urbain' },
+    amountDisplay: { en: '112M€', fr: '112 M€' },
+    amountFCFA: '112 M€',
+    amountUSD: '112M€',
     description: {
-      en: 'Housing construction.',
-      fr: 'Construction de logements.',
+      en: 'Abidjan Inter-Urban Bus Terminal: advisory, structuring and project development delivered within a Public-Private Partnership.',
+      fr: 'Gare Routière Inter-Urbaine d’Abidjan : conseil, structuration et développement de projet dans le cadre d’un Partenariat Public-Privé.',
     },
-    metaTag: 'URBAN HOUSING PRECINCT',
-    image: '/projects/real-estate-cameroon.jpeg',
-    specs: [
-      { label: 'COUNTRY', value: 'Cameroon' },
-      { label: 'CAPITAL', value: '€20,000,000' },
-      { label: 'TIMELINE', value: 'Q1 2025' },
-    ],
-  },
-  {
-    id: 'proj-ci-hydraulic',
-    category: 'water_infra',
-    categories: ['water_infra', 'sovereign', 'ppp'],
-    country: { en: 'IVORY COAST', fr: "CÔTE D'IVOIRE" },
-    flag: '🇨🇮',
-    quarter: 'Q1 2025',
-    statusTag: { en: 'WATER INFRASTRUCTURE', fr: 'HYDRAULIQUE URBAINE' },
-    sector: { en: 'HYDRAULIC', fr: 'HYDRAULIQUE' },
-    amountDisplay: '€278 MILLION',
-    amountFCFA: '182,350,000,000 FCFA',
-    amountUSD: '$300,000,000 USD',
-    description: {
-      en: 'Abidjan South drinking water supply project.',
-      fr: 'Projet d’alimentation en eau potable d’Abidjan Sud.',
+    metaTag: {
+      en: 'Abidjan Inter-Urban Bus Terminal · PPP',
+      fr: 'Gare Routière Inter-Urbaine d’Abidjan · PPP',
     },
-    metaTag: 'ABIDJAN SOUTH // DRINKING WATER',
     image: '/projects/hydraulique-abidjan-ivory.png',
     specs: [
-      { label: 'COUNTRY', value: 'Ivory Coast' },
-      { label: 'CAPITAL', value: '€278,000,000' },
-      { label: 'TIMELINE', value: 'Q1 2025' },
+      { label: { en: 'COUNTRY', fr: 'PAYS' }, value: { en: 'Côte d’Ivoire', fr: 'Côte d’Ivoire' } },
+      { label: { en: 'AMOUNT', fr: 'MONTANT' }, value: { en: '112M€', fr: '112 M€' } },
+      { label: { en: 'BUSINESS LINE', fr: 'MÉTIER' }, value: { en: 'Public-Private Partnerships (PPP)', fr: 'Partenariats Public-Privé (PPP)' } },
+    ],
+  },
+  {
+    id: 'proj-cm-housing',
+    category: 'ppp',
+    categories: ['ppp'],
+    country: { en: 'Cameroon', fr: 'Cameroun' },
+    flag: 'CM',
+    statusTag: { en: 'Public-Private Partnership (PPP)', fr: 'Partenariat Public-Privé (PPP)' },
+    sector: { en: 'Housing & Urban Development', fr: 'Programme de Logements' },
+    amountDisplay: { en: '100M€', fr: '100 M€' },
+    amountFCFA: '100 M€',
+    amountUSD: '100M€',
+    description: {
+      en: 'Housing Program in Cameroon: large-scale residential infrastructure structured and developed under a Public-Private Partnership framework.',
+      fr: 'Programme de Logements au Cameroun : développement d’infrastructures résidentielles d’envergure structuré dans le cadre d’un Partenariat Public-Privé.',
+    },
+    metaTag: {
+      en: 'Housing Program · PPP',
+      fr: 'Programme de Logements · PPP',
+    },
+    image: '/projects/real-estate-cameroon.jpeg',
+    specs: [
+      { label: { en: 'COUNTRY', fr: 'PAYS' }, value: { en: 'Cameroon', fr: 'Cameroun' } },
+      { label: { en: 'AMOUNT', fr: 'MONTANT' }, value: { en: '100M€', fr: '100 M€' } },
+      { label: { en: 'BUSINESS LINE', fr: 'MÉTIER' }, value: { en: 'Public-Private Partnerships (PPP)', fr: 'Partenariats Public-Privé (PPP)' } },
+    ],
+  },
+  {
+    id: 'proj-ci-storage',
+    category: 'ppp',
+    categories: ['ppp'],
+    country: { en: 'Côte d’Ivoire', fr: 'Côte d’Ivoire' },
+    flag: 'CI',
+    statusTag: { en: 'Public-Private Partnership (PPP)', fr: 'Partenariat Public-Privé (PPP)' },
+    sector: { en: 'Energy Storage Infrastructure', fr: 'Stockage de Produits Pétroliers' },
+    amountDisplay: { en: '600M€', fr: '600 M€' },
+    amountFCFA: '600 M€',
+    amountUSD: '600M€',
+    description: {
+      en: 'Construction of petroleum product storage tanks: strategic energy storage infrastructure structured as a flagship Public-Private Partnership.',
+      fr: 'Construction de bacs de stockage de produits pétroliers : infrastructure énergétique stratégique structurée en Partenariat Public-Privé.',
+    },
+    metaTag: {
+      en: 'Petroleum Product Storage Tanks · PPP',
+      fr: 'Bacs de stockage de produits pétroliers · PPP',
+    },
+    image: '/projects/immobilier-cite-senegal.png',
+    specs: [
+      { label: { en: 'COUNTRY', fr: 'PAYS' }, value: { en: 'Côte d’Ivoire', fr: 'Côte d’Ivoire' } },
+      { label: { en: 'AMOUNT', fr: 'MONTANT' }, value: { en: '600M€', fr: '600 M€' } },
+      { label: { en: 'BUSINESS LINE', fr: 'MÉTIER' }, value: { en: 'Public-Private Partnerships (PPP)', fr: 'Partenariats Public-Privé (PPP)' } },
     ],
   },
 ];
 
-export const JOURNEY_PERIODS: JourneyPeriodData[] = [
+// Official Governance & Team Members from Brochure Page 15 (ready for approved photos & bios)
+export const TEAM_MEMBERS: TeamMemberData[] = [
   {
-    year: '2026',
-    progressPct: 12,
-    quarters: [
-      {
-        q: 'Q1',
-        tag: 'SOVEREIGN PIPELINE',
-        title: {
-          en: 'Scaling of IMAAD Sovereign Infrastructure Pipeline toward the 1,000 Bn FCFA target across 7 regional & international hubs.',
-          fr: "Accélération du portefeuille d'infrastructures souveraines IMAAD vers le cap des 1 000 Mds FCFA sur 7 hubs.",
-        },
-      },
-      {
-        q: 'Q2',
-        tag: 'DEDICATED FUNDS',
-        title: {
-          en: 'Launch of the IMAAD Clean Energy & Sovereign Resilience Co-Investment Platform alongside international DFIs.',
-          fr: 'Lancement de la plateforme de co-investissement Énergie Propre & Résilience Souveraine avec les IFD.',
-        },
-        highlighted: true,
-      },
-      {
-        q: 'Q4',
-        tag: 'REGIONAL INTEGRATION',
-        title: {
-          en: 'Cross-border corridor syndication linking WAEMU institutional liquidity with Gulf and European capital partners.',
-          fr: 'Syndication de corridors transfrontaliers reliant la liquidité UEMOA aux partenaires du Golfe et européens.',
-        },
-      },
-    ],
-    verticalNode: {
-      index: '01 / 06',
-      side: 'right',
-      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80',
-      bullets: {
-        en: [
-          'Scaling of IMAAD Sovereign Infrastructure Pipeline toward the 1,000 Bn FCFA milestone across 7 hubs.',
-          'Launch of Dedicated Clean Energy & Sovereign Resilience Co-Investment Platform with international DFIs.',
-        ],
-        fr: [
-          'Déploiement du pipeline souverain vers le cap des 1 000 Milliards FCFA à travers 7 hubs.',
-          'Création du véhicule dédié Énergie Propre & Résilience Souveraine.',
-        ],
-      },
-    },
+    name: 'Pierre Wolf',
+    role: { en: 'Chairman of the Board of Directors', fr: 'Président du Conseil d’Administration' },
   },
   {
-    year: '2024',
-    progressPct: 28,
-    quarters: [
-      {
-        q: 'Q1',
-        tag: "CÔTE D'IVOIRE",
-        title: {
-          en: 'Financial structuring & syndication of 150 Bn FCFA Road Infrastructure Corridor in Côte d’Ivoire.',
-          fr: "Structuration financière et syndication du corridor routier de 150 Mds FCFA en Côte d'Ivoire.",
-        },
-      },
-      {
-        q: 'Q3',
-        tag: 'DUBAI & INTERNATIONAL',
-        title: {
-          en: 'Expansion of the International Capital Markets & Sovereign Syndication Desk in Dubai (UAE).',
-          fr: 'Expansion du bureau international Marchés de Capitaux & Syndication Souveraine à Dubaï (EAU).',
-        },
-        highlighted: true,
-      },
-      {
-        q: 'Q4',
-        tag: 'GUINEA IPP',
-        title: {
-          en: 'Mandate awarded for 120 Bn FCFA (100 MW) Hybrid Solar & Industrial Transmission Grid in Guinea.',
-          fr: 'Mandat obtenu pour le projet solaire hybride et réseau haute tension de 120 Mds FCFA (100 MW) en Guinée.',
-        },
-      },
-    ],
-    verticalNode: {
-      index: '02 / 06',
-      side: 'left',
-      image: 'https://images.unsplash.com/photo-1541888946425-d09bb18086f6?auto=format&fit=crop&w=900&q=80',
-      bullets: {
-        en: [
-          'Structuring and financial syndication of 150 Bn FCFA Road Infrastructure Corridor in Côte d’Ivoire.',
-          'Expansion of International Institutional Desk connecting Gulf, European, and African liquidity pools.',
-        ],
-        fr: [
-          "Structuration et syndication du corridor routier de 150 Mds FCFA en Côte d'Ivoire.",
-          'Ouverture de la passerelle institutionnelle Golfe – Europe – Afrique.',
-        ],
-      },
-    },
+    name: 'Issa Mehmet N’Diaye',
+    role: { en: 'Co-founder & Chief Executive Officer', fr: 'Co-fondateur & Président Directeur Général' },
   },
   {
-    year: '2022',
-    progressPct: 45,
-    quarters: [
-      {
-        q: 'Q2',
-        tag: 'SENEGAL PPP',
-        title: {
-          en: 'Financial close of 85 Bn FCFA Institutional, Administrative & Higher-Education PPP Precinct in Senegal.',
-          fr: 'Closing financier du pôle institutionnel et universitaire PPP de 85 Mds FCFA au Sénégal.',
-        },
-      },
-      {
-        q: 'Q3',
-        tag: 'CREDIT ENHANCEMENT',
-        title: {
-          en: 'Establishment of the Dedicated Sovereign Guarantee & Multilateral Risk Mitigation Taskforce.',
-          fr: "Mise en place de l'unité spécialisée en garanties souveraines et rehaussement de crédit multilatéral.",
-        },
-        highlighted: true,
-      },
-      {
-        q: 'Q4',
-        tag: 'TOGO LOGISTICS',
-        title: {
-          en: 'Concession structuring initiated for 95 Bn FCFA Multimodal Dry Port & Logistics Platform in Togo.',
-          fr: 'Structuration de la concession du port sec et plateforme logistique multimodale de 95 Mds FCFA au Togo.',
-        },
-      },
-    ],
-    verticalNode: {
-      index: '03 / 06',
-      side: 'right',
-      image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=80',
-      bullets: {
-        en: [
-          'Financial close of 85 Bn FCFA Institutional & Higher-Education PPP Precinct in Senegal.',
-          'Establishment of the Dedicated Sovereign Advisory & Credit Enhancement Taskforce.',
-        ],
-        fr: [
-          'Closing financier du complexe institutionnel et éducatif de 85 Mds FCFA au Sénégal.',
-          'Création du pôle Garanties Souveraines & Rehaussement de Crédit.',
-        ],
-      },
-    },
+    name: 'Rym Moulaye-Idriss',
+    role: { en: 'Co-founder & Deputy Chief Executive Officer', fr: 'Co-fondatrice & Directrice Générale Adjointe' },
   },
   {
-    year: '2020',
-    progressPct: 62,
-    quarters: [
-      {
-        q: 'Q1',
-        tag: 'BENIN HEALTHCARE',
-        title: {
-          en: 'Origination of 65 Bn FCFA Turnkey Regional Hospital & Biomedical Infrastructure Program in Benin.',
-          fr: 'Origination du programme hospitalier régional et biomédical clé en main de 65 Mds FCFA au Bénin.',
-        },
-      },
-      {
-        q: 'Q2',
-        tag: 'SOVEREIGN RESILIENCE',
-        title: {
-          en: 'Deployment of rapid sovereign liquidity and health-infrastructure advisory across WAEMU states.',
-          fr: 'Déploiement de solutions rapides de liquidité souveraine et résilience sanitaire dans la zone UEMOA.',
-        },
-        highlighted: true,
-      },
-      {
-        q: 'Q4',
-        tag: 'WATER UTILITIES',
-        title: {
-          en: 'Structuring of 55 Bn FCFA blended finance facility for urban potable water infrastructure in Burkina Faso.',
-          fr: "Structuration de 55 Mds FCFA en financement mixte pour l'hydraulique urbaine au Burkina Faso.",
-        },
-      },
-    ],
-    verticalNode: {
-      index: '04 / 06',
-      side: 'left',
-      image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=80',
-      bullets: {
-        en: [
-          'Origination of 65 Bn FCFA Turnkey Regional Hospital & Biomedical Infrastructure Program in Benin.',
-          'Deployment of rapid sovereign liquidity and resilience advisory across WAEMU member states.',
-        ],
-        fr: [
-          'Origination du programme hospitalier régional de 65 Mds FCFA au Bénin.',
-          'Accompagnement souverain des États membres de l’UEMOA.',
-        ],
-      },
-    },
+    name: 'Olutobi Osibodu',
+    role: { en: 'Co-founder & Managing Director', fr: 'Co-fondateur & Directeur Exécutif' },
   },
   {
-    year: '2016',
-    progressPct: 78,
-    quarters: [
-      {
-        q: 'Q2',
-        tag: 'REGIONAL EXPANSION',
-        title: {
-          en: 'Cross-border advisory & structuring presence established across Guinea, Togo, Benin, and Burkina Faso.',
-          fr: 'Implantation des activités de conseil et structuration en Guinée, au Togo, au Bénin et au Burkina Faso.',
-        },
-      },
-      {
-        q: 'Q3',
-        tag: 'DFI SYNDICATION',
-        title: {
-          en: 'First multi-donor sovereign infrastructure syndicate structured alongside regional development banks.',
-          fr: 'Première syndication souveraine multi-bailleurs structurée avec les banques régionales de développement.',
-        },
-        highlighted: true,
-      },
-      {
-        q: 'Q4',
-        tag: 'PPP FRAMEWORK',
-        title: {
-          en: 'Advisory support on national Public-Private Partnership regulatory and bankability frameworks.',
-          fr: 'Appui conseil sur les cadres réglementaires et la bancabilité des Partenariats Public-Privé.',
-        },
-      },
-    ],
-    verticalNode: {
-      index: '05 / 06',
-      side: 'right',
-      image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=80',
-      bullets: {
-        en: [
-          'Cross-border structuring partnerships established in Guinea, Togo, and Burkina Faso.',
-          'First multi-donor sovereign infrastructure syndicate structured with regional development banks.',
-        ],
-        fr: [
-          'Déploiement régional en Guinée, au Togo et au Burkina Faso.',
-          'Première syndication multi-bailleurs avec les banques régionales de développement.',
-        ],
-      },
-    },
+    name: 'Pape Baye Diop',
+    role: { en: 'Chief Operating Officer', fr: 'Directeur des Opérations' },
   },
   {
-    year: '2011',
-    progressPct: 94,
-    quarters: [
-      {
-        q: 'Q1',
-        tag: 'FOUNDING VISION',
-        title: {
-          en: 'Inception of the executive investment banking and sovereign financial engineering practice.',
-          fr: "Genèse de la pratique exécutive de banque d'affaires et d'ingénierie financière souveraine.",
-        },
-      },
-      {
-        q: 'Q2',
-        tag: 'CORE DOCTRINE',
-        title: {
-          en: 'Formulation of the three foundational pillars: Sovereignty, Sustainable Impact, and Financial Excellence.',
-          fr: 'Formulation des trois piliers fondateurs : Souveraineté, Impact Durable et Excellence Financière.',
-        },
-        highlighted: true,
-      },
-      {
-        q: 'Q4',
-        tag: 'FIRST MANDATES',
-        title: {
-          en: 'Execution of inaugural sovereign debt advisory and strategic infrastructure feasibility mandates in West Africa.',
-          fr: 'Exécution des premiers mandats de conseil souverain et de structuration en Afrique de l’Ouest.',
-        },
-      },
-    ],
-    verticalNode: {
-      index: '06 / 06',
-      side: 'left',
-      image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80',
-      bullets: {
-        en: [
-          'Founding of the executive advisory practice by senior African & international investment bankers.',
-          'Inception of the core doctrine: Financial Sovereignty & Sustainable African Growth.',
-        ],
-        fr: [
-          "Fondation de la pratique par des banquiers d'affaires seniors africains et internationaux.",
-          'Établissement de la doctrine : Catalyseur de Souveraineté et de Croissance Durable.',
-        ],
-      },
-    },
+    name: 'Mireille Atta',
+    role: { en: 'Head of Administration and Accounting', fr: 'Responsable Administratif et Comptable' },
+  },
+  {
+    name: 'Safietou Camara',
+    role: { en: 'Senior Financial Analyst', fr: 'Analyste Financier Senior' },
+  },
+  {
+    name: 'Hervé Rugwizangoga',
+    role: { en: 'Chief Business Development Officer', fr: 'Directeur du Développement Commercial' },
+  },
+  {
+    name: 'Frédéric Wolf',
+    role: { en: 'Executive Assistant to the CEO', fr: 'Assistant Exécutif Direction Générale' },
+  },
+  {
+    name: 'Henri Tchakoute',
+    role: { en: 'Head of Business Development, Cameroon', fr: 'Responsable du Développement Commercial, Cameroun' },
+  },
+  {
+    name: 'Korotoum Kone',
+    role: { en: 'Junior Financial Analyst', fr: 'Analyste Financier Junior' },
+  },
+  {
+    name: 'Paul-Maylis Agbahan',
+    role: { en: 'Executive Assistant', fr: 'Assistante de Direction' },
   },
 ];
 
-export const DNA_MONOLITHS: DnaMonolithData[] = [
+// Primary Offices from Chairman & CEO Reference Artifact
+export const OFFICIAL_OFFICES: OfficeLocationData[] = [
   {
-    index: 0,
-    letter: 'I',
-    word: { en: 'INNOVATE', fr: 'INNOVER' },
-    shortCallout: {
-      en: 'sovereign financial engineering & bespoke capital structures',
-      fr: 'ingénierie financière souveraine & structuration sur mesure',
-    },
-    fullDescription: {
-      en: 'Engineering bespoke sovereign financial instruments, blended finance vehicles, and risk-mitigation frameworks tailored to African macroeconomic realities.',
-      fr: "Conception d'instruments financiers souverains sur mesure, de véhicules de financement mixte et de mécanismes d'atténuation des risques adaptés aux réalités africaines.",
-    },
-    calloutOffset: { x: 40, y: 24 },
+    id: 'kigali',
+    entityLabel: { en: 'Headquarters · Holding & IFESA', fr: 'Siège · Holding & IFESA' },
+    cityCountry: { en: 'Kigali, Rwanda', fr: 'Kigali, Rwanda' },
+    addressLines: [
+      '11 KG 532 ST, Brilliant Tower,',
+      '7e étage, Room 703',
+      'Kigali, Rwanda',
+    ],
+    phone: '+250 780 395 017',
+    mapUrl: 'https://maps.google.com/?q=11+KG+532+ST+Brilliant+Tower+Kigali+Rwanda',
   },
-  {
-    index: 1,
-    letter: 'M',
-    word: { en: 'MOBILIZE', fr: 'MOBILISER' },
-    shortCallout: {
-      en: 'global institutional, pension & DFI liquidity at scale',
-      fr: 'la liquidité institutionnelle globale, fonds de pension & IFD',
-    },
-    fullDescription: {
-      en: 'Unlocking international capital markets, multilateral Development Finance Institutions (DFIs), regional pension funds, and sovereign co-investment pools.',
-      fr: 'Mobilisation des marchés de capitaux internationaux, des Institutions Financières de Développement (IFD), des caisses de retraite et fonds souverains.',
-    },
-    calloutOffset: { x: 110, y: 12 },
-  },
-  {
-    index: 2,
-    letter: 'A',
-    word: { en: 'ANCHOR', fr: 'ANCRER' },
-    shortCallout: {
-      en: 'economic sovereignty & strategic national asset ownership',
-      fr: 'la souveraineté économique & la maîtrise des actifs stratégiques',
-    },
-    fullDescription: {
-      en: 'Strengthening national fiscal resilience so African states and domestic champions retain long-term control and value creation of critical infrastructure.',
-      fr: 'Renforcement de la résilience budgétaire afin que les États et champions nationaux conservent la maîtrise durable de leurs infrastructures critiques.',
-    },
-    calloutOffset: { x: 185, y: 20 },
-  },
-  {
-    index: 3,
-    letter: 'A',
-    word: { en: 'ACCELERATE', fr: 'ACCÉLÉRER' },
-    shortCallout: {
-      en: 'transformative Public-Private Partnerships (PPPs) to close',
-      fr: "les Partenariats Public-Privé (PPP) jusqu'au closing financier",
-    },
-    fullDescription: {
-      en: 'Fast-tracking complex infrastructure mandates from early feasibility and concession structuring to syndicated financial close and execution.',
-      fr: 'Accélération des mandats complexes depuis les études de bancabilité et la structuration de concession jusqu’au bouclage financier syndiqué.',
-    },
-    calloutOffset: { x: 240, y: 28 },
-  },
-  {
-    index: 4,
-    letter: 'D',
-    word: { en: 'DELIVER', fr: 'DÉLIVRER' },
-    shortCallout: {
-      en: 'durable generational impact & tier-one ESG excellence',
-      fr: 'un impact générationnel durable & une gouvernance ESG de 1er plan',
-    },
-    fullDescription: {
-      en: 'Ensuring disciplined execution, transparent governance, and measurable socioeconomic impact across transport, healthcare, education, and clean energy.',
-      fr: 'Garantie d’une exécution rigoureuse, d’une gouvernance transparente et d’un impact socio-économique mesurable (routes, santé, éducation, énergie).',
-    },
-    calloutOffset: { x: 280, y: 18 },
-  },
-];
-
-export const REGIONAL_HUBS = [
   {
     id: 'abidjan',
-    flag: '🇨🇮',
-    tab: "ABIDJAN (CI)",
-    title: "IMAAD GROUP CÔTE D'IVOIRE — HEADQUARTERS",
-    address: 'Cocody Ambassades / Plateau Financial District, Abidjan, Côte d’Ivoire',
-    phone: 'Tel: (+225) 27 22 40 00 00 • WAEMU Sovereign Desk',
-  },
-  {
-    id: 'dakar',
-    flag: '🇸🇳',
-    tab: 'DAKAR (SN)',
-    title: 'IMAAD GROUP SENEGAL — ATLANTIC HUB',
-    address: 'Plateau Business District & Diamniadio Hub, Dakar, Senegal',
-    phone: 'Tel: (+221) 33 820 00 00 • PPP & Institutional Structuring',
-  },
-  {
-    id: 'cotonou',
-    flag: '🇧🇯',
-    tab: 'COTONOU (BJ)',
-    title: 'IMAAD GROUP BENIN & TOGO CORRIDOR',
-    address: 'Boulevard de la Marina, Cotonou, Benin / Lomé Hub',
-    phone: 'Tel: (+229) 21 30 00 00 • Healthcare & Port Concessions',
-  },
-  {
-    id: 'dubai',
-    flag: '🇦🇪',
-    tab: 'DUBAI (UAE)',
-    title: 'IMAAD INTERNATIONAL — CAPITAL MARKETS DESK',
-    address: 'DIFC / Financial Center Road, Dubai, United Arab Emirates',
-    phone: 'Tel: (+971) 4 300 00 00 • DFI & Sovereign Syndication',
+    entityLabel: { en: 'Regional Office · IFWCA', fr: 'Bureau Régional · IFWCA' },
+    cityCountry: { en: 'Abidjan, Côte d’Ivoire', fr: 'Abidjan, Côte d’Ivoire' },
+    addressLines: [
+      'Cocody Riviera Bonoumin,',
+      'Immeuble IHBC 2, face au Collège Charles de Gaulle,',
+      '4e étage, Appartement 4A',
+      'Abidjan, Côte d’Ivoire',
+    ],
+    phone: '+225 01 42 81 26 26',
+    mapUrl: 'https://maps.google.com/?q=Cocody+Riviera+Bonoumin+Abidjan+Cote+d+Ivoire',
   },
 ];
+
+// 9 Offices Footprint (per Management feedback)
+export const NINE_OFFICES_LIST: { en: string; fr: string }[] = [
+  { en: 'Kigali', fr: 'Kigali' },
+  { en: 'Abidjan', fr: 'Abidjan' },
+  { en: 'Yaoundé', fr: 'Yaoundé' },
+  { en: 'London', fr: 'Londres' },
+  { en: 'Dakar', fr: 'Dakar' },
+  { en: 'Conakry', fr: 'Conakry' },
+  { en: 'Cotonou', fr: 'Cotonou' },
+  { en: 'Lagos', fr: 'Lagos' },
+  { en: 'Casablanca', fr: 'Casablanca' },
+];
+
+export const OFFICIAL_REGULATORY_NOTICE = {
+  fr: '*La demande d’IFG en vue d’obtenir une licence de banque d’investissement au Rwanda est en cours de préparation pour être soumise à l’Autorité des marchés de capitaux (CMA). Dans l’attente de son approbation, les activités d’IFG au Rwanda sont limitées aux services de conseil. Ce site est fourni à titre d’information et ne constitue pas une offre de titres ni de services financiers.',
+  en: '*IFG’s application for an investment banking licence in Rwanda is being prepared for submission to the Capital Market Authority (CMA). Pending its approval, IFG’s activities in Rwanda are limited to advisory services. This website is provided for informational purposes only and does not constitute an offer of securities or financial services.',
+};
+
+// Retained cleanly for type compatibility with archived components
+export const JOURNEY_PERIODS: JourneyPeriodData[] = [];
+export const DNA_MONOLITHS: DnaMonolithData[] = [];
+export const REGIONAL_HUBS = OFFICIAL_OFFICES.map((o) => ({
+  id: o.id,
+  flag: o.id === 'kigali' ? 'RW' : 'CI',
+  tab: o.cityCountry.fr.toUpperCase(),
+  title: `${o.entityLabel.fr} — ${o.cityCountry.fr}`,
+  address: o.addressLines.join(' '),
+  phone: o.phone,
+}));

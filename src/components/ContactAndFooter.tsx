@@ -4,6 +4,8 @@ import { CheckCircle2, Globe2, Mail, Send, X } from 'lucide-react';
 import {
   ExcellenceModuleData,
   Language,
+  NINE_OFFICES_LIST,
+  OFFICIAL_REGULATORY_NOTICE,
   ProjectCardData,
   REGIONAL_HUBS,
 } from '../data/imaadData';
@@ -69,17 +71,17 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                   </div>
                   <div className="text-xs text-slate-400">
                     {lang === 'en'
-                      ? 'Catalyst for Sovereignty & Sustainable Growth'
-                      : 'Catalyseur de Souveraineté & Croissance Durable'}
+                      ? 'Catalyst for sovereignty and sustainable growth'
+                      : 'Catalyseur de la souveraineté et de la croissance durable'}
                   </div>
                 </div>
               </div>
 
               <a
-                href="mailto:contact@imaadfg.com"
+                href="mailto:infos@imaadholding.com"
                 className="mt-5 inline-block text-sm text-white underline underline-offset-4 transition-colors hover:text-gold-300"
               >
-                contact@imaadfg.com
+                infos@imaadholding.com
               </a>
 
               <div className="mt-6">
@@ -151,25 +153,25 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
               </ul>
             </div>
 
-            {/* Col 3: Areas of Excellence */}
+            {/* Col 3: Areas of Excellence (Exact Brochure Order) */}
             <div>
               <h4 className="mb-5 font-heading text-sm font-bold text-white">
-                {lang === 'en' ? 'Areas of Excellence' : "Domaines d'Excellence"}
+                {lang === 'en' ? 'Areas of Excellence' : 'Domaines d’Excellence'}
               </h4>
               <ul className="space-y-2.5 text-xs text-slate-400">
                 <li>
-                  <a href="#excellence-01" className="transition-colors hover:text-gold-300">
-                    01. {lang === 'en' ? 'Advisory & Structuring' : 'Conseil & Structuration'}
+                  <a href="#excellence" className="transition-colors hover:text-gold-300">
+                    01. {lang === 'en' ? 'Sovereign Financing' : 'Financement Souverain'}
                   </a>
                 </li>
                 <li>
-                  <a href="#excellence-02" className="transition-colors hover:text-gold-300">
-                    02. {lang === 'en' ? 'Public-Private Partnerships (PPP)' : 'Partenariats Public-Privé (PPP)'}
+                  <a href="#excellence" className="transition-colors hover:text-gold-300">
+                    02. Corporate &amp; Trade Finance
                   </a>
                 </li>
                 <li>
-                  <a href="#excellence-03" className="transition-colors hover:text-gold-300">
-                    03. {lang === 'en' ? 'Dedicated Investment Funds' : "Fonds d'Investissement Dédiés"}
+                  <a href="#excellence" className="transition-colors hover:text-gold-300">
+                    03. {lang === 'en' ? 'Public-Private Partnerships (PPP)' : 'Partenariats Public-Privé (PPP)'}
                   </a>
                 </li>
                 <li>
@@ -185,57 +187,42 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                     }}
                     className="cursor-pointer text-left text-gold-300 underline underline-offset-4 hover:text-white"
                   >
-                    {lang === 'en' ? 'Submit a Sovereign Mandate' : 'Soumettre un Mandat Souverain'}
+                    {lang === 'en' ? 'Submit a Sovereign Mandate' : 'Soumettre un Mandat'}
                   </button>
                 </li>
               </ul>
             </div>
 
-            {/* Col 4: International Presence with Country Flags (Directly from User's Initial Footer!) */}
+            {/* Col 4: 9 Offices Footprint (Clean Text, Zero Emojis) */}
             <div>
               <h4 className="mb-5 font-heading text-sm font-bold text-white">
-                {lang === 'en' ? 'Presence & Hubs' : 'Présence & Hubs'}
+                {lang === 'en' ? 'Offices (9)' : 'Bureaux (9)'}
               </h4>
-              <div className="grid grid-cols-2 gap-3 text-xs text-slate-300">
-                <div className="flex items-center gap-2">
-                  <span>🇨🇮</span> <span>Côte d&apos;Ivoire</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>🇸🇳</span> <span>Senegal</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>🇬🇳</span> <span>Guinea</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>🇧🇯</span> <span>Benin</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>🇹🇬</span> <span>Togo</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>🇧🇫</span> <span>Burkina Faso</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>🇦🇪</span> <span>UAE (Dubai)</span>
-                </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-xs text-slate-300">
+                {NINE_OFFICES_LIST.map((office) => (
+                  <div key={office.en} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-400/80" />
+                    <span>{office[lang]}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Bottom Legal & Copyright */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
-            <div className="flex flex-wrap gap-6">
-              <a href="#contact" className="hover:text-gold-300">
-                {lang === 'en' ? 'Terms & Conditions' : 'Conditions Générales'}
-              </a>
-              <a href="#contact" className="hover:text-gold-300">
-                {lang === 'en' ? 'Privacy Policy' : 'Politique de Confidentialité'}
-              </a>
-              <a href="#contact" className="hover:text-gold-300">
-                {lang === 'en' ? 'AML & Sovereign Governance' : 'Conformité & Gouvernance'}
-              </a>
+          {/* Bottom Legal, Copyright & Regulatory Notice */}
+          <div className="mt-8 space-y-4 text-xs text-slate-500">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>&copy; 2026 Imaad Financial Group Ltd &middot; Kigali &middot; Abidjan</div>
+              <div className="flex flex-wrap gap-6">
+                <a href="mailto:infos@imaadholding.com" className="hover:text-gold-300">
+                  infos@imaadholding.com
+                </a>
+                <span className="text-slate-600">www.imaadfg.com</span>
+              </div>
             </div>
-            <div>&copy; 2026 IMAAD Financial Group. All rights reserved.</div>
+            <p className="max-w-5xl text-[11px] leading-relaxed text-slate-500">
+              {OFFICIAL_REGULATORY_NOTICE[lang]}
+            </p>
           </div>
         </div>
       </footer>
@@ -312,7 +299,14 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                   <HudButton
                     variant="gold"
                     fullWidth
-                    onClick={onOpenSubmitModal}
+                    onClick={() => {
+                      onCloseDossier();
+                      if (onNavigateContact) {
+                        onNavigateContact();
+                      } else {
+                        onOpenSubmitModal();
+                      }
+                    }}
                   >
                     {lang === 'en'
                       ? 'INITIATE A MANDATE IN THIS DIVISION'
@@ -325,8 +319,10 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
               {activeDossier.type === 'project' && activeDossier.project && (
                 <div>
                   <div className="mb-4 flex items-center gap-3">
-                    <span className="text-xl">{activeDossier.project.flag}</span>
-                    <h3 className="font-display text-xl font-bold tracking-[0.18em] text-white">
+                    <span className="border border-gold-400/50 bg-gold-500/10 px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-gold-300">
+                      {activeDossier.project.flag}
+                    </span>
+                    <h3 className="font-display text-xl font-bold tracking-[0.14em] text-white uppercase">
                       {activeDossier.project.sector[lang]}
                     </h3>
                   </div>
@@ -343,17 +339,17 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                     {activeDossier.project.description[lang]}
                   </p>
 
-                  <div className="my-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div className="my-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
                     {activeDossier.project.specs.map((s, idx) => (
                       <div
                         key={idx}
                         className="border border-white/10 bg-white/[0.02] p-3"
                       >
                         <span className="block font-mono text-[10px] tracking-[0.15em] text-slate-400">
-                          {s.label}
+                          {s.label[lang]}
                         </span>
                         <span className="mt-1 block font-heading text-sm font-semibold text-gold-300">
-                          {s.value}
+                          {s.value[lang]}
                         </span>
                       </div>
                     ))}
@@ -362,7 +358,14 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                   <HudButton
                     variant="gold"
                     fullWidth
-                    onClick={onOpenSubmitModal}
+                    onClick={() => {
+                      onCloseDossier();
+                      if (onNavigateContact) {
+                        onNavigateContact();
+                      } else {
+                        onOpenSubmitModal();
+                      }
+                    }}
                   >
                     {lang === 'en'
                       ? 'STRUCTURE A SIMILAR PROJECT'

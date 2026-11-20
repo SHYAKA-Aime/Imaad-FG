@@ -11,88 +11,104 @@ export interface OperatingHub {
   id: string;
   country: { en: string; fr: string };
   city: string;
-  flag: string;
   lat: number;
   lon: number;
 }
 
+// Official 11 African countries from IMAAD Financial Group Brochure (Page 16) — zero emojis
 const OPERATING_HUBS: OperatingHub[] = [
   {
     id: '384',
-    country: { en: 'IVORY COAST', fr: "CÔTE D'IVOIRE" },
+    country: { en: 'Côte d’Ivoire', fr: 'Côte d’Ivoire' },
     city: 'Abidjan',
-    flag: '🇨🇮',
     lat: 5.36,
     lon: -4.01,
   },
   {
+    id: '646',
+    country: { en: 'Rwanda', fr: 'Rwanda' },
+    city: 'Kigali',
+    lat: -1.94,
+    lon: 30.06,
+  },
+  {
+    id: '120',
+    country: { en: 'Cameroon', fr: 'Cameroun' },
+    city: 'Yaoundé',
+    lat: 3.85,
+    lon: 11.5,
+  },
+  {
     id: '686',
-    country: { en: 'SENEGAL', fr: 'SÉNÉGAL' },
+    country: { en: 'Senegal', fr: 'Sénégal' },
     city: 'Dakar',
-    flag: '🇸🇳',
     lat: 14.72,
     lon: -17.47,
   },
   {
     id: '324',
-    country: { en: 'GUINEA', fr: 'GUINÉE' },
+    country: { en: 'Guinea', fr: 'Guinée' },
     city: 'Conakry',
-    flag: '🇬🇳',
     lat: 9.64,
     lon: -13.58,
   },
   {
     id: '204',
-    country: { en: 'BENIN', fr: 'BÉNIN' },
+    country: { en: 'Benin', fr: 'Bénin' },
     city: 'Cotonou',
-    flag: '🇧🇯',
     lat: 6.37,
     lon: 2.39,
   },
   {
     id: '566',
-    country: { en: 'NIGERIA', fr: 'NIGÉRIA' },
+    country: { en: 'Nigeria', fr: 'Nigéria' },
     city: 'Lagos',
-    flag: '🇳🇬',
     lat: 6.52,
     lon: 3.38,
   },
   {
-    id: '120',
-    country: { en: 'CAMEROON', fr: 'CAMEROUN' },
-    city: 'Yaoundé',
-    flag: '🇨🇲',
-    lat: 3.85,
-    lon: 11.5,
-  },
-  {
-    id: '646',
-    country: { en: 'RWANDA', fr: 'RWANDA' },
-    city: 'Kigali',
-    flag: '🇷🇼',
-    lat: -1.94,
-    lon: 30.06,
-  },
-  {
     id: '262',
-    country: { en: 'DJIBOUTI', fr: 'DJIBOUTI' },
+    country: { en: 'Djibouti', fr: 'Djibouti' },
     city: 'Djibouti',
-    flag: '🇩🇯',
     lat: 11.59,
     lon: 43.15,
   },
+  {
+    id: '504',
+    country: { en: 'Morocco', fr: 'Maroc' },
+    city: 'Casablanca',
+    lat: 33.57,
+    lon: -7.59,
+  },
+  {
+    id: '478',
+    country: { en: 'Mauritania', fr: 'Mauritanie' },
+    city: 'Nouakchott',
+    lat: 18.07,
+    lon: -15.96,
+  },
+  {
+    id: '508',
+    country: { en: 'Mozambique', fr: 'Mozambique' },
+    city: 'Maputo',
+    lat: -25.96,
+    lon: 32.57,
+  },
 ];
 
-// Capital flow corridors connecting IMAAD's operating hubs across Africa
+// Capital flow corridors connecting IMAAD's pan-African footprint
 const CORRIDOR_PAIRS: [number, number][] = [
-  [1, 2], // Dakar -> Conakry
-  [2, 0], // Conakry -> Abidjan
-  [0, 3], // Abidjan -> Cotonou
-  [0, 4], // Abidjan -> Lagos
-  [4, 5], // Lagos -> Yaoundé
-  [5, 6], // Yaoundé -> Kigali
-  [6, 7], // Kigali -> Djibouti
-  [0, 6], // Abidjan -> Kigali (transcontinental spine)
+  [8, 9], // Casablanca -> Nouakchott
+  [9, 3], // Nouakchott -> Dakar
+  [3, 4], // Dakar -> Conakry
+  [4, 0], // Conakry -> Abidjan
+  [0, 5], // Abidjan -> Cotonou
+  [0, 6], // Abidjan -> Lagos
+  [6, 2], // Lagos -> Yaoundé
+  [2, 1], // Yaoundé -> Kigali
+  [1, 7], // Kigali -> Djibouti
+  [1, 10], // Kigali -> Maputo
+  [0, 1], // Abidjan -> Kigali (pan-African spine)
 ];
 
 /**
@@ -391,7 +407,6 @@ const HubBeacon: React.FC<{
             className="flex items-center gap-1.5 whitespace-nowrap rounded border border-[#E5C158]/85 bg-[#040812]/95 px-3 py-1.5 shadow-[0_6px_24px_rgba(0,0,0,0.92),0_0_18px_rgba(201,162,77,0.45)] backdrop-blur-md transition-opacity duration-300"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[#F3D98B] shadow-[0_0_8px_#F3D98B]" />
-            <span className="text-xs leading-none">{hub.flag}</span>
             <span className="font-mono text-[11px] font-bold tracking-[0.14em] text-white uppercase">
               {hub.country[lang]}
             </span>

@@ -123,8 +123,8 @@ export const PortalPreloader: React.FC<PortalPreloaderProps> = ({
               className="mt-6 max-w-xs sm:max-w-none font-display text-[11px] leading-relaxed tracking-[0.22em] text-gold-300 uppercase sm:text-sm sm:tracking-[0.28em]"
             >
               {lang === 'en'
-                ? 'CATALYST FOR SOVEREIGNTY & SUSTAINABLE GROWTH'
-                : 'CATALYSEUR DE SOUVERAINETÉ & CROISSANCE DURABLE'}
+                ? 'CATALYST FOR SOVEREIGNTY AND SUSTAINABLE GROWTH'
+                : 'CATALYSEUR DE LA SOUVERAINETÉ ET DE LA CROISSANCE DURABLE'}
             </motion.p>
 
             {/* Minimal Luxury Loading Bar & Counter */}

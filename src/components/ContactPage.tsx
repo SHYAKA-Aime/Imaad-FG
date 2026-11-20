@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, CheckCircle2, ArrowLeft } from 'lucide-react';
-import { Language } from '../data/imaadData';
+import { Mail, CheckCircle2, ArrowLeft, MapPin, Phone, ExternalLink } from 'lucide-react';
+import { Language, OFFICIAL_OFFICES } from '../data/imaadData';
 import { soundEngine } from '../utils/soundEngine';
 
 interface ContactPageProps {
@@ -97,6 +97,49 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   infos@imaadholding.com
                 </a>
               </div>
+            </div>
+
+            {/* Official Headquarters & Regional Office Details (from CEO Reference) */}
+            <div className="mt-8 space-y-4">
+              {OFFICIAL_OFFICES.map((office) => (
+                <div
+                  key={office.id}
+                  className="rounded-md border border-[#E6DFD1] border-t-2 border-t-[#C09A4B] bg-[#FAF8F3] p-5"
+                >
+                  <div className="font-mono text-[10px] font-semibold tracking-[0.16em] text-[#A68032] uppercase">
+                    {office.entityLabel[lang]}
+                  </div>
+                  <div className="mt-1 font-serif text-base font-bold text-[#0B1528]">
+                    {office.cityCountry[lang]}
+                  </div>
+                  <div className="mt-2.5 flex items-start gap-2.5 text-xs leading-relaxed text-slate-600">
+                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#C09A4B]" />
+                    <div>
+                      {office.addressLines.map((line, i) => (
+                        <div key={i}>{line}</div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mt-2.5 flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-[#E6DFD1]">
+                    <a
+                      href={`tel:${office.phone.replace(/\s+/g, '')}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0B1528] hover:text-[#A68032] transition-colors"
+                    >
+                      <Phone className="h-3.5 w-3.5 text-[#C09A4B]" />
+                      <span>{office.phone}</span>
+                    </a>
+                    <a
+                      href={office.mapUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 font-mono text-[10px] font-semibold tracking-[0.14em] text-[#A68032] uppercase underline underline-offset-4 hover:text-[#0B1528] transition-colors"
+                    >
+                      <span>{lang === 'en' ? 'View on map' : 'Voir sur la carte'}</span>
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
 
