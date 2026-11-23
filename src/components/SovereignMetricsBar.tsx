@@ -10,6 +10,7 @@ interface SovereignMetricsBarProps {
 export const SovereignMetricsBar: React.FC<SovereignMetricsBarProps> = ({
   lang,
 }) => {
+  // Exact official brochure figures (with "à fin 2026" removed per Management guidance) + 9 Offices
   const metrics = [
     {
       value: lang === 'fr' ? '+1 Md €' : '+€1 Bn',
@@ -24,10 +25,7 @@ export const SovereignMetricsBar: React.FC<SovereignMetricsBarProps> = ({
     },
     {
       value: lang === 'fr' ? '+3,5 Mds €' : '+€3.5 Bn',
-      label:
-        lang === 'fr'
-          ? 'Portefeuille projets à fin 2026'
-          : 'Project portfolio by end of 2026',
+      label: lang === 'fr' ? 'Portefeuille de projets' : 'Project portfolio',
     },
     {
       value: '24',
@@ -45,26 +43,25 @@ export const SovereignMetricsBar: React.FC<SovereignMetricsBarProps> = ({
   return (
     <section
       id="metrics"
-      className="relative z-20 border-y border-[#C4BDB0] bg-[#DDD8CE] text-[#0B1528]"
+      className="relative z-20 border-b border-[#E5DFD3] bg-[#F8F6F2] text-[#0E1B2E]"
     >
-      {/* Official Brochure Key Figures + 9 Offices (Medium Warm Stone Mode) */}
-      <div className="mx-auto max-w-[1440px] px-5 py-9 sm:px-8 md:px-12 md:py-12">
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8 lg:grid-cols-5">
+      <div className="mx-auto max-w-[1360px] px-5 py-12 sm:px-10 md:py-16 lg:px-16">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
           {metrics.map((metric, idx) => (
             <motion.div
               key={metric.label}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className={`border-l-2 border-[#B38832] pl-4 sm:pl-5 ${
+              transition={{ duration: 0.45, delay: idx * 0.06 }}
+              className={`border-l border-[#C1A258] pl-5 ${
                 idx === 4 ? 'col-span-2 sm:col-span-1' : ''
               }`}
             >
-              <div className="font-heading text-2xl font-bold tracking-tight text-[#0B1528] sm:text-3xl lg:text-[32px]">
+              <div className="font-serif text-3xl font-medium tracking-tight text-[#0E1B2E] sm:text-[34px]">
                 {metric.value}
               </div>
-              <div className="mt-2 font-mono text-[10px] font-semibold tracking-[0.14em] text-[#475569] uppercase leading-snug">
+              <div className="mt-2 font-sans text-xs leading-snug text-[#4B586B]">
                 {metric.label}
               </div>
             </motion.div>

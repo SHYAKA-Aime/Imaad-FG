@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Globe2, Mail, Send, X } from 'lucide-react';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, X } from "lucide-react";
 import {
   ExcellenceModuleData,
   Language,
   NINE_OFFICES_LIST,
   ProjectCardData,
-  REGIONAL_HUBS,
-} from '../data/imaadData';
-import { HudButton, VertexDots } from './ui/BlueprintPrimitives';
-import { soundEngine } from '../utils/soundEngine';
+} from "../data/imaadData";
+import { HudButton } from "./ui/BlueprintPrimitives";
+import { soundEngine } from "../utils/soundEngine";
 
 interface ContactAndFooterProps {
   lang: Language;
   activeDossier: {
-    type: 'module' | 'project' | 'submit' | null;
+    type: "module" | "project" | "submit" | null;
     module?: ExcellenceModuleData;
     project?: ProjectCardData;
   };
   onCloseDossier: () => void;
   onOpenSubmitModal: () => void;
+  onNavigateSection?: (targetHash: string) => void;
   onNavigateContact?: () => void;
   onNavigateTeam?: () => void;
   onNavigateService?: (serviceId: string) => void;
@@ -31,21 +31,13 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
   activeDossier,
   onCloseDossier,
   onOpenSubmitModal,
+  onNavigateSection,
   onNavigateContact,
   onNavigateTeam,
   onNavigateService,
   onNavigateProjects,
 }) => {
-  const [selectedHub, setSelectedHub] = useState(REGIONAL_HUBS[0]);
-  const [contactSent, setContactSent] = useState(false);
   const [modalFormSent, setModalFormSent] = useState(false);
-
-  const handleMainContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    soundEngine.playPortalChime();
-    setContactSent(true);
-    setTimeout(() => setContactSent(false), 6000);
-  };
 
   const handleModalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,96 +51,104 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
 
   return (
     <>
-      <footer id="contact" className="border-t border-white/10 bg-obsidian-950 pt-14 pb-10 sm:pt-20">
-        <div className="mx-auto max-w-[1360px] px-5 sm:px-8 md:px-9">
-          <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 sm:grid-cols-2 sm:gap-12 sm:pb-14 lg:grid-cols-[1.3fr_0.85fr_1fr_1.15fr]">
-            {/* Col 1: Brand, Email & Wireframe Socials */}
+      <footer
+        id="contact"
+        className="border-t border-[#F8F6F2]/10 bg-[#0E1B2E] pt-16 pb-10 text-[#F8F6F2] sm:pt-20"
+      >
+        <div className="mx-auto max-w-[1360px] px-5 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-1 gap-10 border-b border-[#F8F6F2]/15 pb-12 sm:grid-cols-2 sm:gap-12 sm:pb-14 lg:grid-cols-[1.35fr_0.85fr_1fr_1.15fr]">
+            {/* Col 1: Brand, Email & LinkedIn Only */}
             <div>
               <div className="flex items-center gap-3.5">
                 <img
                   src="/logo-imaad.svg"
-                  alt="IMAAD Financial Group"
-                  className="h-10 w-auto object-contain drop-shadow-[0_0_12px_rgba(201,162,77,0.3)]"
+                  alt="Imaad Financial Group"
+                  className="h-11 w-auto object-contain"
                 />
                 <div>
-                  <div className="font-display text-xs font-bold tracking-[0.2em] text-gold-300">
-                    IMAAD FINANCIAL GROUP
+                  <div className="font-serif text-sm font-semibold tracking-[0.12em] text-[#C1A258]">
+                    Imaad Financial Group
                   </div>
-                  <div className="text-xs text-slate-400">
-                    {lang === 'en'
-                      ? 'Catalyst for sovereignty and sustainable growth'
-                      : 'Catalyseur de la souveraineté et de la croissance durable'}
+                  <div className="mt-0.5 font-sans text-xs text-[#D8DDE6]/80">
+                    {lang === "en"
+                      ? "Catalyst for sovereignty and sustainable growth"
+                      : "Catalyseur de la souveraineté et de la croissance durable"}
                   </div>
                 </div>
               </div>
 
               <a
                 href="mailto:infos@imaadholding.com"
-                className="mt-5 inline-block text-sm text-white underline underline-offset-4 transition-colors hover:text-gold-300"
+                className="mt-5 inline-block font-sans text-sm text-[#F8F6F2] underline underline-offset-4 transition-colors hover:text-[#C1A258]"
               >
                 infos@imaadholding.com
               </a>
 
+              {/* LinkedIn Only (per Management feedback) */}
               <div className="mt-6">
-                <div className="group relative inline-flex border border-white/15">
-                  <VertexDots />
-                  <a
-                    href="https://www.linkedin.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="LinkedIn"
-                    className="flex h-11 w-11 items-center justify-center border-r border-white/15 text-slate-400 transition-colors hover:bg-gold-500/15 hover:text-gold-300"
+                <a
+                  href="https://www.linkedin.com/company/104942881/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn — Imaad Financial Group"
+                  className="inline-flex items-center gap-2.5 border border-[#F8F6F2]/20 bg-[#111F38] px-4 py-2.5 font-sans text-xs font-semibold tracking-[0.14em] text-[#D8DDE6] uppercase transition-colors hover:border-[#C1A258] hover:text-[#C1A258]"
+                >
+                  <svg
+                    className="h-4 w-4 fill-current"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
                   >
-                    <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://x.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="X (Twitter)"
-                    className="flex h-11 w-11 items-center justify-center border-r border-white/15 text-slate-400 transition-colors hover:bg-gold-500/15 hover:text-gold-300"
-                  >
-                    <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                  </a>
-                  <a
-                    href="https://www.instagram.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Instagram"
-                    className="flex h-11 w-11 items-center justify-center text-slate-400 transition-colors hover:bg-gold-500/15 hover:text-gold-300"
-                  >
-                    <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
-                    </svg>
-                  </a>
-                </div>
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                  </svg>
+                  <span>LinkedIn</span>
+                </a>
               </div>
             </div>
 
             {/* Col 2: Sitemap */}
             <div>
-              <h4 className="mb-5 font-heading text-sm font-bold text-white">
-                {lang === 'en' ? 'Sitemap' : 'Plan du Site'}
+              <h4 className="mb-5 font-serif text-base font-medium text-[#F8F6F2]">
+                {lang === "en" ? "Sitemap" : "Plan du site"}
               </h4>
-              <ul className="space-y-2.5 text-xs text-slate-400">
+              <ul className="space-y-2.5 font-sans text-xs text-[#D8DDE6]/80">
                 <li>
-                  <a href="#mission" className="transition-colors hover:text-gold-300">
-                    {lang === 'en' ? 'About Us & Mission' : 'À Propos & Mission'}
-                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playClick();
+                      if (onNavigateSection) onNavigateSection("#mission");
+                    }}
+                    className="cursor-pointer text-left transition-colors hover:text-[#C1A258]"
+                  >
+                    {lang === "en" ? "About us" : "À propos"}
+                  </button>
                 </li>
                 <li>
-                  <a href="#responsibility" className="transition-colors hover:text-gold-300">
-                    {lang === 'en' ? 'Corporate Responsibility' : 'Responsabilité Sociétale'}
-                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playClick();
+                      if (onNavigateSection)
+                        onNavigateSection("#responsibility");
+                    }}
+                    className="cursor-pointer text-left transition-colors hover:text-[#C1A258]"
+                  >
+                    {lang === "en"
+                      ? "Corporate responsibility"
+                      : "Responsabilité sociétale"}
+                  </button>
                 </li>
                 <li>
-                  <a href="#excellence" className="transition-colors hover:text-gold-300">
-                    {lang === 'en' ? 'Areas of Excellence' : 'Domaines d’Excellence'}
-                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundEngine.playClick();
+                      if (onNavigateSection) onNavigateSection("#excellence");
+                    }}
+                    className="cursor-pointer text-left transition-colors hover:text-[#C1A258]"
+                  >
+                    {lang === "en" ? "Services" : "Services"}
+                  </button>
                 </li>
                 <li>
                   <button
@@ -157,9 +157,11 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                       soundEngine.playClick();
                       if (onNavigateProjects) onNavigateProjects();
                     }}
-                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                    className="cursor-pointer text-left transition-colors hover:text-[#C1A258]"
                   >
-                    {lang === 'en' ? 'Projects & Impact' : 'Projets & Impact'}
+                    {lang === "en"
+                      ? "Projects and impact"
+                      : "Projets et impact"}
                   </button>
                 </li>
                 <li>
@@ -169,30 +171,30 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                       soundEngine.playClick();
                       if (onNavigateTeam) onNavigateTeam();
                     }}
-                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                    className="cursor-pointer text-left transition-colors hover:text-[#C1A258]"
                   >
-                    {lang === 'en' ? 'Governance & Team' : 'Gouvernance & Équipe'}
+                    {lang === "en" ? "Team" : "Équipe"}
                   </button>
                 </li>
               </ul>
             </div>
 
-            {/* Col 3: Areas of Excellence (Exact Brochure Order, linked to dedicated Service Detail pages) */}
+            {/* Col 3: Services */}
             <div>
-              <h4 className="mb-5 font-heading text-sm font-bold text-white">
-                {lang === 'en' ? 'Areas of Excellence' : 'Domaines d’Excellence'}
+              <h4 className="mb-5 font-serif text-base font-medium text-[#F8F6F2]">
+                {lang === "en" ? "Services" : "Services"}
               </h4>
-              <ul className="space-y-2.5 text-xs text-slate-400">
+              <ul className="space-y-2.5 font-sans text-xs text-[#D8DDE6]/80">
                 <li>
                   <button
                     type="button"
                     onClick={() => {
                       soundEngine.playClick();
-                      if (onNavigateService) onNavigateService('excellence-01');
+                      if (onNavigateService) onNavigateService("excellence-01");
                     }}
-                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                    className="cursor-pointer text-left transition-colors hover:text-[#C1A258]"
                   >
-                    01. {lang === 'en' ? 'Sovereign Debt' : 'Dette Souveraine'}
+                    {lang === "en" ? "Sovereign debt" : "Dette souveraine"}
                   </button>
                 </li>
                 <li>
@@ -200,11 +202,11 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                     type="button"
                     onClick={() => {
                       soundEngine.playClick();
-                      if (onNavigateService) onNavigateService('excellence-02');
+                      if (onNavigateService) onNavigateService("excellence-02");
                     }}
-                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                    className="cursor-pointer text-left transition-colors hover:text-[#C1A258]"
                   >
-                    02. Corporate &amp; Trade Finance
+                    Corporate &amp; Trade Finance
                   </button>
                 </li>
                 <li>
@@ -212,14 +214,16 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                     type="button"
                     onClick={() => {
                       soundEngine.playClick();
-                      if (onNavigateService) onNavigateService('excellence-03');
+                      if (onNavigateService) onNavigateService("excellence-03");
                     }}
-                    className="cursor-pointer text-left transition-colors hover:text-gold-300"
+                    className="cursor-pointer text-left transition-colors hover:text-[#C1A258]"
                   >
-                    03. {lang === 'en' ? 'Public-Private Partnerships' : 'Partenariats Public-Privé'}
+                    {lang === "en"
+                      ? "Public-private partnerships"
+                      : "Partenariats public-privé"}
                   </button>
                 </li>
-                <li>
+                <li className="pt-1">
                   <button
                     type="button"
                     onClick={() => {
@@ -230,23 +234,23 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                         onOpenSubmitModal();
                       }
                     }}
-                    className="cursor-pointer text-left text-gold-300 underline underline-offset-4 hover:text-white"
+                    className="cursor-pointer text-left text-[#C1A258] underline underline-offset-4 hover:text-[#F8F6F2]"
                   >
-                    {lang === 'en' ? 'Submit a Sovereign Mandate' : 'Soumettre un Mandat'}
+                    {lang === "en" ? "Contact us" : "Nous écrire"}
                   </button>
                 </li>
               </ul>
             </div>
 
-            {/* Col 4: 9 Offices Footprint (Clean Text, Zero Emojis) */}
+            {/* Col 4: 9 Offices */}
             <div>
-              <h4 className="mb-5 font-heading text-sm font-bold text-white">
-                {lang === 'en' ? 'Offices (9)' : 'Bureaux (9)'}
+              <h4 className="mb-5 font-serif text-base font-medium text-[#F8F6F2]">
+                {lang === "en" ? "Offices (9)" : "Bureaux (9)"}
               </h4>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-xs text-slate-300">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 font-sans text-xs text-[#D8DDE6]">
                 {NINE_OFFICES_LIST.map((office) => (
                   <div key={office.en} className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 shrink-0 rotate-45 bg-gold-400/80" />
+                    <span className="h-[1px] w-2 shrink-0 bg-[#C1A258]" />
                     <span>{office[lang]}</span>
                   </div>
                 ))}
@@ -254,21 +258,27 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
             </div>
           </div>
 
-          {/* Bottom Legal & Copyright */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
-            <div>&copy; 2026 Imaad Financial Group Ltd &middot; Kigali &middot; Abidjan</div>
+          {/* Bottom Copyright */}
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 font-sans text-xs text-[#9AA6B8]">
+            <div>
+              &copy; 2026 Imaad Financial Group Ltd &middot; Kigali &middot;
+              Abidjan
+            </div>
             <div className="flex flex-wrap gap-6">
-              <a href="mailto:infos@imaadholding.com" className="hover:text-gold-300">
+              <a
+                href="mailto:infos@imaadholding.com"
+                className="transition-colors hover:text-[#C1A258]"
+              >
                 infos@imaadholding.com
               </a>
-              <span className="text-slate-600">www.imaadfg.com</span>
+              <span>www.imaadfg.com</span>
             </div>
           </div>
         </div>
       </footer>
 
       {/* =====================================================================
-          INTERACTIVE MANDATE DOSSIER & PROJECT SUBMISSION MODAL
+          INTERACTIVE MANDATE DOSSIER & SUBMISSION MODAL
       ====================================================================== */}
       <AnimatePresence>
         {activeDossier.type && (
@@ -280,47 +290,44 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
           >
             <div
               onClick={onCloseDossier}
-              className="absolute inset-0 bg-obsidian-950/85 backdrop-blur-md"
+              className="absolute inset-0 bg-[#0E1B2E]/85 backdrop-blur-sm"
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.94, y: 16 }}
+              initial={{ opacity: 0, scale: 0.96, y: 14 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.94, y: 16 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative z-10 max-h-[90vh] w-full max-w-2xl overflow-y-auto border border-gold-400/45 bg-obsidian-900 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.9)] sm:p-10"
+              exit={{ opacity: 0, scale: 0.96, y: 14 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10 max-h-[90vh] w-full max-w-2xl overflow-y-auto border border-[#C1A258]/40 bg-[#111F38] p-6 text-[#F8F6F2] shadow-2xl sm:p-10"
             >
-              <VertexDots color="gold" />
-
-              <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4">
-                <span className="font-mono text-xs tracking-[0.2em] text-gold-300 uppercase">
-                  {activeDossier.type === 'module' && activeDossier.module
+              <div className="mb-6 flex items-center justify-between border-b border-[#F8F6F2]/15 pb-4">
+                <span className="font-sans text-[11px] font-semibold tracking-[0.2em] text-[#C1A258] uppercase">
+                  {activeDossier.type === "module" && activeDossier.module
                     ? activeDossier.module.dossier.tag[lang]
-                    : activeDossier.type === 'project' && activeDossier.project
-                    ? lang === 'en'
-                      ? `MANDATE DOSSIER · ${activeDossier.project.country[lang]}`
-                      : `DOSSIER DE MANDAT · ${activeDossier.project.country[lang]}`
-                    : lang === 'en'
-                    ? 'MANDATE SUBMISSION'
-                    : 'SOUMISSION DE MANDAT'}
+                    : activeDossier.type === "project" && activeDossier.project
+                      ? lang === "en"
+                        ? `Mandate dossier · ${activeDossier.project.country[lang]}`
+                        : `Dossier de mandat · ${activeDossier.project.country[lang]}`
+                      : lang === "en"
+                        ? "Mandate submission"
+                        : "Soumission de mandat"}
                 </span>
                 <button
                   type="button"
                   onClick={onCloseDossier}
-                  className="inline-flex items-center gap-1.5 border border-white/15 px-3 py-1 font-mono text-xs text-slate-400 transition-colors hover:border-gold-400 hover:text-gold-300"
+                  className="inline-flex items-center gap-1.5 border border-[#F8F6F2]/20 px-3 py-1 font-sans text-[11px] font-semibold tracking-[0.14em] text-[#D8DDE6] uppercase transition-colors hover:border-[#C1A258] hover:text-[#C1A258]"
                 >
                   <X className="h-3.5 w-3.5" />
-                  <span>{lang === 'en' ? 'CLOSE' : 'FERMER'}</span>
+                  <span>{lang === "en" ? "Close" : "Fermer"}</span>
                 </button>
               </div>
 
-              {/* CASE 1: EXCELLENCE DIVISION DOSSIER */}
-              {activeDossier.type === 'module' && activeDossier.module && (
+              {activeDossier.type === "module" && activeDossier.module && (
                 <div>
-                  <h3 className="font-display text-xl font-bold tracking-[0.18em] text-white sm:text-2xl">
+                  <h3 className="font-serif text-2xl font-medium text-[#F8F6F2]">
                     {activeDossier.module.title[lang]}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                  <p className="mt-3 font-sans text-sm leading-relaxed text-[#D8DDE6]">
                     {activeDossier.module.dossier.structureNote[lang]}
                   </p>
 
@@ -328,12 +335,12 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                     {activeDossier.module.dossier.metrics.map((m, idx) => (
                       <div
                         key={idx}
-                        className="border border-white/10 bg-white/[0.02] p-3.5"
+                        className="border border-[#F8F6F2]/15 bg-[#0E1B2E] p-4"
                       >
-                        <span className="block font-mono text-[10px] tracking-[0.15em] text-slate-400">
+                        <span className="block font-sans text-[10px] font-semibold tracking-[0.16em] text-[#C1A258] uppercase">
                           {m.label[lang]}
                         </span>
-                        <span className="mt-1 block font-heading text-sm font-semibold text-gold-200">
+                        <span className="mt-1 block font-sans text-sm font-medium text-[#F8F6F2]">
                           {m.value[lang]}
                         </span>
                       </div>
@@ -341,7 +348,7 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                   </div>
 
                   <HudButton
-                    variant="gold"
+                    tone="on-navy"
                     fullWidth
                     onClick={() => {
                       onCloseDossier();
@@ -352,26 +359,20 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                       }
                     }}
                   >
-                    {lang === 'en'
-                      ? 'INITIATE A MANDATE IN THIS DIVISION'
-                      : 'SOUMETTRE UN MANDAT DANS CE PÔLE'}
+                    {lang === "en"
+                      ? "Initiate a mandate in this division"
+                      : "Soumettre un mandat dans ce pôle"}
                   </HudButton>
                 </div>
               )}
 
-              {/* CASE 2: PROJECT CASE STUDY DOSSIER */}
-              {activeDossier.type === 'project' && activeDossier.project && (
+              {activeDossier.type === "project" && activeDossier.project && (
                 <div>
-                  <div className="mb-4 flex items-center gap-3">
-                    <span className="border border-gold-400/50 bg-gold-500/10 px-2 py-0.5 font-mono text-[11px] font-bold tracking-wider text-gold-300">
-                      {activeDossier.project.flag}
-                    </span>
-                    <h3 className="font-display text-xl font-bold tracking-[0.14em] text-white uppercase">
-                      {activeDossier.project.sector[lang]}
-                    </h3>
-                  </div>
+                  <h3 className="mb-4 font-serif text-2xl font-medium text-[#F8F6F2]">
+                    {activeDossier.project.sector[lang]}
+                  </h3>
 
-                  <div className="mb-4 h-48 overflow-hidden border border-white/15">
+                  <div className="mb-5 h-52 overflow-hidden border border-[#F8F6F2]/15">
                     <img
                       src={activeDossier.project.image}
                       alt={activeDossier.project.sector[lang]}
@@ -379,7 +380,7 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                     />
                   </div>
 
-                  <p className="text-sm leading-relaxed text-slate-300">
+                  <p className="font-sans text-sm leading-relaxed text-[#D8DDE6]">
                     {activeDossier.project.description[lang]}
                   </p>
 
@@ -387,12 +388,12 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                     {activeDossier.project.specs.map((s, idx) => (
                       <div
                         key={idx}
-                        className="border border-white/10 bg-white/[0.02] p-3"
+                        className="border border-[#F8F6F2]/15 bg-[#0E1B2E] p-3.5"
                       >
-                        <span className="block font-mono text-[10px] tracking-[0.15em] text-slate-400">
+                        <span className="block font-sans text-[10px] font-semibold tracking-[0.16em] text-[#C1A258] uppercase">
                           {s.label[lang]}
                         </span>
-                        <span className="mt-1 block font-heading text-sm font-semibold text-gold-300">
+                        <span className="mt-1 block font-sans text-sm font-medium text-[#F8F6F2]">
                           {s.value[lang]}
                         </span>
                       </div>
@@ -400,7 +401,7 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                   </div>
 
                   <HudButton
-                    variant="gold"
+                    tone="on-navy"
                     fullWidth
                     onClick={() => {
                       onCloseDossier();
@@ -411,34 +412,33 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                       }
                     }}
                   >
-                    {lang === 'en'
-                      ? 'STRUCTURE A SIMILAR PROJECT'
-                      : 'STRUCTURER UN PROJET SIMILAIRE'}
+                    {lang === "en"
+                      ? "Structure a similar project"
+                      : "Structurer un projet similaire"}
                   </HudButton>
                 </div>
               )}
 
-              {/* CASE 3: SUBMIT A PROJECT MODAL */}
-              {activeDossier.type === 'submit' && (
+              {activeDossier.type === "submit" && (
                 <div>
-                  <h3 className="font-display text-xl font-bold tracking-[0.18em] text-white">
-                    {lang === 'en'
-                      ? 'SUBMIT A SOVEREIGN OR CORPORATE MANDATE'
-                      : 'SOUMETTRE UN MANDAT SOUVERAIN OU CORPORATE'}
+                  <h3 className="font-serif text-2xl font-medium text-[#F8F6F2]">
+                    {lang === "en"
+                      ? "Submit a sovereign or corporate mandate"
+                      : "Soumettre un mandat souverain ou corporate"}
                   </h3>
-                  <p className="mt-2 mb-6 text-xs text-slate-400">
-                    {lang === 'en'
-                      ? 'Direct transmission to the IMAAD Financial Group Executive Structuring Committee.'
-                      : 'Transmission directe au Comité Exécutif de Structuration d’IMAAD Financial Group.'}
+                  <p className="mt-2 mb-6 font-sans text-xs text-[#D8DDE6]/80">
+                    {lang === "en"
+                      ? "Direct transmission to the Imaad Financial Group Executive Structuring Committee."
+                      : "Transmission directe au Comité Exécutif de Structuration d’Imaad Financial Group."}
                   </p>
 
                   {modalFormSent ? (
                     <div className="py-10 text-center">
-                      <CheckCircle2 className="mx-auto mb-3 h-12 w-12 text-emerald-400" />
-                      <div className="font-display text-sm font-bold tracking-[0.2em] text-gold-300">
-                        {lang === 'en'
-                          ? 'MANDATE TRANSMISSION CONFIRMED'
-                          : 'TRANSMISSION DU MANDAT CONFIRMÉE'}
+                      <CheckCircle2 className="mx-auto mb-3 h-11 w-11 text-[#C1A258]" />
+                      <div className="font-serif text-lg font-medium text-[#F8F6F2]">
+                        {lang === "en"
+                          ? "Mandate transmission confirmed"
+                          : "Transmission du mandat confirmée"}
                       </div>
                     </div>
                   ) : (
@@ -447,14 +447,22 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                         <input
                           type="text"
                           required
-                          placeholder={lang === 'en' ? 'Full Name & Title *' : 'Nom Complet & Fonction *'}
-                          className="w-full border border-white/15 bg-obsidian-950 px-3.5 py-2.5 text-xs text-white focus:border-gold-400 focus:outline-none"
+                          placeholder={
+                            lang === "en"
+                              ? "Full name and title *"
+                              : "Nom complet et fonction *"
+                          }
+                          className="w-full border border-[#F8F6F2]/20 bg-[#0E1B2E] px-3.5 py-2.5 font-sans text-xs text-[#F8F6F2] focus:border-[#C1A258] focus:outline-none"
                         />
                         <input
                           type="email"
                           required
-                          placeholder={lang === 'en' ? 'Official Email *' : 'E-mail officiel *'}
-                          className="w-full border border-white/15 bg-obsidian-950 px-3.5 py-2.5 text-xs text-white focus:border-gold-400 focus:outline-none"
+                          placeholder={
+                            lang === "en"
+                              ? "Official email *"
+                              : "E-mail officiel *"
+                          }
+                          className="w-full border border-[#F8F6F2]/20 bg-[#0E1B2E] px-3.5 py-2.5 font-sans text-xs text-[#F8F6F2] focus:border-[#C1A258] focus:outline-none"
                         />
                       </div>
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -462,37 +470,37 @@ export const ContactAndFooter: React.FC<ContactAndFooterProps> = ({
                           type="text"
                           required
                           placeholder={
-                            lang === 'en'
-                              ? 'Ministry / Institution / Sponsor *'
-                              : 'Ministère / Institution / Promoteur *'
+                            lang === "en"
+                              ? "Ministry / Institution / Sponsor *"
+                              : "Ministère / Institution / Promoteur *"
                           }
-                          className="w-full border border-white/15 bg-obsidian-950 px-3.5 py-2.5 text-xs text-white focus:border-gold-400 focus:outline-none"
+                          className="w-full border border-[#F8F6F2]/20 bg-[#0E1B2E] px-3.5 py-2.5 font-sans text-xs text-[#F8F6F2] focus:border-[#C1A258] focus:outline-none"
                         />
                         <input
                           type="text"
                           required
                           placeholder={
-                            lang === 'en'
-                              ? 'Country & Target Amount (e.g. €100M)'
-                              : 'Pays & Montant cible (ex. 100 M€)'
+                            lang === "en"
+                              ? "Country and target amount (e.g. €100M)"
+                              : "Pays et montant cible (ex. 100 M€)"
                           }
-                          className="w-full border border-white/15 bg-obsidian-950 px-3.5 py-2.5 text-xs text-white focus:border-gold-400 focus:outline-none"
+                          className="w-full border border-[#F8F6F2]/20 bg-[#0E1B2E] px-3.5 py-2.5 font-sans text-xs text-[#F8F6F2] focus:border-[#C1A258] focus:outline-none"
                         />
                       </div>
                       <textarea
                         rows={4}
                         required
                         placeholder={
-                          lang === 'en'
-                            ? 'Executive summary of the project, current feasibility stage, and required structuring role...'
-                            : 'Résumé exécutif du projet, stade de maturité et besoin de structuration...'
+                          lang === "en"
+                            ? "Executive summary of the project and required structuring role..."
+                            : "Résumé exécutif du projet et besoin de structuration..."
                         }
-                        className="w-full border border-white/15 bg-obsidian-950 px-3.5 py-2.5 text-xs text-white focus:border-gold-400 focus:outline-none"
+                        className="w-full border border-[#F8F6F2]/20 bg-[#0E1B2E] px-3.5 py-2.5 font-sans text-xs text-[#F8F6F2] focus:border-[#C1A258] focus:outline-none"
                       />
-                      <HudButton type="submit" variant="gold" fullWidth>
-                        {lang === 'en'
-                          ? 'TRANSMIT MANDATE DOSSIER'
-                          : 'TRANSMETTRE LE DOSSIER'}
+                      <HudButton type="submit" tone="on-navy" fullWidth>
+                        {lang === "en"
+                          ? "Transmit mandate dossier"
+                          : "Transmettre le dossier"}
                       </HudButton>
                     </form>
                   )}

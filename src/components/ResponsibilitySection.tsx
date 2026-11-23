@@ -1,6 +1,6 @@
 import React from 'react';
 import { Language } from '../data/imaadData';
-import { VertexDots } from './ui/BlueprintPrimitives';
+import { HudCorners } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
 
 interface ResponsibilitySectionProps {
@@ -15,50 +15,57 @@ export const ResponsibilitySection: React.FC<ResponsibilitySectionProps> = ({
   return (
     <section
       id="responsibility"
-      className="relative border-y border-[#C4BDB0] bg-[#DDD8CE] py-14 text-[#0B1528] sm:py-20 lg:py-24"
+      className="relative border-b border-[#E5DFD3] bg-[#F8F6F2] py-20 text-[#0E1B2E] sm:py-24 lg:py-28"
     >
-      <div className="mx-auto max-w-[1360px] px-5 sm:px-8 md:px-9">
-        <div className="group relative border border-[#C4BDB0] bg-[#EAE6DE] shadow-[0_14px_40px_rgba(11,21,40,0.08)]">
-          <VertexDots color="gold" />
-
-          {/* Full-width Banner Image */}
-          <div className="relative h-52 overflow-hidden border-b border-[#C4BDB0] sm:h-72 lg:h-80">
+      <div className="mx-auto max-w-[1360px] px-5 sm:px-10 lg:px-16">
+        <div className="border border-[#E5DFD3] bg-[#F1EDE5]/60">
+          {/* Full-width Real Infrastructure Banner */}
+          <div className="relative h-56 overflow-hidden border-b border-[#E5DFD3] sm:h-72 lg:h-80">
             <img
               src="/responsibility-banner.jpg"
-              alt="Clean Solar Energy and Sustainable Infrastructure"
+              alt={
+                lang === 'en'
+                  ? 'Clean solar energy and sustainable infrastructure'
+                  : 'Énergie solaire et infrastructures durables'
+              }
               className="h-full w-full object-cover object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B1528]/35 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0E1B2E]/30 via-transparent to-transparent" />
           </div>
 
-          <div className="flex flex-col items-start justify-between gap-7 p-6 sm:p-10 lg:flex-row lg:items-end lg:gap-8 lg:p-12">
+          <div className="flex flex-col items-start justify-between gap-8 p-7 sm:p-10 lg:flex-row lg:items-end lg:p-12">
             <div className="max-w-3xl">
-              <h2 className="font-display text-lg font-bold tracking-[0.14em] text-[#0B1528] uppercase sm:text-2xl sm:tracking-[0.18em] lg:text-3xl lg:tracking-[0.2em]">
+              <div className="mb-3 font-sans text-[11px] font-semibold tracking-[0.22em] text-[#C1A258] uppercase">
+                {lang === 'en' ? 'Responsibility' : 'Responsabilité'}
+              </div>
+
+              <h2 className="font-serif text-2xl font-medium text-[#0E1B2E] sm:text-3xl lg:text-4xl leading-snug">
                 {lang === 'en'
-                  ? 'CORPORATE & SOVEREIGN RESPONSIBILITY'
-                  : 'RESPONSABILITÉ SOUVERAINE & SOCIÉTALE'}
+                  ? 'Corporate and sovereign responsibility'
+                  : 'Responsabilité souveraine et sociétale'}
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-[#3A4659] sm:text-base">
+
+              <p className="mt-4 font-sans text-sm leading-relaxed text-[#3D4B5E] sm:text-base">
                 {lang === 'en'
-                  ? 'Every mandate structured by IMAAD Financial Group is evaluated not only by its financial bankability, but by its generational impact on communities, human capital, and climate resilience:'
-                  : 'Chaque mandat structuré par IMAAD Financial Group est évalué non seulement selon sa bancabilité financière, mais aussi selon son impact générationnel sur les populations :'}
+                  ? 'Every mandate structured by Imaad Financial Group is evaluated on its financial bankability and its measurable impact on communities and climate resilience:'
+                  : 'Chaque mandat structuré par Imaad Financial Group est évalué selon sa bancabilité financière et son impact mesurable sur les populations et la résilience climatique :'}
               </p>
 
               <ul className="mt-5 space-y-3">
-                <li className="flex items-start gap-3.5 text-sm font-semibold text-[#0B1528]">
-                  <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rotate-45 bg-[#B38832]" />
+                <li className="flex items-start gap-3.5 font-sans text-sm font-medium text-[#0E1B2E]">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-[#C1A258]" />
                   <span>
                     {lang === 'en'
                       ? 'Contribute to improving living conditions through healthcare, potable water, and transport infrastructure.'
                       : 'Contribuer à l’amélioration durable des conditions de vie (santé, eau potable, désenclavement routier).'}
                   </span>
                 </li>
-                <li className="flex items-start gap-3.5 text-sm font-semibold text-[#0B1528]">
-                  <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rotate-45 bg-[#B38832]" />
+                <li className="flex items-start gap-3.5 font-sans text-sm font-medium text-[#0E1B2E]">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-[#C1A258]" />
                   <span>
                     {lang === 'en'
-                      ? 'Enlarge educational, scientific, and industrial prospects for future African generations.'
-                      : "Élargir les perspectives éducatives, universitaires et industrielles des générations futures."}
+                      ? 'Expand educational, scientific, and industrial prospects for future generations.'
+                      : 'Élargir les perspectives éducatives, universitaires et industrielles des générations futures.'}
                   </span>
                 </li>
               </ul>
@@ -71,9 +78,10 @@ export const ResponsibilitySection: React.FC<ResponsibilitySectionProps> = ({
                 if (onNavigateContact) onNavigateContact();
               }}
               onMouseEnter={() => soundEngine.playHover()}
-              className="inline-flex h-11 shrink-0 items-center justify-center rounded bg-[#0B1528] px-7 font-heading text-xs font-bold tracking-[0.18em] text-gold-300 uppercase shadow-[0_8px_22px_rgba(11,21,40,0.18)] transition-all duration-300 hover:bg-[#172847] hover:text-white sm:h-12 sm:px-8"
+              className="group relative inline-flex h-12 shrink-0 items-center justify-center bg-[#0E1B2E] px-7 font-sans text-xs font-semibold tracking-[0.16em] text-[#F8F6F2] uppercase transition-all duration-300 hover:bg-[#162744] hover:text-[#C1A258]"
             >
-              {lang === 'en' ? 'LEARN MORE' : 'EN SAVOIR PLUS'}
+              <HudCorners tone="on-navy" />
+              <span>{lang === 'en' ? 'Learn more' : 'En savoir plus'}</span>
             </button>
           </div>
         </div>

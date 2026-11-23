@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Currency, Language } from '../data/imaadData';
+import { HudCorners } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
 
 interface NavbarProps {
@@ -39,14 +40,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 25);
+      setScrolled(window.scrollY > 24);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile drawer on view change or resize to desktop
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 768) setMobileMenuOpen(false);
@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       setTimeout(() => {
         const el = document.querySelector(targetHash);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 80);
+      }, 90);
     } else {
       const el = document.querySelector(targetHash);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -114,31 +114,31 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`fixed top-0 right-0 left-0 z-[1000] transition-all duration-500 ease-out border-b border-white/10 ${
+      className={`fixed top-0 right-0 left-0 z-[1000] border-b transition-all duration-400 ${
         scrolled || currentView !== 'home' || mobileMenuOpen
-          ? 'bg-[#0B1528]/95 backdrop-blur-xl shadow-[0_12px_35px_rgba(0,0,0,0.6)]'
-          : 'bg-transparent'
+          ? 'border-[#F8F6F2]/15 bg-[#0E1B2E]/95 backdrop-blur-md shadow-[0_8px_28px_rgba(14,27,46,0.35)]'
+          : 'border-[#F8F6F2]/10 bg-[#0E1B2E]/45 backdrop-blur-sm'
       }`}
     >
-      <div className="mx-auto flex h-[74px] sm:h-[88px] md:h-[104px] w-full max-w-[1440px] items-center justify-between px-5 sm:px-8 md:px-14 lg:px-20">
-        {/* Left Brand Logo */}
+      <div className="mx-auto flex h-[74px] sm:h-[86px] md:h-[96px] w-full max-w-[1360px] items-center justify-between px-5 sm:px-10 lg:px-16">
+        {/* Brand Logo */}
         <a
           href="#hero"
           onClick={(e) => {
             e.preventDefault();
             handleNavClick('#hero');
           }}
-          className="group flex shrink-0 items-center py-1.5 transition-transform duration-300 hover:scale-[1.02]"
+          className="group flex shrink-0 items-center py-1.5 transition-opacity duration-300 hover:opacity-90"
         >
           <img
             src="/logo-imaad.svg"
-            alt="IMAAD Financial Group"
-            className="h-11 sm:h-14 md:h-16 lg:h-[70px] w-auto object-contain drop-shadow-[0_0_20px_rgba(201,162,77,0.35)]"
+            alt="Imaad Financial Group"
+            className="h-11 sm:h-14 md:h-16 w-auto object-contain"
           />
         </a>
 
-        {/* Desktop Navigation (md and up) */}
-        <nav className="hidden md:flex items-center gap-5 lg:gap-7">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           <a
             href="#mission"
             onClick={(e) => {
@@ -146,7 +146,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               handleNavClick('#mission');
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className="font-heading text-xs font-semibold tracking-[0.16em] text-slate-300 uppercase transition-colors hover:text-gold-300 lg:text-[13px]"
+            className="font-sans text-xs font-semibold tracking-[0.16em] text-[#D8DDE6] uppercase transition-colors hover:text-[#C1A258]"
           >
             {lang === 'en' ? 'About' : 'À propos'}
           </a>
@@ -158,10 +158,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               handleGoServices();
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className={`font-heading text-xs font-semibold tracking-[0.16em] uppercase transition-colors lg:text-[13px] ${
+            className={`font-sans text-xs font-semibold tracking-[0.16em] uppercase transition-colors ${
               currentView === 'service'
-                ? 'text-gold-300 font-bold'
-                : 'text-slate-300 hover:text-gold-300'
+                ? 'text-[#C1A258]'
+                : 'text-[#D8DDE6] hover:text-[#C1A258]'
             }`}
           >
             Services
@@ -174,10 +174,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               handleGoProjects();
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className={`font-heading text-xs font-semibold tracking-[0.16em] uppercase transition-colors lg:text-[13px] ${
+            className={`font-sans text-xs font-semibold tracking-[0.16em] uppercase transition-colors ${
               currentView === 'projects'
-                ? 'text-gold-300 font-bold'
-                : 'text-slate-300 hover:text-gold-300'
+                ? 'text-[#C1A258]'
+                : 'text-[#D8DDE6] hover:text-[#C1A258]'
             }`}
           >
             {lang === 'en' ? 'Projects' : 'Projets'}
@@ -190,10 +190,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               handleGoTeam();
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className={`font-heading text-xs font-semibold tracking-[0.16em] uppercase transition-colors lg:text-[13px] ${
+            className={`font-sans text-xs font-semibold tracking-[0.16em] uppercase transition-colors ${
               currentView === 'team'
-                ? 'text-gold-300 font-bold'
-                : 'text-slate-300 hover:text-gold-300'
+                ? 'text-[#C1A258]'
+                : 'text-[#D8DDE6] hover:text-[#C1A258]'
             }`}
           >
             {lang === 'en' ? 'Team' : 'Équipe'}
@@ -206,20 +206,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               handleGoContact();
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className={`font-heading text-xs font-semibold tracking-[0.16em] uppercase transition-colors lg:text-[13px] ${
+            className={`font-sans text-xs font-semibold tracking-[0.16em] uppercase transition-colors ${
               currentView === 'contact'
-                ? 'text-gold-300 font-bold'
-                : 'text-slate-300 hover:text-gold-300'
+                ? 'text-[#C1A258]'
+                : 'text-[#D8DDE6] hover:text-[#C1A258]'
             }`}
           >
             Contact
           </a>
 
-          {/* FR | EN Segmented Language Switcher */}
+          {/* FR | EN Switcher */}
           <div
-            className="inline-flex items-center overflow-hidden rounded border border-white/15 bg-white/[0.03]"
+            className="inline-flex items-center border border-[#F8F6F2]/20 bg-[#111F38]"
             role="group"
-            aria-label="Language switcher"
+            aria-label={lang === 'en' ? 'Language switcher' : 'Sélecteur de langue'}
           >
             <button
               type="button"
@@ -227,10 +227,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 soundEngine.playClick();
                 setLang('fr');
               }}
-              className={`px-2.5 py-1 font-mono text-[11px] font-bold tracking-wider transition-colors ${
+              className={`px-2.5 py-1.5 font-sans text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors ${
                 lang === 'fr'
-                  ? 'bg-[#C69C45] text-[#0B1528]'
-                  : 'text-slate-300 hover:text-gold-300'
+                  ? 'bg-[#C1A258] text-[#0E1B2E]'
+                  : 'text-[#D8DDE6] hover:text-[#C1A258]'
               }`}
             >
               FR
@@ -241,32 +241,34 @@ export const Navbar: React.FC<NavbarProps> = ({
                 soundEngine.playClick();
                 setLang('en');
               }}
-              className={`px-2.5 py-1 font-mono text-[11px] font-bold tracking-wider transition-colors ${
+              className={`px-2.5 py-1.5 font-sans text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors ${
                 lang === 'en'
-                  ? 'bg-[#C69C45] text-[#0B1528]'
-                  : 'text-slate-300 hover:text-gold-300'
+                  ? 'bg-[#C1A258] text-[#0E1B2E]'
+                  : 'text-[#D8DDE6] hover:text-[#C1A258]'
               }`}
             >
               EN
             </button>
           </div>
 
-          {/* Gold Action Button */}
+          {/* Unified Institutional CTA Button */}
           <button
             type="button"
             onClick={handleGoContact}
-            className="inline-flex items-center justify-center rounded bg-[#C69C45] px-4 py-2 lg:px-5 font-heading text-xs font-bold tracking-wider text-[#0B1528] uppercase transition-all duration-300 hover:bg-[#d4ab53] hover:shadow-[0_0_20px_rgba(201,162,77,0.4)]"
+            onMouseEnter={() => soundEngine.playHover()}
+            className="group relative inline-flex h-10 items-center justify-center bg-[#C1A258]/15 px-5 font-sans text-[11px] font-semibold tracking-[0.16em] text-[#F8F6F2] uppercase transition-all duration-300 hover:bg-[#C1A258] hover:text-[#0E1B2E]"
           >
-            {lang === 'en' ? 'Contact Us' : 'Nous écrire'}
+            <HudCorners tone="on-navy" />
+            <span>{lang === 'en' ? 'Contact Us' : 'Nous écrire'}</span>
           </button>
         </nav>
 
-        {/* Mobile Controls (< md) */}
+        {/* Mobile Controls */}
         <div className="flex items-center gap-3 md:hidden">
           <div
-            className="inline-flex items-center overflow-hidden rounded border border-white/15 bg-white/[0.04]"
+            className="inline-flex items-center border border-[#F8F6F2]/20 bg-[#111F38]"
             role="group"
-            aria-label="Language switcher"
+            aria-label={lang === 'en' ? 'Language switcher' : 'Sélecteur de langue'}
           >
             <button
               type="button"
@@ -274,10 +276,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 soundEngine.playClick();
                 setLang('fr');
               }}
-              className={`px-2 py-1 font-mono text-[10px] font-bold tracking-wider transition-colors ${
+              className={`px-2.5 py-1 font-sans text-[10px] font-semibold tracking-wider uppercase transition-colors ${
                 lang === 'fr'
-                  ? 'bg-[#C69C45] text-[#0B1528]'
-                  : 'text-slate-300 hover:text-gold-300'
+                  ? 'bg-[#C1A258] text-[#0E1B2E]'
+                  : 'text-[#D8DDE6] hover:text-[#C1A258]'
               }`}
             >
               FR
@@ -288,10 +290,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 soundEngine.playClick();
                 setLang('en');
               }}
-              className={`px-2 py-1 font-mono text-[10px] font-bold tracking-wider transition-colors ${
+              className={`px-2.5 py-1 font-sans text-[10px] font-semibold tracking-wider uppercase transition-colors ${
                 lang === 'en'
-                  ? 'bg-[#C69C45] text-[#0B1528]'
-                  : 'text-slate-300 hover:text-gold-300'
+                  ? 'bg-[#C1A258] text-[#0E1B2E]'
+                  : 'text-[#D8DDE6] hover:text-[#C1A258]'
               }`}
             >
               EN
@@ -313,22 +315,22 @@ export const Navbar: React.FC<NavbarProps> = ({
                 ? 'Open navigation menu'
                 : 'Ouvrir le menu de navigation'
             }
-            className="flex h-10 w-10 items-center justify-center rounded border border-white/15 bg-white/[0.04] text-gold-300 transition-colors hover:border-gold-400/60 hover:bg-gold-500/10"
+            className="flex h-10 w-10 items-center justify-center border border-[#F8F6F2]/20 bg-[#111F38] text-[#C1A258] transition-colors hover:border-[#C1A258]"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
-      {/* Responsive Mobile Navigation Drawer */}
+      {/* Mobile Navigation Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.nav
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-white/10 bg-[#081020]/98 backdrop-blur-xl md:hidden"
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden border-t border-[#F8F6F2]/10 bg-[#0E1B2E] md:hidden"
           >
             <div className="flex flex-col gap-1 px-6 py-5">
               <a
@@ -337,7 +339,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   e.preventDefault();
                   handleNavClick('#mission');
                 }}
-                className="border-b border-white/5 py-3.5 font-heading text-sm font-semibold tracking-[0.2em] text-slate-200 uppercase transition-colors hover:text-gold-300"
+                className="border-b border-[#F8F6F2]/10 py-3.5 font-sans text-xs font-semibold tracking-[0.18em] text-[#F8F6F2] uppercase hover:text-[#C1A258]"
               >
                 {lang === 'en' ? 'About' : 'À propos'}
               </a>
@@ -348,11 +350,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   e.preventDefault();
                   handleGoServices();
                 }}
-                className={`border-b border-white/5 py-3.5 font-heading text-sm font-semibold tracking-[0.2em] uppercase transition-colors ${
-                  currentView === 'service'
-                    ? 'text-gold-300 font-bold'
-                    : 'text-slate-200 hover:text-gold-300'
-                }`}
+                className="border-b border-[#F8F6F2]/10 py-3.5 font-sans text-xs font-semibold tracking-[0.18em] text-[#F8F6F2] uppercase hover:text-[#C1A258]"
               >
                 Services
               </a>
@@ -363,11 +361,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   e.preventDefault();
                   handleGoProjects();
                 }}
-                className={`border-b border-white/5 py-3.5 font-heading text-sm font-semibold tracking-[0.2em] uppercase transition-colors ${
-                  currentView === 'projects'
-                    ? 'text-gold-300 font-bold'
-                    : 'text-slate-200 hover:text-gold-300'
-                }`}
+                className="border-b border-[#F8F6F2]/10 py-3.5 font-sans text-xs font-semibold tracking-[0.18em] text-[#F8F6F2] uppercase hover:text-[#C1A258]"
               >
                 {lang === 'en' ? 'Projects' : 'Projets'}
               </a>
@@ -378,11 +372,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   e.preventDefault();
                   handleGoTeam();
                 }}
-                className={`border-b border-white/5 py-3.5 font-heading text-sm font-semibold tracking-[0.2em] uppercase transition-colors ${
-                  currentView === 'team'
-                    ? 'text-gold-300 font-bold'
-                    : 'text-slate-200 hover:text-gold-300'
-                }`}
+                className="border-b border-[#F8F6F2]/10 py-3.5 font-sans text-xs font-semibold tracking-[0.18em] text-[#F8F6F2] uppercase hover:text-[#C1A258]"
               >
                 {lang === 'en' ? 'Team' : 'Équipe'}
               </a>
@@ -393,11 +383,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   e.preventDefault();
                   handleGoContact();
                 }}
-                className={`border-b border-white/5 py-3.5 font-heading text-sm font-semibold tracking-[0.2em] uppercase transition-colors ${
-                  currentView === 'contact'
-                    ? 'text-gold-300 font-bold'
-                    : 'text-slate-200 hover:text-gold-300'
-                }`}
+                className="border-b border-[#F8F6F2]/10 py-3.5 font-sans text-xs font-semibold tracking-[0.18em] text-[#F8F6F2] uppercase hover:text-[#C1A258]"
               >
                 Contact
               </a>
@@ -405,7 +391,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={handleGoContact}
-                className="mt-4 w-full rounded bg-[#C69C45] py-3 font-heading text-xs font-bold tracking-[0.18em] text-[#0B1528] uppercase transition-colors hover:bg-[#d4ab53]"
+                className="group relative mt-4 w-full bg-[#C1A258] py-3 font-sans text-xs font-semibold tracking-[0.18em] text-[#0E1B2E] uppercase transition-colors hover:bg-[#C1A258]/90"
               >
                 {lang === 'en' ? 'Contact Us' : 'Nous écrire'}
               </button>

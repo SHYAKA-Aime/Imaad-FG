@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Currency, HERO_SLIDES, Language } from '../data/imaadData';
-import { HeroArchitectureScene } from './three/HeroArchitectureScene';
 import { HudCorners } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
 
@@ -11,18 +10,22 @@ interface HeroSectionProps {
   onOpenSubmitModal: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({
-  lang,
-  currency,
-  onOpenSubmitModal: _onOpenSubmitModal,
-}) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const heroRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // Calm scroll parallax on the full-bleed background media
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
 
   const currentSlide = HERO_SLIDES[activeSlide];
 
-  // Auto-cycle hero slides with longer dwell time on the primary bio slide (16s vs 7s)
   useEffect(() => {
-    const duration = currentSlide.durationMs ?? 7000;
+    const duration = currentSlide.durationMs ?? 8000;
     const timer = setTimeout(() => {
       setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     }, duration);
@@ -31,39 +34,50 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <section
+      ref={heroRef}
       id="hero"
-      className="relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-obsidian-950 pt-[74px] sm:pt-[88px] md:pt-[104px]"
+      className="relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0E1B2E] pt-[86px] md:pt-[96px]"
     >
-      {/* 1. Deep Atmospheric Gradient & Ambient Sapphire/Gold Nebula */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(circle at 45% 45%, rgba(30,107,255,0.14) 0%, rgba(3,5,8,0.7) 55%, #030508 100%), linear-gradient(180deg, rgba(3,5,8,0.4) 0%, transparent 40%, rgba(3,5,8,0.85) 100%)',
-          }}
-        />
-        <div className="blueprint-grid-bg absolute inset-0 opacity-25" />
-      </div>
+      {/* 1. Full-Bleed Background Video Stage (Swap /public/hero-bg.mp4 anytime with your final footage) */}
+      <motion.div
+        style={{ y: bgY }}
+        className="pointer-events-none absolute -top-[15%] inset-x-0 bottom-0 z-0"
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/hero-bg-poster.jpg"
+          aria-hidden="true"
+          className="h-full w-full object-cover object-center brightness-[0.55] contrast-[1.12]"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
 
-      {/* 2. Floating 3D WebGL Sovereign Architecture Geodesic Scene */}
-      <HeroArchitectureScene activeSlide={activeSlide} lang={lang} />
-
-      {/* Mobile bottom legibility gradient so text stays crisp under the upper 3D globe */}
+      {/* Deep Dark Low-Opacity Foreground Layer Covering the Entire Hero Video */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[56%] md:hidden"
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{ backgroundColor: 'rgba(6, 12, 22, 0.48)' }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            'linear-gradient(180deg, rgba(3,5,8,0) 0%, rgba(3,5,8,0.78) 38%, rgba(3,5,8,0.96) 100%)',
+            'linear-gradient(180deg, rgba(14,27,46,0.45) 0%, rgba(14,27,46,0.0) 38%, rgba(14,27,46,0.55) 100%)',
         }}
       />
 
-      {/* 3. Main Hero Stage (Mobile: Globe Top / Editorial Bottom | Desktop: Left Rail + Globe + Right Editorial) */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 items-end px-5 pb-6 sm:px-8 md:items-center md:px-12 md:py-8">
-        {/* LEFT VERTICAL RAIL: Mode Switcher (Visible on md and up) */}
+      {/* 2. Main Reference Stage: Far-Left Vertical Rail | Open Center for Video | Middle-Right Editorial Stack */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 items-center px-5 py-10 sm:px-10 md:px-12 lg:px-16">
+        {/* FAR-LEFT VERTICAL RAIL (Desktop) */}
         <aside
-          aria-label={lang === 'en' ? 'Perspective Switcher' : 'Sélecteur de perspective'}
-          className="mr-5 hidden flex-col items-center justify-center gap-6 border-r border-white/10 py-3 pr-3.5 md:mr-10 md:flex lg:mr-14 lg:gap-9 lg:pr-4"
+          aria-label={
+            lang === 'en' ? 'Slide navigation' : 'Navigation des diapositives'
+          }
+          className="hidden flex-col items-center justify-center gap-7 py-2 md:flex lg:gap-9"
         >
           {HERO_SLIDES.map((s, idx) => {
             const isActive = idx === activeSlide;
@@ -76,20 +90,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   setActiveSlide(idx);
                 }}
                 onMouseEnter={() => soundEngine.playHover()}
-                className="group relative flex items-center justify-center py-1.5 px-1"
+                className="group relative flex items-center justify-center px-2.5 py-2"
               >
+                {/* Active Side Hairline Ticks (Reference-inspired, gold #C1A258) */}
                 <span
-                  className={`writing-vertical font-display text-[8px] font-bold tracking-[0.26em] uppercase transition-colors duration-300 lg:text-[9px] ${
+                  className={`pointer-events-none absolute left-0 top-1/2 h-4 w-[1.5px] -translate-y-1/2 bg-[#C1A258] transition-all duration-300 ${
+                    isActive ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
+                  }`}
+                />
+                <span
+                  className={`writing-vertical font-sans text-[10px] font-semibold tracking-[0.24em] uppercase transition-colors duration-300 ${
                     isActive
-                      ? 'text-gold-300'
-                      : 'text-slate-500 hover:text-slate-300'
+                      ? 'text-[#C1A258]'
+                      : 'text-[#F8F6F2]/60 hover:text-[#F8F6F2]'
                   }`}
                 >
                   {s.tabLabel[lang]}
                 </span>
                 <span
-                  className={`absolute top-1/2 -right-[15px] w-[2px] -translate-y-1/2 overflow-hidden bg-white/15 transition-all duration-300 lg:-right-[17px] ${
-                    isActive ? 'h-full opacity-100' : 'h-0 opacity-0'
+                  className={`pointer-events-none absolute right-0 top-1/2 h-full w-[1.5px] -translate-y-1/2 overflow-hidden bg-[#F8F6F2]/15 transition-opacity duration-300 ${
+                    isActive ? 'opacity-100' : 'opacity-0'
                   }`}
                 >
                   {isActive && (
@@ -98,11 +118,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       initial={{ scaleY: 0 }}
                       animate={{ scaleY: 1 }}
                       transition={{
-                        duration: (currentSlide.durationMs ?? 7000) / 1000,
+                        duration: (currentSlide.durationMs ?? 8000) / 1000,
                         ease: 'linear',
                       }}
                       style={{ transformOrigin: 'top' }}
-                      className="block h-full w-full bg-gold-400 shadow-[0_0_12px_#C9A24D]"
+                      className="block h-full w-full bg-[#C1A258]"
                     />
                   )}
                 </span>
@@ -111,10 +131,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           })}
         </aside>
 
-        {/* RIGHT EDITORIAL HERO CONTENT: Compact, Refined, Balanced with 3D Globe */}
-        <div className="flex w-full flex-col items-start pt-[245px] sm:pt-[290px] md:ml-auto md:w-auto md:max-w-[360px] md:pt-0 lg:max-w-md xl:max-w-lg">
-          {/* Mobile Horizontal Perspective Switcher (Visible on < md) */}
-          <div className="mb-3 flex flex-wrap items-center gap-1.5 md:hidden">
+        {/* RIGHT-ALIGNED EDITORIAL BLOCK (Lower-middle right, leaves upper & center-left viewport open for video) */}
+        <div className="ml-auto mt-10 flex w-full max-w-xl flex-col items-end text-right md:mt-24 lg:mt-28 lg:max-w-[740px]">
+          {/* Mobile Horizontal Switcher */}
+          <div className="mb-5 flex flex-wrap justify-end gap-2 md:hidden">
             {HERO_SLIDES.map((s, idx) => {
               const isActive = idx === activeSlide;
               return (
@@ -125,10 +145,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     soundEngine.playClick();
                     setActiveSlide(idx);
                   }}
-                  className={`px-2 py-0.5 font-display text-[8px] font-bold tracking-[0.16em] uppercase transition-all ${
+                  className={`px-2.5 py-1 font-sans text-[10px] font-semibold tracking-[0.14em] uppercase transition-colors ${
                     isActive
-                      ? 'border border-gold-400/60 bg-gold-500/15 text-gold-300'
-                      : 'border border-white/10 text-slate-400'
+                      ? 'bg-[#C1A258] text-[#0E1B2E]'
+                      : 'border border-[#F8F6F2]/25 text-[#F8F6F2]/80'
                   }`}
                 >
                   {s.tabLabel[lang]}
@@ -137,8 +157,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             })}
           </div>
 
-          {/* Silky Masked Editorial Slide Transition (Fixed Stage Height Keeps Buttons Steady) */}
-          <div className="relative min-h-[168px] w-full sm:min-h-[188px]">
+          {/* Compact Masked Sentence-Case Cinzel Headline & Short Subtitle */}
+          <div className="relative min-h-[148px] w-full sm:min-h-[168px]">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={`${currentSlide.id}-${lang}`}
@@ -150,44 +170,54 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   visible: {},
                   exit: {
                     opacity: 0,
-                    y: -12,
-                    filter: 'blur(4px)',
-                    transition: { duration: 0.34, ease: [0.4, 0, 1, 1] },
+                    y: -10,
+                    transition: { duration: 0.3, ease: [0.4, 0, 1, 1] },
                   },
                 }}
-                className="flex w-full flex-col items-start"
+                className="flex w-full flex-col items-end text-right"
               >
-                {/* Primary Bio Slide vs Pillar Slide Headline with Masked Line Curtain Reveal */}
-                {currentSlide.isBioSlide ? (
-                  <h1 className="font-display text-xl font-bold tracking-[0.1em] text-white uppercase sm:text-2xl md:text-[26px] lg:text-[30px] leading-snug">
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 8 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+                    },
+                  }}
+                  className="mb-2.5 font-sans text-[11px] font-semibold tracking-[0.24em] text-[#C1A258] uppercase"
+                >
+                  {currentSlide.eyebrow[lang]}
+                </motion.div>
+
+                <h1 className="font-serif text-3xl font-medium tracking-[0.02em] text-[#F8F6F2] sm:text-4xl lg:text-[46px] leading-[1.16]">
+                  <span className="block overflow-hidden">
+                    <motion.span
+                      className="block"
+                      variants={{
+                        hidden: { y: '105%', opacity: 0 },
+                        visible: {
+                          y: '0%',
+                          opacity: 1,
+                          transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+                        },
+                      }}
+                    >
+                      {currentSlide.line1[lang]}{' '}
+                      <span className="text-[#C1A258]">
+                        {currentSlide.lineGold[lang]}
+                      </span>
+                    </motion.span>
+                  </span>
+                  {currentSlide.line3[lang] && (
                     <span className="block overflow-hidden">
                       <motion.span
                         className="block"
                         variants={{
-                          hidden: { y: '105%', opacity: 0, filter: 'blur(3px)' },
+                          hidden: { y: '105%', opacity: 0 },
                           visible: {
                             y: '0%',
                             opacity: 1,
-                            filter: 'blur(0px)',
-                            transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
-                          },
-                        }}
-                      >
-                        {currentSlide.line1[lang]}{' '}
-                        <span className="text-gold-300">
-                          {currentSlide.lineGold[lang]}
-                        </span>
-                      </motion.span>
-                    </span>
-                    <span className="block overflow-hidden">
-                      <motion.span
-                        className="block"
-                        variants={{
-                          hidden: { y: '105%', opacity: 0, filter: 'blur(3px)' },
-                          visible: {
-                            y: '0%',
-                            opacity: 1,
-                            filter: 'blur(0px)',
                             transition: {
                               duration: 0.72,
                               delay: 0.1,
@@ -199,60 +229,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         {currentSlide.line3[lang]}
                       </motion.span>
                     </span>
-                  </h1>
-                ) : (
-                  <h1 className="overflow-hidden font-display text-xl font-bold tracking-[0.14em] text-white uppercase sm:text-2xl md:text-3xl lg:text-[34px] leading-tight">
-                    <motion.span
-                      className="block"
-                      variants={{
-                        hidden: { y: '105%', opacity: 0, filter: 'blur(3px)' },
-                        visible: {
-                          y: '0%',
-                          opacity: 1,
-                          filter: 'blur(0px)',
-                          transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
-                        },
-                      }}
-                    >
-                      {currentSlide.tabLabel[lang]}
-                    </motion.span>
-                  </h1>
-                )}
+                  )}
+                </h1>
 
-                {/* Delicate Sweeping Gold Accent Hairline */}
-                <motion.div
-                  variants={{
-                    hidden: { scaleX: 0, opacity: 0 },
-                    visible: {
-                      scaleX: 1,
-                      opacity: 1,
-                      transition: {
-                        duration: 0.65,
-                        delay: 0.16,
-                        ease: [0.22, 1, 0.36, 1],
-                      },
-                    },
-                  }}
-                  style={{ transformOrigin: 'left' }}
-                  className="mt-3.5 h-[1px] w-16 bg-gradient-to-r from-gold-400/90 to-transparent"
-                />
-
-                {/* Slide Description with Soft Upward Focus-In Glide */}
                 <motion.p
                   variants={{
-                    hidden: { y: 12, opacity: 0, filter: 'blur(4px)' },
+                    hidden: { y: 10, opacity: 0 },
                     visible: {
                       y: 0,
                       opacity: 1,
-                      filter: 'blur(0px)',
                       transition: {
-                        duration: 0.75,
-                        delay: 0.22,
+                        duration: 0.65,
+                        delay: 0.18,
                         ease: [0.22, 1, 0.36, 1],
                       },
                     },
                   }}
-                  className="mt-3 max-w-md text-xs leading-relaxed text-slate-300 sm:text-[13px]"
+                  className="mt-3.5 max-w-xl font-sans text-xs leading-relaxed text-[#D8DDE6] sm:text-sm lg:max-w-[640px]"
                 >
                   {currentSlide.description[lang]}
                 </motion.p>
@@ -260,40 +253,46 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </AnimatePresence>
           </div>
 
-          {/* Persistent Hero Actions (Unified 2-Corner Low-Opacity White Bracket Style) */}
-          <div className="mt-5 flex flex-wrap items-center gap-3.5 sm:mt-6">
+          {/* Persistent Unified 2-Corner CTA Buttons (Right-Aligned as in reference) */}
+          <div className="mt-6 flex flex-wrap items-center justify-end gap-3.5">
             <a
               href="#excellence"
               onClick={() => soundEngine.playClick()}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative inline-flex h-11 items-center justify-center bg-gold-500/15 px-6 font-display text-[11px] font-bold tracking-[0.18em] text-gold-200 uppercase backdrop-blur-md transition-all duration-300 hover:bg-gold-500/25 hover:text-white sm:h-12 sm:px-7"
+              className="group relative inline-flex h-11 items-center justify-center bg-[#C1A258]/20 px-6 font-sans text-[11px] font-semibold tracking-[0.18em] text-[#F8F6F2] uppercase backdrop-blur-sm transition-all duration-300 hover:bg-[#C1A258] hover:text-[#0E1B2E] sm:h-12 sm:px-7"
             >
-              <HudCorners />
-              <span>{lang === 'en' ? 'Discover our solutions' : 'Découvrir nos solutions'}</span>
+              <HudCorners tone="on-navy" />
+              <span>
+                {lang === 'en' ? 'Discover our solutions' : 'Découvrir nos solutions'}
+              </span>
             </a>
 
             <a
               href="#projects-showcase"
               onClick={() => soundEngine.playClick()}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative inline-flex h-11 items-center justify-center bg-white/[0.04] px-6 font-display text-[11px] font-bold tracking-[0.18em] text-white uppercase backdrop-blur-md transition-all duration-300 hover:bg-white/[0.09] hover:text-gold-200 sm:h-12 sm:px-7"
+              className="group relative inline-flex h-11 items-center justify-center bg-[#F8F6F2]/[0.06] px-6 font-sans text-[11px] font-semibold tracking-[0.18em] text-[#F8F6F2] uppercase backdrop-blur-sm transition-all duration-300 hover:bg-[#F8F6F2]/[0.14] hover:text-[#C1A258] sm:h-12 sm:px-7"
             >
-              <HudCorners />
+              <HudCorners tone="on-navy" />
               <span>{lang === 'en' ? 'See our projects' : 'Voir nos projets'}</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* 4. Minimal Bottom Scroll Prompt (Stats moved down to dedicated SovereignMetricsBar) */}
-      <div className="relative z-10 pb-6 pt-2">
-        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-center md:justify-start px-5 sm:px-8 md:px-12">
+      {/* 3. Minimal Bottom-Left Scroll Prompt (Reference-Matched, Floating Cleanly Over Media) */}
+      <div className="relative z-10 pb-8 pt-2">
+        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 sm:px-10 md:px-12 lg:px-16">
           <a
             href="#metrics"
             onClick={() => soundEngine.playClick()}
-            className="group inline-flex items-center gap-3 font-mono text-[10px] sm:text-[11px] tracking-[0.22em] text-slate-400 uppercase transition-colors hover:text-gold-300"
+            className="group inline-flex flex-col items-start gap-2.5 font-sans text-xs font-normal tracking-[0.06em] text-[#F8F6F2]/80 transition-colors hover:text-[#C1A258]"
           >
-            <span className="h-1.5 w-1.5 rotate-45 bg-gold-400 shadow-[0_0_8px_#C9A24D] transition-transform group-hover:scale-125" />
+            <span className="flex flex-col gap-1.5 pl-0.5">
+              <span className="h-[3px] w-[3px] bg-[#C1A258]" />
+              <span className="h-[3px] w-[3px] bg-[#C1A258]/65" />
+              <span className="h-[3px] w-[3px] bg-[#C1A258]/35" />
+            </span>
             <span>
               {lang === 'en'
                 ? 'Scroll down to explore more'

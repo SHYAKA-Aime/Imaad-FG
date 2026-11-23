@@ -7,6 +7,7 @@ import {
   PROJECTS_PORTFOLIO,
   ProjectCardData,
 } from '../data/imaadData';
+import { HoverBorderTrace, HudCorners } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
 
 interface ProjectsPageProps {
@@ -25,20 +26,22 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
 }) => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
-  // Official brochure business lines in exact order
   const filterTabs = [
-    { id: 'all', label: lang === 'en' ? 'ALL' : 'TOUS' },
+    { id: 'all', label: lang === 'en' ? 'All' : 'Tous' },
     {
       id: 'sovereign',
-      label: lang === 'en' ? 'SOVEREIGN DEBT' : 'DETTE SOUVERAINE',
+      label: lang === 'en' ? 'Sovereign debt' : 'Dette souveraine',
     },
     {
       id: 'corporate',
-      label: 'CORPORATE & TRADE FINANCE',
+      label: 'Corporate & Trade Finance',
     },
     {
       id: 'ppp',
-      label: lang === 'en' ? 'PUBLIC-PRIVATE PARTNERSHIPS (PPP)' : 'PARTENARIATS PUBLIC-PRIVÉ (PPP)',
+      label:
+        lang === 'en'
+          ? 'Public-Private Partnerships (PPP)'
+          : 'Partenariats Public-Privé (PPP)',
     },
   ];
 
@@ -52,48 +55,47 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
         );
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="min-h-screen bg-[#F8F6F2] text-[#0E1B2E]">
       {/* =====================================================================
-          1. TOP HERO SECTION
+          1. NAVY HERO SECTION (#0E1B2E)
       ====================================================================== */}
-      <section className="relative overflow-hidden bg-[#0B1528] pt-24 pb-16 text-white sm:pt-32 sm:pb-24 md:pt-36 md:pb-28">
+      <section className="relative overflow-hidden border-b border-[#F8F6F2]/10 bg-[#0E1B2E] pt-28 pb-16 text-[#F8F6F2] sm:pt-36 sm:pb-24">
         <div className="absolute inset-0 z-0">
           <img
             src="/projects/hydraulique-abidjan-ivory.png"
-            alt="Infrastructure Impact"
-            className="h-full w-full object-cover object-center opacity-35"
+            alt={
+              lang === 'en' ? 'Infrastructure impact' : 'Impact des infrastructures'
+            }
+            className="h-full w-full object-cover object-center opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1528]/95 via-[#0B1528]/85 to-[#0B1528]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,162,77,0.12)_0%,transparent_70%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0E1B2E]/90 via-[#0E1B2E]/80 to-[#0E1B2E]" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-[1360px] px-5 sm:px-10 lg:px-16">
-          {/* Breadcrumb Back Link */}
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-8">
             <button
               type="button"
               onClick={() => {
                 soundEngine.playClick();
                 onBackToHome();
               }}
-              className="group inline-flex items-center gap-2 font-heading text-xs font-semibold tracking-[0.2em] text-[#C9A24D] uppercase transition-colors hover:text-white"
+              className="group inline-flex items-center gap-2 font-sans text-xs font-semibold tracking-[0.16em] text-[#C1A258] uppercase transition-colors hover:text-[#F8F6F2]"
             >
               <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-              <span>{lang === 'en' ? 'BACK TO HOMEPAGE' : 'RETOUR À L’ACCUEIL'}</span>
+              <span>{lang === 'en' ? 'Back to homepage' : 'Retour à l’accueil'}</span>
             </button>
           </div>
 
-          {/* Centered Hero Narrative */}
           <div className="mx-auto max-w-3xl text-center">
-            <div className="font-heading text-xs font-bold tracking-[0.24em] text-[#C9A24D] uppercase sm:text-sm">
-              {lang === 'en' ? 'OUR IMPACT' : 'NOTRE IMPACT'}
+            <div className="font-sans text-[11px] font-semibold tracking-[0.22em] text-[#C1A258] uppercase">
+              {lang === 'en' ? 'Our impact' : 'Notre impact'}
             </div>
 
-            <h1 className="mt-2.5 sm:mt-3 font-serif text-2xl font-bold tracking-tight text-white uppercase sm:text-4xl md:text-5xl lg:text-6xl">
-              {lang === 'en' ? 'PROJECTS & IMPACT' : 'PROJETS & IMPACT'}
+            <h1 className="mt-3 font-serif text-3xl font-medium text-[#F8F6F2] sm:text-4xl lg:text-5xl">
+              {lang === 'en' ? 'Projects and impact' : 'Projets et impact'}
             </h1>
 
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base leading-relaxed text-slate-300 font-light">
+            <p className="mt-5 font-sans text-sm leading-relaxed text-[#D8DDE6] sm:text-base">
               {lang === 'en'
                 ? 'Measurable results, a sustainable vision — proven expertise, transformative projects and a pan-African presence across 10 key sectors.'
                 : 'Des résultats mesurables, une vision durable — une expertise éprouvée, des projets structurants et une présence panafricaine dans 10 secteurs clés.'}
@@ -103,64 +105,57 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
       </section>
 
       {/* =====================================================================
-          2. GOLD STATS RIBBON BAR (EXACT BROCHURE FIGURES + 9 OFFICES)
+          2. GOLD STATS RIBBON (#C1A258 — "à fin 2026" REMOVED)
       ====================================================================== */}
-      <section className="bg-[#C69C45] py-7 sm:py-8 text-[#0B1528] shadow-md">
+      <section className="bg-[#C1A258] py-7 text-[#0E1B2E] sm:py-8">
         <div className="mx-auto max-w-[1360px] px-5 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 gap-5 text-center sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
-            {/* Stat 1 */}
-            <div className="border-b border-[#0B1528]/15 pb-4 sm:border-b-0 sm:pb-0 lg:border-r lg:px-3">
-              <div className="font-serif text-2xl font-extrabold tracking-tight sm:text-[26px] xl:text-[30px] text-[#0B1528] whitespace-nowrap">
+            <div className="border-b border-[#0E1B2E]/15 pb-4 sm:border-b-0 sm:pb-0 lg:border-r lg:px-3">
+              <div className="font-serif text-2xl font-semibold text-[#0E1B2E] sm:text-[28px] whitespace-nowrap">
                 {lang === 'fr' ? '+1 Md €' : '+€1 Bn'}
               </div>
-              <div className="mt-1 font-heading text-[10px] font-bold tracking-wider text-[#0B1528]/85 uppercase sm:text-[11px]">
-                {lang === 'en' ? 'MOBILIZED SINCE 2020' : 'MOBILISÉS DEPUIS 2020'}
+              <div className="mt-1 font-sans text-[11px] font-semibold tracking-[0.12em] text-[#0E1B2E]/85 uppercase">
+                {lang === 'en' ? 'Mobilized since 2020' : 'Mobilisés depuis 2020'}
               </div>
             </div>
 
-            {/* Stat 2 */}
-            <div className="border-b border-[#0B1528]/15 pb-4 sm:border-b-0 sm:pb-0 lg:border-r lg:px-3">
-              <div className="font-serif text-2xl font-extrabold tracking-tight sm:text-[26px] xl:text-[30px] text-[#0B1528]">
+            <div className="border-b border-[#0E1B2E]/15 pb-4 sm:border-b-0 sm:pb-0 lg:border-r lg:px-3">
+              <div className="font-serif text-2xl font-semibold text-[#0E1B2E] sm:text-[28px]">
                 +5
               </div>
-              <div className="mt-1 font-heading text-[10px] font-bold tracking-wider text-[#0B1528]/85 uppercase sm:text-[11px]">
+              <div className="mt-1 font-sans text-[11px] font-semibold tracking-[0.12em] text-[#0E1B2E]/85 uppercase">
                 {lang === 'en'
-                  ? 'PPP PROJECTS COMPLETED OR UNDERWAY'
-                  : 'PROJETS PPP FINALISÉS OU EN COURS'}
+                  ? 'PPP projects completed or underway'
+                  : 'Projets PPP finalisés ou en cours'}
               </div>
             </div>
 
-            {/* Stat 3 */}
-            <div className="border-b border-[#0B1528]/15 pb-4 sm:border-b-0 sm:pb-0 lg:border-r lg:px-3">
-              <div className="font-serif text-2xl font-extrabold tracking-tight sm:text-[26px] xl:text-[30px] text-[#0B1528] whitespace-nowrap">
+            <div className="border-b border-[#0E1B2E]/15 pb-4 sm:border-b-0 sm:pb-0 lg:border-r lg:px-3">
+              <div className="font-serif text-2xl font-semibold text-[#0E1B2E] sm:text-[28px] whitespace-nowrap">
                 {lang === 'fr' ? '+3,5 Mds €' : '+€3.5 Bn'}
               </div>
-              <div className="mt-1 font-heading text-[10px] font-bold tracking-wider text-[#0B1528]/85 uppercase sm:text-[11px]">
-                {lang === 'en'
-                  ? 'PROJECT PORTFOLIO BY END OF 2026'
-                  : 'PORTEFEUILLE PROJETS À FIN 2026'}
+              <div className="mt-1 font-sans text-[11px] font-semibold tracking-[0.12em] text-[#0E1B2E]/85 uppercase">
+                {lang === 'en' ? 'Project portfolio' : 'Portefeuille de projets'}
               </div>
             </div>
 
-            {/* Stat 4 */}
-            <div className="border-b border-[#0B1528]/15 pb-4 sm:border-b-0 sm:pb-0 lg:border-r lg:px-3">
-              <div className="font-serif text-2xl font-extrabold tracking-tight sm:text-[26px] xl:text-[30px] text-[#0B1528]">
+            <div className="border-b border-[#0E1B2E]/15 pb-4 sm:border-b-0 sm:pb-0 lg:border-r lg:px-3">
+              <div className="font-serif text-2xl font-semibold text-[#0E1B2E] sm:text-[28px]">
                 24
               </div>
-              <div className="mt-1 font-heading text-[10px] font-bold tracking-wider text-[#0B1528]/85 uppercase sm:text-[11px]">
+              <div className="mt-1 font-sans text-[11px] font-semibold tracking-[0.12em] text-[#0E1B2E]/85 uppercase">
                 {lang === 'en'
-                  ? 'COUNTRIES COVERED IN SUB-SAHARAN AFRICA'
-                  : 'PAYS COUVERTS EN AFRIQUE SUBSAHARIENNE'}
+                  ? 'Countries in Sub-Saharan Africa'
+                  : 'Pays en Afrique subsaharienne'}
               </div>
             </div>
 
-            {/* Stat 5 */}
             <div className="sm:col-span-2 lg:col-span-1 lg:px-3">
-              <div className="font-serif text-2xl font-extrabold tracking-tight sm:text-[26px] xl:text-[30px] text-[#0B1528]">
+              <div className="font-serif text-2xl font-semibold text-[#0E1B2E] sm:text-[28px]">
                 9
               </div>
-              <div className="mt-1 font-heading text-[10px] font-bold tracking-wider text-[#0B1528]/85 uppercase sm:text-[11px]">
-                {lang === 'en' ? 'OFFICES' : 'BUREAUX'}
+              <div className="mt-1 font-sans text-[11px] font-semibold tracking-[0.12em] text-[#0E1B2E]/85 uppercase">
+                {lang === 'en' ? 'Offices' : 'Bureaux'}
               </div>
             </div>
           </div>
@@ -168,14 +163,14 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
       </section>
 
       {/* =====================================================================
-          3. MAIN CONTENT: FILTERS, HEADER & 9 OFFICIAL BROCHURE PROJECTS
+          3. IVORY PORTFOLIO GRID (#F8F6F2)
       ====================================================================== */}
-      <section className="bg-white py-12 sm:py-16 lg:py-20">
+      <section className="bg-[#F8F6F2] py-16 sm:py-24">
         <div className="mx-auto max-w-[1360px] px-5 sm:px-10 lg:px-16">
-          {/* Rounded Pill Filter Bar */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 border-b border-slate-200 pb-6 sm:pb-8">
-            <span className="mr-1 sm:mr-2 w-full sm:w-auto font-heading text-xs font-bold tracking-wider text-slate-800 uppercase">
-              {lang === 'en' ? 'BUSINESS LINES:' : 'MÉTIERS :'}
+          {/* Interactive Filter Bar */}
+          <div className="flex flex-wrap items-center gap-2.5 border-b border-[#E5DFD3] pb-8">
+            <span className="mr-2 w-full font-sans text-[11px] font-semibold tracking-[0.18em] text-[#6B7688] uppercase sm:w-auto">
+              {lang === 'en' ? 'Business lines:' : 'Métiers :'}
             </span>
 
             {filterTabs.map((tab) => {
@@ -188,10 +183,10 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                     soundEngine.playClick();
                     setActiveFilter(tab.id);
                   }}
-                  className={`rounded-full px-3.5 py-1.5 sm:px-5 sm:py-2 font-heading text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all duration-200 ${
+                  className={`border px-4 py-2 font-sans text-[11px] font-semibold tracking-[0.14em] uppercase transition-all duration-200 ${
                     isActive
-                      ? 'border border-[#0B1528] bg-[#0B1528] text-white shadow-sm'
-                      : 'border border-slate-300 bg-white text-slate-700 hover:border-slate-800 hover:text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04)]'
+                      ? 'border-[#0E1B2E] bg-[#0E1B2E] text-[#F8F6F2]'
+                      : 'border-[#D4CCC0] bg-[#FFFFFF] text-[#3D4B5E] hover:border-[#0E1B2E] hover:text-[#0E1B2E]'
                   }`}
                 >
                   {tab.label}
@@ -200,17 +195,15 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
             })}
           </div>
 
-          {/* Sub-header below filters */}
           <div className="mt-12 mb-10">
-            <div className="font-heading text-xs font-bold tracking-[0.2em] text-[#C69C45] uppercase">
-              {lang === 'en' ? 'KEY PROJECTS' : 'QUELQUES PROJETS'}
+            <div className="font-sans text-[11px] font-semibold tracking-[0.22em] text-[#C1A258] uppercase">
+              {lang === 'en' ? 'Key projects' : 'Quelques projets'}
             </div>
-            <h2 className="mt-1 font-serif text-2xl font-bold tracking-tight text-[#0B1528] uppercase sm:text-3xl lg:text-4xl">
-              {lang === 'en' ? 'PROJECTS & IMPACT' : 'PROJETS & IMPACT'}
+            <h2 className="mt-1.5 font-serif text-2xl font-medium text-[#0E1B2E] sm:text-3xl lg:text-4xl">
+              {lang === 'en' ? 'Projects and impact' : 'Projets et impact'}
             </h2>
           </div>
 
-          {/* 9 Official Brochure Project Cards Grid (No Emojis, No Closed/Closing Status) */}
           <motion.div
             layout
             className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
@@ -220,66 +213,59 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                 <motion.article
                   layout
                   key={project.id}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.45, delay: idx * 0.04 }}
+                  exit={{ opacity: 0, scale: 0.97 }}
+                  transition={{ duration: 0.4, delay: idx * 0.03 }}
                   onClick={() => {
                     soundEngine.playClick();
                     onInspectProject(project);
                   }}
                   onMouseEnter={() => soundEngine.playHover()}
-                  className="group relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-lg border border-slate-200/90 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
+                  className="group relative flex cursor-pointer flex-col justify-between overflow-hidden border border-[#E5DFD3] bg-[#FFFFFF] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(14,27,46,0.1)]"
                 >
-                  {/* Top Image with Clean Badges (No Emojis, No Closed/Closing Status) */}
-                  <div className="relative h-56 sm:h-60 w-full overflow-hidden bg-slate-100">
+                  <HoverBorderTrace color="gold" />
+
+                  <div className="relative h-56 w-full overflow-hidden border-b border-[#E5DFD3] bg-[#0E1B2E] sm:h-60">
                     <img
                       src={project.image}
                       alt={project.sector[lang]}
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0E1B2E]/55 via-transparent to-transparent" />
 
-                    {/* Country Badge (Bottom Left — Clean Text, Zero Emojis) */}
-                    <div className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded bg-[#0B1528]/90 px-2.5 py-1 font-heading text-[11px] font-semibold tracking-wider text-white backdrop-blur-sm uppercase">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#C69C45]" />
-                      <span>{project.country[lang]}</span>
+                    <div className="absolute bottom-3 left-3 bg-[#0E1B2E]/90 px-3 py-1 font-sans text-[10px] font-semibold tracking-[0.14em] text-[#F8F6F2] uppercase">
+                      {project.country[lang]}
                     </div>
 
-                    {/* Business Line Badge (Bottom Right) */}
-                    <div className="absolute bottom-3 right-3 rounded bg-[#C69C45] px-2.5 py-1 font-heading text-[10px] font-bold tracking-wider text-[#0B1528] uppercase shadow-sm">
+                    <div className="absolute right-3 bottom-3 bg-[#C1A258] px-2.5 py-1 font-sans text-[10px] font-semibold tracking-[0.14em] text-[#0E1B2E] uppercase">
                       {project.category === 'ppp'
                         ? 'PPP'
                         : project.category === 'corporate'
-                          ? 'CORPORATE'
-                          : lang === 'en'
-                            ? 'SOVEREIGN'
-                            : 'SOUVERAIN'}
+                        ? 'Corporate'
+                        : lang === 'en'
+                        ? 'Sovereign'
+                        : 'Souverain'}
                     </div>
                   </div>
 
-                  {/* Card Content Body */}
                   <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
                     <div>
-                      {/* Sector Title */}
-                      <div className="font-heading text-xs font-bold tracking-widest text-[#0B1528] uppercase">
+                      <h3 className="font-serif text-lg font-medium text-[#0E1B2E]">
                         {project.sector[lang]}
-                      </div>
+                      </h3>
 
-                      {/* Capital Amount in Gold */}
-                      <div className="mt-2 font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#C69C45]">
+                      <div className="mt-2 font-serif text-xl font-medium text-[#C1A258] sm:text-2xl">
                         {project.amountDisplay[lang]}
                       </div>
 
-                      {/* Description */}
-                      <p className="mt-3 text-xs sm:text-[13px] leading-relaxed text-slate-600 font-normal">
+                      <p className="mt-3 font-sans text-xs leading-relaxed text-[#4B586B] sm:text-sm">
                         {project.description[lang]}
                       </p>
                     </div>
 
-                    {/* Subtle Inspect link */}
-                    <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4 font-heading text-[11px] font-bold tracking-wider text-slate-400 uppercase group-hover:text-[#C69C45] transition-colors">
-                      <span>{lang === 'en' ? 'LEARN MORE' : 'EN SAVOIR PLUS'}</span>
+                    <div className="mt-6 flex items-center justify-between border-t border-[#E5DFD3] pt-4 font-sans text-[11px] font-semibold tracking-[0.16em] text-[#C1A258] uppercase transition-colors group-hover:text-[#0E1B2E]">
+                      <span>{lang === 'en' ? 'Learn more' : 'En savoir plus'}</span>
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </div>
                   </div>
@@ -288,20 +274,22 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
             </AnimatePresence>
           </motion.div>
 
-          {/* Bottom Mandate Consultation Callout */}
-          <div className="mt-20 overflow-hidden rounded-xl border border-slate-200 bg-[#F9FAFB] p-8 sm:p-12 text-center">
-            <div className="font-heading text-xs font-bold tracking-[0.24em] text-[#C69C45] uppercase">
-              {lang === 'en' ? 'PARTNERSHIP & STRUCTURING' : 'PARTENARIAT & STRUCTURATION'}
+          {/* Bottom Mandate Callout */}
+          <div className="mt-20 border border-[#E5DFD3] bg-[#0E1B2E] p-8 text-center text-[#F8F6F2] sm:p-12">
+            <div className="font-sans text-[11px] font-semibold tracking-[0.22em] text-[#C1A258] uppercase">
+              {lang === 'en'
+                ? 'Partnership and structuring'
+                : 'Partenariat et structuration'}
             </div>
-            <h3 className="mt-2 font-serif text-2xl font-bold text-[#0B1528] uppercase sm:text-3xl">
+            <h3 className="mt-2.5 font-serif text-2xl font-medium text-[#F8F6F2] sm:text-3xl">
               {lang === 'en'
-                ? 'HAVE A STRATEGIC INFRASTRUCTURE MANDATE?'
-                : 'VOUS AVEZ UN PROJET STRUCTURANT ?'}
+                ? 'Have a strategic infrastructure mandate?'
+                : 'Vous avez un projet structurant ?'}
             </h3>
-            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 font-normal">
+            <p className="mx-auto mt-3 max-w-2xl font-sans text-sm leading-relaxed text-[#D8DDE6]">
               {lang === 'en'
-                ? 'Our teams structure and finance sovereign, corporate & trade finance, and Public-Private Partnership projects across Africa.'
-                : 'Nos équipes structurent et financent des projets souverains, corporate & trade finance et Partenariats Public-Privé à travers l’Afrique.'}
+                ? 'Our teams structure and finance sovereign, corporate & trade finance, and Public-Private Partnership projects across Sub-Saharan Africa.'
+                : 'Nos équipes structurent et financent des projets souverains, corporate & trade finance et Partenariats Public-Privé en Afrique subsaharienne.'}
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -311,9 +299,12 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                   soundEngine.playClick();
                   onNavigateContact();
                 }}
-                className="cursor-pointer rounded bg-[#C69C45] px-7 py-3 font-heading text-xs font-bold tracking-wider text-[#0B1528] uppercase transition-all hover:bg-[#d4ab53] hover:shadow-lg"
+                className="group relative inline-flex h-12 items-center justify-center bg-[#C1A258]/20 px-7 font-sans text-xs font-semibold tracking-[0.16em] text-[#F8F6F2] uppercase transition-all hover:bg-[#C1A258] hover:text-[#0E1B2E]"
               >
-                {lang === 'en' ? 'SUBMIT A PROJECT MANDATE' : 'SOUMETTRE UN PROJET'}
+                <HudCorners tone="on-navy" />
+                <span>
+                  {lang === 'en' ? 'Submit a project' : 'Soumettre un projet'}
+                </span>
               </button>
               <button
                 type="button"
@@ -321,9 +312,12 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                   soundEngine.playClick();
                   onBackToHome();
                 }}
-                className="rounded border border-slate-300 bg-white px-7 py-3 font-heading text-xs font-bold tracking-wider text-slate-700 uppercase transition-all hover:border-slate-800 hover:text-slate-900"
+                className="group relative inline-flex h-12 items-center justify-center bg-[#F8F6F2]/[0.05] px-7 font-sans text-xs font-semibold tracking-[0.16em] text-[#F8F6F2] uppercase transition-all hover:bg-[#F8F6F2]/[0.12] hover:text-[#C1A258]"
               >
-                {lang === 'en' ? 'RETURN TO HOMEPAGE' : 'RETOUR À L’ACCUEIL'}
+                <HudCorners tone="on-navy" />
+                <span>
+                  {lang === 'en' ? 'Return to homepage' : 'Retour à l’accueil'}
+                </span>
               </button>
             </div>
           </div>

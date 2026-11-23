@@ -12,6 +12,7 @@ dist/
 # Local media / raw source assets (served assets live in public/)
 *.mov
 *.mp4
+!public/hero-bg.mp4
 projects images/
 
 # OS & editor files

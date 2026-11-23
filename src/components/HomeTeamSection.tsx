@@ -6,7 +6,7 @@ import {
   TEAM_MEMBERS,
   TeamMemberData,
 } from '../data/imaadData';
-import { HoverBorderTrace, HudCorners, VertexDots } from './ui/BlueprintPrimitives';
+import { HoverBorderTrace, HudCorners } from './ui/BlueprintPrimitives';
 import { soundEngine } from '../utils/soundEngine';
 
 interface HomeTeamSectionProps {
@@ -49,31 +49,26 @@ const ENTITY_GROUPS: {
 
 const ENTITY_TABS: {
   id: EntityFilter;
-  code: string;
   shortLabel: { en: string; fr: string };
   rulerPct: number;
 }[] = [
   {
     id: 'all',
-    code: '19',
-    shortLabel: { en: 'All Entities', fr: 'Toutes les entités' },
+    shortLabel: { en: 'All entities', fr: 'Toutes les entités' },
     rulerPct: 12,
   },
   {
     id: 'holding',
-    code: '01',
     shortLabel: { en: 'Holding / Rwanda', fr: 'Holding / Rwanda' },
     rulerPct: 38,
   },
   {
     id: 'ifesa',
-    code: '02',
     shortLabel: { en: 'IFESA / Rwanda', fr: 'IFESA / Rwanda' },
     rulerPct: 65,
   },
   {
     id: 'ifwca',
-    code: '03',
     shortLabel: { en: 'IFWCA / Côte d’Ivoire', fr: 'IFWCA / Côte d’Ivoire' },
     rulerPct: 90,
   },
@@ -91,7 +86,7 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
     target: bannerRef,
     offset: ['start end', 'end start'],
   });
-  const bgY = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+  const bgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
 
   const activeTab = ENTITY_TABS[activeEntityIdx];
   const visibleGroups =
@@ -112,45 +107,43 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
   return (
     <section
       id="team"
-      className="relative overflow-hidden border-y border-[#C4BDB0] bg-[#DDD8CE] text-[#0B1528]"
+      className="relative overflow-hidden border-b border-[#E5DFD3] bg-[#F8F6F2] text-[#0E1B2E]"
     >
-      {/* ===================================================================
-          1. PARALLAX ARCHITECTURAL BANNER HEADER
-      ==================================================================== */}
+      {/* 1. Parallax Architectural Banner */}
       <div
         ref={bannerRef}
-        className="relative overflow-hidden border-b border-[#C4BDB0] bg-[#0B1528] py-14 sm:py-20"
+        className="relative overflow-hidden border-b border-[#E5DFD3] bg-[#0E1B2E] py-16 sm:py-20"
       >
         <motion.img
-          style={{ y: bgY, scale: 1.15 }}
+          style={{ y: bgY, scale: 1.12 }}
           src="/team-banner.jpg"
-          alt="Imaad Financial Group — Governance"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-35"
+          alt={
+            lang === 'en'
+              ? 'Imaad Financial Group governance'
+              : 'Gouvernance Imaad Financial Group'
+          }
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
         />
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(3,5,8,0.85) 0%, rgba(11,21,40,0.72) 55%, rgba(11,21,40,0.92) 100%)',
+              'linear-gradient(180deg, rgba(14,27,46,0.82) 0%, rgba(17,31,56,0.72) 55%, rgba(14,27,46,0.92) 100%)',
           }}
         />
 
-        <div className="relative z-10 mx-auto max-w-[1360px] px-5 sm:px-10 lg:px-16">
-          {/* Minimal Banner Header (Clean, No Extra Text Boxes) */}
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-2xl font-bold tracking-[0.18em] text-white uppercase sm:text-4xl lg:text-5xl">
-              {lang === 'en' ? 'TEAM' : 'ÉQUIPE'}
-            </h2>
+        <div className="relative z-10 mx-auto max-w-[1360px] px-5 text-center sm:px-10 lg:px-16">
+          <div className="mb-3 font-sans text-[11px] font-semibold tracking-[0.22em] text-[#C1A258] uppercase">
+            {lang === 'en' ? 'Governance' : 'Gouvernance'}
           </div>
+          <h2 className="font-serif text-3xl font-medium text-[#F8F6F2] sm:text-4xl lg:text-[42px]">
+            {lang === 'en' ? 'Team' : 'Équipe'}
+          </h2>
         </div>
       </div>
 
-      {/* ===================================================================
-          2. TEYLIOM ENTITY FILTER & ARCHITECTURAL RULER + PORTRAIT AVATAR CARDS
-             (MEDIUM WARM STONE MODE — #DDD8CE / #EAE6DE / #0B1528)
-      ==================================================================== */}
-      <div className="mx-auto max-w-[1360px] px-5 py-14 sm:px-10 sm:py-20 lg:px-16">
-        {/* Filter Bar + Teyliom Prev/Next Controls */}
+      {/* 2. Ivory Directory with Interactive Entity Switcher & Gold Ruler */}
+      <div className="mx-auto max-w-[1360px] px-5 py-16 sm:px-10 sm:py-24 lg:px-16">
         <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
           <div className="flex flex-wrap gap-2.5">
             {ENTITY_TABS.map((tab, idx) => {
@@ -167,10 +160,10 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                     soundEngine.playClick();
                     setActiveEntityIdx(idx);
                   }}
-                  className={`border px-4 py-2 font-mono text-[10px] font-semibold tracking-[0.16em] uppercase transition-all ${
+                  className={`border px-4 py-2 font-sans text-[11px] font-semibold tracking-[0.14em] uppercase transition-all ${
                     isActive
-                      ? 'border-[#0B1528] bg-[#0B1528] text-gold-300 shadow-sm'
-                      : 'border-[#B8B0A2] bg-[#EAE6DE] text-[#3A4659] hover:border-[#0B1528] hover:text-[#0B1528]'
+                      ? 'border-[#0E1B2E] bg-[#0E1B2E] text-[#F8F6F2]'
+                      : 'border-[#D4CCC0] bg-[#F1EDE5] text-[#3D4B5E] hover:border-[#0E1B2E] hover:text-[#0E1B2E]'
                   }`}
                 >
                   {tab.shortLabel[lang]} ({count})
@@ -184,35 +177,33 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
               type="button"
               onClick={handlePrev}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative inline-flex h-10 items-center gap-2 bg-[#0B1528]/[0.06] px-4 font-display text-[10px] font-bold tracking-[0.2em] text-[#0B1528] uppercase transition-all hover:bg-[#0B1528]/[0.12]"
+              className="group relative inline-flex h-10 items-center gap-2 bg-[#0E1B2E]/[0.06] px-4 font-sans text-[11px] font-semibold tracking-[0.16em] text-[#0E1B2E] uppercase transition-all hover:bg-[#0E1B2E] hover:text-[#F8F6F2]"
             >
-              <span className="pointer-events-none absolute top-0 left-0 h-2.5 w-2.5 border-t border-l border-[#0B1528]/35 transition-all duration-300 group-hover:h-3.5 group-hover:w-3.5 group-hover:border-[#0B1528]/75" />
-              <span className="pointer-events-none absolute right-0 bottom-0 h-2.5 w-2.5 border-r border-b border-[#0B1528]/35 transition-all duration-300 group-hover:h-3.5 group-hover:w-3.5 group-hover:border-[#0B1528]/75" />
-              <ChevronLeft className="h-3.5 w-3.5 text-[#9A7428]" />
-              <span>{lang === 'en' ? 'PREV' : 'PRÉC.'}</span>
+              <HudCorners tone="on-ivory" />
+              <ChevronLeft className="h-3.5 w-3.5 text-[#C1A258]" />
+              <span>{lang === 'en' ? 'Prev' : 'Préc.'}</span>
             </button>
 
             <button
               type="button"
               onClick={handleNext}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative inline-flex h-10 items-center gap-2 bg-[#0B1528]/[0.06] px-4 font-display text-[10px] font-bold tracking-[0.2em] text-[#0B1528] uppercase transition-all hover:bg-[#0B1528]/[0.12]"
+              className="group relative inline-flex h-10 items-center gap-2 bg-[#0E1B2E]/[0.06] px-4 font-sans text-[11px] font-semibold tracking-[0.16em] text-[#0E1B2E] uppercase transition-all hover:bg-[#0E1B2E] hover:text-[#F8F6F2]"
             >
-              <span className="pointer-events-none absolute top-0 left-0 h-2.5 w-2.5 border-t border-l border-[#0B1528]/35 transition-all duration-300 group-hover:h-3.5 group-hover:w-3.5 group-hover:border-[#0B1528]/75" />
-              <span className="pointer-events-none absolute right-0 bottom-0 h-2.5 w-2.5 border-r border-b border-[#0B1528]/35 transition-all duration-300 group-hover:h-3.5 group-hover:w-3.5 group-hover:border-[#0B1528]/75" />
-              <span>{lang === 'en' ? 'NEXT' : 'SUIV.'}</span>
-              <ChevronRight className="h-3.5 w-3.5 text-[#9A7428]" />
+              <HudCorners tone="on-ivory" />
+              <span>{lang === 'en' ? 'Next' : 'Suiv.'}</span>
+              <ChevronRight className="h-3.5 w-3.5 text-[#C1A258]" />
             </button>
           </div>
         </div>
 
-        {/* Teyliom Architectural Tick-Mark Ruler Bar */}
-        <div className="relative mt-6 mb-12 h-6 w-full overflow-hidden border-b border-[#B8B0A2]">
+        {/* Animated Gold Ruler Bar */}
+        <div className="relative mt-6 mb-12 h-5 w-full overflow-hidden border-b border-[#D4CCC0]">
           <div
-            className="h-full w-full opacity-45"
+            className="h-full w-full opacity-40"
             style={{
               backgroundImage:
-                'repeating-linear-gradient(to right, rgba(154,116,40,0.55) 0px, rgba(154,116,40,0.55) 1px, transparent 1px, transparent 18px)',
+                'repeating-linear-gradient(to right, rgba(193,162,88,0.6) 0px, rgba(193,162,88,0.6) 1px, transparent 1px, transparent 18px)',
             }}
           />
           <motion.div
@@ -220,37 +211,35 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
             transition={{ type: 'spring', stiffness: 220, damping: 28 }}
             className="absolute bottom-0 -translate-x-1/2"
           >
-            <div className="h-3 w-3 rotate-45 translate-y-1.5 bg-[#9A7428] shadow-[0_0_10px_rgba(154,116,40,0.5)]" />
+            <div className="h-2.5 w-2.5 rotate-45 translate-y-1.5 bg-[#C1A258]" />
           </motion.div>
         </div>
 
-        {/* Exact Entity Groups with Full Editorial Portrait Avatar Cards */}
+        {/* Entity Groups */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab.id}
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3 }}
             className="space-y-16"
           >
             {visibleGroups.map((group) => {
               const members = TEAM_MEMBERS.filter((m) => m.entity === group.id);
               return (
                 <div key={group.id}>
-                  {/* Exact Official Entity Heading */}
-                  <div className="mb-7 border-b border-[#C4BDB0] pb-3.5">
-                    <h3 className="font-serif text-xl font-bold tracking-wide text-[#0B1528] sm:text-2xl">
+                  <div className="mb-8 border-b border-[#E5DFD3] pb-3.5">
+                    <h3 className="font-serif text-xl font-medium text-[#0E1B2E] sm:text-2xl">
                       {group.fullTitle[lang]}
                     </h3>
                   </div>
 
-                  {/* Editorial Portrait Cards (Warm Stone Surface + Dark Studio Avatar Contrast) */}
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {members.map((member, idx) => (
                       <motion.article
                         key={member.id}
-                        initial={{ opacity: 0, y: 18 }}
+                        initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
                         transition={{ duration: 0.35, delay: idx * 0.03 }}
@@ -259,31 +248,28 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                           setSelectedMember(member);
                         }}
                         onMouseEnter={() => soundEngine.playHover()}
-                        className="group relative flex cursor-pointer flex-col overflow-hidden bg-[#EAE6DE] shadow-[0_6px_22px_rgba(11,21,40,0.06)] transition-all duration-400 hover:-translate-y-1.5 hover:bg-[#F1EEE8] hover:shadow-[0_18px_40px_rgba(11,21,40,0.14)]"
+                        className="group relative flex cursor-pointer flex-col overflow-hidden border border-[#E5DFD3] bg-[#FFFFFF] transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(14,27,46,0.1)]"
                       >
                         <HoverBorderTrace color="gold" />
 
-                        {/* Pure Portrait Avatar Frame */}
-                        <div className="relative aspect-[4/4.4] w-full overflow-hidden border-b border-[#D2CBBF] bg-[#070E1B]">
+                        <div className="relative aspect-[4/4.3] w-full overflow-hidden border-b border-[#E5DFD3] bg-[#0E1B2E]">
                           <img
                             src={member.photo || '/team-avatar.svg'}
                             alt={member.name}
                             loading="lazy"
                             className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                           />
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B1528]/55 via-transparent to-transparent" />
                         </div>
 
-                        {/* Clean Name & Exact Role */}
                         <div className="flex flex-1 flex-col p-5">
-                          <h4 className="font-serif text-base font-bold tracking-wide text-[#0B1528] transition-colors group-hover:text-[#9A7428]">
+                          <h4 className="font-serif text-base font-medium text-[#0E1B2E] transition-colors group-hover:text-[#C1A258]">
                             {member.name}
                           </h4>
-                          <p className="mt-1.5 text-xs leading-relaxed text-[#3A4659]">
+                          <p className="mt-1.5 font-sans text-xs leading-relaxed text-[#4B586B]">
                             {member.role[lang]}
                           </p>
                           {member.bio && (
-                            <p className="mt-3 border-t border-[#D2CBBF] pt-3 text-[11px] leading-relaxed text-[#475569]">
+                            <p className="mt-3 border-t border-[#E5DFD3] pt-3 font-sans text-xs leading-relaxed text-[#3D4B5E]">
                               {member.bio[lang]}
                             </p>
                           )}
@@ -297,8 +283,8 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
           </motion.div>
         </AnimatePresence>
 
-        {/* Bottom Subtle CTA */}
-        <div className="mt-14 flex justify-center">
+        {/* Bottom CTA */}
+        <div className="mt-16 flex justify-center">
           <button
             type="button"
             onClick={() => {
@@ -306,19 +292,17 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
               onNavigateContact();
             }}
             onMouseEnter={() => soundEngine.playHover()}
-            className="group relative inline-flex h-12 items-center justify-center bg-[#0B1528] px-8 font-display text-[11px] font-bold tracking-[0.22em] text-gold-300 uppercase shadow-[0_10px_26px_rgba(11,21,40,0.18)] transition-all hover:bg-[#152544] hover:text-white"
+            className="group relative inline-flex h-12 items-center justify-center bg-[#0E1B2E] px-8 font-sans text-xs font-semibold tracking-[0.16em] text-[#F8F6F2] uppercase transition-all hover:bg-[#162744] hover:text-[#C1A258]"
           >
-            <HudCorners />
+            <HudCorners tone="on-navy" />
             <span>
-              {lang === 'en' ? 'START A CONVERSATION' : 'ÉCHANGER AVEC NOTRE ÉQUIPE'}
+              {lang === 'en' ? 'Start a conversation' : 'Échanger avec notre équipe'}
             </span>
           </button>
         </div>
       </div>
 
-      {/* ===================================================================
-          3. MEMBER BIOGRAPHY MODAL
-      ==================================================================== */}
+      {/* 3. Member Profile Modal (No Bracketed Placeholder Text) */}
       <AnimatePresence>
         {selectedMember && (
           <motion.div
@@ -326,28 +310,29 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedMember(null)}
-            className="fixed inset-0 z-[1200] flex items-center justify-center bg-obsidian-950/85 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-[1200] flex items-center justify-center bg-[#0E1B2E]/80 p-4 backdrop-blur-sm"
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 16 }}
+              initial={{ opacity: 0, scale: 0.97, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 16 }}
-              transition={{ duration: 0.25 }}
+              exit={{ opacity: 0, scale: 0.97, y: 12 }}
+              transition={{ duration: 0.24 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-xl border border-gold-400/40 bg-[#0B1528] p-7 sm:p-9 shadow-[0_30px_80px_rgba(0,0,0,0.85)]"
+              className="relative w-full max-w-xl border border-[#C1A258]/40 bg-[#0E1B2E] p-7 text-[#F8F6F2] shadow-2xl sm:p-9"
             >
-              <VertexDots color="gold" />
               <button
                 type="button"
                 onClick={() => setSelectedMember(null)}
-                aria-label={lang === 'en' ? 'Close biography' : 'Fermer la biographie'}
-                className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center border border-white/15 bg-white/[0.04] text-slate-300 transition-colors hover:border-gold-400 hover:text-gold-300"
+                aria-label={
+                  lang === 'en' ? 'Close profile' : 'Fermer le profil'
+                }
+                className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center border border-[#F8F6F2]/15 text-[#D8DDE6] transition-colors hover:border-[#C1A258] hover:text-[#C1A258]"
               >
                 <X className="h-4 w-4" />
               </button>
 
               <div className="flex items-center gap-5">
-                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-[#C69C45] bg-[#081020]">
+                <div className="h-20 w-20 shrink-0 overflow-hidden rounded-full border border-[#C1A258] bg-[#111F38]">
                   <img
                     src={selectedMember.photo || '/team-avatar.svg'}
                     alt={selectedMember.name}
@@ -355,30 +340,28 @@ export const HomeTeamSection: React.FC<HomeTeamSectionProps> = ({
                   />
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] font-semibold tracking-[0.18em] text-gold-400 uppercase">
+                  <div className="font-sans text-[10px] font-semibold tracking-[0.18em] text-[#C1A258] uppercase">
                     {selectedMember.entityLabel[lang]}
                   </div>
-                  <h3 className="mt-1 font-serif text-xl font-bold text-white sm:text-2xl">
+                  <h3 className="mt-1 font-serif text-xl font-medium text-[#F8F6F2] sm:text-2xl">
                     {selectedMember.name}
                   </h3>
-                  <p className="mt-0.5 text-xs font-medium text-slate-300 sm:text-sm">
+                  <p className="mt-1 font-sans text-xs text-[#D8DDE6] sm:text-sm">
                     {selectedMember.role[lang]}
                   </p>
                 </div>
               </div>
 
-              <div className="mt-6 border-t border-white/10 pt-5">
-                <div className="font-mono text-[10px] tracking-[0.2em] text-gold-400 uppercase">
-                  {lang === 'en' ? 'BIOGRAPHY' : 'BIOGRAPHIE'}
+              {selectedMember.bio && (
+                <div className="mt-6 border-t border-[#F8F6F2]/15 pt-5">
+                  <div className="font-sans text-[10px] font-semibold tracking-[0.2em] text-[#C1A258] uppercase">
+                    {lang === 'en' ? 'Biography' : 'Biographie'}
+                  </div>
+                  <p className="mt-3 font-sans text-sm leading-relaxed text-[#D8DDE6]">
+                    {selectedMember.bio[lang]}
+                  </p>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-slate-200">
-                  {selectedMember.bio
-                    ? selectedMember.bio[lang]
-                    : lang === 'en'
-                    ? '[Biography to be completed]'
-                    : '[Biographie à compléter]'}
-                </p>
-              </div>
+              )}
             </motion.div>
           </motion.div>
         )}
