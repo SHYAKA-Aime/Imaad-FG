@@ -5,6 +5,7 @@ import {
   Language,
   ProjectCardData,
 } from "./data/imaadData";
+import { PortalPreloader } from "./components/PortalPreloader";
 import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import { SovereignMetricsBar } from "./components/SovereignMetricsBar";
@@ -19,6 +20,7 @@ import { ContactAndFooter } from "./components/ContactAndFooter";
 import { soundEngine } from "./utils/soundEngine";
 
 export function App() {
+  const [portalOpen, setPortalOpen] = useState<boolean>(true);
   const [lang, setLang] = useState<Language>("fr");
   const [currency, setCurrency] = useState<Currency>("FCFA");
 
@@ -86,7 +88,14 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-[#0E1B2E] text-[#F8F6F2]">
-      {/* 1. Fixed Institutional Header */}
+      {/* 1. Institutional Entry Preloader */}
+      <PortalPreloader
+        isOpen={portalOpen}
+        onEnter={() => setPortalOpen(false)}
+        lang={lang}
+      />
+
+      {/* 2. Fixed Institutional Header */}
       <Navbar
         lang={lang}
         setLang={setLang}
@@ -102,6 +111,10 @@ export function App() {
         onNavigateTeam={handleNavigateTeam}
         onNavigateService={handleNavigateService}
         onNavigateContact={handleNavigateContact}
+        onReplayIntro={() => {
+          setMenuOpen(false);
+          setPortalOpen(true);
+        }}
         onOpenSubmitModal={() => setActiveDossier({ type: "submit" })}
       />
 

@@ -36,7 +36,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
     <section
       ref={heroRef}
       id="hero"
-      className="relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0E1B2E] pt-[86px] md:pt-[96px]"
+      className="relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-[#0E1B2E] pt-[74px] sm:pt-[86px] md:pt-[96px]"
     >
       {/* 1. Full-Bleed Background Video Stage (Swap /public/hero-bg.mp4 anytime with your final footage) */}
       <motion.div
@@ -71,7 +71,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
       />
 
       {/* 2. Main Reference Stage: Far-Left Vertical Rail | Open Center for Video | Middle-Right Editorial Stack */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 items-center px-5 py-10 sm:px-10 md:px-12 lg:px-16">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 items-end px-5 py-6 sm:px-10 sm:py-10 md:items-center md:px-12 lg:px-16">
         {/* FAR-LEFT VERTICAL RAIL (Desktop) */}
         <aside
           aria-label={
@@ -131,10 +131,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
           })}
         </aside>
 
-        {/* RIGHT-ALIGNED EDITORIAL BLOCK (Lower-middle right, leaves upper & center-left viewport open for video) */}
-        <div className="ml-auto mt-10 flex w-full max-w-xl flex-col items-end text-right md:mt-24 lg:mt-28 lg:max-w-[740px]">
-          {/* Mobile Horizontal Switcher */}
-          <div className="mb-5 flex flex-wrap justify-end gap-2 md:hidden">
+        {/* EDITORIAL BLOCK (Left-aligned & bottom-weighted on mobile for clear video framing; lower-middle right on desktop) */}
+        <div className="flex w-full max-w-xl flex-col items-start text-left md:ml-auto md:mt-24 md:items-end md:text-right lg:mt-28 lg:max-w-[740px]">
+          {/* Mobile Horizontal Hairline Switcher */}
+          <div
+            aria-label={
+              lang === 'en' ? 'Slide navigation' : 'Navigation des diapositives'
+            }
+            className="mb-5 flex w-full items-center gap-5 overflow-x-auto border-b border-[#F8F6F2]/15 md:hidden"
+          >
             {HERO_SLIDES.map((s, idx) => {
               const isActive = idx === activeSlide;
               return (
@@ -145,20 +150,37 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
                     soundEngine.playClick();
                     setActiveSlide(idx);
                   }}
-                  className={`px-2.5 py-1 font-sans text-[10px] font-semibold tracking-[0.14em] uppercase transition-colors ${
-                    isActive
-                      ? 'bg-[#C1A258] text-[#0E1B2E]'
-                      : 'border border-[#F8F6F2]/25 text-[#F8F6F2]/80'
-                  }`}
+                  className="relative shrink-0 pb-3 font-sans text-[10px] font-semibold tracking-[0.16em] uppercase transition-colors"
                 >
-                  {s.tabLabel[lang]}
+                  <span
+                    className={
+                      isActive
+                        ? 'text-[#C1A258]'
+                        : 'text-[#F8F6F2]/60 hover:text-[#F8F6F2]'
+                    }
+                  >
+                    {s.tabLabel[lang]}
+                  </span>
+                  {isActive && (
+                    <motion.span
+                      key={`mob-rail-${activeSlide}-${lang}`}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{
+                        duration: (currentSlide.durationMs ?? 8000) / 1000,
+                        ease: 'linear',
+                      }}
+                      style={{ transformOrigin: 'left' }}
+                      className="absolute right-0 bottom-0 left-0 h-[2px] bg-[#C1A258]"
+                    />
+                  )}
                 </button>
               );
             })}
           </div>
 
           {/* Compact Masked Sentence-Case Cinzel Headline & Short Subtitle */}
-          <div className="relative min-h-[148px] w-full sm:min-h-[168px]">
+          <div className="relative min-h-[178px] w-full sm:min-h-[172px] md:min-h-[168px]">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={`${currentSlide.id}-${lang}`}
@@ -174,7 +196,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
                     transition: { duration: 0.3, ease: [0.4, 0, 1, 1] },
                   },
                 }}
-                className="flex w-full flex-col items-end text-right"
+                className="flex w-full flex-col items-start text-left md:items-end md:text-right"
               >
                 <motion.div
                   variants={{
@@ -185,12 +207,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
                       transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
                     },
                   }}
-                  className="mb-2.5 font-sans text-[11px] font-semibold tracking-[0.24em] text-[#C1A258] uppercase"
+                  className="mb-2 font-sans text-[10px] font-semibold tracking-[0.22em] text-[#C1A258] uppercase sm:mb-2.5 sm:text-[11px] sm:tracking-[0.24em]"
                 >
                   {currentSlide.eyebrow[lang]}
                 </motion.div>
 
-                <h1 className="font-serif text-3xl font-medium tracking-[0.02em] text-[#F8F6F2] sm:text-4xl lg:text-[46px] leading-[1.16]">
+                <h1 className="font-serif text-[26px] font-medium tracking-[0.02em] text-[#F8F6F2] leading-[1.2] sm:text-4xl sm:leading-[1.16] lg:text-[46px]">
                   <span className="block overflow-hidden">
                     <motion.span
                       className="block"
@@ -245,7 +267,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
                       },
                     },
                   }}
-                  className="mt-3.5 max-w-xl font-sans text-xs leading-relaxed text-[#D8DDE6] sm:text-sm lg:max-w-[640px]"
+                  className="mt-3 max-w-xl font-sans text-[13px] leading-relaxed text-[#D8DDE6] sm:mt-3.5 sm:text-sm lg:max-w-[640px]"
                 >
                   {currentSlide.description[lang]}
                 </motion.p>
@@ -253,13 +275,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
             </AnimatePresence>
           </div>
 
-          {/* Persistent Unified 2-Corner CTA Buttons (Right-Aligned as in reference) */}
-          <div className="mt-6 flex flex-wrap items-center justify-end gap-3.5">
+          {/* Persistent Unified 2-Corner CTA Buttons (Full-width stack on mobile, right-aligned row on desktop) */}
+          <div className="mt-5 flex w-full flex-col items-stretch gap-3 sm:mt-6 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5 md:justify-end">
             <a
               href="#excellence"
               onClick={() => soundEngine.playClick()}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative inline-flex h-11 items-center justify-center bg-[#C1A258]/20 px-6 font-sans text-[11px] font-semibold tracking-[0.18em] text-[#F8F6F2] uppercase backdrop-blur-sm transition-all duration-300 hover:bg-[#C1A258] hover:text-[#0E1B2E] sm:h-12 sm:px-7"
+              className="group relative inline-flex h-11 w-full items-center justify-center bg-[#C1A258]/20 px-5 font-sans text-[11px] font-semibold tracking-[0.16em] text-[#F8F6F2] uppercase backdrop-blur-sm transition-all duration-300 hover:bg-[#C1A258] hover:text-[#0E1B2E] sm:h-12 sm:w-auto sm:px-7 sm:tracking-[0.18em]"
             >
               <HudCorners tone="on-navy" />
               <span>
@@ -271,7 +293,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
               href="#projects-showcase"
               onClick={() => soundEngine.playClick()}
               onMouseEnter={() => soundEngine.playHover()}
-              className="group relative inline-flex h-11 items-center justify-center bg-[#F8F6F2]/[0.06] px-6 font-sans text-[11px] font-semibold tracking-[0.18em] text-[#F8F6F2] uppercase backdrop-blur-sm transition-all duration-300 hover:bg-[#F8F6F2]/[0.14] hover:text-[#C1A258] sm:h-12 sm:px-7"
+              className="group relative inline-flex h-11 w-full items-center justify-center bg-[#F8F6F2]/[0.06] px-5 font-sans text-[11px] font-semibold tracking-[0.16em] text-[#F8F6F2] uppercase backdrop-blur-sm transition-all duration-300 hover:bg-[#F8F6F2]/[0.14] hover:text-[#C1A258] sm:h-12 sm:w-auto sm:px-7 sm:tracking-[0.18em]"
             >
               <HudCorners tone="on-navy" />
               <span>{lang === 'en' ? 'See our projects' : 'Voir nos projets'}</span>
@@ -281,7 +303,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang }) => {
       </div>
 
       {/* 3. Minimal Bottom-Left Scroll Prompt (Reference-Matched, Floating Cleanly Over Media) */}
-      <div className="relative z-10 pb-8 pt-2">
+      <div className="relative z-10 pb-6 pt-2 sm:pb-8">
         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 sm:px-10 md:px-12 lg:px-16">
           <a
             href="#metrics"
